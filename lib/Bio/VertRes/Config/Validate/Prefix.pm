@@ -19,14 +19,12 @@ Check to see if the prefix is valid
 
 use Moose;
 
-
-sub is_valid
-{
-  my($self, $prefix) = @_;
-  return 0 unless(defined($prefix));
-  return 0 if(length($prefix) > 12);
-  return 0 if( $prefix =~ /[\W]/);
-  return 1;
+sub is_valid {
+    my ( $self, $prefix ) = @_;
+    return 0 unless ( defined($prefix) );
+    return 0 if ( length($prefix) > 12 );
+    return 0 if ( $prefix =~ /[\W]/ );
+    return 1;
 }
 
 no Moose;

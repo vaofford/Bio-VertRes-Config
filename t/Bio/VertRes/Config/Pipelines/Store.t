@@ -7,23 +7,22 @@ BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
     use Test::Most;
-    use_ok('Bio::VertRes::Config::Pipelines::Import');
+    use_ok('Bio::VertRes::Config::Pipelines::Store');
 }
 
 ok(
     (
-        my $obj = Bio::VertRes::Config::Pipelines::Import->new(
+        my $obj = Bio::VertRes::Config::Pipelines::Store->new(
             database => 'my_database',
         )
     ),
-    'initialise import config'
+    'initialise store config'
 );
 
 is_deeply(
     $obj->to_hash,
     {
-        'mpsa_limit' => 500,
-        'db'         => {
+        'db' => {
             'database' => 'my_database',
             'password' => undef,
             'user'     => 'root',
@@ -31,8 +30,7 @@ is_deeply(
             'host'     => 'localhost'
         },
         'data' => {
-            'exit_on_errors' => 0,
-            'db'             => {
+            'db' => {
                 'database' => 'my_database',
                 'password' => undef,
                 'user'     => 'root',
@@ -41,13 +39,17 @@ is_deeply(
             },
             'dont_wait' => 0
         },
-        'log'    => '/nfs/pathnfs01/log/my_database/import_logfile.log',
+        'vrtrack_processed_flags' => {
+            'qc'     => 1,
+            'stored' => 0
+        },
         'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-        'prefix' => '_',
-        'module' => 'VertRes::Pipelines::Import_iRODS_fastq'
+        'log'    => '/nfs/pathnfs01/log/my_database/stored_logfile.log',
+        'limit'  => 100,
+        'module' => 'VertRes::Pipelines::StoreLane',
+        'prefix' => '_'
     },
     'output hash constructed correctly'
 );
 
 done_testing();
-
