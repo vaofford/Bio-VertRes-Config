@@ -16,11 +16,11 @@ use Moose;
 use Bio::VertRes::Config::Pipelines::Common;
 extends 'Bio::VertRes::Config::Pipelines::Common';
 
-has 'pipeline_short_name'  => ( is => 'ro', isa => 'Str', default => 'stored' );
+has 'pipeline_short_name'  => ( is => 'ro', isa => 'Str', default => 'assembly' );
 has 'module'               => ( is => 'ro', isa => 'Str', default => 'VertRes::Pipelines::Assembly' );
 has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default => '_assembly_' );
 
-has '_max_failures'        => ( is => 'ro', isa => 'Int', default => 6 );
+has '_max_failures'        => ( is => 'ro', isa => 'Int', default => 3 );
 has '_max_lanes_to_search' => ( is => 'ro', isa => 'Int', default => 200 );
 has '_limit'               => ( is => 'ro', isa => 'Int', default => 100 );
 has '_tmp_directory'       => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/tmp' );
