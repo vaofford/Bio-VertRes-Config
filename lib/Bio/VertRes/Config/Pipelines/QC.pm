@@ -23,30 +23,32 @@ A class for generating the QC pipeline config file.
 use Moose;
 use Bio::VertRes::Config::Pipelines::Common;
 use Bio::VertRes::Config::References;
+use Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter;
 extends 'Bio::VertRes::Config::Pipelines::Common';
+with 'Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter';
 
-has 'pipeline_short_name' => ( is => 'ro', isa => 'Str', default  => 'qc' );
-has 'module'              => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::TrackQC_Fastq' );
-has 'reference'           => ( is => 'ro', isa => 'Str', required => 1 );
+has 'pipeline_short_name'   => ( is => 'ro', isa => 'Str', default  => 'qc' );
+has 'module'                => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::TrackQC_Fastq' );
+has 'reference'             => ( is => 'ro', isa => 'Str', required => 1 );
 has 'reference_lookup_file' => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
-has 'limits'             => ( is => 'ro', isa => 'HashRef', required => 1 );
-                         
-has '_max_failures'      => ( is => 'ro', isa => 'Int', default => 3 );
-has '_bwa_ref'           => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build__bwa_ref' );
-has '_fa_ref'            => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build__fa_ref' );
-has '_fai_ref'           => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build__fai_ref' );
-has '_stats_ref'         => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build__stats_ref' );
-has '_mapper'            => ( is => 'ro', isa => 'Str', default => 'bwa' );
-has '_bwa_exec'          => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/bwa' );
-has '_samtools'          => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/samtools' );
-has '_glf'               => ( is => 'ro', isa => 'Str', default => '/software/vertres/bin-external/glf' );
-has '_mapviewdepth'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/bindepth' );
-has '_adapters'          => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta' );
-has '_snps'              => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin' );
-has '_skip_genotype'     => ( is => 'ro', isa => 'Int', default => 1 );
-has '_gtype_confidence'  => ( is => 'ro', isa => 'Num', default => 1.2 );
-has '_chr_regex'         => ( is => 'ro', isa => 'Str', default => '.*' );
-has '_do_samtools_rmdup' => ( is => 'ro', isa => 'Int', default => 1 );
+
+has '_max_failures'         => ( is => 'ro', isa => 'Int', default => 3 );
+has '_bwa_ref'              => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build__bwa_ref' );
+has '_fa_ref'               => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build__fa_ref' );
+has '_fai_ref'              => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build__fai_ref' );
+has '_stats_ref'            => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build__stats_ref' );
+has '_mapper'               => ( is => 'ro', isa => 'Str', default => 'bwa' );
+has '_bwa_exec'             => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/bwa' );
+has '_samtools'             => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/samtools' );
+has '_glf'                  => ( is => 'ro', isa => 'Str', default => '/software/vertres/bin-external/glf' );
+has '_mapviewdepth'         => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/bindepth' );
+has '_adapters'             => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta' );
+has '_snps'                 => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin' );
+has '_skip_genotype'        => ( is => 'ro', isa => 'Int', default => 1 );
+has '_gtype_confidence'     => ( is => 'ro', isa => 'Num', default => 1.2 );
+has '_chr_regex'            => ( is => 'ro', isa => 'Str', default => '.*' );
+has '_do_samtools_rmdup'    => ( is => 'ro', isa => 'Int', default => 1 );
+
 
 sub _build__bwa_ref {
     my ($self) = @_;
@@ -68,6 +70,7 @@ sub _build__stats_ref {
     my ($self) = @_;
     return join( '.', ( $self->_fa_ref, 'refstats' ) );
 }
+
 
 override 'log_file_name' => sub {
 
@@ -91,34 +94,17 @@ override 'log_file_name' => sub {
   
   if(length($output_filename) > 80 )
   {
-    $output_filename = substr($output_filename, 0,76).'_'.rand(999);
+    $output_filename = substr($output_filename, 0,76).'_'.int(rand(999));
   }
   return join('.',($output_filename,'log'));
 };
-
-sub escape_limits
-{
-  my ($self) = @_;
-  
-  for my $limit_type (keys %{$self->limits}) 
-  {
-    my @escaped_array_values;
-    for my $array_value ( @{$self->limits->{$limit_type}})
-    {
-      push(@escaped_array_values, (quotemeta $array_value));
-    }
-    $self->limits->{$limit_type} = \@escaped_array_values;
-  }
-  return $self->limits;
-}
-
 
 override 'to_hash' => sub {
     my ($self) = @_;
     my $output_hash = super();
     $output_hash->{data}{exit_on_errors} = 0;
     $output_hash->{max_failures}         = $self->_max_failures;
-    $output_hash->{limits}               = $self->escape_limits();
+    $output_hash->{limits}               = $self->_escaped_limits;
 
     $output_hash->{data}{bwa_ref}           = $self->_bwa_ref;
     $output_hash->{data}{fa_ref}            = $self->_fa_ref;

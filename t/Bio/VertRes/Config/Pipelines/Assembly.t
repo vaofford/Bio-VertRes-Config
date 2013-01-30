@@ -22,7 +22,7 @@ ok(
 is_deeply(
     $obj->to_hash,
     {
-        'max_failures' => 6,
+        'max_failures' => 3,
         'db'           => {
             'database' => 'my_database',
             'password' => undef,
@@ -54,7 +54,7 @@ is_deeply(
             'stored'             => 1
         },
         'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-        'log'    => '/nfs/pathnfs01/log/my_database/stored_logfile.log',
+        'log'    => '/nfs/pathnfs01/log/my_database/assembly_logfile.log',
         'limit'  => 100,
         'module' => 'VertRes::Pipelines::Assembly',
         'prefix' => '_assembly_'
