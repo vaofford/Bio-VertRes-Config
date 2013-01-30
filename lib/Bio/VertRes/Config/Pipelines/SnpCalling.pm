@@ -28,6 +28,7 @@ use Bio::VertRes::Config::Pipelines::Roles::MultiplePrefix;
 extends 'Bio::VertRes::Config::Pipelines::Common';
 with 'Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter';
 with 'Bio::VertRes::Config::Pipelines::Roles::MultiplePrefix';
+with 'Bio::VertRes::Config::Pipelines::Roles::LogFilenameWithReference';
 
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str', default  => 'snps' );
 has 'module'              => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::SNPs' );
@@ -72,29 +73,6 @@ sub _build__fai_ref {
     return join( '.', ( $self->_fa_ref, 'fai' ) );
 }
 
-override 'log_file_name' => sub {
-    my ($self) = @_;
-    my $output_filename = "";
-    for my $limit_type (qw(project sample library)) {
-        if ( defined $self->limits->{$limit_type} ) {
-            my $list_of_limit_values = $self->limits->{$limit_type};
-            for my $limit_value ( @{$list_of_limit_values} ) {
-                $limit_value =~ s/^\s+|\s+$//g;
-                $output_filename = $output_filename . '_' . $limit_value;
-            }
-        }
-    }
-
-    $output_filename .= join( '_', ( $self->reference ) );
-    $output_filename =~ s!\W+!_!g;
-    $output_filename =~ s/_$//g;
-
-    if ( length($output_filename) > 80 ) {
-        $output_filename = substr( $output_filename, 0, 76 ) . '_' . int( rand(999) );
-    }
-    return join( '.', ( $output_filename, 'log' ) );
-};
-
 override 'to_hash' => sub {
     my ($self) = @_;
     my $output_hash = super();
@@ -121,7 +99,7 @@ override 'to_hash' => sub {
     $output_hash->{data}{fa_ref}                   = $self->_fa_ref;
     $output_hash->{data}{fai_ref}                  = $self->_fai_ref;
     $output_hash->{data}{ignore_snp_called_status} = $self->_ignore_snp_called_status;
-
+    $output_hash->{limits}               = $self->_escaped_limits;    
     return $output_hash;
 };
 

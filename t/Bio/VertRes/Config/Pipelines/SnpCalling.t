@@ -25,6 +25,7 @@ ok(
 
 my $returned_config_hash = $obj->to_hash;
 my $prefix               = $returned_config_hash->{prefix};
+ok( ( $prefix =~ m/_[\d]{10}_[\d]{1,4}_/ ), 'check prefix pattern is as expected' );
 $returned_config_hash->{prefix} = '_checked_elsewhere_';
 
 is_deeply(
@@ -70,7 +71,10 @@ is_deeply(
               'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'log' => '/nfs/pathnfs01/log/my_database/snps__ABC_study_EFG_ABC.log',
               'module' => 'VertRes::Pipelines::SNPs',
-              'prefix' => '_checked_elsewhere_'
+              'prefix' => '_checked_elsewhere_',
+              'limits' => {
+                  'project' => ['ABC\ study\(\ EFG\ \)']
+              },
             },
     'Expected base config file'
 );

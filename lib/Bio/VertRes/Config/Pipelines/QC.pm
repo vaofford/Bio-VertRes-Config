@@ -26,6 +26,7 @@ use Bio::VertRes::Config::References;
 use Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter;
 extends 'Bio::VertRes::Config::Pipelines::Common';
 with 'Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter';
+with 'Bio::VertRes::Config::Pipelines::Roles::LogFilenameWithReference';
 
 has 'pipeline_short_name'   => ( is => 'ro', isa => 'Str', default  => 'qc' );
 has 'module'                => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::TrackQC_Fastq' );
@@ -70,34 +71,6 @@ sub _build__stats_ref {
     my ($self) = @_;
     return join( '.', ( $self->_fa_ref, 'refstats' ) );
 }
-
-
-override 'log_file_name' => sub {
-
-  my ($self) = @_;
-  my $output_filename = "";
-  for my $limit_type (qw(project sample library)) 
-  {
-      if (defined $self->limits->{$limit_type}) 
-      {
-          my $list_of_limit_values = $self->limits->{$limit_type};
-          for my $limit_value (@{$list_of_limit_values})
-          {
-            $limit_value =~ s/^\s+|\s+$//g;
-            $output_filename = $output_filename.'_'.$limit_value;
-          }
-      }
-  }
-  
-  $output_filename =~ s!\W+!_!g;
-  $output_filename =~ s/_$//g;
-  
-  if(length($output_filename) > 80 )
-  {
-    $output_filename = substr($output_filename, 0,76).'_'.int(rand(999));
-  }
-  return join('.',($output_filename,'log'));
-};
 
 override 'to_hash' => sub {
     my ($self) = @_;
