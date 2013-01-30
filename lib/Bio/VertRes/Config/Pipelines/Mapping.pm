@@ -83,7 +83,7 @@ override 'to_hash' => sub {
     my $output_hash = super();
 
     $output_hash->{vrtrack_processed_flags} = { import => 1, qc => 1, stored => 1 };
-
+    $output_hash->{limits}                     = $self->limits;
     $output_hash->{data}{mark_duplicates}      = $self->_mark_duplicates;
     $output_hash->{data}{reference}            = $self->_reference_fasta;
     $output_hash->{data}{assembly_name}        = $self->reference;

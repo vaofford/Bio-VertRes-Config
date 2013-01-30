@@ -30,6 +30,11 @@ $returned_config_hash->{prefix} = '_checked_elsewhere_';
 is_deeply(
     $returned_config_hash,
     {
+      'limits' => {
+                              'project' => [
+                                             'ABC study( EFG )'
+                                           ]
+                            },
               'vrtrack_processed_flags' => {
                                              'qc' => 1,
                                              'stored' => 1,

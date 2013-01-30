@@ -33,6 +33,11 @@ ok( ( $prefix =~ m/_[\d]{10}_[\d]{1,4}_/ ), 'check prefix pattern is as expected
 is_deeply(
     $returned_config_hash,
     {
+      'limits' => {
+                              'project' => [
+                                             'ABC study( EFG )'
+                                           ]
+                            },
         'vrtrack_processed_flags' => {
             'qc'     => 1,
             'stored' => 1,
