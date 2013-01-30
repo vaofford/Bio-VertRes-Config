@@ -7,20 +7,20 @@ BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
     use Test::Most;
-    use_ok('Bio::VertRes::Config::Pipelines::BwaMapping');
+    use_ok('Bio::VertRes::Config::Pipelines::Ssaha2Mapping');
 }
 
 my $obj;
 ok(
     (
-        $obj = Bio::VertRes::Config::Pipelines::BwaMapping->new(
+        $obj = Bio::VertRes::Config::Pipelines::Ssaha2Mapping->new(
             database              => 'my_database',
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
         )
     ),
-    'initialise bwa mapping config'
+    'initialise ssaha2 mapping config'
 );
 
 my $returned_config_hash = $obj->to_hash;
@@ -59,16 +59,18 @@ is_deeply(
                           'add_index' => 1,
                           'reference' => '/path/to/ABC.fa',
                           'do_cleanup' => 1,
-                          'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/bwa-0.6.1/bwa',
-                          'slx_mapper' => 'bwa',
+                          'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/ssaha2/ssaha2',
+                          'slx_mapper' => 'ssaha2',
+                          '454_mapper' => 'ssaha2',
+                          '454_mapper_exe' => '/software/pathogen/external/apps/usr/local/ssaha2/ssaha2',
                           'ignore_mapped_status' => 1
                         },
-              'log' => '/nfs/pathnfs01/log/my_database/mapping__ABC_study_EFG_ABC_bwa.log',
+              'log' => '/nfs/pathnfs01/log/my_database/mapping__ABC_study_EFG_ABC_ssaha2.log',
               'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'prefix' => '_checked_elsewhere_',
               'module' => 'VertRes::Pipelines::Mapping'
             },
-    'Expected bwa base config file'
+    'Expected ssaha2 base config file'
 );
 
 

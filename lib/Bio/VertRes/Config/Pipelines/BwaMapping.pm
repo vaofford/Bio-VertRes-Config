@@ -4,7 +4,7 @@ package Bio::VertRes::Config::Pipelines::BwaMapping;
 
 =head1 SYNOPSIS
 
-Base BWA for the smalt mapper. 
+Base class for the BWA mapper
    use Bio::VertRes::Config::Pipelines::BwaMapping;
 
    my $pipeline = Bio::VertRes::Config::Pipelines::BwaMapping->new(
