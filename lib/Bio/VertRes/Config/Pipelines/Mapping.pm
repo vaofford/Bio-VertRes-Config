@@ -48,7 +48,6 @@ has '_get_genome_coverage'  => ( is => 'ro', isa => 'Int', default => 1 );
 has '_add_index'            => ( is => 'ro', isa => 'Int', default => 1 );
 has '_ignore_mapped_status' => ( is => 'ro', isa => 'Int', default => 1 );
 
-
 sub _build__reference_fasta {
     my ($self) = @_;
     Bio::VertRes::Config::References->new( reference_lookup_file => $self->reference_lookup_file )
@@ -74,7 +73,7 @@ override 'log_file_name' => sub {
     $output_filename =~ s/_$//g;
 
     if ( length($output_filename) > 80 ) {
-        $output_filename = substr( $output_filename, 0, 76 ) . '_' . rand(999);
+        $output_filename = substr( $output_filename, 0, 76 ) . '_' . int(rand(999));
     }
     return join( '.', ( $output_filename, 'log' ) );
 };
@@ -96,7 +95,6 @@ override 'to_hash' => sub {
     $output_hash->{data}{ignore_mapped_status} = $self->_ignore_mapped_status;
     $output_hash->{data}{slx_mapper}           = $self->slx_mapper;
     $output_hash->{data}{slx_mapper_exe}       = $self->slx_mapper_exe;
-    
 
     return $output_hash;
 };
