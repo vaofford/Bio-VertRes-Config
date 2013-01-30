@@ -18,6 +18,7 @@ extends 'Bio::VertRes::Config::Pipelines::Common';
 
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str', default => 'stored' );
 has 'module'              => ( is => 'ro', isa => 'Str', default => 'VertRes::Pipelines::StoreLane' );
+has 'toplevel_action'     => ( is => 'ro', isa => 'Str', default => '__VRTrack_Storing__' );
 
 has '_limit'              => ( is => 'ro', isa => 'Int', default => 100 );
 

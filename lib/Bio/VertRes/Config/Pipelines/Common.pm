@@ -18,6 +18,7 @@ use Bio::VertRes::Config::Types;
 has 'prefix'              => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default  => '_' );
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str',                          required => 1 );
 has 'module'              => ( is => 'ro', isa => 'Str',                          required => 1 );
+has 'toplevel_action'     => ( is => 'ro', isa => 'Str',                          required => 1 );
 
 has 'log'           => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_log' );
 has 'log_base'      => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/log' );

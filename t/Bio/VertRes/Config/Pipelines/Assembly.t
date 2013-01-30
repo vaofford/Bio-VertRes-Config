@@ -19,6 +19,8 @@ ok(
     'initialise assembly config'
 );
 
+is($obj->toplevel_action, '__VRTrack_Assembly__');
+
 is_deeply(
     $obj->to_hash,
     {

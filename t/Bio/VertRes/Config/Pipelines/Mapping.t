@@ -24,7 +24,7 @@ ok(
     ),
     'initialise mapping config'
 );
-
+is($obj->toplevel_action, '__VRTrack_Mapping__');
 my $returned_config_hash = $obj->to_hash;
 my $prefix               = $returned_config_hash->{prefix};
 $returned_config_hash->{prefix} = '_checked_elsewhere_';

@@ -22,7 +22,7 @@ ok(
     ),
     'initialise qc config'
 );
-
+is($obj->toplevel_action, '__VRTrack_QC__');
 is_deeply(
     $obj->to_hash,
     {

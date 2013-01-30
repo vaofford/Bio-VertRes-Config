@@ -32,6 +32,7 @@ has 'pipeline_short_name'   => ( is => 'ro', isa => 'Str', default  => 'qc' );
 has 'module'                => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::TrackQC_Fastq' );
 has 'reference'             => ( is => 'ro', isa => 'Str', required => 1 );
 has 'reference_lookup_file' => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
+has 'toplevel_action'       => ( is => 'ro', isa => 'Str', default => '__VRTrack_QC__' );
 
 has '_max_failures'         => ( is => 'ro', isa => 'Int', default => 3 );
 has '_bwa_ref'              => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build__bwa_ref' );

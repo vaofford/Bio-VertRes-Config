@@ -19,6 +19,7 @@ extends 'Bio::VertRes::Config::Pipelines::Common';
 has 'pipeline_short_name'  => ( is => 'ro', isa => 'Str', default => 'assembly' );
 has 'module'               => ( is => 'ro', isa => 'Str', default => 'VertRes::Pipelines::Assembly' );
 has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default => '_assembly_' );
+has 'toplevel_action'      => ( is => 'ro', isa => 'Str', default => '__VRTrack_Assembly__' );
 
 has '_max_failures'        => ( is => 'ro', isa => 'Int', default => 3 );
 has '_max_lanes_to_search' => ( is => 'ro', isa => 'Int', default => 200 );

@@ -35,6 +35,7 @@ has 'module'              => ( is => 'ro', isa => 'Str', default  => 'VertRes::P
 has 'reference'           => ( is => 'ro', isa => 'Str', required => 1 );
 has 'reference_lookup_file' =>
   ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
+has 'toplevel_action'       => ( is => 'ro', isa => 'Str', default => '__VRTrack_RNASeqExpression__' );
 
 has '_annotation_file'             => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build__annotation_file' );
 has '_sequencing_file_suffix'      => ( is => 'ro', isa => 'Str',  default => 'markdup.bam' );

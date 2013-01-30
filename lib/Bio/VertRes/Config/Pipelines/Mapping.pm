@@ -35,6 +35,7 @@ has 'pipeline_short_name'   => ( is => 'ro', isa => 'Str', default  => 'mapping'
 has 'module'                => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::Mapping' );
 has 'reference'             => ( is => 'ro', isa => 'Str', required => 1 );
 has 'reference_lookup_file' => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
+has 'toplevel_action'       => ( is => 'ro', isa => 'Str', default => '__VRTrack_Mapping__' );
 
 has 'slx_mapper'            => ( is => 'ro', isa => 'Str', required => 1 );
 has 'slx_mapper_exe'        => ( is => 'ro', isa => 'Str', required => 1 );

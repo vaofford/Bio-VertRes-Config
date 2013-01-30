@@ -18,7 +18,7 @@ ok(
     ),
     'initialise import config'
 );
-
+is($obj->toplevel_action, '__VRTrack_Import__');
 is_deeply(
     $obj->to_hash,
     {

@@ -22,7 +22,7 @@ ok(
     ),
     'initialise rna seq expression config'
 );
-
+is($obj->toplevel_action, '__VRTrack_RNASeqExpression__');
 my $returned_config_hash = $obj->to_hash;
 my $prefix               = $returned_config_hash->{prefix};
 ok( ( $prefix =~ m/_[\d]{10}_[\d]{1,4}_/ ), 'check prefix pattern is as expected' );

@@ -18,7 +18,7 @@ ok(
     ),
     'initialise store config'
 );
-
+is($obj->toplevel_action, '__VRTrack_Storing__');
 is_deeply(
     $obj->to_hash,
     {

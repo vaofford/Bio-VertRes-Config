@@ -18,6 +18,7 @@ extends 'Bio::VertRes::Config::Pipelines::Common';
 
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str', default => 'import' );
 has 'module'              => ( is => 'ro', isa => 'Str', default => 'VertRes::Pipelines::Import_iRODS_fastq' );
+has 'toplevel_action'      => ( is => 'ro', isa => 'Str', default => '__VRTrack_Import__' );
 
 has '_mpsa_limit'         => ( is => 'ro', isa => 'Int', default => 500 );
 

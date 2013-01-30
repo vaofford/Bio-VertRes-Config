@@ -15,7 +15,8 @@ ok(
         my $obj = Bio::VertRes::Config::Pipelines::Common->new(
             database            => 'my_database',
             pipeline_short_name => 'new_pipeline',
-            module              => 'Bio::Example'
+            module              => 'Bio::Example',
+            toplevel_action     => '__VRTrack_Action__'
         )
     ),
     'initialise common config'
@@ -54,7 +55,8 @@ ok(
         my $obj_non_standard = Bio::VertRes::Config::Pipelines::Common->new(
             database            => 'pathogen_prok_track',
             pipeline_short_name => 'new_pipeline',
-            module              => 'Bio::Example'
+            module              => 'Bio::Example',
+            toplevel_action     => '__VRTrack_Action__'
         )
     ),
     'initialise common config for pipeline with non standard root'

@@ -35,6 +35,7 @@ has 'module'              => ( is => 'ro', isa => 'Str', default  => 'VertRes::P
 has 'reference'           => ( is => 'ro', isa => 'Str', required => 1 );
 has 'reference_lookup_file' =>
   ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
+has 'toplevel_action'       => ( is => 'ro', isa => 'Str', default => '__VRTrack_SNPs__' );
 has 'run_after_bam_improvement' => ( is => 'ro', isa => 'Bool', default => 0);
 
 has '_max_lanes'     => ( is => 'ro', isa => 'Int',  default => 30 );

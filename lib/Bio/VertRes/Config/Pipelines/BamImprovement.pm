@@ -35,6 +35,7 @@ has 'module'              => ( is => 'ro', isa => 'Str', default  => 'VertRes::P
 has 'reference'           => ( is => 'ro', isa => 'Str', required => 1 );
 has 'reference_lookup_file' =>
   ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
+has 'toplevel_action'      => ( is => 'ro', isa => 'Str', default => '__VRTrack_BamImprovement__' );
 
 has 'slx_mapper'               => ( is => 'ro', isa => 'Str',  default => 'smalt' );
 has '_reference_fasta'         => ( is => 'ro', isa => 'Str',  lazy    => 1, builder => '_build__reference_fasta' );
