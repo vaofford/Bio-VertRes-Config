@@ -10,6 +10,7 @@ Exceptions for input data
 
 use Exception::Class (
     Bio::VertRes::Config::Exceptions::FileDoesntExist   => { description => 'Couldnt open the file' },
+    Bio::VertRes::Config::Exceptions::FileCantBeModified => { description => 'Couldnt open the file for modification' },
 );  
 use Moose;
 

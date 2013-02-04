@@ -28,7 +28,7 @@ use Bio::VertRes::Config::Pipelines::Roles::MultiplePrefix;
 extends 'Bio::VertRes::Config::Pipelines::Common';
 with 'Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter';
 with 'Bio::VertRes::Config::Pipelines::Roles::MultiplePrefix';
-with 'Bio::VertRes::Config::Pipelines::Roles::LogFilenameWithReference';
+with 'Bio::VertRes::Config::Pipelines::Roles::FilenameWithReference';
 
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str', default  => 'improvement' );
 has 'module'              => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::BamImprovement::NonHuman' );

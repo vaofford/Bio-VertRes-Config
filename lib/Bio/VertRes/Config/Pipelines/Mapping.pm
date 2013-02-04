@@ -55,29 +55,42 @@ sub _build__reference_fasta {
       ->get_reference_location_on_disk( $self->reference );
 }
 
+sub _construct_filename
+{
+  my ($self, $suffix) = @_;
+  my $output_filename = "";
+  for my $limit_type (qw(project sample library)) {
+      if ( defined $self->limits->{$limit_type} ) {
+          my $list_of_limit_values = $self->limits->{$limit_type};
+          for my $limit_value ( @{$list_of_limit_values} ) {
+              $limit_value =~ s/^\s+|\s+$//g;
+              $output_filename = $output_filename . '_' . $limit_value;
+          }
+      }
+  }
+  
+  $output_filename .= join('_',($self->reference, $self->slx_mapper));
+  
+  $output_filename =~ s!\W+!_!g;
+  $output_filename =~ s/_$//g;
+  
+  if ( length($output_filename) > 80 ) {
+      $output_filename = substr( $output_filename, 0, 76 ) . '_' . int(rand(999));
+  }
+  return join( '.', ( $output_filename, $suffix ) );
+}
+
 override 'log_file_name' => sub {
     my ($self) = @_;
-    my $output_filename = "";
-    for my $limit_type (qw(project sample library)) {
-        if ( defined $self->limits->{$limit_type} ) {
-            my $list_of_limit_values = $self->limits->{$limit_type};
-            for my $limit_value ( @{$list_of_limit_values} ) {
-                $limit_value =~ s/^\s+|\s+$//g;
-                $output_filename = $output_filename . '_' . $limit_value;
-            }
-        }
-    }
-    
-    $output_filename .= join('_',($self->reference, $self->slx_mapper));
-
-    $output_filename =~ s!\W+!_!g;
-    $output_filename =~ s/_$//g;
-
-    if ( length($output_filename) > 80 ) {
-        $output_filename = substr( $output_filename, 0, 76 ) . '_' . int(rand(999));
-    }
-    return join( '.', ( $output_filename, 'log' ) );
+    return $self->_construct_filename('log');
 };
+
+
+override 'config_file_name' => sub {
+    my ($self) = @_;
+    return $self->_construct_filename('conf');
+};
+
 
 override 'to_hash' => sub {
     my ($self) = @_;

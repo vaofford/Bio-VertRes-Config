@@ -13,19 +13,27 @@ A set of attributes common to all pipeline config files. It is ment to be extend
 =cut
 
 use Moose;
+use File::Slurp;
 use Bio::VertRes::Config::Types;
+use Data::Dumper;
+use File::Basename;
+use File::Path qw(make_path);
+with 'Bio::VertRes::Config::Pipelines::Roles::RootDatabaseLookup';
 
 has 'prefix'              => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default  => '_' );
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str',                          required => 1 );
 has 'module'              => ( is => 'ro', isa => 'Str',                          required => 1 );
 has 'toplevel_action'     => ( is => 'ro', isa => 'Str',                          required => 1 );
 
-has 'log'           => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_log' );
-has 'log_base'      => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/log' );
-has 'log_file_name' => ( is => 'ro', isa => 'Str', default => 'logfile.log' );
+has 'log'                 => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_log' );
+has 'log_base'            => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/log' );
+has 'log_file_name'       => ( is => 'ro', isa => 'Str', default => 'logfile.log' );
+
+has 'config'              => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_config' );
+has 'config_base'         => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/conf' );
+has 'config_file_name'    => ( is => 'ro', isa => 'Str', default => '.conf' );
 
 has 'root'                 => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_root' );
-has 'root_database_name'   => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_root_database_name' );
 has 'root_base'            => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe' );
 has 'root_pipeline_suffix' => ( is => 'ro', isa => 'Str', default => 'seq-pipelines' );
 
@@ -40,19 +48,10 @@ sub _build_root {
     join( '/', ( $self->root_base, $self->root_database_name, $self->root_pipeline_suffix ) );
 }
 
-sub _build_root_database_name {
+sub _build_config {
     my ($self) = @_;
-    my %non_standard_databases = (
-        'pathogen_virus_track'    => 'viruses',
-        'pathogen_prok_track'     => 'prokaryotes',
-        'pathogen_euk_track'      => 'eukaryotes',
-        'pathogen_helminth_track' => 'helminths',
-        'pathogen_rnd_track'      => 'rnd'
-    );
-    if ( $non_standard_databases{ $self->database } ) {
-        return $non_standard_databases{ $self->database };
-    }
-    return $self->database;
+    my $conf_file_name = join( '_', ( $self->pipeline_short_name, $self->config_file_name ) );
+    join( '/', ( $self->config_base, $self->root_database_name, $self->pipeline_short_name,  $conf_file_name ) );
 }
 
 sub _build_log {
@@ -79,6 +78,19 @@ sub _build_user {
 sub _build_password {
     my ($self) = @_;
     $ENV{VRTRACK_PASSWORD};
+}
+
+sub create_config_file
+{
+   my ($self) = @_;
+   
+   if(!(-e $self->config))
+   {
+     my($config_filename, $directories, $suffix) = fileparse($self->config);
+     make_path($directories);
+   }
+   
+   write_file( $self->config, Dumper( $self->to_hash));
 }
 
 sub to_hash {

@@ -26,7 +26,7 @@ use Bio::VertRes::Config::References;
 use Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter;
 extends 'Bio::VertRes::Config::Pipelines::Common';
 with 'Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter';
-with 'Bio::VertRes::Config::Pipelines::Roles::LogFilenameWithReference';
+with 'Bio::VertRes::Config::Pipelines::Roles::FilenameWithReference';
 
 has 'pipeline_short_name'   => ( is => 'ro', isa => 'Str', default  => 'qc' );
 has 'module'                => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::TrackQC_Fastq' );
