@@ -49,7 +49,6 @@ sub _build__filenames_to_action {
       open(my $overall_config_fh, $self->overall_config) or Bio::VertRes::Config::Exceptions::FileDoesntExist->throw(error => 'Couldnt open file '.$self->overall_config);
       while(<$overall_config_fh>)
       {
-        
         my $line = $_;
         chomp($line);
         next if($line =~ /^#/);
