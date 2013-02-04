@@ -26,6 +26,8 @@ sub update_or_create {
 
     # split by short name
     for my $pipeline_config ( @{ $self->pipeline_configs } ) {
+        # Create the config file
+        $pipeline_config->create_config_file;
         if ( !defined( $short_name_to_configs{ $pipeline_config->pipeline_short_name } ) ) {
             $short_name_to_configs{ $pipeline_config->pipeline_short_name } = [];
         }
