@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use Data::Dumper;
+use File::Temp;
 
 BEGIN { unshift( @INC, './lib' ) }
 
@@ -9,6 +10,9 @@ BEGIN {
     use Test::Most;
     use_ok('Bio::VertRes::Config::Pipelines::SmaltMapping');
 }
+
+my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
+my $destination_directory = $destination_directory_obj->dirname();
 
 my $obj;
 ok(
@@ -18,6 +22,7 @@ ok(
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
+            config_base           => $destination_directory
         )
     ),
     'initialise smalt mapping config'
@@ -75,6 +80,15 @@ is_deeply(
             },
     'Expected smalt base config file'
 );
+
+is(
+    $obj->config,
+    $destination_directory . '/my_database/mapping/mapping__ABC_study_EFG_ABC_smalt.conf',
+    'config file in expected format'
+);
+ok( $obj->create_config_file, 'Can run the create config file method' );
+ok( ( -e $obj->config ), 'Config file exists' );
+
 
 ok(
     (

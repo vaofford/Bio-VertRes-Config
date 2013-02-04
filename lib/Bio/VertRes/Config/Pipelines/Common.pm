@@ -20,28 +20,28 @@ use File::Basename;
 use File::Path qw(make_path);
 with 'Bio::VertRes::Config::Pipelines::Roles::RootDatabaseLookup';
 
-has 'prefix'              => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default  => '_' );
-has 'pipeline_short_name' => ( is => 'ro', isa => 'Str',                          required => 1 );
-has 'module'              => ( is => 'ro', isa => 'Str',                          required => 1 );
-has 'toplevel_action'     => ( is => 'ro', isa => 'Str',                          required => 1 );
-
-has 'log'                 => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_log' );
-has 'log_base'            => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/log' );
-has 'log_file_name'       => ( is => 'ro', isa => 'Str', default => 'logfile.log' );
-
-has 'config'              => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_config' );
-has 'config_base'         => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/conf' );
-has 'config_file_name'    => ( is => 'ro', isa => 'Str', default => '.conf' );
+has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default  => '_' );
+has 'pipeline_short_name'  => ( is => 'ro', isa => 'Str',                          required => 1 );
+has 'module'               => ( is => 'ro', isa => 'Str',                          required => 1 );
+has 'toplevel_action'      => ( is => 'ro', isa => 'Str',                          required => 1 );
+                           
+has 'log'                  => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_log' );
+has 'log_base'             => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/log' );
+has 'log_file_name'        => ( is => 'ro', isa => 'Str', default => 'logfile.log' );
+                           
+has 'config'               => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_config' );
+has 'config_base'          => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/conf' );
+has 'config_file_name'     => ( is => 'ro', isa => 'Str', default => 'global.conf' );
 
 has 'root'                 => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_root' );
 has 'root_base'            => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe' );
 has 'root_pipeline_suffix' => ( is => 'ro', isa => 'Str', default => 'seq-pipelines' );
 
-has 'database' => ( is => 'ro', isa => 'Str',        required => 1 );
-has 'host'     => ( is => 'ro', isa => 'Str',        lazy     => 1, builder => '_build_host' );
-has 'port'     => ( is => 'ro', isa => 'Int',        lazy     => 1, builder => '_build_port' );
-has 'user'     => ( is => 'ro', isa => 'Str',        lazy     => 1, builder => '_build_user' );
-has 'password' => ( is => 'ro', isa => 'Maybe[Str]', lazy     => 1, builder => '_build_password' );
+has 'database'             => ( is => 'ro', isa => 'Str',        required => 1 );
+has 'host'                 => ( is => 'ro', isa => 'Str',        lazy     => 1, builder => '_build_host' );
+has 'port'                 => ( is => 'ro', isa => 'Int',        lazy     => 1, builder => '_build_port' );
+has 'user'                 => ( is => 'ro', isa => 'Str',        lazy     => 1, builder => '_build_user' );
+has 'password'             => ( is => 'ro', isa => 'Maybe[Str]', lazy     => 1, builder => '_build_password' );
 
 sub _build_root {
     my ($self) = @_;
@@ -89,7 +89,8 @@ sub create_config_file
      my($config_filename, $directories, $suffix) = fileparse($self->config);
      make_path($directories);
    }
-   
+   # dont print out an extra wrapper variable
+   $Data::Dumper::Terse = 1;
    write_file( $self->config, Dumper( $self->to_hash));
 }
 

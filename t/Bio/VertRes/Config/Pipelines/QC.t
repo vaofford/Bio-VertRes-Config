@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use Data::Dumper;
+use File::Temp;
 
 BEGIN { unshift( @INC, './lib' ) }
 
@@ -10,6 +11,10 @@ BEGIN {
     use_ok('Bio::VertRes::Config::Pipelines::QC');
 }
 
+my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
+my $destination_directory = $destination_directory_obj->dirname();
+
+
 my $obj;
 ok(
     (
@@ -17,7 +22,8 @@ ok(
             database              => 'my_database',
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
-            limits                => { project => ['ABC study( EFG )'] }
+            limits                => { project => ['ABC study( EFG )'] },
+            config_base           => $destination_directory
         )
     ),
     'initialise qc config'
@@ -71,6 +77,15 @@ is_deeply(
     },
     'output hash constructed correctly'
 );
+
+is(
+    $obj->config,
+    $destination_directory . '/my_database/qc/qc__ABC_study_EFG_ABC.conf',
+    'config file in expected format'
+);
+ok( $obj->create_config_file, 'Can run the create config file method' );
+ok( ( -e $obj->config ), 'Config file exists' );
+
 
 ok(
     (

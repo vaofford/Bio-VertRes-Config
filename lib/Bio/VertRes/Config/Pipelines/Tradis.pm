@@ -30,7 +30,6 @@ with 'Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter';
 with 'Bio::VertRes::Config::Pipelines::Roles::MultiplePrefix';
 with 'Bio::VertRes::Config::Pipelines::Roles::FilenameWithReference';
 
-has 'pipeline_short_name' => ( is => 'ro', isa => 'Str',  default => 'tradis' );
 has '_protocol'           => ( is => 'ro', isa => 'Str',  default => 'TradisProtocol' );
 has '_mapping_quality'    => ( is => 'ro', isa => 'Int',  default => 10 );
 

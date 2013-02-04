@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use Data::Dumper;
+use File::Temp;
 
 BEGIN { unshift( @INC, './lib' ) }
 
@@ -9,11 +10,14 @@ BEGIN {
     use Test::Most;
     use_ok('Bio::VertRes::Config::Pipelines::Assembly');
 }
+my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
+my $destination_directory = $destination_directory_obj->dirname();
 
 ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::Assembly->new(
             database => 'my_database',
+            config_base           => $destination_directory
         )
     ),
     'initialise assembly config'
@@ -63,5 +67,14 @@ is_deeply(
     },
     'output hash constructed correctly'
 );
+
+is(
+    $obj->config,
+    $destination_directory . '/my_database/assembly/assembly_global.conf',
+    'config file in expected format'
+);
+ok( $obj->create_config_file, 'Can run the create config file method' );
+ok( ( -e $obj->config ), 'Config file exists' );
+
 
 done_testing();

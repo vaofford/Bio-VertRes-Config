@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use Data::Dumper;
+use File::Temp;
 
 BEGIN { unshift( @INC, './lib' ) }
 
@@ -9,6 +10,9 @@ BEGIN {
     use Test::Most;
     use_ok('Bio::VertRes::Config::Pipelines::Tradis');
 }
+
+my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
+my $destination_directory = $destination_directory_obj->dirname();
 
 my $obj;
 ok(
@@ -18,6 +22,7 @@ ok(
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
+            config_base           => $destination_directory
         )
     ),
     'initialise tradis config'
@@ -64,13 +69,22 @@ is_deeply(
                           'mapping_quality' => 10,
                           'sequencing_file_suffix' => 'markdup.bam'
                         },
-              'log' => '/nfs/pathnfs01/log/my_database/tradis__ABC_study_EFG_ABC.log',
+              'log' => '/nfs/pathnfs01/log/my_database/rna_seq__ABC_study_EFG_ABC.log',
               'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'prefix' => '_checked_elsewhere_',
               'module' => 'VertRes::Pipelines::RNASeqExpression'
             },
     'Expected base config file'
 );
+
+is(
+    $obj->config,
+    $destination_directory . '/my_database/rna_seq/rna_seq__ABC_study_EFG_ABC.conf',
+    'config file in expected format'
+);
+ok( $obj->create_config_file, 'Can run the create config file method' );
+ok( ( -e $obj->config ), 'Config file exists' );
+
 
 
 done_testing();

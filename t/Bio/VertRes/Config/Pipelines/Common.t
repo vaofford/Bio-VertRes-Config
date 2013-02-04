@@ -2,6 +2,8 @@
 use strict;
 use warnings;
 use Data::Dumper;
+use File::Temp;
+use File::Slurp;
 
 BEGIN { unshift( @INC, './lib' ) }
 
@@ -10,13 +12,17 @@ BEGIN {
     use_ok('Bio::VertRes::Config::Pipelines::Common');
 }
 
+my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
+my $destination_directory = $destination_directory_obj->dirname();
+
 ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::Common->new(
             database            => 'my_database',
             pipeline_short_name => 'new_pipeline',
             module              => 'Bio::Example',
-            toplevel_action     => '__VRTrack_Action__'
+            toplevel_action     => '__VRTrack_Action__',
+            config_base         => $destination_directory
         )
     ),
     'initialise common config'
@@ -48,6 +54,44 @@ is_deeply(
         'module' => 'Bio::Example'
     },
     'output hash constructed correctly'
+);
+
+is(
+    $obj->config,
+    $destination_directory . '/my_database/new_pipeline/new_pipeline_global.conf',
+    'config file in expected format'
+);
+ok( $obj->create_config_file, 'Can run the create config file method' );
+ok( ( -e $obj->config ), 'Config file exists' );
+
+my $text              = read_file( $obj->config );
+my $input_config_file = eval($text);
+is_deeply(
+    $input_config_file,
+    {
+        'db' => {
+            'database' => 'my_database',
+            'password' => undef,
+            'user'     => 'root',
+            'port'     => 3306,
+            'host'     => 'localhost'
+        },
+        'data' => {
+            'db' => {
+                'database' => 'my_database',
+                'password' => undef,
+                'user'     => 'root',
+                'port'     => 3306,
+                'host'     => 'localhost'
+            },
+            'dont_wait' => 0
+        },
+        'log'    => '/nfs/pathnfs01/log/my_database/new_pipeline_logfile.log',
+        'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+        'prefix' => '_',
+        'module' => 'Bio::Example'
+    },
+    'Can pull in file correctly and parse it'
 );
 
 ok(
