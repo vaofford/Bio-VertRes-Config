@@ -101,7 +101,8 @@ ok(
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
             _pseudo_genome        => 0,
-            run_after_bam_improvement => 1
+            run_after_bam_improvement => 1,
+            config_base         => '/tmp'
             
         )
     ),

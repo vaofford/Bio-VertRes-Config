@@ -17,7 +17,7 @@ use Bio::VertRes::Config::TopLevel;
 
 has 'database'         => ( is => 'ro', isa => 'Str',      required => 1 );
 has 'pipeline_configs' => ( is => 'ro', isa => 'ArrayRef', required => 1 );
-has 'overall_config_base'  => ( is => 'ro', isa => 'Str',     default => '/nfs/pathnfs01/conf' );
+has 'overall_config_base'  => ( is => 'ro', isa => 'Str',     required => 1 );
 
 sub update_or_create {
     my ($self) = @_;

@@ -98,7 +98,8 @@ ok(
                 sample      => [ 'sample 1', 'sample 2' ],
                 species     => ['species 1'],
                 other_stuff => ['some other stuff']
-            }
+            },
+            config_base         => '/tmp'
         )
     ),
     'initialise qc config with multiple limits'

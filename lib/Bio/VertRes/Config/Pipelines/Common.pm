@@ -24,13 +24,15 @@ has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix
 has 'pipeline_short_name'  => ( is => 'ro', isa => 'Str',                          required => 1 );
 has 'module'               => ( is => 'ro', isa => 'Str',                          required => 1 );
 has 'toplevel_action'      => ( is => 'ro', isa => 'Str',                          required => 1 );
+
+has 'overwrite_existing_config_file' => ( is => 'ro', isa => 'Bool', default => 0 );
                            
 has 'log'                  => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_log' );
 has 'log_base'             => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/log' );
 has 'log_file_name'        => ( is => 'ro', isa => 'Str', default => 'logfile.log' );
                            
 has 'config'               => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_config' );
-has 'config_base'          => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/conf' );
+has 'config_base'          => ( is => 'ro', isa => 'Str', required => 1 );
 has 'config_file_name'     => ( is => 'ro', isa => 'Str', default => 'global.conf' );
 
 has 'root'                 => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_root' );
@@ -89,6 +91,10 @@ sub create_config_file
      my($config_filename, $directories, $suffix) = fileparse($self->config);
      make_path($directories);
    }
+
+   # If the file exists and you dont want to overwrite existing files, skip it
+   return if( (-e  $self->config) && $self->overwrite_existing_config_file == 0);
+
    # dont print out an extra wrapper variable
    $Data::Dumper::Terse = 1;
    write_file( $self->config, Dumper( $self->to_hash));

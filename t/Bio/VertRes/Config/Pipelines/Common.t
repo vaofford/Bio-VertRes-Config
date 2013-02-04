@@ -100,7 +100,8 @@ ok(
             database            => 'pathogen_prok_track',
             pipeline_short_name => 'new_pipeline',
             module              => 'Bio::Example',
-            toplevel_action     => '__VRTrack_Action__'
+            toplevel_action     => '__VRTrack_Action__',
+            config_base         => $destination_directory
         )
     ),
     'initialise common config for pipeline with non standard root'

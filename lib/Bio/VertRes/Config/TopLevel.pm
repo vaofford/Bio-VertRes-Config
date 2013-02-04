@@ -28,6 +28,7 @@ has 'overall_config_file_name'         => ( is => 'ro', isa => 'Str',     lazy  
 has '_overall_config_file_name_suffix' => ( is => 'ro', isa => 'Str',     default => 'pipeline.conf' );
 has '_filenames_to_action'             => ( is => 'ro', isa => 'HashRef', lazy    => 1, builder => '_build__filenames_to_action' );
 
+has '_filenames_to_action'             => ( is => 'ro', isa => 'HashRef', lazy    => 1, builder => '_build__filenames_to_action' );
 
 sub _build_overall_config_file_name {
     my ($self) = @_;
@@ -41,6 +42,7 @@ sub _build_overall_config {
 
 sub _build__filenames_to_action {
     my ($self) = @_;
+    my %preexisting_filenames;
     my %filenames_to_action;
     
     # If the pipeline config file exists already, open it up and pull out all the details
@@ -55,13 +57,14 @@ sub _build__filenames_to_action {
         next if($line =~ /^\s*$/);
         if($line =~ /^([\S]+)\s+([\S]+)$/)
         {
-          $filenames_to_action{$2} = $1;
+          $preexisting_filenames{$2} = $1;
         }
       }
     }
     
     for my $pipeline_config (@{$self->pipeline_configs})
     {
+      next if($preexisting_filenames{$pipeline_config->config});
       $filenames_to_action{$pipeline_config->config} = $pipeline_config->toplevel_action;
     }
     
@@ -84,7 +87,7 @@ sub update_or_create {
       make_path($directories);
     }
 
-    open(my $overall_config_fh, '+>', $self->overall_config) or Bio::VertRes::Config::Exceptions::FileCantBeModified->throw(error => 'Couldnt open file for writing '.$self->overall_config);    
+    open(my $overall_config_fh, '+>>', $self->overall_config) or Bio::VertRes::Config::Exceptions::FileCantBeModified->throw(error => 'Couldnt open file for writing '.$self->overall_config);    
     
     for my $filename (keys %{$self->_filenames_to_action})
     {

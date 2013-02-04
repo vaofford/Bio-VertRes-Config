@@ -98,7 +98,8 @@ ok(
             reference                => 'ABC',
             limits                   => { project => ['ABC study( EFG )'] },
             additional_mapper_params => '-y 0.5  -r 1  -x',
-            mapper_index_params      => '-s 4  -k 13'
+            mapper_index_params      => '-s 4  -k 13',
+            config_base         => '/tmp'
         )
     ),
     'initialise smalt mapping config with optional parameters for mapper and indexing'

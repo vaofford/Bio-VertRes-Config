@@ -18,6 +18,7 @@ ok(
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
+            config_base         => '/tmp'
         )
     ),
     'initialise maq mapping config'
