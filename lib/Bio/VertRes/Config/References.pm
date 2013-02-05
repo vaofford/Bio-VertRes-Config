@@ -38,7 +38,7 @@ sub _build__reference_names_to_files
 sub available_references
 {
   my ($self) = @_;
-  my @references = keys %{$self->_reference_names_to_files};
+  my @references = sort(keys %{$self->_reference_names_to_files});
   return \@references;
 }
 

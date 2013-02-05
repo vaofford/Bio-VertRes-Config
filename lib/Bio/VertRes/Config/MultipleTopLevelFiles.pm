@@ -31,7 +31,7 @@ sub update_or_create {
         if ( !defined( $short_name_to_configs{ $pipeline_config->pipeline_short_name } ) ) {
             $short_name_to_configs{ $pipeline_config->pipeline_short_name } = [];
         }
-        push( $short_name_to_configs{ $pipeline_config->pipeline_short_name }, $pipeline_config );
+        push( @{$short_name_to_configs{ $pipeline_config->pipeline_short_name }}, $pipeline_config );
     }
 
     for my $pipeline_short_name ( keys %short_name_to_configs ) {

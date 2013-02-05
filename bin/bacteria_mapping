@@ -68,6 +68,7 @@ USAGE
 $database ||= 'pathogen_prok_track';
 $config_base ||= '/nfs/pathnfs01/conf';
 $reference_lookup_file ||= '/lustre/scratch108/pathogen/pathpipe/refs/refs.index';
+my $overwrite_existing_config_file = 0;
 
 if(defined($available_references))
 {
@@ -77,23 +78,24 @@ else
 {
   my $limits = Bio::VertRes::Config::CommandLine::ConstructLimits->new(input_type => $type, input_id => $id, species => $species)->limits_hash;
   
-  my %snp_calling_parameters = {
-    database              => $database,
-    config_base           => $config_base,
-    limits                => $limits,
-    reference_lookup_file => $reference_lookup_file,
-    reference             => $reference
-  };
+  my %snp_calling_parameters = (
+    database                       => $database,
+    config_base                    => $config_base,
+    limits                         => $limits,
+    reference_lookup_file          => $reference_lookup_file,
+    reference                      => $reference,
+    overwrite_existing_config_file => $overwrite_existing_config_file
+  );
   
-  if($mapper eq 'bwa')
+  if(defined($mapper)  && $mapper eq 'bwa')
   {
     Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingBwa->new(\%snp_calling_parameters)->create();
   }
-  elsif($mapper eq 'ssaha2')
+  elsif(defined($mapper)  && $mapper eq 'ssaha2')
   {
     Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSsaha2->new(\%snp_calling_parameters)->create();
   }
-  elsif($mapper eq 'stampy')
+  elsif(defined($mapper)  && $mapper eq 'stampy')
   {
     Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy->new(\%snp_calling_parameters)->create();
   }
