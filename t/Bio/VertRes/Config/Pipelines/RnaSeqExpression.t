@@ -23,7 +23,8 @@ ok(
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
-            config_base           => $destination_directory
+            config_base           => $destination_directory,
+            protocol              => 'StrandSpecificProtocol'
         )
     ),
     'initialise rna seq expression config'

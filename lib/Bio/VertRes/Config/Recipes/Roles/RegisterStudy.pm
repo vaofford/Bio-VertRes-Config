@@ -11,9 +11,15 @@ Moose Role for registering a study
 
 Hooks into the create method after the base method is run to register a study
 
+=method add_qc_config
+
+Method with takes in the pipeline config array and adds the qc config to it.
+
 =cut
 
 use Moose::Role;
+use Bio::VertRes::Config::Pipelines::QC;
+use Bio::VertRes::Config::RegisterStudy;
 
 # Register all the studies passed in the project limits array
 after 'create' => sub { 
@@ -32,6 +38,23 @@ after 'create' => sub {
     }
   }
 };
+
+sub add_qc_config
+{
+  my ($self, $pipeline_configs_array) = @_;
+  push(
+      @{$pipeline_configs_array},
+      Bio::VertRes::Config::Pipelines::QC->new(
+          database                       => $self->database,
+          config_base                    => $self->config_base,
+          overwrite_existing_config_file => $self->overwrite_existing_config_file,
+          limits                         => $self->limits,
+          reference                      => $self->reference,
+          reference_lookup_file          => $self->reference_lookup_file
+      )
+  );
+  return ;
+}
 
 
 no Moose;

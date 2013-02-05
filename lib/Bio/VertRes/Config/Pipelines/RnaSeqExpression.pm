@@ -38,7 +38,7 @@ has 'toplevel_action'       => ( is => 'ro', isa => 'Str', default => '__VRTrack
 
 has '_annotation_file'             => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build__annotation_file' );
 has '_sequencing_file_suffix'      => ( is => 'ro', isa => 'Str',  default => 'markdup.bam' );
-has '_protocol'                    => ( is => 'ro', isa => 'Str',  default => 'StrandSpecificProtocol' );
+has 'protocol'                     => ( is => 'ro', isa => 'Str',  required => 1 );
 has '_mapping_quality'             => ( is => 'ro', isa => 'Int',  default => 1 );
 has '_intergenic_regions'          => ( is => 'ro', isa => 'Bool', default => 1 );
 has '_ignore_rnaseq_called_status' => ( is => 'ro', isa => 'Bool', default => 1 );
@@ -59,7 +59,7 @@ override 'to_hash' => sub {
     $output_hash->{limits} = $self->_escaped_limits;
 
     $output_hash->{data}{sequencing_file_suffix}      = $self->_sequencing_file_suffix;
-    $output_hash->{data}{protocol}                    = $self->_protocol;
+    $output_hash->{data}{protocol}                    = $self->protocol;
     $output_hash->{data}{annotation_file}             = $self->_annotation_file;
     $output_hash->{data}{mapping_quality}             = $self->_mapping_quality;
     $output_hash->{data}{intergenic_regions}          = $self->_intergenic_regions;

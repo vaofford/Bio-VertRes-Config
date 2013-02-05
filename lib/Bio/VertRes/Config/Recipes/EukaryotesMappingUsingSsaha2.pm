@@ -1,33 +1,36 @@
-package Bio::VertRes::Config::Recipes::RegisterAndQCStudy;
-# ABSTRACT: Register and QC a study
+package Bio::VertRes::Config::Recipes::EukaryotesMappingUsingSsaha2;
+# ABSTRACT: Standard snp calling pipeline for bacteria
 
 =head1 SYNOPSIS
 
-Register and QC a study
-   use Bio::VertRes::Config::Recipes::RegisterAndQCStudy;
+Standard snp calling pipeline for eukaryotes.
+   use Bio::VertRes::Config::Recipes::EukaryotesMappingUsingSsaha2;
    
-   my $obj = Bio::VertRes::Config::Recipes::RegisterAndQCStudy->new( 
+   my $obj = Bio::VertRes::Config::Recipes::EukaryotesMappingUsingSsaha2->new( 
      database => 'abc', 
      limits => {project => ['Study ABC']}, 
      reference => 'ABC', 
-     reference_lookup_file => '/path/to/refs.index');
+     reference_lookup_file => '/path/to/refs.index'
+     );
    $obj->create;
    
 =cut
 
 use Moose;
-use Bio::VertRes::Config::Pipelines::QC;
-use Bio::VertRes::Config::RegisterStudy;
 extends 'Bio::VertRes::Config::Recipes::Common';
 with 'Bio::VertRes::Config::Recipes::Roles::RegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
+with 'Bio::VertRes::Config::Recipes::Roles::EukaryotesMapping';
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
     my @pipeline_configs;
+    
     $self->add_qc_config(\@pipeline_configs);
-
+    $self->add_eukaryotes_ssaha2_mapping_config(\@pipeline_configs);
+    
+    # Insert BAM Improvment here
     return \@pipeline_configs;
 };
 

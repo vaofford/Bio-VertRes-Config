@@ -25,22 +25,13 @@ extends 'Bio::VertRes::Config::Recipes::Common';
 with 'Bio::VertRes::Config::Recipes::Roles::RegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
+with 'Bio::VertRes::Config::Recipes::Roles::BacteriaSnpCalling';
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
     my @pipeline_configs;
     
-    push(
-        @pipeline_configs,
-        Bio::VertRes::Config::Pipelines::QC->new(
-            database                       => $self->database,
-            config_base                    => $self->config_base,
-            overwrite_existing_config_file => $self->overwrite_existing_config_file,
-            limits                         => $self->limits,
-            reference                      => $self->reference,
-            reference_lookup_file          => $self->reference_lookup_file
-        )
-    );
+    $self->add_qc_config(\@pipeline_configs);
     
     push(
         @pipeline_configs,
@@ -51,23 +42,12 @@ override '_pipeline_configs' => sub {
             limits                         => $self->limits,
             reference                      => $self->reference,
             reference_lookup_file          => $self->reference_lookup_file,
-
         )
     );
     
     # Insert BAM Improvment here
     
-    push(
-        @pipeline_configs,
-        Bio::VertRes::Config::Pipelines::SnpCalling->new(
-            database                       => $self->database,
-            config_base                    => $self->config_base,
-            overwrite_existing_config_file => $self->overwrite_existing_config_file,
-            limits                         => $self->limits,
-            reference                      => $self->reference,
-            reference_lookup_file          => $self->reference_lookup_file
-        )
-    );
+    $self->add_bacteria_snp_calling_config(\@pipeline_configs);
     
     return \@pipeline_configs;
 };

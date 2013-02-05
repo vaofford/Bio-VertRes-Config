@@ -30,7 +30,7 @@ with 'Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter';
 with 'Bio::VertRes::Config::Pipelines::Roles::MultiplePrefix';
 with 'Bio::VertRes::Config::Pipelines::Roles::FilenameWithReference';
 
-has '_protocol'           => ( is => 'ro', isa => 'Str',  default => 'TradisProtocol' );
+has 'protocol'           => ( is => 'ro', isa => 'Str',  default => 'TradisProtocol' );
 has '_mapping_quality'    => ( is => 'ro', isa => 'Int',  default => 10 );
 
 __PACKAGE__->meta->make_immutable;

@@ -8,7 +8,7 @@ BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
     use Test::Most;
-    use_ok('Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt');
+    use_ok('Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingStampy');
 }
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
@@ -16,14 +16,12 @@ my $destination_directory = $destination_directory_obj->dirname();
 
 ok(
     (
-        my $obj = Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt->new(
+        my $obj = Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingStampy->new(
             database    => 'my_database',
             config_base => $destination_directory,
             limits      => { project => ['ABC study( EFG )'] },
             reference_lookup_file => 't/data/refs.index',
-            reference             => 'ABC',
-            additional_mapper_params => '-y 0.5  -r 1  -x',
-            mapper_index_params      => '-s 4  -k 13',
+            reference             => 'ABC'
         )
     ),
     'initalise creating files'
@@ -44,11 +42,11 @@ ok((-e "$destination_directory/my_database/assembly/assembly_global.conf"), 'ass
 ok((-e "$destination_directory/my_database/stored/stored_global.conf"), 'stored config file exists');
 ok((-e "$destination_directory/my_database/import/import_global.conf"), 'import config file exists');
 ok((-e "$destination_directory/my_database/qc/qc__ABC_study_EFG.conf"), 'QC config file exists' );
-ok((-e "$destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_smalt.conf"), 'mapping config file exists' );
+ok((-e "$destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_stampy.conf"), 'mapping config file exists' );
 ok((-e "$destination_directory/my_database/snps/snps__ABC_study_EFG_ABC.conf"), 'snps config file exists' );
 
 
-my $text = read_file( "$destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_smalt.conf" );
+my $text = read_file( "$destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_stampy.conf" );
 my $input_config_file = eval($text);
 $input_config_file->{prefix} = '_checked_elsewhere_';
 is_deeply($input_config_file,{
@@ -77,11 +75,8 @@ is_deeply($input_config_file,{
               'reference' => '/path/to/ABC.fa',
               'do_cleanup' => 1,
               'ignore_mapped_status' => 1,
-              'slx_mapper' => 'smalt',
-              'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/smalt-0.7.0.1/smalt_x86_64',
-              'mapper_index_suffix' => 's4k13',
-              'additional_mapper_params' => '-y 0.5  -r 1  -x',
-              'mapper_index_params'     => '-s 4  -k 13'
+              'slx_mapper' => 'stampy',
+              'slx_mapper_exe' => '/software/vertres/bin-external//stampy-1.0.17/stampy.py'
             },
   'limits' => {
                 'project' => [
@@ -93,7 +88,7 @@ is_deeply($input_config_file,{
                                  'stored' => 1,
                                  'import' => 1
                                },
-  'log' => '/nfs/pathnfs01/log/my_database/mapping__ABC_study_EFG_ABC_smalt.log',
+  'log' => '/nfs/pathnfs01/log/my_database/mapping__ABC_study_EFG_ABC_stampy.log',
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
   'module' => 'VertRes::Pipelines::Mapping'
@@ -151,71 +146,6 @@ is_deeply($input_config_file,{
   'prefix' => '_checked_elsewhere_',
   'module' => 'VertRes::Pipelines::SNPs'
 },'SNP calling Config file as expected');
-
-
-$destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
-$destination_directory = $destination_directory_obj->dirname();
-
-ok(
-    (
-        $obj = Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt->new(
-            database    => 'my_database',
-            config_base => $destination_directory,
-            limits      => { project => ['ABC study( EFG )'] },
-            reference_lookup_file => 't/data/refs.index',
-            reference             => 'ABC',
-        )
-    ),
-    'initalise creating files'
-);
-ok( ( $obj->create ), 'Create all the config files and toplevel files without optional mapping parameters' );
-$text = read_file( "$destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_smalt.conf" );
-$input_config_file = eval($text);
-$input_config_file->{prefix} = '_checked_elsewhere_';
-is_deeply($input_config_file,{
-  'db' => {
-            'database' => 'my_database',
-            'password' => undef,
-            'user' => 'root',
-            'port' => 3306,
-            'host' => 'localhost'
-          },
-  'data' => {
-              'mark_duplicates' => 1,
-              'do_recalibration' => 0,
-              'db' => {
-                        'database' => 'my_database',
-                        'password' => undef,
-                        'user' => 'root',
-                        'port' => 3306,
-                        'host' => 'localhost'
-                      },
-              'get_genome_coverage' => 1,
-              'dont_wait' => 0,
-              'assembly_name' => 'ABC',
-              'exit_on_errors' => 0,
-              'add_index' => 1,
-              'reference' => '/path/to/ABC.fa',
-              'do_cleanup' => 1,
-              'ignore_mapped_status' => 1,
-              'slx_mapper' => 'smalt',
-              'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/smalt-0.7.0.1/smalt_x86_64',
-            },
-  'limits' => {
-                'project' => [
-                               'ABC study( EFG )'
-                             ]
-              },
-  'vrtrack_processed_flags' => {
-                                 'qc' => 1,
-                                 'stored' => 1,
-                                 'import' => 1
-                               },
-  'log' => '/nfs/pathnfs01/log/my_database/mapping__ABC_study_EFG_ABC_smalt.log',
-  'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-  'prefix' => '_checked_elsewhere_',
-  'module' => 'VertRes::Pipelines::Mapping'
-},'Mapping Config file as expected');
 
 
 done_testing();

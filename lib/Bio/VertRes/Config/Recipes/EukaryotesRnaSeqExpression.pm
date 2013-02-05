@@ -1,16 +1,16 @@
-package Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy;
-# ABSTRACT: Standard snp calling pipeline for bacteria
+package Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpression;
+# ABSTRACT: Standard snp calling pipeline for eukaryotes
 
 =head1 SYNOPSIS
 
-Standard snp calling pipeline for bacteria. Register study, QC, map with Stampy, snp call
-   use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy;
+Standard snp calling pipeline for eukaryotes
+   use Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpression;
    
-   my $obj = Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy->new( 
+   my $obj = Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpression->new( 
      database => 'abc', 
      limits => {project => ['Study ABC']}, 
      reference => 'ABC', 
-     reference_lookup_file => '/path/to/refs.index'
+     reference_lookup_file => '/path/to/refs.index',
      );
    $obj->create;
    
@@ -18,14 +18,16 @@ Standard snp calling pipeline for bacteria. Register study, QC, map with Stampy,
 
 use Moose;
 use Bio::VertRes::Config::Pipelines::QC;
-use Bio::VertRes::Config::Pipelines::StampyMapping;
-use Bio::VertRes::Config::Pipelines::SnpCalling;
+use Bio::VertRes::Config::Pipelines::TophatMapping;
+use Bio::VertRes::Config::Pipelines::RnaSeqExpression;
 use Bio::VertRes::Config::RegisterStudy;
 extends 'Bio::VertRes::Config::Recipes::Common';
 with 'Bio::VertRes::Config::Recipes::Roles::RegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
-with 'Bio::VertRes::Config::Recipes::Roles::BacteriaSnpCalling';
+with 'Bio::VertRes::Config::Recipes::Roles::RnaSeqExpression';
+
+has 'protocol'  => ( is => 'ro', isa => 'Str',  default => 'StandardProtocol' );
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
@@ -35,20 +37,17 @@ override '_pipeline_configs' => sub {
     
     push(
         @pipeline_configs,
-        Bio::VertRes::Config::Pipelines::StampyMapping->new(
+        Bio::VertRes::Config::Pipelines::TophatMapping->new(
             database                       => $self->database,
             config_base                    => $self->config_base,
             overwrite_existing_config_file => $self->overwrite_existing_config_file,
             limits                         => $self->limits,
             reference                      => $self->reference,
-            reference_lookup_file          => $self->reference_lookup_file,
-
+            reference_lookup_file          => $self->reference_lookup_file
         )
     );
     
-    # Insert BAM Improvment here
-    
-    $self->add_bacteria_snp_calling_config(\@pipeline_configs);
+    $self->add_rna_seq_expression_config(\@pipeline_configs);
     
     return \@pipeline_configs;
 };

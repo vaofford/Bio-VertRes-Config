@@ -1,12 +1,12 @@
-package Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy;
+package Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingSmalt;
 # ABSTRACT: Standard snp calling pipeline for bacteria
 
 =head1 SYNOPSIS
 
-Standard snp calling pipeline for bacteria. Register study, QC, map with Stampy, snp call
-   use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy;
+Standard snp calling pipeline for eukaryotes.
+   use Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingBwa;
    
-   my $obj = Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy->new( 
+   my $obj = Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingBwa->new( 
      database => 'abc', 
      limits => {project => ['Study ABC']}, 
      reference => 'ABC', 
@@ -17,15 +17,18 @@ Standard snp calling pipeline for bacteria. Register study, QC, map with Stampy,
 =cut
 
 use Moose;
-use Bio::VertRes::Config::Pipelines::QC;
-use Bio::VertRes::Config::Pipelines::StampyMapping;
-use Bio::VertRes::Config::Pipelines::SnpCalling;
-use Bio::VertRes::Config::RegisterStudy;
+use Bio::VertRes::Config::Pipelines::SmaltMapping;
 extends 'Bio::VertRes::Config::Recipes::Common';
 with 'Bio::VertRes::Config::Recipes::Roles::RegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
-with 'Bio::VertRes::Config::Recipes::Roles::BacteriaSnpCalling';
+with 'Bio::VertRes::Config::Recipes::Roles::EukaryotesSnpCalling';
+with 'Bio::VertRes::Config::Recipes::Roles::EukaryotesMapping';
+
+
+has 'additional_mapper_params' => ( is => 'ro', isa => 'Maybe[Str]' );
+has 'mapper_index_params'      => ( is => 'ro', isa => 'Maybe[Str]' );
+
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
@@ -35,20 +38,21 @@ override '_pipeline_configs' => sub {
     
     push(
         @pipeline_configs,
-        Bio::VertRes::Config::Pipelines::StampyMapping->new(
+        Bio::VertRes::Config::Pipelines::SmaltMapping->new(
             database                       => $self->database,
             config_base                    => $self->config_base,
             overwrite_existing_config_file => $self->overwrite_existing_config_file,
             limits                         => $self->limits,
             reference                      => $self->reference,
             reference_lookup_file          => $self->reference_lookup_file,
-
+            additional_mapper_params       => $self->additional_mapper_params,
+            mapper_index_params            => $self->mapper_index_params
         )
     );
-    
+
     # Insert BAM Improvment here
     
-    $self->add_bacteria_snp_calling_config(\@pipeline_configs);
+    $self->add_eukaryotes_snp_calling_config(\@pipeline_configs);
     
     return \@pipeline_configs;
 };
