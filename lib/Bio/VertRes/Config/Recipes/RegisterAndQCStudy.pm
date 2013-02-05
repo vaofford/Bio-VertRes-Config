@@ -21,6 +21,7 @@ use Bio::VertRes::Config::RegisterStudy;
 extends 'Bio::VertRes::Config::Recipes::Common';
 with 'Bio::VertRes::Config::Recipes::Roles::RegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
+with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;

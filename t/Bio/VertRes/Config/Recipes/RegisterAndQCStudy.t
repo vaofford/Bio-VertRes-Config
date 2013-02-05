@@ -11,7 +11,7 @@ BEGIN {
     use_ok('Bio::VertRes::Config::Recipes::RegisterAndQCStudy');
 }
 
-my $destination_directory_obj = File::Temp->newdir( CLEANUP => 0 );
+my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
 
 ok(
