@@ -34,7 +34,7 @@ with 'Bio::VertRes::Config::Pipelines::Roles::MultiplePrefix';
 has 'pipeline_short_name'   => ( is => 'ro', isa => 'Str', default  => 'mapping' );
 has 'module'                => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::Mapping' );
 has 'reference'             => ( is => 'ro', isa => 'Str', required => 1 );
-has 'reference_lookup_file' => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
+has 'reference_lookup_file' => ( is => 'ro', isa => 'Str', required => 1 );
 has 'toplevel_action'       => ( is => 'ro', isa => 'Str', default => '__VRTrack_Mapping__' );
 
 has 'slx_mapper'            => ( is => 'ro', isa => 'Str', required => 1 );
@@ -59,7 +59,7 @@ sub _construct_filename
 {
   my ($self, $suffix) = @_;
   my $output_filename = "";
-  for my $limit_type (qw(project sample library)) {
+  for my $limit_type (qw(project sample library species)) {
       if ( defined $self->limits->{$limit_type} ) {
           my $list_of_limit_values = $self->limits->{$limit_type};
           for my $limit_value ( @{$list_of_limit_values} ) {

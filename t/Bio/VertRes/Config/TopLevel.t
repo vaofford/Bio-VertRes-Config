@@ -44,7 +44,7 @@ push(@pipeline_configs, Bio::VertRes::Config::Pipelines::SmaltMapping->new(
 ok((my $obj = Bio::VertRes::Config::TopLevel->new(
   database => 'my_database', 
   pipeline_configs => \@pipeline_configs,
-  overall_config_base => $destination_directory,
+  config_base => $destination_directory,
   pipeline_short_name => 'mapping'
 )), 'initialise object');
 
@@ -63,7 +63,7 @@ is_deeply(\@mapping_rows , ["__VRTrack_Mapping__ $destination_directory/my_datab
 ok((my $obj_rerun = Bio::VertRes::Config::TopLevel->new(
   database => 'my_database', 
   pipeline_configs => \@pipeline_configs,
-  overall_config_base => $destination_directory,
+  config_base => $destination_directory,
   pipeline_short_name => 'mapping'
 )), 'initialise object to run it again');
 ok(($obj_rerun->update_or_create()), 'Create the toplevel file thats been rerun');
@@ -86,7 +86,7 @@ push(@pipeline_configs, Bio::VertRes::Config::Pipelines::StampyMapping->new(
 ok((my $obj_append = Bio::VertRes::Config::TopLevel->new(
   database => 'my_database', 
   pipeline_configs => \@pipeline_configs,
-  overall_config_base => $destination_directory,
+  config_base => $destination_directory,
   pipeline_short_name => 'mapping'
 )), 'initialise object to append a new mapping');
 ok(($obj_append->update_or_create()), 'Create the toplevel file to append a new mapping');

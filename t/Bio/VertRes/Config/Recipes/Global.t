@@ -6,8 +6,6 @@ use File::Temp;
 use File::Slurp;
 BEGIN { unshift( @INC, './lib' ) }
 
-
-
 BEGIN {
     use Test::Most;
     use_ok('Bio::VertRes::Config::Recipes::Global');
@@ -25,7 +23,6 @@ ok(-e $destination_directory.'/my_database/my_database_assembly_pipeline.conf', 
 ok(-e $destination_directory.'/my_database/my_database_stored_pipeline.conf', 'stored toplevel file');
 ok(-e $destination_directory.'/my_database/my_database_import_pipeline.conf', 'import toplevel file');
 
-
 my $text = read_file( $destination_directory.'/my_database/my_database_assembly_pipeline.conf' );
 chomp($text);
 is($text, "__VRTrack_Assembly__ $destination_directory/my_database/assembly/assembly_global.conf", 'content of assembly toplevel file as expected');
@@ -42,4 +39,3 @@ is($text, "__VRTrack_Import__ $destination_directory/my_database/import/import_g
 ok((-e "$destination_directory/my_database/import/import_global.conf"), 'import config file exists');
 
 done_testing();
-

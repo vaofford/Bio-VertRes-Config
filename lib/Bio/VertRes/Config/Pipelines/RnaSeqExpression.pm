@@ -33,8 +33,7 @@ with 'Bio::VertRes::Config::Pipelines::Roles::FilenameWithReference';
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str', default  => 'rna_seq' );
 has 'module'              => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::RNASeqExpression' );
 has 'reference'           => ( is => 'ro', isa => 'Str', required => 1 );
-has 'reference_lookup_file' =>
-  ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
+has 'reference_lookup_file' =>  ( is => 'ro', isa => 'Str', required => 1 );
 has 'toplevel_action'       => ( is => 'ro', isa => 'Str', default => '__VRTrack_RNASeqExpression__' );
 
 has '_annotation_file'             => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build__annotation_file' );

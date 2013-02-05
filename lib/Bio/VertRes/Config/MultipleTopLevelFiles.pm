@@ -17,7 +17,7 @@ use Bio::VertRes::Config::TopLevel;
 
 has 'database'         => ( is => 'ro', isa => 'Str',      required => 1 );
 has 'pipeline_configs' => ( is => 'ro', isa => 'ArrayRef', required => 1 );
-has 'overall_config_base'  => ( is => 'ro', isa => 'Str',     required => 1 );
+has 'config_base'  => ( is => 'ro', isa => 'Str',     required => 1 );
 
 sub update_or_create {
     my ($self) = @_;
@@ -39,7 +39,7 @@ sub update_or_create {
             database            => $self->database,
             pipeline_configs    => $short_name_to_configs{$pipeline_short_name},
             pipeline_short_name => $pipeline_short_name,
-            overall_config_base => $self->overall_config_base
+            config_base => $self->config_base
         )->update_or_create();
 
     }

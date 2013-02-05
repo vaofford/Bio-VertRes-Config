@@ -7,7 +7,7 @@ package Bio::VertRes::Config::TopLevel;
 A top level config file for a pipeline. This specifies all of the sub configs to execute
    use Bio::VertRes::Config::TopLevel;
    
-   my $pipeline = Bio::VertRes::Config::TopLevel->new(database => 'abc', pipeline_configs => [$config_obj1, $config_obj2], overall_config_base => '/tmp');
+   my $pipeline = Bio::VertRes::Config::TopLevel->new(database => 'abc', pipeline_configs => [$config_obj1, $config_obj2], config_base => '/tmp');
    $pipeline->update_or_create();
 
 =cut
@@ -23,7 +23,7 @@ has 'database'            => ( is => 'ro', isa => 'Str', required => 1 );
 has 'pipeline_configs'    => ( is => 'ro', isa => 'ArrayRef', required => 1 );
 
 has 'overall_config'                   => ( is => 'ro', isa => 'Str',     lazy    => 1, builder => '_build_overall_config' );
-has 'overall_config_base'              => ( is => 'ro', isa => 'Str',     required => 1 );
+has 'config_base'              => ( is => 'ro', isa => 'Str',     required => 1 );
 has 'overall_config_file_name'         => ( is => 'ro', isa => 'Str',     lazy    => 1, builder => '_build_overall_config_file_name' );
 has '_overall_config_file_name_suffix' => ( is => 'ro', isa => 'Str',     default => 'pipeline.conf' );
 has '_filenames_to_action'             => ( is => 'ro', isa => 'HashRef', lazy    => 1, builder => '_build__filenames_to_action' );
@@ -37,7 +37,7 @@ sub _build_overall_config_file_name {
 
 sub _build_overall_config {
     my ($self) = @_;
-    return join( '/', ( $self->overall_config_base, $self->root_database_name, $self->overall_config_file_name ) );
+    return join( '/', ( $self->config_base, $self->root_database_name, $self->overall_config_file_name ) );
 }
 
 sub _build__filenames_to_action {

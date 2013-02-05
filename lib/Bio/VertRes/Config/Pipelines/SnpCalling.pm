@@ -33,8 +33,7 @@ with 'Bio::VertRes::Config::Pipelines::Roles::FilenameWithReference';
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str', default  => 'snps' );
 has 'module'              => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::SNPs' );
 has 'reference'           => ( is => 'ro', isa => 'Str', required => 1 );
-has 'reference_lookup_file' =>
-  ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
+has 'reference_lookup_file' =>  ( is => 'ro', isa => 'Str', required => 1 );
 has 'toplevel_action'       => ( is => 'ro', isa => 'Str', default => '__VRTrack_SNPs__' );
 has 'run_after_bam_improvement' => ( is => 'ro', isa => 'Bool', default => 0);
 

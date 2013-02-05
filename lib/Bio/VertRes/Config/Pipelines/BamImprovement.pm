@@ -33,8 +33,7 @@ with 'Bio::VertRes::Config::Pipelines::Roles::FilenameWithReference';
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str', default  => 'improvement' );
 has 'module'              => ( is => 'ro', isa => 'Str', default  => 'VertRes::Pipelines::BamImprovement::NonHuman' );
 has 'reference'           => ( is => 'ro', isa => 'Str', required => 1 );
-has 'reference_lookup_file' =>
-  ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
+has 'reference_lookup_file' => ( is => 'ro', isa => 'Str', required => 1);
 has 'toplevel_action'      => ( is => 'ro', isa => 'Str', default => '__VRTrack_BamImprovement__' );
 
 has 'slx_mapper'               => ( is => 'ro', isa => 'Str',  default => 'smalt' );

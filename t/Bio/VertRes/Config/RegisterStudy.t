@@ -20,7 +20,7 @@ ok(
         my $obj = Bio::VertRes::Config::RegisterStudy->new(
             database            => 'my_database',
             study_name          => 'First Study',
-            overall_config_base => $destination_directory
+            config_base => $destination_directory
         )
     ),
     'initialise study file which doesnt have any preexisting studies'
@@ -37,7 +37,7 @@ ok(
         $obj = Bio::VertRes::Config::RegisterStudy->new(
             database            => 'my_database',
             study_name          => 'Another Study',
-            overall_config_base => $destination_directory
+            config_base => $destination_directory
         )
     ),
     'initialise adding another study'
@@ -54,7 +54,7 @@ ok(
         $obj = Bio::VertRes::Config::RegisterStudy->new(
             database            => 'my_database',
             study_name          => 'First Study',
-            overall_config_base => $destination_directory
+            config_base => $destination_directory
         )
     ),
     'initialise adding the first study again'

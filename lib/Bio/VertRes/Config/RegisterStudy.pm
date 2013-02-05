@@ -20,7 +20,7 @@ with 'Bio::VertRes::Config::Pipelines::Roles::RootDatabaseLookup';
 
 has 'database'            => ( is => 'ro', isa => 'Str', required => 1 );
 has 'study_name'          => ( is => 'ro', isa => 'Str', required => 1 );
-has 'overall_config_base' => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/conf' );
+has 'config_base' => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs01/conf' );
 
 has '_study_file_name'    => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build__study_file_name' );
 
@@ -28,7 +28,7 @@ sub _build__study_file_name
 {
   my ($self) = @_;
   my $filename = join( '.', ( $self->root_database_name, 'ilm','studies' ) );
-  return join('/',($self->overall_config_base,$self->root_database_name, $filename));
+  return join('/',($self->config_base,$self->root_database_name, $filename));
 }
 
 sub _is_study_in_file_already

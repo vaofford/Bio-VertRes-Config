@@ -53,7 +53,7 @@ push(@pipeline_configs, Bio::VertRes::Config::Pipelines::SnpCalling->new(
 ok((my $obj = Bio::VertRes::Config::MultipleTopLevelFiles->new(
   database => 'my_database', 
   pipeline_configs => \@pipeline_configs,
-  overall_config_base => $destination_directory
+  config_base => $destination_directory
 )), 'initialise object');
 
 ok(($obj->update_or_create()), 'Create all the toplevel files');
