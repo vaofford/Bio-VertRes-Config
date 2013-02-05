@@ -1,0 +1,107 @@
+#!/usr/bin/env perl
+
+package Bio::VertRes::Config::Main::BacteriaMapping;
+# ABSTRACT: Create config scripts to map bacteria
+# PODNAME: bacteria_mapping
+=head1 SYNOPSIS
+
+Create config scripts to map bacteria.
+
+=cut
+
+BEGIN { unshift( @INC, '../lib' ) }
+use Moose;
+use Getopt::Long;
+use Bio::VertRes::Config::CommandLine::LogParameters;
+use Bio::VertRes::Config::CommandLine::ConstructLimits;
+use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingBwa;
+use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt;
+use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSsaha2;
+use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy;
+use Bio::VertRes::Config::References;
+
+Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV)->create;
+
+my ($database, $config_base, $reference_lookup_file, $available_references, $reference, $type, $id,$species, $mapper, $help );
+
+GetOptions(
+    'd|database=s'              => \$database,
+    'c|config_base=s'           => \$config_base,
+    'l|reference_lookup_file=s' => \$reference_lookup_file,
+    'r|reference=s'             => \$reference,
+    'a|available_references'    => \$available_references,
+    't|type=s'                  => \$type,
+    'i|id=s'                    => \$id,
+    's|species=s'               => \$species,
+    'm|mapper=s'                => \$mapper,
+    'h|help'                    => \$help,
+);
+
+
+( ($available_references || ($reference && $type && $id))  && !$help ) or die <<USAGE;
+Usage: bacteria_mapping [options]
+Pipeline to map and SNP call bacteria, producing a pseudo genome at the end.
+
+# list all available references
+bacteria_mapping -a
+
+# Map and SNP call a study
+bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+
+# Map and SNP call a single lane
+bacteria_mapping -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+
+# Map and SNP call a file of lanes
+bacteria_mapping -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+
+# Map and SNP call a single species in a study
+bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
+
+# Map and SNP call a study with BWA instead of the default (SMALT)
+bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -m bwa
+
+# This help message
+bacteria_mapping -h
+
+USAGE
+
+$database ||= 'pathogen_prok_track';
+$config_base ||= '/nfs/pathnfs01/conf';
+$reference_lookup_file ||= '/lustre/scratch108/pathogen/pathpipe/refs/refs.index';
+
+if(defined($available_references))
+{
+  print join("\n", @{ Bio::VertRes::Config::References->new( reference_lookup_file => $reference_lookup_file )->available_references });
+}
+else
+{
+  my $limits = Bio::VertRes::Config::CommandLine::ConstructLimits->new(input_type => $type, input_id => $id, species => $species)->limits_hash;
+  
+  my %snp_calling_parameters = {
+    database              => $database,
+    config_base           => $config_base,
+    limits                => $limits,
+    reference_lookup_file => $reference_lookup_file,
+    reference             => $reference
+  };
+  
+  if($mapper eq 'bwa')
+  {
+    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingBwa->new(\%snp_calling_parameters)->create();
+  }
+  elsif($mapper eq 'ssaha2')
+  {
+    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSsaha2->new(\%snp_calling_parameters)->create();
+  }
+  elsif($mapper eq 'stampy')
+  {
+    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy->new(\%snp_calling_parameters)->create();
+  }
+  else
+  {
+    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt->new(\%snp_calling_parameters)->create();
+  }
+}
+
+
+

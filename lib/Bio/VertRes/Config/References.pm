@@ -35,6 +35,13 @@ sub _build__reference_names_to_files
   return \%reference_names_to_files;
 }
 
+sub available_references
+{
+  my ($self) = @_;
+  my @references = keys %{$self->_reference_names_to_files};
+  return \@references;
+}
+
 
 sub get_reference_location_on_disk
 {
