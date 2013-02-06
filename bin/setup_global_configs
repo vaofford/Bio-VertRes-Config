@@ -1,0 +1,50 @@
+#!/usr/bin/env perl
+
+package Bio::VertRes::Config::Main::SetupGlobalConfigs;
+
+# ABSTRACT: Create config scripts and overall strucutre for the global configs
+# PODNAME: setup_global_configs
+
+=head1 SYNOPSIS
+
+Create config scripts and overall strucutre for the global configs
+
+=cut
+
+BEGIN { unshift( @INC, '../lib' ) }
+use Moose;
+use Getopt::Long;
+use Bio::VertRes::Config::CommandLine::LogParameters;
+
+Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV , script_name => $0 )->create;
+
+my ( $database, $config_base, $overwrite_existing_config_file, $help );
+
+GetOptions(
+    'd|database=s'                     => \$database,
+    'c|config_base=s'                  => \$config_base,
+    'o|overwrite_existing_config_file' => \$overwrite_existing_config_file,
+    'h|help'                           => \$help,
+);
+
+$config_base           ||= '/nfs/pathnfs01/conf';
+$overwrite_existing_config_file ||= 0;
+
+( defined($database) && !$help ) or die <<USAGE;
+Usage: setup_global_configs [options]
+Setup global config files and directory structure for a database
+
+setup_global_configs -d pathogen_abc_track
+
+# This help message
+setup_global_configs -h
+
+USAGE
+
+my %parameters = (
+    database                       => $database,
+    config_base                    => $config_base,
+    overwrite_existing_config_file => $overwrite_existing_config_file
+);
+
+Bio::VertRes::Config::Recipes::Global->new( \%parameters )->create();
