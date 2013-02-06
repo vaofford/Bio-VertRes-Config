@@ -72,7 +72,7 @@ sub invalid_reference_message
         }
     );
   } 
-  return undef;
+  return $output_message;
 }
 
 sub get_reference_location_on_disk
