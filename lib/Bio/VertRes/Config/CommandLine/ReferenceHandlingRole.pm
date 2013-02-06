@@ -16,7 +16,7 @@ use Bio::VertRes::Config::References;
 
 sub handle_reference_inputs_or_exit
 {
-  my($reference_lookup_file, $available_referenes, $reference) = @_;
+  my($reference_lookup_file, $available_references, $reference) = @_;
   
   my $reference_lookup = Bio::VertRes::Config::References->new( reference_lookup_file => $reference_lookup_file );
   
