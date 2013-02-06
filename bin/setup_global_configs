@@ -15,6 +15,7 @@ BEGIN { unshift( @INC, '../lib' ) }
 use Moose;
 use Getopt::Long;
 use Bio::VertRes::Config::CommandLine::LogParameters;
+use Bio::VertRes::Config::Recipes::Global;
 
 Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV , script_name => $0 )->create;
 
@@ -32,7 +33,7 @@ $overwrite_existing_config_file ||= 0;
 
 ( defined($database) && !$help ) or die <<USAGE;
 Usage: setup_global_configs [options]
-Setup global config files and directory structure for a database
+Setup global config files and directory structure for a database.
 
 setup_global_configs -d pathogen_abc_track
 
