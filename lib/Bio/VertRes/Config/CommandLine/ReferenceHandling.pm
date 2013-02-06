@@ -16,15 +16,14 @@ use Bio::VertRes::Config::References;
 
 sub handle_reference_inputs_or_exit
 {
-  my($self, $reference_lookup_file, $available_referenes, $reference) = @_;
+  my($reference_lookup_file, $available_referenes, $reference) = @_;
   
   my $reference_lookup = Bio::VertRes::Config::References->new( reference_lookup_file => $reference_lookup_file );
   
   if ( defined($available_references) && $available_references ne "" ) {
       print join(
           "\n",
-          @{ $reference_lookup->search_for_references($available_references)
-          }
+          @{ $reference_lookup->search_for_references($available_references)}
       );
       exit(0);
   }

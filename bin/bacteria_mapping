@@ -74,7 +74,7 @@ bacteria_mapping -h
 
 USAGE
 
-$self->handle_reference_inputs_or_exit($reference_lookup_file, $available_referenes, $reference);
+handle_reference_inputs_or_exit($reference_lookup_file, $available_references, $reference);
 
 
 my $limits = Bio::VertRes::Config::CommandLine::ConstructLimits->new(
