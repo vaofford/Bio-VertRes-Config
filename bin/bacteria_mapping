@@ -1,8 +1,10 @@
 #!/usr/bin/env perl
 
 package Bio::VertRes::Config::Main::BacteriaMapping;
+
 # ABSTRACT: Create config scripts to map bacteria
 # PODNAME: bacteria_mapping
+
 =head1 SYNOPSIS
 
 Create config scripts to map bacteria.
@@ -18,18 +20,20 @@ use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingBwa;
 use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt;
 use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSsaha2;
 use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy;
-use Bio::VertRes::Config::References;
+with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
-Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV)->create;
 
-my ($database, $config_base, $reference_lookup_file, $available_references, $reference, $type, $id,$species, $mapper, $help );
+Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV )->create;
+
+my ( $database, $config_base, $reference_lookup_file, $available_references, $reference, $type, $id, $species, $mapper,
+    $help );
 
 GetOptions(
     'd|database=s'              => \$database,
     'c|config_base=s'           => \$config_base,
     'l|reference_lookup_file=s' => \$reference_lookup_file,
     'r|reference=s'             => \$reference,
-    'a|available_references'    => \$available_references,
+    'a|available_references=s'  => \$available_references,
     't|type=s'                  => \$type,
     'i|id=s'                    => \$id,
     's|species=s'               => \$species,
@@ -37,13 +41,18 @@ GetOptions(
     'h|help'                    => \$help,
 );
 
+$database              ||= 'pathogen_prok_track';
+$config_base           ||= '/nfs/pathnfs01/conf';
+$reference_lookup_file ||= '/lustre/scratch108/pathogen/pathpipe/refs/refs.index';
+my $overwrite_existing_config_file = 0;
 
-( ($available_references || ($reference && $type && $id))  && !$help ) or die <<USAGE;
+( ( ( defined($available_references) && $available_references ne "" ) || ( $reference && $type && $id ) ) && !$help )
+  or die <<USAGE;
 Usage: bacteria_mapping [options]
 Pipeline to map and SNP call bacteria, producing a pseudo genome at the end.
 
-# list all available references
-bacteria_mapping -a
+# Search for an available reference
+bacteria_mapping -a "Stap"
 
 # Map and SNP call a study
 bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
@@ -65,45 +74,35 @@ bacteria_mapping -h
 
 USAGE
 
-$database ||= 'pathogen_prok_track';
-$config_base ||= '/nfs/pathnfs01/conf';
-$reference_lookup_file ||= '/lustre/scratch108/pathogen/pathpipe/refs/refs.index';
-my $overwrite_existing_config_file = 0;
+$self->handle_reference_inputs_or_exit($reference_lookup_file, $available_referenes, $reference);
 
-if(defined($available_references))
-{
-  print join("\n", @{ Bio::VertRes::Config::References->new( reference_lookup_file => $reference_lookup_file )->available_references });
-}
-else
-{
-  my $limits = Bio::VertRes::Config::CommandLine::ConstructLimits->new(input_type => $type, input_id => $id, species => $species)->limits_hash;
-  
-  my %snp_calling_parameters = (
+
+my $limits = Bio::VertRes::Config::CommandLine::ConstructLimits->new(
+    input_type => $type,
+    input_id   => $id,
+    species    => $species
+)->limits_hash;
+
+my %snp_calling_parameters = (
     database                       => $database,
     config_base                    => $config_base,
     limits                         => $limits,
     reference_lookup_file          => $reference_lookup_file,
     reference                      => $reference,
     overwrite_existing_config_file => $overwrite_existing_config_file
-  );
-  
-  if(defined($mapper)  && $mapper eq 'bwa')
-  {
-    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingBwa->new(\%snp_calling_parameters)->create();
-  }
-  elsif(defined($mapper)  && $mapper eq 'ssaha2')
-  {
-    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSsaha2->new(\%snp_calling_parameters)->create();
-  }
-  elsif(defined($mapper)  && $mapper eq 'stampy')
-  {
-    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy->new(\%snp_calling_parameters)->create();
-  }
-  else
-  {
-    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt->new(\%snp_calling_parameters)->create();
-  }
-}
+);
 
+if ( defined($mapper) && $mapper eq 'bwa' ) {
+    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingBwa->new( \%snp_calling_parameters )->create();
+}
+elsif ( defined($mapper) && $mapper eq 'ssaha2' ) {
+    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSsaha2->new( \%snp_calling_parameters )->create();
+}
+elsif ( defined($mapper) && $mapper eq 'stampy' ) {
+    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy->new( \%snp_calling_parameters )->create();
+}
+else {
+    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt->new( \%snp_calling_parameters )->create();
+}
 
 

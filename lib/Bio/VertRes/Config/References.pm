@@ -17,8 +17,8 @@ use Bio::VertRes::Config::Types;
 use Bio::VertRes::Config::Exceptions;
 
 has 'reference_lookup_file'      => ( is => 'ro', isa => 'Bio::VertRes::Config::File', required => 1 );
-
 has '_reference_names_to_files'  => ( is => 'ro', isa => 'HashRef', lazy => 1, builder => '_build__reference_names_to_files');
+has 'available_references'  => ( is => 'ro', isa => 'ArrayRef', lazy => 1, builder => '_build_available_references');
 
 sub _build__reference_names_to_files
 {
@@ -35,13 +35,45 @@ sub _build__reference_names_to_files
   return \%reference_names_to_files;
 }
 
-sub available_references
+sub _build_available_references
 {
   my ($self) = @_;
   my @references = sort(keys %{$self->_reference_names_to_files});
   return \@references;
 }
 
+sub search_for_references
+{
+   my ($self, $query) = @_;
+   $query =~ s!\W!.+!g;
+   my @search_results = grep { /$query/i } @{$self->available_references};
+   
+   return \@search_results;
+}
+
+sub is_reference_name_valid
+{
+  my ($self, $query) = @_;
+  return 1 if(defined($self->_reference_names_to_files->{$query}));
+  return 0;
+}
+
+sub invalid_reference_message
+{
+  my ($self, $query) = @_;
+  my $output_message ="Invalid reference specified.\n";
+  my $search_results =  $self->search_for_references($query);
+  if(@{$search_results} > 0)
+  {
+    $output_message .= "Did you mean:\n\n";
+    $output_message .= join(
+        "\n",
+        @{ $search_results
+        }
+    );
+  } 
+  return undef;
+}
 
 sub get_reference_location_on_disk
 {
