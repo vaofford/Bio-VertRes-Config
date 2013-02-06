@@ -22,7 +22,6 @@ use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSsaha2;
 use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
-
 Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV )->create;
 
 my ( $database, $config_base, $reference_lookup_file, $available_references, $reference, $type, $id, $species, $mapper,
@@ -104,5 +103,4 @@ elsif ( defined($mapper) && $mapper eq 'stampy' ) {
 else {
     Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt->new( \%snp_calling_parameters )->create();
 }
-
 
