@@ -59,7 +59,7 @@ sub _construct_filename
 {
   my ($self, $suffix) = @_;
   my $output_filename = "";
-  for my $limit_type (qw(project sample library species)) {
+  for my $limit_type (qw(project sample library species lane)) {
       if ( defined $self->limits->{$limit_type} ) {
           my $list_of_limit_values = $self->limits->{$limit_type};
           for my $limit_value ( @{$list_of_limit_values} ) {
