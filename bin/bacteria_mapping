@@ -106,15 +106,15 @@ else {
 print "Once the data is available you can run these commands:\n\n";
 
 print "Create a multifasta alignment file of your data\n";
-print "snpfind -t $type -i $id -p \n\n";
+print "  snpfind -t $type -i $id -p \n\n";
 
 print "Create symlinks to the unfiltered variants in VCF format\n";
-print "snpfind -t $type -i $id -symlink\n\n";
+print "  snpfind -t $type -i $id -symlink\n\n";
 
 print "Symlink to the BAM files\n";
-print "mapfind -t $type -i $id -symlink\n\n";
+print "  mapfind -t $type -i $id -symlink\n\n";
 
 print "More details\n";
-print "snpfind -h\n";
-print "mapfind -h\n\n";
+print "  snpfind -h\n";
+print "  mapfind -h\n\n";
 

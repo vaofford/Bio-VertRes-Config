@@ -22,7 +22,7 @@ with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
 Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV )->create;
 
-my ( $database, $config_base, $reference_lookup_file, $available_references, $reference, $type, $id, $species, $mapper,
+my ( $database, $config_base, $reference_lookup_file, $available_references, $reference, $type, $id, $species, $mapper,$protocol,
     $help );
 
 GetOptions(
@@ -35,12 +35,14 @@ GetOptions(
     'i|id=s'                    => \$id,
     's|species=s'               => \$species,
     'm|mapper=s'                => \$mapper,
+    'p|protocol=s'              => \$protocol,
     'h|help'                    => \$help,
 );
 
 $database              ||= 'pathogen_prok_track';
 $config_base           ||= '/nfs/pathnfs01/conf';
 $reference_lookup_file ||= '/lustre/scratch108/pathogen/pathpipe/refs/refs.index';
+$protocol              ||= "StrandSpecificProtocol";
 my $overwrite_existing_config_file = 0;
 
 ( ( ( defined($available_references) && $available_references ne "" ) || ( $reference && $type && $id ) ) && !$help )
@@ -59,6 +61,9 @@ bacteria_rna_seq_expression -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_
 
 # Run over a file of lanes
 bacteria_rna_seq_expression -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+
+# Use the Standard FRT Protocol. The default is the Croucher Protocol
+bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "StandardProtocol"
 
 # Run over a single species in a study
 bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
@@ -80,38 +85,39 @@ my $limits = Bio::VertRes::Config::CommandLine::ConstructLimits->new(
     species    => $species
 )->limits_hash;
 
-my %snp_calling_parameters = (
+my %parameters = (
     database                       => $database,
     config_base                    => $config_base,
     limits                         => $limits,
     reference_lookup_file          => $reference_lookup_file,
     reference                      => $reference,
-    overwrite_existing_config_file => $overwrite_existing_config_file
+    overwrite_existing_config_file => $overwrite_existing_config_file,
+    protocol                       => $protocol
 );
 
 if ( defined($mapper) && $mapper eq 'bwa' ) {
-    Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingBwa->new( \%snp_calling_parameters )->create();
+    Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingBwa->new( \%parameters )->create();
 }
 else {
-    Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingSmalt->new( \%snp_calling_parameters )->create();
+    Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingSmalt->new( \%parameters )->create();
 }
 
 print "Once the data is available you can run these commands:\n\n";
 
 print "Create symlinks to all your data\n";
-print "rnaseqfind -t $type -i $id -symlink\n\n";
+print "  rnaseqfind -t $type -i $id -symlink\n\n";
 
 print "Symlink to the spreadsheets of statistics per gene\n";
-print "rnaseqfind -t $type -i $id -symlink -f spreadsheet\n\n";
+print "  rnaseqfind -t $type -i $id -symlink -f spreadsheet\n\n";
 
 print "Symlink to the BAM files (corrected for the protocol)\n";
-print "rnaseqfind -t $type -i $id -symlink -f bam\n\n";
+print "  rnaseqfind -t $type -i $id -symlink -f bam\n\n";
 
 print "Symlink to the annotation for the intergenic regions\n";
-print "rnaseqfind -t $type -i $id -symlink -f intergenic\n\n";
+print "  rnaseqfind -t $type -i $id -symlink -f intergenic\n\n";
 
 print "Symlink to the coverage plots\n";
-print "rnaseqfind -t $type -i $id -symlink -f coverage\n\n";
+print "  rnaseqfind -t $type -i $id -symlink -f coverage\n\n";
 
 print "More details\n";
-print "rnaseqfind -h\n";
+print "  rnaseqfind -h\n";
