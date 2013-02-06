@@ -1,9 +1,9 @@
 #!/usr/bin/env perl
 
-package Bio::VertRes::Config::Main::BacteriaRnaSeqExpression;
+package Bio::VertRes::Config::Main::VirusRnaSeqExpression;
 
 # ABSTRACT: Create config scripts to map and run the rna seq expression pipeline
-# PODNAME: bacteria_rna_seq_expression
+# PODNAME: virus_rna_seq_expression
 
 =head1 SYNOPSIS
 
@@ -16,9 +16,9 @@ use Moose;
 use Getopt::Long;
 use Bio::VertRes::Config::CommandLine::LogParameters;
 use Bio::VertRes::Config::CommandLine::ConstructLimits;
-use Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingBwa;
-use Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingSmalt;
-use Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingTophat;
+use Bio::VertRes::Config::Recipes::VirusRnaSeqExpressionUsingBwa;
+use Bio::VertRes::Config::Recipes::VirusRnaSeqExpressionUsingSmalt;
+use Bio::VertRes::Config::Recipes::VirusRnaSeqExpressionUsingTophat;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
 Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV )->create;
@@ -40,7 +40,7 @@ GetOptions(
     'h|help'                    => \$help,
 );
 
-$database              ||= 'pathogen_prok_track';
+$database              ||= 'pathogen_virus_track';
 $config_base           ||= '/nfs/pathnfs01/conf';
 $reference_lookup_file ||= '/lustre/scratch108/pathogen/pathpipe/refs/refs.index';
 $protocol              ||= "StrandSpecificProtocol";
@@ -48,32 +48,32 @@ my $overwrite_existing_config_file = 0;
 
 ( ( ( defined($available_references) && $available_references ne "" ) || ( $reference && $type && $id ) ) && !$help )
   or die <<USAGE;
-Usage: bacteria_rna_seq_expression [options]
+Usage: virus_rna_seq_expression [options]
 Run the RNA seq expression pipeline
 
 # Search for an available reference
-bacteria_rna_seq_expression -a "Stap"
+virus_rna_seq_expression -a "Influenzavirus"
 
 # Run over a study
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1"
 
 # Run over a single lane
-bacteria_rna_seq_expression -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+virus_rna_seq_expression -t lane -i 1234_5#6 -r "Influenzavirus_A_H1N1"
 
 # Run over a file of lanes
-bacteria_rna_seq_expression -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+virus_rna_seq_expression -t file -i file_of_lanes -r "Influenzavirus_A_H1N1"
 
 # Use the Standard FRT Protocol. The default is the Croucher Protocol
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "StandardProtocol"
+virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -s "StandardProtocol"
 
 # Run over a single species in a study
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
+virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -s "Influenzavirus A"
 
 # Map with BWA instead of the SMALT (default). Tophat is also available.
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -m bwa
+virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -m bwa
 
 # This help message
-bacteria_rna_seq_expression -h
+virus_rna_seq_expression -h
 
 USAGE
 
@@ -97,13 +97,13 @@ my %parameters = (
 );
 
 if ( defined($mapper) && $mapper eq 'bwa' ) {
-    Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingBwa->new( \%parameters )->create();
+    Bio::VertRes::Config::Recipes::VirusRnaSeqExpressionUsingBwa->new( \%parameters )->create();
 }
 elsif ( defined($mapper) && $mapper eq 'tophat' ) {
-    Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingTophat->new( \%parameters )->create();
+    Bio::VertRes::Config::Recipes::VirusRnaSeqExpressionUsingTophat->new( \%parameters )->create();
 }
 else {
-    Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingSmalt->new( \%parameters )->create();
+    Bio::VertRes::Config::Recipes::VirusRnaSeqExpressionUsingSmalt->new( \%parameters )->create();
 }
 
 print "Once the data is available you can run these commands:\n\n";

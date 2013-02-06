@@ -55,6 +55,23 @@ sub add_eukaryotes_ssaha2_mapping_config
   return ;
 }
 
+sub add_eukaryotes_tophat_mapping_config
+{
+  my ($self, $pipeline_configs_array) = @_;
+  push(
+      @{$pipeline_configs_array},
+    Bio::VertRes::Config::Pipelines::TophatMapping->new(
+        database                       => $self->database,
+        config_base                    => $self->config_base,
+        overwrite_existing_config_file => $self->overwrite_existing_config_file,
+        limits                         => $self->limits,
+        reference                      => $self->reference,
+        reference_lookup_file          => $self->reference_lookup_file
+          )
+      );
+  return ;
+}
+
 
 sub add_eukaryotes_stampy_mapping_config
 {

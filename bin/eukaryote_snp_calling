@@ -1,13 +1,13 @@
 #!/usr/bin/env perl
 
-package Bio::VertRes::Config::Main::BacteriaMapping;
+package Bio::VertRes::Config::Main::EukaryoteSnpCalling;
 
-# ABSTRACT: Create config scripts to map bacteria
-# PODNAME: bacteria_mapping
+# ABSTRACT: Create config scripts to map and snp call eukaryotes
+# PODNAME: eukaryote_snp_calling
 
 =head1 SYNOPSIS
 
-Create config scripts to map bacteria.
+Create config scripts to map and snp call eukaryotes.
 
 =cut
 
@@ -16,10 +16,10 @@ use Moose;
 use Getopt::Long;
 use Bio::VertRes::Config::CommandLine::LogParameters;
 use Bio::VertRes::Config::CommandLine::ConstructLimits;
-use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingBwa;
-use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt;
-use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSsaha2;
-use Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy;
+use Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingBwa;
+use Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingSmalt;
+use Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingSsaha2;
+use Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingStampy;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
 Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV )->create;
@@ -40,36 +40,36 @@ GetOptions(
     'h|help'                    => \$help,
 );
 
-$database              ||= 'pathogen_prok_track';
+$database              ||= 'pathogen_euk_track';
 $config_base           ||= '/nfs/pathnfs01/conf';
 $reference_lookup_file ||= '/lustre/scratch108/pathogen/pathpipe/refs/refs.index';
 my $overwrite_existing_config_file = 0;
 
 ( ( ( defined($available_references) && $available_references ne "" ) || ( $reference && $type && $id ) ) && !$help )
   or die <<USAGE;
-Usage: bacteria_mapping [options]
-Pipeline to map and SNP call bacteria, producing a pseudo genome at the end.
+Usage: eukaryote_snp_calling [options]
+Pipeline to map and SNP call eukaryote, producing a pseudo genome at the end.
 
 # Search for an available reference
-bacteria_mapping -a "Stap"
+eukaryote_snp_calling -a "Leishmania"
 
 # Map and SNP call a study
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+eukaryote_snp_calling -t study -i 1234 -r "Leishmania_donovani_21Apr2011"
 
 # Map and SNP call a single lane
-bacteria_mapping -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+eukaryote_snp_calling -t lane -i 1234_5#6 -r "Leishmania_donovani_21Apr2011"
 
 # Map and SNP call a file of lanes
-bacteria_mapping -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+eukaryote_snp_calling -t file -i file_of_lanes -r "Leishmania_donovani_21Apr2011"
 
 # Map and SNP call a single species in a study
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
+eukaryote_snp_calling -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -s "Leishmania donovani"
 
 # Map and SNP call a study with BWA instead of the default (SMALT)
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -m bwa
+eukaryote_snp_calling -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -m bwa
 
 # This help message
-bacteria_mapping -h
+eukaryote_snp_calling -h
 
 USAGE
 
@@ -92,16 +92,16 @@ my %snp_calling_parameters = (
 );
 
 if ( defined($mapper) && $mapper eq 'bwa' ) {
-    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingBwa->new( \%snp_calling_parameters )->create();
+    Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingBwa->new( \%snp_calling_parameters )->create();
 }
 elsif ( defined($mapper) && $mapper eq 'ssaha2' ) {
-    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSsaha2->new( \%snp_calling_parameters )->create();
+    Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingSsaha2->new( \%snp_calling_parameters )->create();
 }
 elsif ( defined($mapper) && $mapper eq 'stampy' ) {
-    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingStampy->new( \%snp_calling_parameters )->create();
+    Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingStampy->new( \%snp_calling_parameters )->create();
 }
 else {
-    Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt->new( \%snp_calling_parameters )->create();
+    Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingSmalt->new( \%snp_calling_parameters )->create();
 }
 print "Once the data is available you can run these commands:\n\n";
 
