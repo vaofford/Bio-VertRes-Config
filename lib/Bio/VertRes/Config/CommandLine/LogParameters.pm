@@ -18,6 +18,7 @@ use File::Basename;
 use File::Path qw(make_path);
 
 has 'args'         => ( is => 'ro', isa => 'ArrayRef',   required => 1 );
+has 'script_name'  => ( is => 'ro', isa => 'Str',   required => 1 );
 has 'log_file'     => ( is => 'ro', isa => 'Str',    default => '/nfs/pathnfs01/conf/command_line.log' );
 
 sub create
@@ -31,7 +32,7 @@ sub create
   }
   
   open(my $fh, '+>>', $self->log_file) or Bio::VertRes::Config::Exceptions::FileCantBeModified->throw(error => 'Couldnt open file for writing '.$self->log_file);    
-  print {$fh} join(' ', @{$self->args}). "\n";
+  print {$fh} $self->script_name .' '.join(' ', @{$self->args}). "\n";
   close($fh);
 
   return 1;

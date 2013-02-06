@@ -20,7 +20,7 @@ use Bio::VertRes::Config::Recipes::VirusSnpCallingUsingBwa;
 use Bio::VertRes::Config::Recipes::VirusSnpCallingUsingSmalt;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
-Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV )->create;
+Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV , script_name => $0 )->create;
 
 my ( $database, $config_base, $reference_lookup_file, $available_references, $reference, $type, $id, $species, $mapper,
     $help );
