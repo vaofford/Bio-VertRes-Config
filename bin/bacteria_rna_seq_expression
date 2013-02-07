@@ -21,10 +21,10 @@ use Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingSmalt;
 use Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingTophat;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
-Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV, script_name => $0 )->create;
+my $log_params = Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV, script_name => $0 );
 
 my ( $database, $config_base, $reference_lookup_file, $available_references, $reference, $type, $id, $species, $mapper,$protocol,
-    $help );
+    $regeneration_log_file, $help );
 
 GetOptions(
     'd|database=s'              => \$database,
@@ -37,6 +37,7 @@ GetOptions(
     's|species=s'               => \$species,
     'm|mapper=s'                => \$mapper,
     'p|protocol=s'              => \$protocol,
+    'b|regeneration_log_file=s' => \$regeneration_log_file,
     'h|help'                    => \$help,
 );
 
@@ -44,7 +45,11 @@ $database              ||= 'pathogen_prok_track';
 $config_base           ||= '/nfs/pathnfs01/conf';
 $reference_lookup_file ||= '/lustre/scratch108/pathogen/pathpipe/refs/refs.index';
 $protocol              ||= "StrandSpecificProtocol";
+$regeneration_log_file ||= join('/',($config_base,'command_line.log'));
 my $overwrite_existing_config_file = 0;
+
+$log_params->log_file($regeneration_log_file);
+$log_params->create();
 
 ( ( ( defined($available_references) && $available_references ne "" ) || ( $reference && $type && $id ) ) && !$help )
   or die <<USAGE;

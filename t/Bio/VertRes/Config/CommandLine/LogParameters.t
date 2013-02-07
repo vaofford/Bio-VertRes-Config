@@ -18,7 +18,8 @@ ok(
     (
         Bio::VertRes::Config::CommandLine::LogParameters->new(
             args     => [ 'a', 'b', 'c' ],
-            log_file => $destination_directory . '/x/y/z/logfile'
+            log_file => $destination_directory . '/x/y/z/logfile',
+            script_name => 'zzz'
         )->create
     ),
     'Add text to the log file'
@@ -28,7 +29,8 @@ ok(
     (
         Bio::VertRes::Config::CommandLine::LogParameters->new(
             args     => [ 'e', 'f', 'g' ],
-            log_file => $destination_directory . '/x/y/z/logfile'
+            log_file => $destination_directory . '/x/y/z/logfile',
+            script_name => 'zzz'
         )->create
     ),
     'Add more text to the log file'
@@ -38,8 +40,8 @@ ok((-e $destination_directory . '/x/y/z/logfile'), 'log file exists');
 
 my $text = read_file( $destination_directory . '/x/y/z/logfile' );
 chomp($text);
-is($text, "a b c
-e f g", 'content of log file as expected ');
+is($text, "zzz a b c
+zzz e f g", 'content of log file as expected ');
 
 
 done_testing();

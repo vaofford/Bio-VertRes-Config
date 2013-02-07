@@ -19,7 +19,34 @@ use File::Path qw(make_path);
 
 has 'args'         => ( is => 'ro', isa => 'ArrayRef',   required => 1 );
 has 'script_name'  => ( is => 'ro', isa => 'Str',   required => 1 );
-has 'log_file'     => ( is => 'ro', isa => 'Str',    default => '/nfs/pathnfs01/conf/command_line.log' );
+has 'log_file'     => ( is => 'rw', isa => 'Str',    default => '/tmp/command_line.log' );
+
+has '_output_string' => ( is => 'ro', isa => 'Str', lazy => 1,   builder => '_build__output_string' );
+
+sub BUILD 
+{
+     my ($self) = @_;
+     # Build the variable just after object construction because the array ref gets modified by GetOpts
+     $self->_output_string;
+}
+
+sub _build__output_string
+{
+  my ($self) = @_;
+  my $output_str = "";
+  if(defined($self->script_name))
+  {
+    $output_str = $self->script_name." ";
+  }
+
+  if(defined($self->args) && @{$self->args} > 0)
+  {
+    $output_str .= join(' ', @{$self->args});
+  }
+  $output_str .=  "\n";
+
+  return $output_str;
+}
 
 sub create
 {
@@ -32,7 +59,7 @@ sub create
   }
   
   open(my $fh, '+>>', $self->log_file) or Bio::VertRes::Config::Exceptions::FileCantBeModified->throw(error => 'Couldnt open file for writing '.$self->log_file);    
-  print {$fh} $self->script_name .' '.join(' ', @{$self->args}). "\n";
+  print {$fh} $self->_output_string;
   close($fh);
 
   return 1;

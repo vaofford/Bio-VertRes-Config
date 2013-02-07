@@ -22,9 +22,9 @@ use Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingSsaha2;
 use Bio::VertRes::Config::Recipes::EukaryotesSnpCallingUsingStampy;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
-Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV , script_name => $0 )->create;
+my $log_params = Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV, script_name => $0 );
 
-my ( $database, $config_base, $reference_lookup_file, $available_references, $reference, $type, $id, $species, $mapper,
+my ( $database, $config_base, $reference_lookup_file, $available_references, $reference, $type, $id, $species, $mapper,$regeneration_log_file,
     $help );
 
 GetOptions(
@@ -37,13 +37,18 @@ GetOptions(
     'i|id=s'                    => \$id,
     's|species=s'               => \$species,
     'm|mapper=s'                => \$mapper,
+    'b|regeneration_log_file=s' => \$regeneration_log_file,
     'h|help'                    => \$help,
 );
 
 $database              ||= 'pathogen_euk_track';
 $config_base           ||= '/nfs/pathnfs01/conf';
 $reference_lookup_file ||= '/lustre/scratch108/pathogen/pathpipe/refs/refs.index';
+$regeneration_log_file ||= join('/',($config_base,'command_line.log'));
 my $overwrite_existing_config_file = 0;
+
+$log_params->log_file($regeneration_log_file);
+$log_params->create();
 
 ( ( ( defined($available_references) && $available_references ne "" ) || ( $reference && $type && $id ) ) && !$help )
   or die <<USAGE;
