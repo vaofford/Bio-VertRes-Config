@@ -28,7 +28,7 @@ extends 'Bio::VertRes::Config::Recipes::Common';
 with 'Bio::VertRes::Config::Recipes::Roles::RegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
-with 'Bio::VertRes::Config::Recipes::Roles::RnaSeqExpression';
+with 'Bio::VertRes::Config::Recipes::Roles::BacteriaRnaSeqExpression';
 
 has 'protocol'  => ( is => 'ro', isa => 'Str',  default => 'StrandSpecificProtocol' );
 
@@ -55,7 +55,7 @@ override '_pipeline_configs' => sub {
         )
     );
     
-    $self->add_rna_seq_expression_config(\@pipeline_configs);
+    $self->add_bacteria_rna_seq_expression_config(\@pipeline_configs);
     
     return \@pipeline_configs;
 };

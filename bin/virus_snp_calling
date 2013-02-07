@@ -19,6 +19,8 @@ use Bio::VertRes::Config::CommandLine::LogParameters;
 use Bio::VertRes::Config::CommandLine::ConstructLimits;
 use Bio::VertRes::Config::Recipes::VirusSnpCallingUsingBwa;
 use Bio::VertRes::Config::Recipes::VirusSnpCallingUsingSmalt;
+use Bio::VertRes::Config::Recipes::VirusSnpCallingUsingSsaha2;
+use Bio::VertRes::Config::Recipes::VirusSnpCallingUsingStampy;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
 my $log_params = Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV, script_name => $0 );
@@ -97,6 +99,12 @@ my %snp_calling_parameters = (
 
 if ( defined($mapper) && $mapper eq 'bwa' ) {
     Bio::VertRes::Config::Recipes::VirusSnpCallingUsingBwa->new( \%snp_calling_parameters )->create();
+}    
+elsif ( defined($mapper) && $mapper eq 'ssaha2' ) {
+    Bio::VertRes::Config::Recipes::VirusSnpCallingUsingSsaha2->new( \%snp_calling_parameters )->create();
+}
+elsif ( defined($mapper) && $mapper eq 'stampy' ) {
+    Bio::VertRes::Config::Recipes::VirusSnpCallingUsingStampy->new( \%snp_calling_parameters )->create();
 }
 else {
     Bio::VertRes::Config::Recipes::VirusSnpCallingUsingSmalt->new( \%snp_calling_parameters )->create();

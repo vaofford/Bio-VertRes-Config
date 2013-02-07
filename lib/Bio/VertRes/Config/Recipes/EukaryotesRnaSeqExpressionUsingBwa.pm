@@ -1,12 +1,12 @@
-package Bio::VertRes::Config::Recipes::VirusRnaSeqExpressionUsingBwa;
-# ABSTRACT: Standard snp calling pipeline for virus
+package Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingBwa;
+# ABSTRACT: Standard snp calling pipeline for bacteria
 
 =head1 SYNOPSIS
 
 RNA seq expression with Bwa
-   use Bio::VertRes::Config::Recipes::VirusRnaSeqExpressionUsingBwa;
+   use Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingBwa;
    
-   my $obj = Bio::VertRes::Config::Recipes::VirusRnaSeqExpressionUsingBwa->new( 
+   my $obj = Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingBwa->new( 
      database => 'abc', 
      limits => {project => ['Study ABC']}, 
      reference => 'ABC', 
@@ -25,7 +25,7 @@ extends 'Bio::VertRes::Config::Recipes::Common';
 with 'Bio::VertRes::Config::Recipes::Roles::RegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
-with 'Bio::VertRes::Config::Recipes::Roles::VirusRnaSeqExpression';
+with 'Bio::VertRes::Config::Recipes::Roles::EukaryotesRnaSeqExpression';
 
 has 'protocol'  => ( is => 'ro', isa => 'Str',  default => 'StrandSpecificProtocol' );
 
@@ -47,7 +47,7 @@ override '_pipeline_configs' => sub {
         )
     );
     
-    $self->add_virus_rna_seq_expression_config(\@pipeline_configs);
+    $self->add_eukaryotes_rna_seq_expression_config(\@pipeline_configs);
     
     return \@pipeline_configs;
 };

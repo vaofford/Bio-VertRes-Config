@@ -1,11 +1,11 @@
-package Bio::VertRes::Config::Recipes::Roles::RnaSeqExpression;
+package Bio::VertRes::Config::Recipes::Roles::EukaryotesRnaSeqExpression;
 # ABSTRACT: Moose Role which creates the rna seq expression object
 
 =head1 SYNOPSIS
 
 Moose Role which creates the rna seq expression object
 
-   with 'Bio::VertRes::Config::Recipes::Roles::RnaSeqExpression';
+   with 'Bio::VertRes::Config::Recipes::Roles::EukaryotesRnaSeqExpression';
 
 
 =method add_rna_seq_expression_config
@@ -17,7 +17,7 @@ Method with takes in the pipeline config array and adds the rna seq expression c
 use Moose::Role;
 use Bio::VertRes::Config::Pipelines::RnaSeqExpression;
 
-sub add_rna_seq_expression_config
+sub add_eukaryotes_rna_seq_expression_config
 {
   my ($self, $pipeline_configs_array) = @_;
   push(
