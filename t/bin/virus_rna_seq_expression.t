@@ -107,8 +107,9 @@ my %scripts_and_expected_files = (
         'viruses/viruses_mapping_pipeline.conf',  'viruses/viruses_qc_pipeline.conf',
         'viruses/viruses_rna_seq_pipeline.conf',  'viruses/viruses_stored_pipeline.conf'
     ],
+    '-a "ABC" ' => ['command_line.log'],
 );
-execute_script_and_check_output($script_name, \%scripts_and_expected_files );
+execute_script_and_check_output( $script_name, \%scripts_and_expected_files );
 
 done_testing();
 

@@ -18,6 +18,7 @@ use Moose::Role;
 use Bio::VertRes::Config::Pipelines::BwaMapping;
 use Bio::VertRes::Config::Pipelines::Ssaha2Mapping;
 use Bio::VertRes::Config::Pipelines::StampyMapping;
+use Bio::VertRes::Config::Pipelines::TophatMapping;
 
 sub add_eukaryotes_bwa_mapping_config
 {

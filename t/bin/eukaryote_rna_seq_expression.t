@@ -11,7 +11,6 @@ BEGIN { unshift( @INC, './lib' ) }
 BEGIN { unshift( @INC, './t/lib' ) }
 with 'TestHelper';
 
-
 my $script_name = 'eukaryote_rna_seq_expression';
 
 my %scripts_and_expected_files = (
@@ -58,20 +57,13 @@ my %scripts_and_expected_files = (
         'eukaryotes/stored/stored_global.conf'
     ],
     '-t study -i "ZZZ" -r "ABC" -p "StrandSpecificProtocol"' => [
-        'command_line.log',
-        'eukaryotes/assembly/assembly_global.conf',
-        'eukaryotes/eukaryotes.ilm.studies',
-        'eukaryotes/eukaryotes_assembly_pipeline.conf',
-        'eukaryotes/eukaryotes_import_pipeline.conf',
-        'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
-        'eukaryotes/eukaryotes_rna_seq_pipeline.conf',
-        'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/import/import_global.conf',
-        'eukaryotes/mapping/mapping__ZZZABC_tophat.conf',
-        'eukaryotes/qc/qc__ZZZ.conf',
-        'eukaryotes/rna_seq/rna_seq__ZZZABC.conf',
-        'eukaryotes/stored/stored_global.conf'
+        'command_line.log',                               'eukaryotes/assembly/assembly_global.conf',
+        'eukaryotes/eukaryotes.ilm.studies',              'eukaryotes/eukaryotes_assembly_pipeline.conf',
+        'eukaryotes/eukaryotes_import_pipeline.conf',     'eukaryotes/eukaryotes_mapping_pipeline.conf',
+        'eukaryotes/eukaryotes_qc_pipeline.conf',         'eukaryotes/eukaryotes_rna_seq_pipeline.conf',
+        'eukaryotes/eukaryotes_stored_pipeline.conf',     'eukaryotes/import/import_global.conf',
+        'eukaryotes/mapping/mapping__ZZZABC_tophat.conf', 'eukaryotes/qc/qc__ZZZ.conf',
+        'eukaryotes/rna_seq/rna_seq__ZZZABC.conf',        'eukaryotes/stored/stored_global.conf'
     ],
     '-t study -i "ZZZ" -r "ABC" -s "Staphylococcus aureus"' => [
         'command_line.log',
@@ -98,9 +90,10 @@ my %scripts_and_expected_files = (
         'eukaryotes/mapping/mapping__ZZZABC_tophat.conf', 'eukaryotes/qc/qc__ZZZ.conf',
         'eukaryotes/rna_seq/rna_seq__ZZZABC.conf',        'eukaryotes/stored/stored_global.conf'
     ],
+    '-a "ABC" ' => ['command_line.log'],
 
 );
 
-execute_script_and_check_output($script_name, \%scripts_and_expected_files );
+execute_script_and_check_output( $script_name, \%scripts_and_expected_files );
 
 done_testing();

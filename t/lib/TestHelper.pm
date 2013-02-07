@@ -19,11 +19,12 @@ sub execute_script_and_check_output
   
       find( { wanted => \&process_file, no_chdir => 1 }, ($destination_directory) );
       my @temp_directory_stripped = map { /$destination_directory\/(.+)/ ? $1 : $_ } sort @actual_files_found;
-  
-      #print Dumper \@temp_directory_stripped;
+      my @sorted_directory_stripped = sort(@temp_directory_stripped);
+      my @sorted_expected_values = sort(@{$scripts_and_expected_files->{$script_parameters}});
+      #print Dumper \@sorted_directory_stripped;
       is_deeply(
-          \@temp_directory_stripped,
-          sort( $scripts_and_expected_files->{$script_parameters} ),
+          \@sorted_directory_stripped,
+          \@sorted_expected_values,
           "files created as expected for $full_script"
       );
       @actual_files_found = ();
