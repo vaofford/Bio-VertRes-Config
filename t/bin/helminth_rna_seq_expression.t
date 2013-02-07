@@ -90,6 +90,26 @@ my %scripts_and_expected_files = (
         'helminths/mapping/mapping__ZZZABC_tophat.conf', 'helminths/qc/qc__ZZZ.conf',
         'helminths/rna_seq/rna_seq__ZZZABC.conf',        'helminths/stored/stored_global.conf'
     ],
+     '-t study -i "ZZZ" -r "ABC" -m smalt' =>   [
+         'command_line.log',                              'helminths/assembly/assembly_global.conf',
+         'helminths/helminths.ilm.studies',               'helminths/helminths_assembly_pipeline.conf',
+         'helminths/helminths_import_pipeline.conf',      'helminths/helminths_mapping_pipeline.conf',
+         'helminths/helminths_qc_pipeline.conf',          'helminths/helminths_rna_seq_pipeline.conf',
+         'helminths/helminths_stored_pipeline.conf',      'helminths/import/import_global.conf',
+         'helminths/mapping/mapping__ZZZABC_smalt.conf', 'helminths/qc/qc__ZZZ.conf',
+         'helminths/rna_seq/rna_seq__ZZZABC.conf',        'helminths/stored/stored_global.conf'
+     ],
+     '-t study -i "ZZZ" -r "ABC" -m bwa' =>   [
+         'command_line.log',                              'helminths/assembly/assembly_global.conf',
+         'helminths/helminths.ilm.studies',               'helminths/helminths_assembly_pipeline.conf',
+         'helminths/helminths_import_pipeline.conf',      'helminths/helminths_mapping_pipeline.conf',
+         'helminths/helminths_qc_pipeline.conf',          'helminths/helminths_rna_seq_pipeline.conf',
+         'helminths/helminths_stored_pipeline.conf',      'helminths/import/import_global.conf',
+         'helminths/mapping/mapping__ZZZABC_bwa.conf', 'helminths/qc/qc__ZZZ.conf',
+         'helminths/rna_seq/rna_seq__ZZZABC.conf',        'helminths/stored/stored_global.conf'
+     ],
+     
+     
     '-a "ABC" ' => ['command_line.log'],
 
 );

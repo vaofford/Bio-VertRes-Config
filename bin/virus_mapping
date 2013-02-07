@@ -1,13 +1,13 @@
 #!/usr/bin/env perl
 
-package Bio::VertRes::Config::Main::EukaryoteMapping;
+package Bio::VertRes::Config::Main::VirusMapping;
 
-# ABSTRACT: Create config scripts to map eukaryotes
-# PODNAME: eukaryote_mapping
+# ABSTRACT: Create config scripts to map viruses
+# PODNAME: virus_mapping
 
 =head1 SYNOPSIS
 
-Create config scripts to map and snp call eukaryotes.
+Create config scripts to map and snp call viruses.
 
 =cut
 
@@ -17,11 +17,11 @@ use Moose;
 use Getopt::Long;
 use Bio::VertRes::Config::CommandLine::LogParameters;
 use Bio::VertRes::Config::CommandLine::ConstructLimits;
-use Bio::VertRes::Config::Recipes::EukaryotesMappingUsingBwa;
-use Bio::VertRes::Config::Recipes::EukaryotesMappingUsingSmalt;
-use Bio::VertRes::Config::Recipes::EukaryotesMappingUsingSsaha2;
-use Bio::VertRes::Config::Recipes::EukaryotesMappingUsingStampy;
-use Bio::VertRes::Config::Recipes::EukaryotesMappingUsingTophat;
+use Bio::VertRes::Config::Recipes::VirusMappingUsingBwa;
+use Bio::VertRes::Config::Recipes::VirusMappingUsingSmalt;
+use Bio::VertRes::Config::Recipes::VirusMappingUsingSsaha2;
+use Bio::VertRes::Config::Recipes::VirusMappingUsingStampy;
+use Bio::VertRes::Config::Recipes::VirusMappingUsingTophat;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
 my $log_params = Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV, script_name => $0 );
@@ -43,7 +43,7 @@ GetOptions(
     'h|help'                    => \$help,
 );
 
-$database              ||= 'pathogen_euk_track';
+$database              ||= 'pathogen_virus_track';
 $config_base           ||= '/nfs/pathnfs01/conf';
 $reference_lookup_file ||= '/lustre/scratch108/pathogen/pathpipe/refs/refs.index';
 $regeneration_log_file ||= join('/',($config_base,'command_line.log'));
@@ -54,29 +54,29 @@ $log_params->create();
 
 ( ( ( defined($available_references) && $available_references ne "" ) || ( $reference && $type && $id ) ) && !$help )
   or die <<USAGE;
-Usage: eukaryote_mapping [options]
-Pipeline for eukaryotes mapping
+Usage: virus_mapping [options]
+Pipeline for virus mapping
 
 # Search for an available reference
-eukaryote_mapping -a "Leishmania"
+virus_mapping -a "flu"
 
 # Map a study
-eukaryote_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011"
+virus_mapping -t study -i 1234 -r "Influenzavirus_A_H1N1"
 
 # Map a single lane
-eukaryote_mapping -t lane -i 1234_5#6 -r "Leishmania_donovani_21Apr2011"
+virus_mapping -t lane -i 1234_5#6 -r "Influenzavirus_A_H1N1"
 
 # Map a file of lanes
-eukaryote_mapping -t file -i file_of_lanes -r "Leishmania_donovani_21Apr2011"
+virus_mapping -t file -i file_of_lanes -r "Influenzavirus_A_H1N1"
 
 # Map a single species in a study
-eukaryote_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -s "Leishmania donovani"
+virus_mapping -t study -i 1234 -r "Influenzavirus_A_H1N1" -s "Influenzavirus A"
 
 # Map a study with BWA instead of the default (SMALT)
-eukaryote_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -m bwa
+virus_mapping -t study -i 1234 -r "Influenzavirus_A_H1N1" -m bwa
 
 # This help message
-eukaryote_mapping -h
+virus_mapping -h
 
 USAGE
 
@@ -99,19 +99,19 @@ my %mapping_parameters = (
 );
 
 if ( defined($mapper) && $mapper eq 'bwa' ) {
-    Bio::VertRes::Config::Recipes::EukaryotesMappingUsingBwa->new( \%mapping_parameters )->create();
+    Bio::VertRes::Config::Recipes::VirusMappingUsingBwa->new( \%mapping_parameters )->create();
 }
 elsif ( defined($mapper) && $mapper eq 'ssaha2' ) {
-    Bio::VertRes::Config::Recipes::EukaryotesMappingUsingSsaha2->new( \%mapping_parameters )->create();
+    Bio::VertRes::Config::Recipes::VirusMappingUsingSsaha2->new( \%mapping_parameters )->create();
 }
 elsif ( defined($mapper) && $mapper eq 'stampy' ) {
-    Bio::VertRes::Config::Recipes::EukaryotesMappingUsingStampy->new( \%mapping_parameters )->create();
+    Bio::VertRes::Config::Recipes::VirusMappingUsingStampy->new( \%mapping_parameters )->create();
 }
 elsif ( defined($mapper) && $mapper eq 'tophat' ) {
-    Bio::VertRes::Config::Recipes::EukaryotesMappingUsingTophat->new( \%mapping_parameters )->create();
+    Bio::VertRes::Config::Recipes::VirusMappingUsingTophat->new( \%mapping_parameters )->create();
 }
 else {
-    Bio::VertRes::Config::Recipes::EukaryotesMappingUsingSmalt->new( \%mapping_parameters )->create();
+    Bio::VertRes::Config::Recipes::VirusMappingUsingSmalt->new( \%mapping_parameters )->create();
 }
 print "Once the data is available you can run these commands:\n\n";
 
