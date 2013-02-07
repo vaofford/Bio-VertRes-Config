@@ -3,6 +3,7 @@ package TestHelper;
 use Moose::Role;
 use File::Find;
 use Test::Most;
+use Data::Dumper;
 
 our @actual_files_found;
 sub execute_script_and_check_output
@@ -16,7 +17,7 @@ sub execute_script_and_check_output
       my $full_script =
         './bin/' . $script_name . ' ' . $script_parameters . " -c $destination_directory -l t/data/refs.index";
       system("$full_script >/dev/null 2>&1");
-  
+      
       find( { wanted => \&process_file, no_chdir => 1 }, ($destination_directory) );
       my @temp_directory_stripped = map { /$destination_directory\/(.+)/ ? $1 : $_ } sort @actual_files_found;
       my @sorted_directory_stripped = sort(@temp_directory_stripped);
