@@ -8,7 +8,7 @@ BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
     use Test::Most;
-    use_ok('Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpression');
+    use_ok('Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingTophat');
 }
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
@@ -16,7 +16,7 @@ my $destination_directory = $destination_directory_obj->dirname();
 
 ok(
     (
-        my $obj = Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpression->new(
+        my $obj = Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingTophat->new(
             database    => 'my_database',
             config_base => $destination_directory,
             limits      => { project => ['ABC study( EFG )'] },

@@ -1,12 +1,12 @@
-package Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpression;
+package Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingTophat;
 # ABSTRACT: Standard snp calling pipeline for eukaryotes
 
 =head1 SYNOPSIS
 
 Standard snp calling pipeline for eukaryotes
-   use Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpression;
+   use Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingTophat;
    
-   my $obj = Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpression->new( 
+   my $obj = Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingTophat->new( 
      database => 'abc', 
      limits => {project => ['Study ABC']}, 
      reference => 'ABC', 

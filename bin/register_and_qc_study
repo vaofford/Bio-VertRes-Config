@@ -12,6 +12,7 @@ Create config scripts for registering and QC a study
 =cut
 
 BEGIN { unshift( @INC, '../lib' ) }
+BEGIN { unshift( @INC, './lib' ) }
 use Moose;
 use Getopt::Long;
 use Bio::VertRes::Config::CommandLine::LogParameters;

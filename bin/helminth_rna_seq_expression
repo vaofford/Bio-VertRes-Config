@@ -12,11 +12,12 @@ Create config scripts to map and run the rna seq expression pipeline
 =cut
 
 BEGIN { unshift( @INC, '../lib' ) }
+BEGIN { unshift( @INC, './lib' ) }
 use Moose;
 use Getopt::Long;
 use Bio::VertRes::Config::CommandLine::LogParameters;
 use Bio::VertRes::Config::CommandLine::ConstructLimits;
-use Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpression;
+use Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingTophat;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 
 my $log_params = Bio::VertRes::Config::CommandLine::LogParameters->new( args => \@ARGV, script_name => $0 );

@@ -12,6 +12,7 @@ Create config scripts to map and run the rna seq expression pipeline
 =cut
 
 BEGIN { unshift( @INC, '../lib' ) }
+BEGIN { unshift( @INC, './lib' ) }
 use Moose;
 use Getopt::Long;
 use Bio::VertRes::Config::CommandLine::LogParameters;
