@@ -68,7 +68,7 @@ eukaryote_rna_seq_expression -t lane -i 1234_5#6 -r "Leishmania_donovani_21Apr20
 eukaryote_rna_seq_expression -t file -i file_of_lanes -r "Leishmania_donovani_21Apr2011"
 
 # Use the Strand Specific Protocol, also known as the Croucher protocol. The default is FRT.
-eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -s "StrandSpecificProtocol"
+eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -p "StrandSpecificProtocol"
 
 # Run over a single species in a study
 eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -s "Leishmania donovani"

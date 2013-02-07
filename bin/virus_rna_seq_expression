@@ -70,7 +70,7 @@ virus_rna_seq_expression -t lane -i 1234_5#6 -r "Influenzavirus_A_H1N1"
 virus_rna_seq_expression -t file -i file_of_lanes -r "Influenzavirus_A_H1N1"
 
 # Use the Standard FRT Protocol. The default is the Croucher Protocol
-virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -s "StandardProtocol"
+virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -p "StandardProtocol"
 
 # Run over a single species in a study
 virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -s "Influenzavirus A"
