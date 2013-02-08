@@ -43,12 +43,12 @@ ok( -e $destination_directory . '/my_database/my_database_snps_pipeline.conf', '
 ok((-e "$destination_directory/my_database/assembly/assembly_global.conf"), 'assembly config file exists');
 ok((-e "$destination_directory/my_database/stored/stored_global.conf"), 'stored config file exists');
 ok((-e "$destination_directory/my_database/import/import_global.conf"), 'import config file exists');
-ok((-e "$destination_directory/my_database/qc/qc__ABC_study_EFG.conf"), 'QC config file exists' );
-ok((-e "$destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_smalt.conf"), 'mapping config file exists' );
-ok((-e "$destination_directory/my_database/snps/snps__ABC_study_EFG_ABC.conf"), 'snps config file exists' );
+ok((-e "$destination_directory/my_database/qc/qc_ABC_study_EFG.conf"), 'QC config file exists' );
+ok((-e "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_smalt.conf"), 'mapping config file exists' );
+ok((-e "$destination_directory/my_database/snps/snps_ABC_study_EFG_ABC.conf"), 'snps config file exists' );
 
 
-my $text = read_file( "$destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_smalt.conf" );
+my $text = read_file( "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_smalt.conf" );
 my $input_config_file = eval($text);
 $input_config_file->{prefix} = '_checked_elsewhere_';
 is_deeply($input_config_file,{
@@ -93,14 +93,14 @@ is_deeply($input_config_file,{
                                  'stored' => 1,
                                  'import' => 1
                                },
-  'log' => '/nfs/pathnfs01/log/my_database/mapping__ABC_study_EFG_ABC_smalt.log',
+  'log' => '/nfs/pathnfs01/log/my_database/mapping_ABC_study_EFG_ABC_smalt.log',
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
   'module' => 'VertRes::Pipelines::Mapping'
 },'Mapping Config file as expected');
 
 
-$text = read_file( "$destination_directory/my_database/snps/snps__ABC_study_EFG_ABC.conf" );
+$text = read_file( "$destination_directory/my_database/snps/snps_ABC_study_EFG_ABC.conf" );
 $input_config_file = eval($text);
 $input_config_file->{prefix} = '_checked_elsewhere_';
 is_deeply($input_config_file,{
@@ -147,7 +147,7 @@ is_deeply($input_config_file,{
                                  'mapped' => 1
                                },
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-  'log' => '/nfs/pathnfs01/log/my_database/snps__ABC_study_EFG_ABC.log',
+  'log' => '/nfs/pathnfs01/log/my_database/snps_ABC_study_EFG_ABC.log',
   'prefix' => '_checked_elsewhere_',
   'module' => 'VertRes::Pipelines::SNPs'
 },'SNP calling Config file as expected');
@@ -169,7 +169,7 @@ ok(
     'initalise creating files'
 );
 ok( ( $obj->create ), 'Create all the config files and toplevel files without optional mapping parameters' );
-$text = read_file( "$destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_smalt.conf" );
+$text = read_file( "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_smalt.conf" );
 $input_config_file = eval($text);
 $input_config_file->{prefix} = '_checked_elsewhere_';
 is_deeply($input_config_file,{
@@ -211,7 +211,7 @@ is_deeply($input_config_file,{
                                  'stored' => 1,
                                  'import' => 1
                                },
-  'log' => '/nfs/pathnfs01/log/my_database/mapping__ABC_study_EFG_ABC_smalt.log',
+  'log' => '/nfs/pathnfs01/log/my_database/mapping_ABC_study_EFG_ABC_smalt.log',
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
   'module' => 'VertRes::Pipelines::Mapping'

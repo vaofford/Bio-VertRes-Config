@@ -74,7 +74,7 @@ is_deeply(
                                              'import' => 1
                                            },
               'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-              'log' => '/nfs/pathnfs01/log/my_database/snps__ABC_study_EFG_ABC.log',
+              'log' => '/nfs/pathnfs01/log/my_database/snps_ABC_study_EFG_ABC.log',
               'module' => 'VertRes::Pipelines::SNPs',
               'prefix' => '_checked_elsewhere_',
               'limits' => {
@@ -86,7 +86,7 @@ is_deeply(
 
 is(
     $obj->config,
-    $destination_directory . '/my_database/snps/snps__ABC_study_EFG_ABC.conf',
+    $destination_directory . '/my_database/snps/snps_ABC_study_EFG_ABC.conf',
     'config file in expected format'
 );
 ok( $obj->create_config_file, 'Can run the create config file method' );

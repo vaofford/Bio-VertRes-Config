@@ -33,8 +33,8 @@ my $text = read_file( $destination_directory.'/my_database/my_database.ilm.studi
 chomp($text);
 is($text, "ABC study( EFG )", 'Study is in file');
 
-ok( -e $destination_directory . '/my_database/qc/qc__ABC_study_EFG.conf', 'QC toplevel file' );
-$text = read_file( $destination_directory . '/my_database/qc/qc__ABC_study_EFG.conf' );
+ok( -e $destination_directory . '/my_database/qc/qc_ABC_study_EFG.conf', 'QC toplevel file' );
+$text = read_file( $destination_directory . '/my_database/qc/qc_ABC_study_EFG.conf' );
 my $input_config_file = eval($text);
 is_deeply($input_config_file,{
   'max_failures' => 3,
@@ -77,7 +77,7 @@ is_deeply($input_config_file,{
                                'ABC\ study\(\ EFG\ \)'
                              ]
               },
-  'log' => '/nfs/pathnfs01/log/my_database/qc__ABC_study_EFG.log',
+  'log' => '/nfs/pathnfs01/log/my_database/qc_ABC_study_EFG.log',
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_',
   'module' => 'VertRes::Pipelines::TrackQC_Fastq'
@@ -99,8 +99,8 @@ ok(
 );
 ok( ( $obj->create ), 'Create all the config files and toplevel files with species' );
 
-ok( -e $destination_directory . '/my_database/qc/qc__ABC_study_EFG__Cat_Dog.conf', 'QC toplevel file with species' );
-$text = read_file( $destination_directory . '/my_database/qc/qc__ABC_study_EFG__Cat_Dog.conf' );
+ok( -e $destination_directory . '/my_database/qc/qc_ABC_study_EFG_Cat_Dog.conf', 'QC toplevel file with species' );
+$text = read_file( $destination_directory . '/my_database/qc/qc_ABC_study_EFG_Cat_Dog.conf' );
 $input_config_file = eval($text);
 is_deeply($input_config_file,{
   'max_failures' => 3,
@@ -147,7 +147,7 @@ is_deeply($input_config_file,{
                                'Dog'
                              ]
               },
-  'log' => '/nfs/pathnfs01/log/my_database/qc__ABC_study_EFG__Cat_Dog.log',
+  'log' => '/nfs/pathnfs01/log/my_database/qc_ABC_study_EFG_Cat_Dog.log',
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_',
   'module' => 'VertRes::Pipelines::TrackQC_Fastq'

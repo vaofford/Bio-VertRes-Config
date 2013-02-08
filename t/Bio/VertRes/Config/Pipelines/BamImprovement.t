@@ -70,7 +70,7 @@ is_deeply(
                           'assembly_name' => 'ABC',
                           'ignore_bam_improvement_status' => 1
                         },
-              'log' => '/nfs/pathnfs01/log/my_database/improvement__ABC_study_EFG_ABC.log',
+              'log' => '/nfs/pathnfs01/log/my_database/improvement_ABC_study_EFG_ABC.log',
               'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'prefix' => '_checked_elsewhere_',
               'module' => 'VertRes::Pipelines::BamImprovement::NonHuman',
@@ -80,7 +80,7 @@ is_deeply(
 
 is(
     $obj->config,
-    $destination_directory . '/my_database/improvement/improvement__ABC_study_EFG_ABC.conf',
+    $destination_directory . '/my_database/improvement/improvement_ABC_study_EFG_ABC.conf',
     'config file in expected format'
 );
 ok( $obj->create_config_file, 'Can run the create config file method' );

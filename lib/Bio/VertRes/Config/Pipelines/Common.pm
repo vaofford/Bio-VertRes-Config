@@ -82,6 +82,41 @@ sub _build_password {
     $ENV{VRTRACK_PASSWORD};
 }
 
+sub _limits_values_part_of_filename
+{
+  my ($self) = @_;
+  my $output_filename = "";
+  my @limit_values;
+  for my $limit_type (qw(project sample library species lane)) {
+      if ( defined $self->limits->{$limit_type} ) {
+          my $list_of_limit_values = $self->limits->{$limit_type};
+          for my $limit_value ( @{$list_of_limit_values} ) {
+              $limit_value =~ s/^\s+|\s+$//g;
+              push(@limit_values, $limit_value);
+
+          }
+      }
+  }
+  if(@limit_values > 0)
+  {
+    $output_filename = join('_',@limit_values);
+  }
+  return $output_filename;
+}
+
+sub _filter_characters_truncate_and_add_suffix
+{
+  my ($self, $output_filename, $suffix) = @_;
+  $output_filename =~ s!\W+!_!g;
+  $output_filename =~ s/_$//g;
+  $output_filename =~ s/_+/_/g;
+
+  if ( length($output_filename) > 80 ) {
+      $output_filename = substr( $output_filename, 0, 76 ) . '_' . int( rand(999) );
+  }
+  return join( '.', ( $output_filename, $suffix ) );
+}
+
 sub create_config_file
 {
    my ($self) = @_;

@@ -73,7 +73,7 @@ is_deeply(
                           'slx_mapper' => 'smalt',
                           'ignore_mapped_status' => 1
                         },
-              'log' => '/nfs/pathnfs01/log/my_database/mapping__ABC_study_EFG_ABC_smalt.log',
+              'log' => '/nfs/pathnfs01/log/my_database/mapping_ABC_study_EFG_ABC_smalt.log',
               'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'prefix' => '_checked_elsewhere_',
               'module' => 'VertRes::Pipelines::Mapping'
@@ -83,7 +83,7 @@ is_deeply(
 
 is(
     $obj->config,
-    $destination_directory . '/my_database/mapping/mapping__ABC_study_EFG_ABC_smalt.conf',
+    $destination_directory . '/my_database/mapping/mapping_ABC_study_EFG_ABC_smalt.conf',
     'config file in expected format'
 );
 ok( $obj->create_config_file, 'Can run the create config file method' );

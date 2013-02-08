@@ -69,7 +69,7 @@ is_deeply(
                           'mapping_quality' => 10,
                           'sequencing_file_suffix' => 'markdup.bam'
                         },
-              'log' => '/nfs/pathnfs01/log/my_database/rna_seq__ABC_study_EFG_ABC.log',
+              'log' => '/nfs/pathnfs01/log/my_database/rna_seq_ABC_study_EFG_ABC.log',
               'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'prefix' => '_checked_elsewhere_',
               'module' => 'VertRes::Pipelines::RNASeqExpression'
@@ -79,7 +79,7 @@ is_deeply(
 
 is(
     $obj->config,
-    $destination_directory . '/my_database/rna_seq/rna_seq__ABC_study_EFG_ABC.conf',
+    $destination_directory . '/my_database/rna_seq/rna_seq_ABC_study_EFG_ABC.conf',
     'config file in expected format'
 );
 ok( $obj->create_config_file, 'Can run the create config file method' );

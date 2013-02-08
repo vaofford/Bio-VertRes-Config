@@ -41,11 +41,11 @@ ok( -e $destination_directory . '/my_database/my_database_mapping_pipeline.conf'
 ok((-e "$destination_directory/my_database/assembly/assembly_global.conf"), 'assembly config file exists');
 ok((-e "$destination_directory/my_database/stored/stored_global.conf"), 'stored config file exists');
 ok((-e "$destination_directory/my_database/import/import_global.conf"), 'import config file exists');
-ok((-e "$destination_directory/my_database/qc/qc__ABC_study_EFG.conf"), 'QC config file exists' );
-ok((-e "$destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_ssaha2.conf"), 'mapping config file exists' );
+ok((-e "$destination_directory/my_database/qc/qc_ABC_study_EFG.conf"), 'QC config file exists' );
+ok((-e "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_ssaha2.conf"), 'mapping config file exists' );
 
 
-my $text = read_file( "$destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_ssaha2.conf" );
+my $text = read_file( "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_ssaha2.conf" );
 my $input_config_file = eval($text);
 $input_config_file->{prefix} = '_checked_elsewhere_';
 is_deeply($input_config_file,{
@@ -89,7 +89,7 @@ is_deeply($input_config_file,{
                                  'stored' => 1,
                                  'import' => 1
                                },
-  'log' => '/nfs/pathnfs01/log/my_database/mapping__ABC_study_EFG_ABC_ssaha2.log',
+  'log' => '/nfs/pathnfs01/log/my_database/mapping_ABC_study_EFG_ABC_ssaha2.log',
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
   'module' => 'VertRes::Pipelines::Mapping'

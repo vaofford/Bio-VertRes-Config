@@ -72,8 +72,8 @@ is($text, "__VRTrack_Assembly__ $destination_directory/my_database/assembly/asse
 $text = read_file( $destination_directory.'/my_database/my_database_mapping_pipeline.conf' );
 chomp($text);
 my @mapping_rows = sort(split("\n",$text));
-is_deeply(\@mapping_rows , ["__VRTrack_Mapping__ $destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_bwa.conf",
-"__VRTrack_Mapping__ $destination_directory/my_database/mapping/mapping__ABC_study_EFG_ABC_smalt.conf"], 'content of mapping toplevel file as expected');
+is_deeply(\@mapping_rows , ["__VRTrack_Mapping__ $destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_bwa.conf",
+"__VRTrack_Mapping__ $destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_smalt.conf"], 'content of mapping toplevel file as expected');
 
 $text = read_file( $destination_directory.'/my_database/my_database_stored_pipeline.conf' );
 chomp($text);
@@ -85,7 +85,7 @@ is($text, "__VRTrack_Import__ $destination_directory/my_database/import/import_g
 
 $text = read_file( $destination_directory.'/my_database/my_database_snps_pipeline.conf' );
 chomp($text);
-is($text, "__VRTrack_SNPs__ $destination_directory/my_database/snps/snps__XYZ_study_EFG_ABC.conf", 'content of snps toplevel file as expected');
+is($text, "__VRTrack_SNPs__ $destination_directory/my_database/snps/snps_XYZ_study_EFG_ABC.conf", 'content of snps toplevel file as expected');
 
 done_testing();
 

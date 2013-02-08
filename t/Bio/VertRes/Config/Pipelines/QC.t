@@ -70,7 +70,7 @@ is_deeply(
             'fa_ref'            => '/path/to/ABC.fa',
             'snps'              => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin'
         },
-        'log'    => '/nfs/pathnfs01/log/my_database/qc__ABC_study_EFG.log',
+        'log'    => '/nfs/pathnfs01/log/my_database/qc_ABC_study_EFG.log',
         'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
         'prefix' => '_',
         'module' => 'VertRes::Pipelines::TrackQC_Fastq'
@@ -80,7 +80,7 @@ is_deeply(
 
 is(
     $obj->config,
-    $destination_directory . '/my_database/qc/qc__ABC_study_EFG.conf',
+    $destination_directory . '/my_database/qc/qc_ABC_study_EFG.conf',
     'config file in expected format'
 );
 ok( $obj->create_config_file, 'Can run the create config file method' );
