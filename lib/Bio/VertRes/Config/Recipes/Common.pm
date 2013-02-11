@@ -52,6 +52,6 @@ sub create {
     return $self;
 }
 
-__PACKAGE__->meta->make_immutable;
 no Moose;
+__PACKAGE__->meta->make_immutable;
 1;
