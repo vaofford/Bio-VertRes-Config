@@ -102,7 +102,7 @@ my %scripts_and_expected_files = (
     ],
     '-t study -i ZZZ -r ABC -m ssaha2' => [
         'command_line.log',                           'eukaryotes/assembly/assembly_global.conf',
-        'eukaryotes/import/import_global.conf',       'eukaryotes/mapping/mapping_ZZZ_ABC_ssaha2.conf',
+        'eukaryotes/import/import_global.conf',       'eukaryotes/mapping/mapping_ZZZ_ABC_ssaha.conf',
         'eukaryotes/eukaryotes.ilm.studies',          'eukaryotes/eukaryotes_assembly_pipeline.conf',
         'eukaryotes/eukaryotes_import_pipeline.conf', 'eukaryotes/eukaryotes_mapping_pipeline.conf',
         'eukaryotes/eukaryotes_qc_pipeline.conf',     'eukaryotes/eukaryotes_snps_pipeline.conf',

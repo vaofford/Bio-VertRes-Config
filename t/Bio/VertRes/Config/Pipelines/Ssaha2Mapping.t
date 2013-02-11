@@ -66,12 +66,12 @@ is_deeply(
                           'reference' => '/path/to/ABC.fa',
                           'do_cleanup' => 1,
                           'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/ssaha2/ssaha2',
-                          'slx_mapper' => 'ssaha2',
-                          '454_mapper' => 'ssaha2',
+                          'slx_mapper' => 'ssaha',
+                          '454_mapper' => 'ssaha',
                           '454_mapper_exe' => '/software/pathogen/external/apps/usr/local/ssaha2/ssaha2',
                           'ignore_mapped_status' => 1
                         },
-              'log' => '/nfs/pathnfs01/log/my_database/mapping_ABC_study_EFG_ABC_ssaha2.log',
+              'log' => '/nfs/pathnfs01/log/my_database/mapping_ABC_study_EFG_ABC_ssaha.log',
               'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'prefix' => '_checked_elsewhere_',
               'module' => 'VertRes::Pipelines::Mapping'
