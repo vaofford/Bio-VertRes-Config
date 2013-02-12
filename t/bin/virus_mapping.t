@@ -118,6 +118,14 @@ my %scripts_and_expected_files = (
         'viruses/viruses_qc_pipeline.conf',     'viruses/viruses_stored_pipeline.conf',
         'viruses/qc/qc_ZZZ.conf',              'viruses/stored/stored_global.conf'
     ],
+    '-t study -i ZZZ -r ABC -m bowtie2' => [
+        'command_line.log',                     'viruses/assembly/assembly_global.conf',
+        'viruses/import/import_global.conf',    'viruses/mapping/mapping_ZZZ_ABC_bowtie2.conf',
+        'viruses/viruses.ilm.studies',          'viruses/viruses_assembly_pipeline.conf',
+        'viruses/viruses_import_pipeline.conf', 'viruses/viruses_mapping_pipeline.conf',
+        'viruses/viruses_qc_pipeline.conf',     'viruses/viruses_stored_pipeline.conf',
+        'viruses/qc/qc_ZZZ.conf',              'viruses/stored/stored_global.conf'
+    ],
 
 );
 
