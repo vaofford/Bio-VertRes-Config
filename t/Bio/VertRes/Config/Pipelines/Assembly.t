@@ -16,8 +16,9 @@ my $destination_directory = $destination_directory_obj->dirname();
 ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::Assembly->new(
-            database => 'my_database',
-            config_base           => $destination_directory
+            database    => 'my_database',
+            limits      => {project => ['Abc def (ghi123)']},
+            config_base => $destination_directory
         )
     ),
     'initialise assembly config'
@@ -28,6 +29,9 @@ is($obj->toplevel_action, '__VRTrack_Assembly__');
 is_deeply(
     $obj->to_hash,
     {
+        'limits' => {
+            'project' => ['Abc\ def\ \\(ghi123\\)']
+                    },
         'max_failures' => 3,
         'db'           => {
             'database' => 'my_database',
@@ -63,7 +67,7 @@ is_deeply(
             'stored'             => 1
         },
         'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-        'log'    => '/nfs/pathnfs01/log/my_database/assembly_logfile.log',
+        'log'    => '/nfs/pathnfs01/log/my_database/assembly_Abc_def_ghi123.log',
         'limit'  => 100,
         'module' => 'VertRes::Pipelines::Assembly',
         'prefix' => '_assembly_'
@@ -73,11 +77,55 @@ is_deeply(
 
 is(
     $obj->config,
-    $destination_directory . '/my_database/assembly/assembly_global.conf',
+    $destination_directory . '/my_database/assembly/assembly_Abc_def_ghi123.conf',
     'config file in expected format'
 );
 ok( $obj->create_config_file, 'Can run the create config file method' );
 ok( ( -e $obj->config ), 'Config file exists' );
 
+# Test limits
+ok(
+    (
+        $obj = Bio::VertRes::Config::Pipelines::Assembly->new(
+            database              => 'my_database',
+            limits                => {
+                project     => [ 'study 1',  'study 2' ],
+                sample      => [ 'sample 1', 'sample 2' ],
+                species     => ['species 1'],
+                other_stuff => ['some other stuff']
+            },
+            config_base         => '/path/to/config_base'
+        )
+    ),
+    'initialise annotation config with multiple limits'
+);
+
+is_deeply(
+    $obj->_escaped_limits,
+    {
+        'project'     => [ 'study\ 1',  'study\ 2' ],
+        'sample'      => [ 'sample\ 1', 'sample\ 2' ],
+        'species'     => [ 'species\ 1' ],
+        'other_stuff' => [ 'some\ other\ stuff' ]
+    },
+    'Check escaped limits are as expected'
+);
+is_deeply(
+    $obj->limits,
+    {
+        'project'     => [ 'study 1',  'study 2' ],
+        'sample'      => [ 'sample 1', 'sample 2' ],
+        'species'     => ['species 1'],
+        'other_stuff' => ['some other stuff']
+    },
+    'Check the input limits are unchanged'
+);
+
+# check config file name
+is(
+    $obj->config,
+    '/path/to/config_base/my_database/assembly/assembly_study_1_study_2_sample_1_sample_2_species_1.conf',
+    'config file name in expected format'
+);
 
 done_testing();

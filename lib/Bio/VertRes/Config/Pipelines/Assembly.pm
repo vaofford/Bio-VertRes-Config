@@ -7,7 +7,9 @@ package Bio::VertRes::Config::Pipelines::Assembly;
 A class for generating the Assembly pipeline config file
    use Bio::VertRes::Config::Pipelines::Assembly;
    
-   my $pipeline = Bio::VertRes::Config::Pipelines::Assembly->new(database => 'abc');
+   my $pipeline = Bio::VertRes::Config::Pipelines::Assembly->new(database    => 'abc'
+                                                                 config_base => '/path/to/config/base',
+                                                                 limits      => { project => ['project name']);
    $pipeline->to_hash();
 
 =cut
@@ -15,6 +17,7 @@ A class for generating the Assembly pipeline config file
 use Moose;
 use Bio::VertRes::Config::Pipelines::Common;
 extends 'Bio::VertRes::Config::Pipelines::Common';
+with 'Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter';
 
 has 'pipeline_short_name'  => ( is => 'ro', isa => 'Str', default => 'assembly' );
 has 'module'               => ( is => 'ro', isa => 'Str', default => 'VertRes::Pipelines::Assembly' );
@@ -42,6 +45,7 @@ override 'to_hash' => sub {
     $output_hash->{max_lanes_to_search}     = $self->_max_lanes_to_search;
     $output_hash->{max_failures}            = $self->_max_failures;
     $output_hash->{vrtrack_processed_flags} = { stored => 1, assembled => 0, rna_seq_expression => 0 };
+    $output_hash->{limits}                  = $self->_escaped_limits;
 
     $output_hash->{data}{tmp_directory} = $self->_tmp_directory;
 
@@ -58,6 +62,24 @@ override 'to_hash' => sub {
 
     return $output_hash;
 };
+
+sub _construct_filename
+{
+  my ($self, $suffix) = @_;
+  my $output_filename = $self->_limits_values_part_of_filename();
+  return $self->_filter_characters_truncate_and_add_suffix($output_filename,$suffix);
+}
+
+override 'log_file_name' => sub {
+    my ($self) = @_;
+    return $self->_construct_filename('log');
+};
+
+override 'config_file_name' => sub {
+    my ($self) = @_;
+    return $self->_construct_filename('conf');
+};
+
 
 __PACKAGE__->meta->make_immutable;
 no Moose;
