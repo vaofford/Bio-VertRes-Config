@@ -1,10 +1,10 @@
 package Bio::VertRes::Config::Pipelines::Assembly;
 
-# ABSTRACT: A class for generating the Assembly pipeline config file which archives data to nfs units
+# ABSTRACT: A base class for generating the Assembly pipeline config file which archives data to nfs units
 
 =head1 SYNOPSIS
 
-A class for generating the Assembly pipeline config file
+A base class for generating the Assembly pipeline config file
    use Bio::VertRes::Config::Pipelines::Assembly;
    
    my $pipeline = Bio::VertRes::Config::Pipelines::Assembly->new(database    => 'abc'
@@ -66,7 +66,7 @@ override 'to_hash' => sub {
 sub _construct_filename
 {
   my ($self, $suffix) = @_;
-  my $output_filename = $self->_limits_values_part_of_filename();
+  my $output_filename = join('_',($self->_limits_values_part_of_filename(),$self->_assembler));
   return $self->_filter_characters_truncate_and_add_suffix($output_filename,$suffix);
 }
 
