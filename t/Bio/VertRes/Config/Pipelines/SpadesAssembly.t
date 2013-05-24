@@ -1,0 +1,91 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use Data::Dumper;
+use File::Temp;
+
+BEGIN { unshift( @INC, './lib' ) }
+
+BEGIN {
+    use Test::Most;
+    use_ok('Bio::VertRes::Config::Pipelines::SpadesAssembly');
+}
+my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
+my $destination_directory = $destination_directory_obj->dirname();
+
+ok(
+    (
+        my $obj = Bio::VertRes::Config::Pipelines::SpadesAssembly->new(
+            database    => 'my_database',
+            limits      => {project => ['Abc def (ghi123)']},
+            config_base => $destination_directory
+        )
+    ),
+    'initialise assembly config'
+);
+
+is($obj->toplevel_action, '__VRTrack_Assembly__');
+
+is_deeply(
+    $obj->to_hash,
+    {
+        'limits' => {
+            'project' => ['Abc\ def\ \\(ghi123\\)']
+                    },
+        'max_failures' => 3,
+        'db'           => {
+            'database' => 'my_database',
+            'password' => undef,
+            'user'     => 'root',
+            'port'     => 3306,
+            'host'     => 'localhost'
+        },
+        'data' => {
+            'genome_size' => 10000000,
+            'db'          => {
+                'database' => 'my_database',
+                'password' => undef,
+                'user'     => 'root',
+                'port'     => 3306,
+                'host'     => 'localhost'
+            },
+            'assembler_exec'    => '/software/pathogen/external/apps/usr/bin/spades.py',
+            'dont_wait'         => 0,
+            'assembler'         => 'spades',
+            'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+            'tmp_directory'     => '/lustre/scratch108/pathogen/pathpipe/tmp',
+            'max_threads'       => 1,
+            'pipeline_version'  => 2, # Remove
+            'error_correct'     => 1, # Needs set
+            'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',
+            'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/spades.py',
+            'primers_file'      => '/nfs/pathnfs01/conf/primers/virus_primers',
+            'normalise'         => 1,
+            'remove_primers'    => 1,
+        },
+        'max_lanes_to_search'     => 2000, # Set
+        'vrtrack_processed_flags' => {
+            'assembled'          => 0,
+            'rna_seq_expression' => 0,
+            'stored'             => 1
+        },
+        'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+        'log'    => '/nfs/pathnfs01/log/my_database/assembly_Abc_def_ghi123_spades.log',
+        'limit'  => 500, # Set
+        'module' => 'VertRes::Pipelines::Assembly',
+        'prefix' => '_assembly_'
+    },
+    'output hash constructed correctly'
+);
+
+is(
+    $obj->config,
+    $destination_directory . '/my_database/assembly/assembly_Abc_def_ghi123_spades.conf',
+    'config file in expected format'
+);
+ok( $obj->create_config_file, 'Can run the create config file method' );
+ok( ( -e $obj->config ), 'Config file exists' );
+
+
+
+done_testing();
