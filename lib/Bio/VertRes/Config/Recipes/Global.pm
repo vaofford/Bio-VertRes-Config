@@ -43,7 +43,8 @@ override '_pipeline_configs' => sub {
         Bio::VertRes::Config::Pipelines::Assembly->new(
             database                       => $self->database,
             config_base                    => $self->config_base,
-            overwrite_existing_config_file => $self->overwrite_existing_config_file
+            overwrite_existing_config_file => $self->overwrite_existing_config_file,
+            limits                         => {}
         )
     );
     push(
@@ -51,7 +52,8 @@ override '_pipeline_configs' => sub {
         Bio::VertRes::Config::Pipelines::AnnotateAssembly->new(
             database                       => $self->database,
             config_base                    => $self->config_base,
-            overwrite_existing_config_file => $self->overwrite_existing_config_file
+            overwrite_existing_config_file => $self->overwrite_existing_config_file,
+            limits                         => {}
         )
     );
     return \@pipeline_configs;
