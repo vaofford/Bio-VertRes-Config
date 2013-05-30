@@ -55,15 +55,15 @@ is_deeply(
             'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
             'tmp_directory'     => '/lustre/scratch108/pathogen/pathpipe/tmp',
             'max_threads'       => 1,
-            'pipeline_version'  => 2, # Remove
-            'error_correct'     => 1, # Needs set
+            'pipeline_version'  => 2,
+            'error_correct'     => 0,
             'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',
             'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/spades.py',
             'primers_file'      => '/nfs/pathnfs01/conf/primers/virus_primers',
             'normalise'         => 1,
-            'remove_primers'    => 1,
+            'remove_primers'    => 0,
         },
-        'max_lanes_to_search'     => 2000, # Set
+        'max_lanes_to_search'     => 2000,
         'vrtrack_processed_flags' => {
             'assembled'          => 0,
             'rna_seq_expression' => 0,
