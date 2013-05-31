@@ -9,12 +9,11 @@ Create config scripts to map helminths
 =cut
 
 use Moose;
-use GetOpt::Long qw(GetOptionsFromArray);
 use Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 extends 'Bio::VertRes::Config::CommandLine::RegisterAndQCStudy';
 
-has 'database'             => ( is => 'rw', isa => 'Str',  default => 'pathogen_prok_track' );
+has 'database' => ( is => 'rw', isa => 'Str', default => 'pathogen_prok_track' );
 
 override 'run' => sub {
     my ($self) = @_;
@@ -24,7 +23,9 @@ override 'run' => sub {
 
     return if(handle_reference_inputs_or_exit( $self->reference_lookup_file, $self->available_references, $self->reference ) == 1);
 
-    Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new( assembler => $self->assembler, $self->mapping_parameters )->create();
+    my %mapping_parameters = %{$self->mapping_parameters};
+    $mapping_parameters{'assembler'} = $self->assembler;
+    Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new( \%mapping_parameters )->create();
 
     $self->retrieving_results_text;
 };
