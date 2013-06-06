@@ -60,10 +60,10 @@ is_deeply(
             'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',
             'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/spades.py',
             'primers_file'      => '/nfs/pathnfs01/conf/primers/virus_primers',
-            'normalise'         => 1,
             'remove_primers'    => 0,
+            'normalise'         => 0
         },
-        'max_lanes_to_search'     => 2000,
+        'max_lanes_to_search'     => 200,
         'vrtrack_processed_flags' => {
             'assembled'          => 0,
             'rna_seq_expression' => 0,
@@ -71,7 +71,7 @@ is_deeply(
         },
         'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
         'log'    => '/nfs/pathnfs01/log/my_database/assembly_Abc_def_ghi123_spades.log',
-        'limit'  => 500, # Set
+        'limit'  => 100,
         'module' => 'VertRes::Pipelines::Assembly',
         'prefix' => '_assembly_'
     },

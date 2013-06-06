@@ -60,7 +60,8 @@ is_deeply(
             'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',
             'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl',
             'primers_file'      => '/nfs/pathnfs01/conf/primers/virus_primers',
-            'remove_primers'    => 0
+            'remove_primers'    => 0,
+            'normalise'         => 0
         },
         'max_lanes_to_search'     => 200,
         'vrtrack_processed_flags' => {

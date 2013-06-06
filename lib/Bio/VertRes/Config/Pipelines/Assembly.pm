@@ -36,6 +36,7 @@ has '_max_threads'         => ( is => 'ro', isa => 'Int', default => 1 );
 has '_pipeline_version'    => ( is => 'ro', isa => 'Int', default => 2 );
 has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_sga_exec'            => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/sga' );
+has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
 
 has '_primers_file'        => ( is => 'ro', isa => 'Str',  default => '/nfs/pathnfs01/conf/primers/virus_primers' );
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 0 );
@@ -62,6 +63,7 @@ override 'to_hash' => sub {
     $output_hash->{data}{pipeline_version}  = $self->_pipeline_version;
     $output_hash->{data}{error_correct}     = $self->_error_correct;
     $output_hash->{data}{sga_exec}          = $self->_sga_exec;
+    $output_hash->{data}{normalise}         = $self->_normalise;
 
     # Remove primers
     $output_hash->{data}{primers_file}   = $self->_primers_file;
