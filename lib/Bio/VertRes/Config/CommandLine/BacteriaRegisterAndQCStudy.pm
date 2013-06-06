@@ -34,25 +34,28 @@ override 'register_and_qc_usage_text' => sub {
     my ($self) = @_;
     return <<USAGE;
 Usage: bacteria_register_and_qc_study [options]
-Pipeline to map and SNP call bacteria, producing a pseudo genome at the end.
+Pipeline to register and QC a bacteria study.
 
 # Search for an available reference
-register_and_qc_study -a "Stap"
+bacteria_register_and_qc_study -a "Stap"
 
 # Register and QC a study
-register_and_qc_study -d pathogen_test_track -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
 
 # Register and QC a single lane
-register_and_qc_study -d pathogen_test_track -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+bacteria_register_and_qc_study -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
 
 # Register and QC a file of lanes
-register_and_qc_study -d pathogen_test_track -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+bacteria_register_and_qc_study -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
 
 # Register and QC a single species in a study
-register_and_qc_study -d pathogen_test_track -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
+bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
+
+# Register and QC a study assembling with SPAdes
+bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -assembler spades
 
 # This help message
-register_and_qc_study -h
+bacteria_register_and_qc_study -h
 
 USAGE
 };
