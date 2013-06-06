@@ -81,7 +81,8 @@ sub add_bacteria_velvet_assembly_config
           limits                         => $self->_project_limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _pipeline_version              => $self->_pipeline_version 
+          _pipeline_version              => $self->_pipeline_version, 
+          _normalise                     => $self->_normalise 
       )
   );
   return ;
@@ -99,7 +100,8 @@ sub add_bacteria_spades_assembly_config
           limits                         => $self->_project_limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _pipeline_version              => $self->_pipeline_version 
+          _pipeline_version              => $self->_pipeline_version, 
+          _normalise                     => $self->_normalise 
       )
   );
   return ;

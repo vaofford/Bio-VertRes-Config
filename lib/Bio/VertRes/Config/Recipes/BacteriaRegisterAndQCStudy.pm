@@ -27,6 +27,8 @@ has 'assembler'            => ( is => 'ro', isa => 'Str',  default => 'velvet' )
 has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_pipeline_version'    => ( is => 'ro', isa => 'Int',  default => 2 );
+has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
+
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
