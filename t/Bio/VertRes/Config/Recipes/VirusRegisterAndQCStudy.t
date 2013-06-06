@@ -8,15 +8,16 @@ BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
     use Test::Most;
-    use_ok('Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy');
+    use_ok('Bio::VertRes::Config::Recipes::VirusRegisterAndQCStudy');
 }
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 0 );
 my $destination_directory = $destination_directory_obj->dirname();
 
+
 ok(
     (
-            my $obj = Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new(
+            my $obj = Bio::VertRes::Config::Recipes::VirusRegisterAndQCStudy->new(
             database    => 'my_database',
             config_base => $destination_directory,
             limits      => { project => ['ABC study( EFG )'] },
@@ -85,8 +86,8 @@ is_deeply($input_config_file,{
 },'Config file as expected');
 
 # Check assembly file
-ok( -e $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_velvet.conf', 'assembly toplevel file' );
-$text = read_file( $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_velvet.conf' );
+ok( -e $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_spades.conf', 'assembly toplevel file' );
+$text = read_file( $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_spades.conf' );
 $input_config_file = eval($text);
 
 is_deeply($input_config_file,{
@@ -109,17 +110,17 @@ is_deeply($input_config_file,{
                         'host' => 'localhost'
                       },
               'error_correct' => 0,
-              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/velvet',
+              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades.py',
               'dont_wait' => 0,
               'primers_file' => '/nfs/pathnfs01/conf/primers/virus_primers',
-              'assembler' => 'velvet',
+              'assembler' => 'spades',
               'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-              'normalise' => 0,
+              'normalise' => 1,
               'sga_exec' => '/software/pathogen/external/apps/usr/bin/sga',
               'tmp_directory' => '/lustre/scratch108/pathogen/pathpipe/tmp',
-              'pipeline_version' => 2,
+              'pipeline_version' => 3,
               'max_threads' => 1,
-              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl'
+              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py'
             },
   'max_lanes_to_search' => 200,
   'limits' => {
@@ -133,7 +134,7 @@ is_deeply($input_config_file,{
                                  'stored' => 1
                                },
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-  'log' => '/nfs/pathnfs01/log/my_database/assembly_ABC_study_EFG_velvet.log',
+  'log' => '/nfs/pathnfs01/log/my_database/assembly_ABC_study_EFG_spades.log',
   'limit' => 100,
   'module' => 'VertRes::Pipelines::Assembly',
   'prefix' => '_assembly_'
@@ -190,7 +191,7 @@ is_deeply($input_config_file,{
 
 ok(
     (
-        $obj = Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new(
+        $obj = Bio::VertRes::Config::Recipes::VirusRegisterAndQCStudy->new(
             database    => 'my_database',
             config_base => $destination_directory,
             limits      => { project => ['ABC study( EFG )'], species => ['Cat', 'Dog'] },
@@ -259,21 +260,22 @@ is_deeply($input_config_file,{
 
 ok(
     (
-        $obj = Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new(
+        $obj = Bio::VertRes::Config::Recipes::VirusRegisterAndQCStudy->new(
             database    => 'my_database',
             config_base => $destination_directory,
             limits      => { project => ['ABC study( EFG )'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
-            assembler             => 'spades'
+            assembler             => 'velvet'
         )
     ),
     'initalise creating spades assembly file'
 );
-ok( ( $obj->create ), 'Create all the config files and toplevel files with spades' );
 
-ok( -e $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_spades.conf', 'created toplevel spades' );
-$text = read_file( $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_spades.conf' );
+ok( ( $obj->create ), 'Create all the config files and toplevel files with velvet' );
+
+ok( -e $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_velvet.conf', 'created toplevel velvet' );
+$text = read_file( $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_velvet.conf' );
 $input_config_file = eval($text);
 is_deeply($input_config_file,{
   'max_failures' => 3,
@@ -295,17 +297,17 @@ is_deeply($input_config_file,{
                         'host' => 'localhost'
                       },
               'error_correct' => 0,
-              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades.py',
+              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/velvet',
               'dont_wait' => 0,
               'primers_file' => '/nfs/pathnfs01/conf/primers/virus_primers',
-              'assembler' => 'spades',
+              'assembler' => 'velvet',
               'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-              'normalise' => 0,
+              'normalise' => 1,
               'sga_exec' => '/software/pathogen/external/apps/usr/bin/sga',
               'tmp_directory' => '/lustre/scratch108/pathogen/pathpipe/tmp',
-              'pipeline_version' => 2,
+              'pipeline_version' => 3,
               'max_threads' => 1,
-              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py'
+              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl'
             },
   'max_lanes_to_search' => 200,
   'limits' => {
@@ -319,10 +321,10 @@ is_deeply($input_config_file,{
                                  'stored' => 1
                                },
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-  'log' => '/nfs/pathnfs01/log/my_database/assembly_ABC_study_EFG_spades.log',
+  'log' => '/nfs/pathnfs01/log/my_database/assembly_ABC_study_EFG_velvet.log',
   'limit' => 100,
   'module' => 'VertRes::Pipelines::Assembly',
   'prefix' => '_assembly_'
-},'Config file as expected with spades assembler');
+},'Config file as expected with velvet assembler');
 
 done_testing();
