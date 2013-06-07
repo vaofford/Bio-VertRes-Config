@@ -9,6 +9,8 @@ Create config scripts to map helminths
 =cut
 
 use Moose;
+use Bio::VertRes::Config::Recipes::EukaryotesRegisterAndQCStudy;
+with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 extends 'Bio::VertRes::Config::CommandLine::RegisterAndQCStudy';
 
 has 'database'    => ( is => 'rw', isa => 'Str', default => 'pathogen_euk_track' );
