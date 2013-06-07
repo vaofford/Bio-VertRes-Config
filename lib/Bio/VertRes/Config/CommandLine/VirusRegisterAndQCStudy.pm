@@ -1,4 +1,4 @@
-package Bio::VertRes::Config::CommandLine::BacteriaRegisterAndQCStudy;
+package Bio::VertRes::Config::CommandLine::VirusRegisterAndQCStudy;
 
 # ABSTRACT: Create config scripts to map helminths
 
