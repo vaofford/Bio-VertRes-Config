@@ -11,11 +11,11 @@ BEGIN { unshift( @INC, './lib' ) }
 BEGIN { unshift( @INC, './t/lib' ) }
 with 'TestHelper';
 
-my $script_name = 'Bio::VertRes::Config::CommandLine::RegisterAndQCStudy';
+my $script_name = 'Bio::VertRes::Config::CommandLine::EukaryotesRegisterAndQCStudy';
 
 my %scripts_and_expected_files = (
-    '-d pathogen_euk_track -a ABC '                  => ['command_line.log'],
-    '-d pathogen_euk_track -t study -i ZZZ -r ABC' => [
+    '-a ABC '                  => ['command_line.log'],
+    '-t study -i ZZZ -r ABC' => [
         'command_line.log',
         'eukaryotes/import/import_global.conf',
         'eukaryotes/eukaryotes.ilm.studies',
@@ -25,7 +25,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/qc/qc_ZZZ.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
-    '-d pathogen_euk_track -t lane -i 1234_5#6 -r ABC' => [
+    '-t lane -i 1234_5#6 -r ABC' => [
         'command_line.log',
         'eukaryotes/import/import_global.conf',
         'eukaryotes/eukaryotes_import_pipeline.conf',
@@ -34,7 +34,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/qc/qc_1234_5_6.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
-    '-d pathogen_euk_track -t library -i libname -r ABC' => [
+    '-t library -i libname -r ABC' => [
         'command_line.log',
         'eukaryotes/import/import_global.conf',
         'eukaryotes/eukaryotes_import_pipeline.conf',
@@ -43,7 +43,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/qc/qc_libname.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
-    '-d pathogen_euk_track -t sample -i sample -r ABC' => [
+    '-t sample -i sample -r ABC' => [
         'command_line.log',
         'eukaryotes/import/import_global.conf',
         'eukaryotes/eukaryotes_import_pipeline.conf',
@@ -52,7 +52,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/qc/qc_sample.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
-    '-d pathogen_euk_track -t file -i t/data/lanes_file -r ABC' => [
+    '-t file -i t/data/lanes_file -r ABC' => [
         'command_line.log',
         'eukaryotes/import/import_global.conf',
         'eukaryotes/eukaryotes_import_pipeline.conf',
@@ -61,7 +61,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/qc/qc_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
-    '-d pathogen_euk_track -t study -i ZZZ -r ABC -s Staphylococcus_aureus' => [
+    '-t study -i ZZZ -r ABC -s Staphylococcus_aureus' => [
         'command_line.log',
         'eukaryotes/import/import_global.conf',
         'eukaryotes/eukaryotes.ilm.studies',
