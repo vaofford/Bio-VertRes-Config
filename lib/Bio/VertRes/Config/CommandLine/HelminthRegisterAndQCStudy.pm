@@ -60,6 +60,9 @@ helminth_register_and_qc_study -t file -i file_of_lanes -r "Caenorhabditis_elega
 # Register and QC a single species in a study
 helminth_register_and_qc_study -t study -i 1234 -r "Caenorhabditis_elegans_WS226" -s "Caenorhabditis elegans"
 
+# Register and QC a study in named database specifying location of configs
+helminth_register_and_qc_study -t study -i 1234 -r "Caenorhabditis_elegans_WS226" -d my_database -c /path/to/my/configs
+
 # This help message
 helminth_register_and_qc_study -h
 

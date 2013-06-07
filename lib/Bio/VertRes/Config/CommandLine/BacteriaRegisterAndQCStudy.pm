@@ -66,6 +66,9 @@ bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_
 # Register and QC a study assembling with SPAdes
 bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -assembler spades
 
+# Register and QC a study in named database specifying location of configs
+bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -c /path/to/my/configs
+
 # This help message
 bacteria_register_and_qc_study -h
 

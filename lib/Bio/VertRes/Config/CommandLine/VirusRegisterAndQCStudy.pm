@@ -16,7 +16,6 @@ extends 'Bio::VertRes::Config::CommandLine::Common';
 has 'database'  => ( is => 'rw', isa => 'Str', default => 'pathogen_virus_track' );
 has 'assembler' => ( is => 'rw', isa => 'Str', default => 'spades' );
 
-#override 'run' => sub {
 sub run {
     my ($self) = @_;
 
@@ -66,6 +65,9 @@ virus_register_and_qc_study -t study -i 1234 -r "Norovirus_Hu_Pune_PC52_2007_Ind
 
 # Register and QC a study assembling with velvet
 virus_register_and_qc_study -t study -i 1234 -r "Norovirus_Hu_Pune_PC52_2007_India_v2" -assembler velvet
+
+# Register and QC a study in named database specifying location of configs
+virus_register_and_qc_study -t study -i 1234 -r "Norovirus_Hu_Pune_PC52_2007_India_v2" -d my_database -c /path/to/my/configs
 
 # This help message
 virus_register_and_qc_study -h

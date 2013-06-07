@@ -39,7 +39,6 @@ sub usage_text
   $self->register_and_qc_usage_text;
 }
 
-#override 'register_and_qc_usage_text' => sub {
 sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
@@ -60,6 +59,9 @@ eukaryote_register_and_qc_study -t file -i file_of_lanes -r "Plasmodium_falcipar
 
 # Register and QC a single species in a study
 eukaryote_register_and_qc_study -t study -i 1234 -r "Plasmodium_falciparum_3D7_02April2012" -s "Plasmodium falciparum"
+
+# Register and QC a study in named database specifying location of configs
+eukaryote_register_and_qc_study -t study -i 1234 -r "Plasmodium_falciparum_3D7_02April2012" -d my_database -c /path/to/my/configs
 
 # This help message
 register_and_qc_study -h
