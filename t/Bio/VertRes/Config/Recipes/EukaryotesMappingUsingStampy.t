@@ -75,7 +75,7 @@ is_deeply($input_config_file,{
               'do_cleanup' => 1,
               'ignore_mapped_status' => 1,
               'slx_mapper' => 'stampy',
-              'slx_mapper_exe' => 'python2.7 /software/pathogen/external/apps/usr/local/stampy-1.0.21/stampy.py'
+              'slx_mapper_exe' => 'python2.7 /software/pathogen/external/apps/usr/local/stampy-1.0.22/stampy.py'
             },
   'limits' => {
                 'project' => [
