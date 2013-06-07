@@ -82,7 +82,7 @@ my %scripts_and_expected_files = (
     '-t study -i ZZZ -r ABC -s Staphylococcus_aureus' => [
         'command_line.log',
         'viruses/annotate_assembly/annotate_assembly_ZZZ.conf',
-        'viruses/assembly/assembly_ZZZ_velvet.conf',
+        'viruses/assembly/assembly_ZZZ_spades.conf',
         'viruses/import/import_global.conf',
         'viruses/viruses.ilm.studies',
         'viruses/viruses_annotate_assembly_pipeline.conf',
@@ -96,7 +96,7 @@ my %scripts_and_expected_files = (
     '-d some_other_db_name -t study -i ZZZ -r ABC' => [
         'command_line.log',
         'some_other_db_name/annotate_assembly/annotate_assembly_ZZZ.conf',
-        'some_other_db_name/assembly/assembly_ZZZ_velvet.conf',        
+        'some_other_db_name/assembly/assembly_ZZZ_spades.conf',        
         'some_other_db_name/import/import_global.conf',
         'some_other_db_name/some_other_db_name.ilm.studies',
         'some_other_db_name/some_other_db_name_annotate_assembly_pipeline.conf',
