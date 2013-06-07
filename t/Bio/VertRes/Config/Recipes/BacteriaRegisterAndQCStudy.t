@@ -325,4 +325,73 @@ is_deeply($input_config_file,{
   'prefix' => '_assembly_'
 },'Config file as expected with spades assembler');
 
+# Populate a new study
+Bio::VertRes::Config::RegisterStudy->new(database => 'pathogen_prok_track', study_name => 'DDD',config_base => $destination_directory)->register_study_name();
+
+ok(
+    (
+        $obj = Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new(
+            database    => 'my_other_database',
+            config_base => $destination_directory,
+            limits      => { project => ['DDD'] },
+            reference_lookup_file => 't/data/refs.index',
+            reference             => 'ABC',
+        )
+    ),
+    'Initialise with the study pointing at the wrong database'
+);
+ok( ( $obj->create ), 'the database name should have been updated to prevent the same study being registered in 2 different places' );
+
+ok( -e $destination_directory . '/prokaryotes/qc/qc_DDD.conf', 'QC toplevel file with modified database' );
+$text = read_file( $destination_directory . '/prokaryotes/qc/qc_DDD.conf' );
+$input_config_file = eval($text);
+is_deeply($input_config_file,{
+  'max_failures' => 3,
+  'db' => {
+            'database' => 'pathogen_prok_track',
+            'password' => undef,
+            'user' => 'root',
+            'port' => 3306,
+            'host' => 'localhost'
+          },
+  'data' => {
+              'db' => {
+                        'database' => 'pathogen_prok_track',
+                        'password' => undef,
+                        'user' => 'root',
+                        'port' => 3306,
+                        'host' => 'localhost'
+                      },
+              'chr_regex' => '.*',
+              'mapper' => 'bwa',
+              'glf' => '/software/vertres/bin-external/glf',
+              'do_samtools_rmdup' => 1,
+              'fai_ref' => '/path/to/ABC.fa.fai',
+              'gtype_confidence' => '1.2',
+              'bwa_ref' => '/path/to/ABC.fa',
+              'assembly' => 'ABC',
+              'skip_genotype' => 1,
+              'dont_wait' => 0,
+              'mapviewdepth' => '/software/pathogen/external/apps/usr/bin/bindepth',
+              'stats_ref' => '/path/to/ABC.fa.refstats',
+              'exit_on_errors' => 0,
+              'bwa_exec' => '/software/pathogen/external/apps/usr/local/bwa-0.6.1/bwa',
+              'adapters' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta',
+              'samtools' => '/software/pathogen/external/apps/usr/bin/samtools',
+              'fa_ref' => '/path/to/ABC.fa',
+              'snps' => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin'
+            },
+  'limits' => {
+                'project' => [
+                               'DDD'
+                             ],
+
+              },
+  'log' => '/nfs/pathnfs01/log/prokaryotes/qc_DDD.log',
+  'root' => '/lustre/scratch108/pathogen/pathpipe/prokaryotes/seq-pipelines',
+  'prefix' => '_',
+  'module' => 'VertRes::Pipelines::TrackQC_Fastq'
+},'Config file has modified database names');
+
+
 done_testing();
