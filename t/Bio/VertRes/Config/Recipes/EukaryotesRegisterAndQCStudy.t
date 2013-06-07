@@ -13,7 +13,6 @@ BEGIN {
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 0 );
 my $destination_directory = $destination_directory_obj->dirname();
-$destination_directory = '/Users/cp7/Git/TEMP';
 
 ok(
     (
