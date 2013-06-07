@@ -1,4 +1,4 @@
-package Bio::VertRes::Config::CommandLine::HelminthRegisterAndQCStudy;
+package Bio::VertRes::Config::CommandLine::EukaryotesRegisterAndQCStudy;
 
 # ABSTRACT: Create config scripts to map helminths
 
@@ -9,30 +9,32 @@ Create config scripts to map helminths
 =cut
 
 use Moose;
+use Bio::VertRes::Config::Recipes::EukaryotesRegisterAndQCStudy;
+with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 extends 'Bio::VertRes::Config::CommandLine::RegisterAndQCStudy';
 
-has 'database'    => ( is => 'rw', isa => 'Str', default => 'pathogen_helminth_track' );
+has 'database'    => ( is => 'rw', isa => 'Str', default => 'pathogen_euk_track' );
 
 override 'register_and_qc_usage_text' => sub {
     my ($self) = @_;
     return <<USAGE;
-Usage: helminth_register_and_qc_study [options]
-Pipeline to register and QC a helminth study.
+Usage: eukaryote_register_and_qc_study [options]
+Pipeline to register and QC a eukaryote study.
 
 # Search for an available reference
-helminth_register_and_qc_study -a "Caenorhabditis"
+eukaryote_register_and_qc_study -a "Plasmodium"
 
 # Register and QC a study
-helminth_register_and_qc_study -t study -i 1234 -r "Caenorhabditis_elegans_WS226"
+eukaryote_register_and_qc_study -t study -i 1234 -r "Plasmodium_falciparum_3D7_02April2012"
 
 # Register and QC a single lane
-helminth_register_and_qc_study -t lane -i 1234_5#6 -r "Caenorhabditis_elegans_WS226"
+eukaryote_register_and_qc_study -t lane -i 1234_5#6 -r "Plasmodium_falciparum_3D7_02April2012"
 
 # Register and QC a file of lanes
-helminth_register_and_qc_study -t file -i file_of_lanes -r "Caenorhabditis_elegans_WS226"
+eukaryote_register_and_qc_study -t file -i file_of_lanes -r "Plasmodium_falciparum_3D7_02April2012"
 
 # Register and QC a single species in a study
-helminth_register_and_qc_study -t study -i 1234 -r "Caenorhabditis_elegans_WS226" -s "Caenorhabditis elegans"
+eukaryote_register_and_qc_study -t study -i 1234 -r "Plasmodium_falciparum_3D7_02April2012" -s "Plasmodium falciparum"
 
 # This help message
 register_and_qc_study -h
