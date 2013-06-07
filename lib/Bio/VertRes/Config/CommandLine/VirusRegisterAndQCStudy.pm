@@ -11,11 +11,13 @@ Create config scripts to map helminths
 use Moose;
 use Bio::VertRes::Config::Recipes::VirusRegisterAndQCStudy;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
-extends 'Bio::VertRes::Config::CommandLine::RegisterAndQCStudy';
+extends 'Bio::VertRes::Config::CommandLine::Common';
 
-has 'database' => ( is => 'rw', isa => 'Str', default => 'pathogen_virus_track' );
+has 'database'  => ( is => 'rw', isa => 'Str', default => 'pathogen_virus_track' );
+has 'assembler' => ( is => 'rw', isa => 'Str', default => 'spades' );
 
-override 'run' => sub {
+#override 'run' => sub {
+sub run {
     my ($self) = @_;
 
     ( ( ( defined($self->available_references) && $self->available_references ne "" ) || ( $self->reference && $self->type && $self->id ) )
@@ -30,7 +32,18 @@ override 'run' => sub {
     $self->retrieving_results_text;
 };
 
-override 'register_and_qc_usage_text' => sub {
+sub retrieving_results_text {
+    my ($self) = @_;
+    "";
+}
+
+sub usage_text
+{
+  my ($self) = @_;
+  $self->register_and_qc_usage_text;
+}
+
+sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
 Usage: virus_register_and_qc_study [options]

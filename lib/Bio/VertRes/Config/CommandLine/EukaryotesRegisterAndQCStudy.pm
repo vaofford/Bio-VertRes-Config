@@ -11,11 +11,36 @@ Create config scripts to map helminths
 use Moose;
 use Bio::VertRes::Config::Recipes::EukaryotesRegisterAndQCStudy;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
-extends 'Bio::VertRes::Config::CommandLine::RegisterAndQCStudy';
+extends 'Bio::VertRes::Config::CommandLine::Common';
 
 has 'database'    => ( is => 'rw', isa => 'Str', default => 'pathogen_euk_track' );
 
-override 'register_and_qc_usage_text' => sub {
+sub run {
+    my ($self) = @_;
+
+    ( ( ( defined($self->available_references) && $self->available_references ne "" ) || ( $self->reference && $self->type && $self->id ) )
+          && !$self->help ) or die $self->usage_text;
+
+    return if(handle_reference_inputs_or_exit( $self->reference_lookup_file, $self->available_references, $self->reference ) == 1);
+
+    Bio::VertRes::Config::Recipes::EukaryotesRegisterAndQCStudy->new( $self->mapping_parameters )->create();
+
+    $self->retrieving_results_text;
+}
+
+sub retrieving_results_text {
+    my ($self) = @_;
+    "";
+}
+
+sub usage_text
+{
+  my ($self) = @_;
+  $self->register_and_qc_usage_text;
+}
+
+#override 'register_and_qc_usage_text' => sub {
+sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
 Usage: eukaryote_register_and_qc_study [options]
