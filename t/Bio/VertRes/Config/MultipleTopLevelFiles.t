@@ -7,7 +7,6 @@ use File::Slurp;
 BEGIN { unshift( @INC, './lib' ) }
 
 use Bio::VertRes::Config::Pipelines::BwaMapping;
-#use Bio::VertRes::Config::Pipelines::Assembly;
 use Bio::VertRes::Config::Pipelines::Import;
 use Bio::VertRes::Config::Pipelines::Store;
 use Bio::VertRes::Config::Pipelines::SnpCalling;
