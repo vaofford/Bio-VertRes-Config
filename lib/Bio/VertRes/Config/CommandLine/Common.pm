@@ -39,7 +39,7 @@ has 'smalt_mapper_x' => ( is => 'rw', isa => 'Maybe[Bool]' );
 has 'smalt_mapper_y' => ( is => 'rw', isa => 'Maybe[Num]' );
 
 # set assembler
-has 'assembler' => ( is => 'rw', isa => 'Str', default => 'velvet' );
+has 'assembler' => ( is => 'rw', isa => 'Maybe[Str]' );
 
 sub BUILD {
     my ($self) = @_;

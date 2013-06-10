@@ -14,7 +14,6 @@ with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 extends 'Bio::VertRes::Config::CommandLine::Common';
 
 has 'database'  => ( is => 'rw', isa => 'Str', default => 'pathogen_virus_track' );
-has 'assembler' => ( is => 'rw', isa => 'Str', default => 'spades' );
 
 sub run {
     my ($self) = @_;
@@ -25,7 +24,7 @@ sub run {
     return if(handle_reference_inputs_or_exit( $self->reference_lookup_file, $self->available_references, $self->reference ) == 1);
 
     my %mapping_parameters = %{$self->mapping_parameters};
-    $mapping_parameters{'assembler'} = $self->assembler;
+    $mapping_parameters{'assembler'} = $self->assembler if defined ($self->assembler);
     Bio::VertRes::Config::Recipes::VirusRegisterAndQCStudy->new( \%mapping_parameters )->create();
 
     $self->retrieving_results_text;
