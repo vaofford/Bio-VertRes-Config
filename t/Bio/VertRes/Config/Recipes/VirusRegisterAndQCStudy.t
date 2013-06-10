@@ -100,7 +100,7 @@ is_deeply($input_config_file,{
             'host' => 'localhost'
           },
   'data' => {
-              'remove_primers' => 0,
+              'remove_primers' => 1,
               'genome_size' => 10000000,
               'db' => {
                         'database' => 'my_database',
@@ -109,7 +109,7 @@ is_deeply($input_config_file,{
                         'port' => 3306,
                         'host' => 'localhost'
                       },
-              'error_correct' => 0,
+              'error_correct' => 1,
               'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades.py',
               'dont_wait' => 0,
               'primers_file' => '/nfs/pathnfs01/conf/primers/virus_primers',
@@ -287,7 +287,7 @@ is_deeply($input_config_file,{
             'host' => 'localhost'
           },
   'data' => {
-              'remove_primers' => 0,
+              'remove_primers' => 1,
               'genome_size' => 10000000,
               'db' => {
                         'database' => 'my_database',
@@ -296,7 +296,7 @@ is_deeply($input_config_file,{
                         'port' => 3306,
                         'host' => 'localhost'
                       },
-              'error_correct' => 0,
+              'error_correct' => 1,
               'assembler_exec' => '/software/pathogen/external/apps/usr/bin/velvet',
               'dont_wait' => 0,
               'primers_file' => '/nfs/pathnfs01/conf/primers/virus_primers',
