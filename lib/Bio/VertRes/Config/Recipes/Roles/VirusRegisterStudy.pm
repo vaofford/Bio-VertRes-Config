@@ -84,7 +84,7 @@ sub add_virus_velvet_assembly_config
           _pipeline_version              => $self->_pipeline_version, 
           _normalise                     => $self->_normalise 
       )
-  ) if defined($self->limits->{project});
+  );
   return ;
 }
 
@@ -103,7 +103,7 @@ sub add_virus_spades_assembly_config
           _pipeline_version              => $self->_pipeline_version, 
           _normalise                     => $self->_normalise 
       )
-  ) if defined($self->limits->{project});
+  );
   return ;
 }
 
@@ -118,7 +118,7 @@ sub add_virus_annotate_config
           overwrite_existing_config_file => $self->overwrite_existing_config_file,
           limits                         => $self->_project_limits
       )
-  ) if defined($self->limits->{project});
+  );
   return ;
 }
 
