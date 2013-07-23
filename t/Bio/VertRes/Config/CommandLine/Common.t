@@ -36,5 +36,15 @@ is_deeply($mapping_params, {
           
         }, 'Mapping parameters include smalt parameters');
 
+@input_args = qw(-t study -i ZZZ -r ABC -m smalt --smalt_mapper_l xxx -c);
+push(@input_args, $destination_directory);
+throws_ok(
+    sub {
+        Bio::VertRes::Config::CommandLine::Common->new(args => \@input_args, script_name => 'name_of_script' )->_construct_smalt_additional_mapper_params;
+    },
+    qr/Invalid type/,
+    'Invalid --smalt_mapper_l throws an error'
+);
+
 done_testing();
 
