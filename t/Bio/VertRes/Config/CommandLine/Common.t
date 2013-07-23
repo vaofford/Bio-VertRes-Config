@@ -14,7 +14,7 @@ BEGIN {
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
 
-my @input_args = qw(-t study -i ZZZ -r ABC -m smalt --smalt_index_k 15 --smalt_index_s 4 --smalt_mapper_r 1 --smalt_mapper_y 0.9 --smalt_mapper_x -c);
+my @input_args = qw(-t study -i ZZZ -r ABC -m smalt --smalt_index_k 15 --smalt_index_s 4 --smalt_mapper_r 1 --smalt_mapper_y 0.9 --smalt_mapper_x --smalt_mapper_l pe -c);
 push(@input_args, $destination_directory);
 ok( my $obj = Bio::VertRes::Config::CommandLine::Common->new(args => \@input_args, script_name => 'name_of_script' ), 'initialise commandline common obj');
 my $mapping_params = $obj->mapping_parameters;
@@ -31,7 +31,7 @@ is_deeply($mapping_params, {
                       },
           'mapper_index_params' => '-k 15 -s 4',
           'reference' => 'ABC',
-          'additional_mapper_params' => ' -r 1 -y 0.9 -x',
+          'additional_mapper_params' => ' -r 1 -y 0.9 -x -l pe',
           'config_base' => 'no need to check'
           
         }, 'Mapping parameters include smalt parameters');
