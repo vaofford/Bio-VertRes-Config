@@ -139,7 +139,7 @@ sub _construct_smalt_additional_mapper_params
   if(defined($self->smalt_mapper_l))
   {
     my %pairtyp = ('pe' => 1, 'mp' => 1, 'pp' => 1);
-    Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid type passed in for smalt_mapper_l, can only be one of pe/mp/pp not '.$self->smalt_mapper_l) unless exists $pairtyp{$self->smalt_mapper_l};
+    Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid type passed in for smalt_mapper_l, can only be one of pe/mp/pp not '.$self->smalt_mapper_l.".\n") unless exists $pairtyp{$self->smalt_mapper_l};
     $output_param_str = join(' ',($output_param_str,'-l',$self->smalt_mapper_l));
   }
   
