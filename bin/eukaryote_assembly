@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-package Bio::VertRes::Config::Main::EukaryotesAssemblyAndAnnotation;
+package Bio::VertRes::Config::Main::EukaryotesAssembly;
 
 # ABSTRACT: Create config scripts for assembly and annotation prokaryote data
 # PODNAME: eukaryote_assembly
