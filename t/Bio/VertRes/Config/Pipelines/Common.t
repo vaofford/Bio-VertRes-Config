@@ -22,6 +22,8 @@ ok(
             pipeline_short_name => 'new_pipeline',
             module              => 'Bio::Example',
             toplevel_action     => '__VRTrack_Action__',
+            root_base           => '/path/to/root',
+            log_base            => '/path/to/log',
             config_base         => $destination_directory
         )
     ),
@@ -48,8 +50,8 @@ is_deeply(
             },
             'dont_wait' => 0
         },
-        'log'    => '/nfs/pathnfs05/log/my_database/new_pipeline_logfile.log',
-        'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+        'log'    => '/path/to/log/my_database/new_pipeline_logfile.log',
+        'root'   => '/path/to/root/my_database/seq-pipelines',
         'prefix' => '_',
         'module' => 'Bio::Example'
     },
@@ -86,8 +88,8 @@ is_deeply(
             },
             'dont_wait' => 0
         },
-        'log'    => '/nfs/pathnfs05/log/my_database/new_pipeline_logfile.log',
-        'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+        'log'    => '/path/to/log/my_database/new_pipeline_logfile.log',
+        'root'   => '/path/to/root/my_database/seq-pipelines',
         'prefix' => '_',
         'module' => 'Bio::Example'
     },
@@ -101,6 +103,8 @@ ok(
             pipeline_short_name => 'new_pipeline',
             module              => 'Bio::Example',
             toplevel_action     => '__VRTrack_Action__',
+            root_base           => '/path/to/root',
+            log_base            => '/path/to/log',
             config_base         => $destination_directory
         )
     ),
@@ -126,8 +130,8 @@ is_deeply(
             },
             'dont_wait' => 0
         },
-        'log'    => '/nfs/pathnfs05/log/prokaryotes/new_pipeline_logfile.log',
-        'root'   => '/lustre/scratch108/pathogen/pathpipe/prokaryotes/seq-pipelines',
+        'log'    => '/path/to/log/prokaryotes/new_pipeline_logfile.log',
+        'root'   => '/path/to/root/prokaryotes/seq-pipelines',
         'prefix' => '_',
         'module' => 'Bio::Example'
     },
@@ -143,6 +147,8 @@ ok(
             module              => 'Bio::Example',
             toplevel_action     => '__VRTrack_Action__',
             _database_connection_details_file => 't/data/database_connection_details',
+            root_base           => '/path/to/root',
+            log_base            => '/path/to/log',
             config_base         => $destination_directory
         )
     ),
@@ -169,8 +175,8 @@ is_deeply(
             },
             'dont_wait' => 0
         },
-        'log'    => '/nfs/pathnfs05/log/prokaryotes/new_pipeline_logfile.log',
-        'root'   => '/lustre/scratch108/pathogen/pathpipe/prokaryotes/seq-pipelines',
+        'log'    => '/path/to/log/prokaryotes/new_pipeline_logfile.log',
+        'root'   => '/path/to/root/prokaryotes/seq-pipelines',
         'prefix' => '_',
         'module' => 'Bio::Example'
     },

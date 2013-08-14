@@ -28,7 +28,7 @@ has 'toplevel_action'     => ( is => 'ro', isa => 'Str',                        
 has 'overwrite_existing_config_file' => ( is => 'ro', isa => 'Bool', default => 0 );
 
 has 'log' => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_log' );
-has 'log_base'      => ( is => 'ro', isa => 'Str', default => '/nfs/pathnfs05/log' );
+has 'log_base'      => ( is => 'ro', isa => 'Str', required => 1 );
 has 'log_file_name' => ( is => 'ro', isa => 'Str', default => 'logfile.log' );
 
 has 'config' => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_config' );
@@ -36,7 +36,7 @@ has 'config_base'      => ( is => 'ro', isa => 'Str', required => 1 );
 has 'config_file_name' => ( is => 'ro', isa => 'Str', default  => 'global.conf' );
 
 has 'root' => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build_root' );
-has 'root_base'            => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe' );
+has 'root_base'            => ( is => 'ro', isa => 'Str', required => 1 );
 has 'root_pipeline_suffix' => ( is => 'ro', isa => 'Str', default => 'seq-pipelines' );
 
 has 'database' => ( is => 'ro', isa => 'Str',        required => 1 );

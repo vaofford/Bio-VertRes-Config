@@ -32,6 +32,8 @@ is_deeply($mapping_params, {
           'mapper_index_params' => '-k 15 -s 4',
           'reference' => 'ABC',
           'additional_mapper_params' => ' -r 1 -y 0.9 -x -l pe',
+          'root_base' => '/lustre/scratch108/pathogen/pathpipe',
+          'log_base'  => '/nfs/pathnfs05/log',
           'config_base' => 'no need to check'
           
         }, 'Mapping parameters include smalt parameters');
@@ -45,6 +47,29 @@ throws_ok(
     qr/Invalid type/,
     'Invalid --smalt_mapper_l throws an error'
 );
+
+@input_args = qw(-t study -i ZZZ -r ABC --root_base /path/to/root --log_base /path/to/log -c);
+push(@input_args, $destination_directory);
+ok( my $user_root = Bio::VertRes::Config::CommandLine::Common->new(args => \@input_args, script_name => 'name_of_script' ), 'initialise commandline common obj with user-defined root and log');
+$mapping_params = $user_root->mapping_parameters;
+$mapping_params->{config_base} = 'no need to check';
+is_deeply($mapping_params, {
+          'protocol' => 'StrandSpecificProtocol',
+          'overwrite_existing_config_file' => 0,
+          'reference_lookup_file' => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index',
+          'database' => 'pathogen_prok_track',
+          'limits' => {
+                        'project' => [
+                                       'ZZZ'
+                                     ]
+                      },
+          'reference' => 'ABC',
+          'root_base' => '/path/to/root',
+          'log_base'  => '/path/to/log',
+          'config_base' => 'no need to check'
+          
+        }, 'Mapping parameters include user-defined root and log');
+
 
 done_testing();
 
