@@ -22,6 +22,8 @@ ok(
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
+            root_base             => '/path/to/root',
+            log_base              => '/path/to/log',
             config_base           => $destination_directory
         )
     ),
@@ -73,8 +75,8 @@ is_deeply(
                           'slx_mapper' => 'smalt',
                           'ignore_mapped_status' => 1
                         },
-              'log' => '/nfs/pathnfs05/log/my_database/mapping_ABC_study_EFG_ABC_smalt.log',
-              'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+              'log' => '/path/to/log/my_database/mapping_ABC_study_EFG_ABC_smalt.log',
+              'root' => '/path/to/root/my_database/seq-pipelines',
               'prefix' => '_checked_elsewhere_',
               'dont_use_get_lanes' => 1,
               'module' => 'VertRes::Pipelines::Mapping'
@@ -100,7 +102,9 @@ ok(
             limits                   => { project => ['ABC study( EFG )'] },
             additional_mapper_params => '-y 0.5  -r 1  -x -l pe',
             mapper_index_params      => '-s 4  -k 13',
-            config_base         => '/tmp'
+            root_base                => '/path/to/root',
+            log_base                 => '/path/to/log',
+            config_base              => '/tmp'
         )
     ),
     'initialise smalt mapping config with optional parameters for mapper and indexing'

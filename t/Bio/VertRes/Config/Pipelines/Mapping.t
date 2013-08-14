@@ -24,6 +24,8 @@ ok(
             limits                => { project => ['ABC study( EFG )'] },
             slx_mapper            => 'bwa',
             slx_mapper_exe        => '/path/to/mapper/mapper.exe',
+            root_base             => '/path/to/root',
+            log_base              => '/path/to/log',
             config_base           => $destination_directory
         )
     ),
@@ -74,8 +76,8 @@ is_deeply(
             'slx_mapper'           => 'bwa',
             'ignore_mapped_status' => 1
         },
-        'log'                => '/nfs/pathnfs05/log/my_database/mapping_ABC_study_EFG_ABC_bwa.log',
-        'root'               => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+        'log'                => '/path/to/log/my_database/mapping_ABC_study_EFG_ABC_bwa.log',
+        'root'               => '/path/to/root/my_database/seq-pipelines',
         'prefix'             => '_checked_elsewhere_',
         'dont_use_get_lanes' => 1,
         'module'             => 'VertRes::Pipelines::Mapping'
@@ -100,6 +102,8 @@ ok(
             limits                => { project => ['ABC study( EFG )'], lane => [ '1234_5#6', 'abc_efg' ] },
             slx_mapper            => 'bwa',
             slx_mapper_exe        => '/path/to/mapper/mapper.exe',
+            root_base             => '/path/to/root',
+            log_base              => '/path/to/log',
             config_base           => $destination_directory
         )
     ),

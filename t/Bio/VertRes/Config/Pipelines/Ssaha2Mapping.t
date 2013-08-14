@@ -18,7 +18,9 @@ ok(
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
-            config_base         => '/tmp'
+            root_base             => '/path/to/root',
+            log_base              => '/path/to/log',
+            config_base           => '/tmp'
         )
     ),
     'initialise ssaha2 mapping config'
@@ -71,8 +73,8 @@ is_deeply(
                           '454_mapper_exe' => '/software/pathogen/external/apps/usr/local/ssaha2/ssaha2',
                           'ignore_mapped_status' => 1
                         },
-              'log' => '/nfs/pathnfs05/log/my_database/mapping_ABC_study_EFG_ABC_ssaha.log',
-              'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+              'log' => '/path/to/log/my_database/mapping_ABC_study_EFG_ABC_ssaha.log',
+              'root' => '/path/to/root/my_database/seq-pipelines',
               'prefix' => '_checked_elsewhere_',
               'dont_use_get_lanes' => 1,
               'module' => 'VertRes::Pipelines::Mapping'

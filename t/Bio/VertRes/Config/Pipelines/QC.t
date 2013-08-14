@@ -23,6 +23,8 @@ ok(
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
+            root_base             => '/path/to/root',
+            log_base              => '/path/to/log',
             config_base           => $destination_directory
         )
     ),
@@ -71,8 +73,8 @@ is_deeply(
             'gcdepth_R'         => '/software/pathogen/external/apps/usr/local/gcdepth/gcdepth.R',
             'snps'              => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin'
         },
-        'log'    => '/nfs/pathnfs05/log/my_database/qc_ABC_study_EFG.log',
-        'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+        'log'    => '/path/to/log/my_database/qc_ABC_study_EFG.log',
+        'root'   => '/path/to/root/my_database/seq-pipelines',
         'prefix' => '_',
         'module' => 'VertRes::Pipelines::TrackQC_Fastq'
     },
@@ -100,6 +102,8 @@ ok(
                 species     => ['species 1'],
                 other_stuff => ['some other stuff']
             },
+            root_base           => '/path/to/root',
+            log_base            => '/path/to/log',
             config_base         => '/tmp'
         )
     ),

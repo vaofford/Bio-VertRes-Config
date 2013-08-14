@@ -22,6 +22,8 @@ ok(
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
+            root_base             => '/path/to/root',
+            log_base              => '/path/to/log',
             config_base           => $destination_directory
         )
     ),
@@ -73,8 +75,8 @@ is_deeply(
                                              'mapped' => 1,
                                              'import' => 1
                                            },
-              'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-              'log' => '/nfs/pathnfs05/log/my_database/snps_ABC_study_EFG_ABC.log',
+              'root' => '/path/to/root/my_database/seq-pipelines',
+              'log' => '/path/to/log/my_database/snps_ABC_study_EFG_ABC.log',
               'module' => 'VertRes::Pipelines::SNPs',
               'prefix' => '_checked_elsewhere_',
               'limits' => {
@@ -102,7 +104,9 @@ ok(
             limits                => { project => ['ABC study( EFG )'] },
             _pseudo_genome        => 0,
             run_after_bam_improvement => 1,
-            config_base         => '/tmp'
+            root_base             => '/path/to/root',
+            log_base              => '/path/to/log',
+            config_base           => '/tmp'
             
         )
     ),

@@ -17,8 +17,10 @@ my $destination_directory = $destination_directory_obj->dirname();
 ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::Store->new(
-            database => 'my_database',
-            config_base           => $destination_directory
+            database    => 'my_database',
+            root_base   => '/path/to/root',
+            log_base    => '/path/to/log',
+            config_base => $destination_directory
         )
     ),
     'initialise store config'
@@ -48,8 +50,8 @@ is_deeply(
             'qc'     => 1,
             'stored' => 0
         },
-        'root'   => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-        'log'    => '/nfs/pathnfs05/log/my_database/stored_logfile.log',
+        'root'   => '/path/to/root/my_database/seq-pipelines',
+        'log'    => '/path/to/log/my_database/stored_logfile.log',
         'limit'  => 100,
         'module' => 'VertRes::Pipelines::StoreLane',
         'prefix' => '_'
