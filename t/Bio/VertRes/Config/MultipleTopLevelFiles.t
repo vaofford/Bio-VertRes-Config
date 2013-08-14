@@ -24,13 +24,24 @@ my $destination_directory = $destination_directory_obj->dirname();
 
 # Create a few config objects for testing
 my @pipeline_configs;
-push(@pipeline_configs, Bio::VertRes::Config::Pipelines::Import->new(database => 'my_database', config_base => $destination_directory));
-push(@pipeline_configs, Bio::VertRes::Config::Pipelines::Store->new(database => 'my_database', config_base => $destination_directory));
+push(@pipeline_configs, Bio::VertRes::Config::Pipelines::Import->new(
+    database              => 'my_database',
+    root_base             => '/path/to/root',
+    log_base              => '/path/to/log',
+    config_base           => $destination_directory
+));
+push(@pipeline_configs, Bio::VertRes::Config::Pipelines::Store->new(
+    database              => 'my_database',
+    root_base             => '/path/to/root',
+    log_base              => '/path/to/log',
+    config_base => $destination_directory));
 push(@pipeline_configs, Bio::VertRes::Config::Pipelines::BwaMapping->new(
     database              => 'my_database',
     reference_lookup_file => 't/data/refs.index',
     reference             => 'ABC',
     limits                => { project => ['ABC study( EFG )'] },
+    root_base             => '/path/to/root',
+    log_base              => '/path/to/log',
     config_base           => $destination_directory
 ));
 push(@pipeline_configs, Bio::VertRes::Config::Pipelines::SmaltMapping->new(
@@ -38,6 +49,8 @@ push(@pipeline_configs, Bio::VertRes::Config::Pipelines::SmaltMapping->new(
     reference_lookup_file => 't/data/refs.index',
     reference             => 'ABC',
     limits                => { project => ['ABC study( EFG )'] },
+    root_base             => '/path/to/root',
+    log_base              => '/path/to/log',
     config_base           => $destination_directory
 ));
 push(@pipeline_configs, Bio::VertRes::Config::Pipelines::SnpCalling->new(
@@ -45,6 +58,8 @@ push(@pipeline_configs, Bio::VertRes::Config::Pipelines::SnpCalling->new(
     reference_lookup_file => 't/data/refs.index',
     reference             => 'ABC',
     limits                => { project => ['XYZ study( EFG )'] },
+    root_base             => '/path/to/root',
+    log_base              => '/path/to/log',
     config_base           => $destination_directory
 ));
 
