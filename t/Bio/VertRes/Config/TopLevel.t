@@ -31,6 +31,8 @@ push(@pipeline_configs, Bio::VertRes::Config::Pipelines::BwaMapping->new(
     reference_lookup_file => 't/data/refs.index',
     reference             => 'ABC',
     limits                => { project => ['ABC study( EFG )'] },
+    root_base             => '/path/to/root',
+    log_base              => '/path/to/log',
     config_base           => $destination_directory
 ));
 push(@pipeline_configs, Bio::VertRes::Config::Pipelines::SmaltMapping->new(
@@ -38,6 +40,8 @@ push(@pipeline_configs, Bio::VertRes::Config::Pipelines::SmaltMapping->new(
     reference_lookup_file => 't/data/refs.index',
     reference             => 'ABC',
     limits                => { project => ['ABC study( EFG )'] },
+    root_base             => '/path/to/root',
+    log_base              => '/path/to/log',
     config_base           => $destination_directory
 ));
 
@@ -81,6 +85,8 @@ push(@pipeline_configs, Bio::VertRes::Config::Pipelines::StampyMapping->new(
     reference_lookup_file => 't/data/refs.index',
     reference             => 'ABC',
     limits                => { project => ['Another study'] },
+    root_base             => '/path/to/root',
+    log_base              => '/path/to/log',
     config_base           => $destination_directory
 ));
 ok((my $obj_append = Bio::VertRes::Config::TopLevel->new(
