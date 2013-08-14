@@ -16,6 +16,8 @@ use Bio::VertRes::Config::CommandLine::StudyNameSearch;
 
 has 'database'                       => ( is => 'rw', isa => 'Str',  required => 1 );
 has 'config_base'                    => ( is => 'ro', isa => 'Str',  default  => '/nfs/pathnfs05/conf' );
+has 'root_base'                      => ( is => 'ro', isa => 'Str',  default  => '/lustre/scratch108/pathogen/pathpipe' );
+has 'log_base'                       => ( is => 'ro', isa => 'Str',  default  => '/nfs/pathnfs05/log' );
 has 'overwrite_existing_config_file' => ( is => 'ro', isa => 'Bool', default  => 0 );
 has 'limits'                         => ( is => 'ro', isa => 'HashRef', default => sub { {} });
 

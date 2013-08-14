@@ -27,6 +27,8 @@ override '_pipeline_configs' => sub {
         Bio::VertRes::Config::Pipelines::Import->new(
             database                       => $self->database,
             config_base                    => $self->config_base,
+            root_base                      => $self->root_base,
+            log_base                       => $self->log_base,
             overwrite_existing_config_file => $self->overwrite_existing_config_file
         )
     );
@@ -35,6 +37,8 @@ override '_pipeline_configs' => sub {
         Bio::VertRes::Config::Pipelines::Store->new(
             database                       => $self->database,
             config_base                    => $self->config_base,
+            root_base                      => $self->root_base,
+            log_base                       => $self->log_base,
             overwrite_existing_config_file => $self->overwrite_existing_config_file
         )
     );
