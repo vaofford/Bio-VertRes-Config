@@ -50,6 +50,8 @@ sub add_eukaryotes_qc_config
       Bio::VertRes::Config::Pipelines::QC->new(
           database                       => $self->database,
           config_base                    => $self->config_base,
+          root_base                      => $self->root_base,
+          log_base                       => $self->log_base,
           overwrite_existing_config_file => $self->overwrite_existing_config_file,
           limits                         => $self->limits,
           reference                      => $self->reference,
@@ -67,6 +69,8 @@ sub add_eukaryotes_velvet_assembly_config
       Bio::VertRes::Config::Pipelines::VelvetAssembly->new(
           database                       => $self->database,
           config_base                    => $self->config_base,
+          root_base                      => $self->root_base,
+          log_base                       => $self->log_base,
           overwrite_existing_config_file => $self->overwrite_existing_config_file,
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
@@ -86,6 +90,8 @@ sub add_eukaryotes_spades_assembly_config
       Bio::VertRes::Config::Pipelines::SpadesAssembly->new(
           database                       => $self->database,
           config_base                    => $self->config_base,
+          root_base                      => $self->root_base,
+          log_base                       => $self->log_base,
           overwrite_existing_config_file => $self->overwrite_existing_config_file,
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
@@ -105,6 +111,8 @@ sub add_eukaryotes_annotate_config
       Bio::VertRes::Config::Pipelines::AnnotateAssembly->new(
           database                       => $self->database,
           config_base                    => $self->config_base,
+          root_base                      => $self->root_base,
+          log_base                       => $self->log_base,
           overwrite_existing_config_file => $self->overwrite_existing_config_file,
           limits                         => $self->limits,
           _kingdom                       => $self->_kingdom,

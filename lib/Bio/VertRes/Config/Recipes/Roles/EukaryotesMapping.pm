@@ -29,6 +29,8 @@ sub add_eukaryotes_bwa_mapping_config
       Bio::VertRes::Config::Pipelines::BwaMapping->new(
           database                       => $self->database,
           config_base                    => $self->config_base,
+          root_base                      => $self->root_base,
+          log_base                       => $self->log_base,
           overwrite_existing_config_file => $self->overwrite_existing_config_file,
           limits                         => $self->limits,
           reference                      => $self->reference,
@@ -46,6 +48,8 @@ sub add_eukaryotes_bowtie2_mapping_config
           Bio::VertRes::Config::Pipelines::Bowtie2Mapping->new(
               database                       => $self->database,
               config_base                    => $self->config_base,
+              root_base                      => $self->root_base,
+              log_base                       => $self->log_base,
               overwrite_existing_config_file => $self->overwrite_existing_config_file,
               limits                         => $self->limits,
               reference                      => $self->reference,
@@ -65,6 +69,8 @@ sub add_eukaryotes_ssaha2_mapping_config
           Bio::VertRes::Config::Pipelines::Ssaha2Mapping->new(
               database                       => $self->database,
               config_base                    => $self->config_base,
+              root_base                      => $self->root_base,
+              log_base                       => $self->log_base,
               overwrite_existing_config_file => $self->overwrite_existing_config_file,
               limits                         => $self->limits,
               reference                      => $self->reference,
@@ -83,6 +89,8 @@ sub add_eukaryotes_tophat_mapping_config
     Bio::VertRes::Config::Pipelines::TophatMapping->new(
         database                       => $self->database,
         config_base                    => $self->config_base,
+        root_base                      => $self->root_base,
+        log_base                       => $self->log_base,
         overwrite_existing_config_file => $self->overwrite_existing_config_file,
         limits                         => $self->limits,
         reference                      => $self->reference,
@@ -101,6 +109,8 @@ sub add_eukaryotes_stampy_mapping_config
           Bio::VertRes::Config::Pipelines::StampyMapping->new(
               database                       => $self->database,
               config_base                    => $self->config_base,
+              root_base                      => $self->root_base,
+              log_base                       => $self->log_base,
               overwrite_existing_config_file => $self->overwrite_existing_config_file,
               limits                         => $self->limits,
               reference                      => $self->reference,
