@@ -19,6 +19,7 @@ ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::Mapping->new(
             database              => 'my_database',
+            database_connect_file => '',
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
@@ -97,6 +98,7 @@ ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::Mapping->new(
             database              => 'my_database',
+            database_connect_file => '',
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'], lane => [ '1234_5#6', 'abc_efg' ] },

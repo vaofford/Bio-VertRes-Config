@@ -17,6 +17,7 @@ ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::SpadesAssembly->new(
             database    => 'my_database',
+            database_connect_file => '',
             limits      => {project => ['Abc def (ghi123)']},
             root_base   => '/path/to/root',
             log_base    => '/path/to/log',

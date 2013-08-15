@@ -17,6 +17,7 @@ ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::Assembly->new(
             database    => 'my_database',
+            database_connect_file => '',
             limits      => {project => ['Abc def (ghi123)']},
             root_base   => '/path/to/root',
             log_base    => '/path/to/log',
@@ -94,6 +95,7 @@ ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::Assembly->new(
             database              => 'my_database',
+            database_connect_file => '',
             limits                => {
                 project     => [ 'study 1',  'study 2' ],
                 sample      => [ 'sample 1', 'sample 2' ],

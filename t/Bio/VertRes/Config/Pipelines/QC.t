@@ -20,6 +20,7 @@ ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::QC->new(
             database              => 'my_database',
+            database_connect_file => '',
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
@@ -94,6 +95,7 @@ ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::QC->new(
             database              => 'my_database',
+            database_connect_file => '',
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => {

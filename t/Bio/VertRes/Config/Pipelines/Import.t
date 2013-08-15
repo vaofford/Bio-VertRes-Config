@@ -18,6 +18,7 @@ ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::Import->new(
             database    => 'my_database',
+            database_connect_file => '',
             root_base   => '/path/to/root',
             log_base    => '/path/to/log',
             config_base => $destination_directory
