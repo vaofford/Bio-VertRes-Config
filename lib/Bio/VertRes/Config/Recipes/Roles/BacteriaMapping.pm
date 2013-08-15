@@ -29,6 +29,7 @@ sub add_bacteria_bwa_mapping_config
       @{$pipeline_configs_array},
       Bio::VertRes::Config::Pipelines::BwaMapping->new(
           database                       => $self->database,
+          database_connect_file          => $self->database_connect_file,
           config_base                    => $self->config_base,
           root_base                      => $self->root_base,
           log_base                       => $self->log_base,
@@ -49,6 +50,7 @@ sub add_bacteria_ssaha2_mapping_config
       @{$pipeline_configs_array},
           Bio::VertRes::Config::Pipelines::Ssaha2Mapping->new(
               database                       => $self->database,
+              database_connect_file          => $self->database_connect_file,
               config_base                    => $self->config_base,
               root_base                      => $self->root_base,
               log_base                       => $self->log_base,
@@ -69,6 +71,7 @@ sub add_bacteria_tophat_mapping_config
       @{$pipeline_configs_array},
     Bio::VertRes::Config::Pipelines::TophatMapping->new(
         database                       => $self->database,
+        database_connect_file          => $self->database_connect_file,
         config_base                    => $self->config_base,
         root_base                      => $self->root_base,
         log_base                       => $self->log_base,
@@ -90,6 +93,7 @@ sub add_bacteria_smalt_mapping_config
       @{$pipeline_configs_array},
           Bio::VertRes::Config::Pipelines::SmaltMapping->new(
               database                       => $self->database,
+              database_connect_file          => $self->database_connect_file,
               config_base                    => $self->config_base,
               root_base                      => $self->root_base,
               log_base                       => $self->log_base,
@@ -112,6 +116,7 @@ sub add_bacteria_stampy_mapping_config
       @{$pipeline_configs_array},
           Bio::VertRes::Config::Pipelines::StampyMapping->new(
               database                       => $self->database,
+              database_connect_file          => $self->database_connect_file,
               config_base                    => $self->config_base,
               root_base                      => $self->root_base,
               log_base                       => $self->log_base,
@@ -132,6 +137,7 @@ sub add_bacteria_bowtie2_mapping_config
       @{$pipeline_configs_array},
           Bio::VertRes::Config::Pipelines::Bowtie2Mapping->new(
               database                       => $self->database,
+              database_connect_file          => $self->database_connect_file,
               config_base                    => $self->config_base,
               root_base                      => $self->root_base,
               log_base                       => $self->log_base,
