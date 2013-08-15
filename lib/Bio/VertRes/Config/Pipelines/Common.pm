@@ -45,9 +45,6 @@ has 'port'     => ( is => 'ro', isa => 'Int',        lazy     => 1, builder => '
 has 'user'     => ( is => 'ro', isa => 'Str',        lazy     => 1, builder => '_build_user' );
 has 'password' => ( is => 'ro', isa => 'Maybe[Str]', lazy     => 1, builder => '_build_password' );
 
-#has '_database_connection_details_file' =>
-#  ( is => 'ro', isa => 'Str', default => '/software/pathogen/config/database_connection_details' );
-#has 'database_connection_details_file' => ( is => 'ro', isa => 'Str', default => '' );
 has 'database_connect_file' => ( is => 'ro', isa => 'Str', required => 1 );
 has '_database_connection_details' =>
   ( is => 'ro', isa => 'Maybe[HashRef]', lazy => 1, builder => '_build__database_connection_details' );
