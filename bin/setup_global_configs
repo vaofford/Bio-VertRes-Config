@@ -48,7 +48,17 @@ $log_params->create();
 Usage: setup_global_configs [options]
 Setup global config files and directory structure for a database.
 
+# Setup global configs
 setup_global_configs -d pathogen_abc_track
+
+# Setup global configs specifying location of configs
+setup_global_configs -d pathogen_abc_track -c /path/to/my/configs
+
+# Setup global configs specifying root and log base directories
+setup_global_configs -d pathogen_abc_track -root /path/to/root -log /path/to/log
+
+# Setup global configs specifying a file with database connection details
+setup_global_configs -d pathogen_abc_track-db_file -db_file /path/to/connect/file
 
 # This help message
 setup_global_configs -h
