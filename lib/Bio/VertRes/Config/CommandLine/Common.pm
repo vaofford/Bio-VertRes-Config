@@ -21,6 +21,8 @@ has 'database'    => ( is => 'rw', isa => 'Str', default => 'pathogen_prok_track
 has 'config_base' => ( is => 'rw', isa => 'Str', default => '/nfs/pathnfs05/conf' );
 has 'root_base'   => ( is => 'rw', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe' );
 has 'log_base'    => ( is => 'rw', isa => 'Str', default => '/nfs/pathnfs05/log' );
+has 'database_connect_file' =>
+  ( is => 'rw', isa => 'Str', default => '/software/pathogen/config/database_connection_details' );
 has 'reference_lookup_file' =>
   ( is => 'rw', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index' );
 has 'reference'                      => ( is => 'rw', isa => 'Maybe[Str]', );
@@ -58,7 +60,7 @@ sub BUILD {
         $smalt_index_k,         $smalt_index_s,                  $smalt_mapper_r,
         $smalt_mapper_y,        $smalt_mapper_x,                 $smalt_mapper_l,
         $assembler,             $root_base,                      $log_base,
-        $help
+        $database_connect_file, $help
     );
 
     GetOptionsFromArray(
@@ -84,6 +86,7 @@ sub BUILD {
         'assembler=s'                      => \$assembler,
         'root_base=s'                      => \$root_base,
         'log_base=s'                       => \$log_base,
+        'db_file:s'                        => \$database_connect_file,
         'h|help'                           => \$help
     );
 
@@ -107,6 +110,7 @@ sub BUILD {
     $self->smalt_mapper_x($smalt_mapper_x)               if ( defined($smalt_mapper_x) );
     $self->smalt_mapper_l($smalt_mapper_l)               if ( defined($smalt_mapper_l) );
     $self->assembler($assembler)                         if ( defined($assembler) );
+    $self->database_connect_file($database_connect_file) if ( defined($database_connect_file) );
 
     $regeneration_log_file ||= join( '/', ( $self->config_base, 'command_line.log' ) );
     $self->regeneration_log_file($regeneration_log_file) if ( defined($regeneration_log_file) );
@@ -175,7 +179,8 @@ sub mapping_parameters {
         reference_lookup_file          => $self->reference_lookup_file,
         reference                      => $self->reference,
         overwrite_existing_config_file => $self->overwrite_existing_config_file,
-        protocol                       => $self->protocol
+        protocol                       => $self->protocol,
+        database_connect_file          => $self->database_connect_file
     );
     
     if(defined($self->_construct_smalt_index_params))

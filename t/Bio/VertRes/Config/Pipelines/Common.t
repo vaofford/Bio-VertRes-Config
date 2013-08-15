@@ -24,6 +24,7 @@ ok(
             toplevel_action     => '__VRTrack_Action__',
             root_base           => '/path/to/root',
             log_base            => '/path/to/log',
+            database_connect_file => '',
             config_base         => $destination_directory
         )
     ),
@@ -105,6 +106,7 @@ ok(
             toplevel_action     => '__VRTrack_Action__',
             root_base           => '/path/to/root',
             log_base            => '/path/to/log',
+            database_connect_file => '',
             config_base         => $destination_directory
         )
     ),
@@ -146,7 +148,7 @@ ok(
             pipeline_short_name => 'new_pipeline',
             module              => 'Bio::Example',
             toplevel_action     => '__VRTrack_Action__',
-            _database_connection_details_file => 't/data/database_connection_details',
+            database_connect_file => 't/data/database_connection_details',
             root_base           => '/path/to/root',
             log_base            => '/path/to/log',
             config_base         => $destination_directory
