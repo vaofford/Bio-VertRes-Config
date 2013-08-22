@@ -196,7 +196,8 @@ ok(
     (
         $obj = Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new(
             database    => 'my_database',
-            config_base => $destination_directory,database_connect_file => 't/data/database_connection_details',
+            config_base => $destination_directory,
+            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'], species => ['Cat', 'Dog'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
@@ -266,7 +267,8 @@ ok(
     (
         $obj = Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new(
             database    => 'my_database',
-            config_base => $destination_directory,database_connect_file => 't/data/database_connection_details',
+            config_base => $destination_directory,
+            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
@@ -338,7 +340,8 @@ ok(
     (
         $obj = Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new(
             database    => 'my_other_database',
-            config_base => $destination_directory,database_connect_file => 't/data/database_connection_details',
+            config_base => $destination_directory,
+            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['DDD'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',

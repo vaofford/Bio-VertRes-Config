@@ -160,7 +160,8 @@ ok(
     (
         $obj = Bio::VertRes::Config::Recipes::BacteriaSnpCallingUsingSmalt->new(
             database    => 'my_database',
-            config_base => $destination_directory,database_connect_file => 't/data/database_connection_details',
+            config_base => $destination_directory,
+            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
