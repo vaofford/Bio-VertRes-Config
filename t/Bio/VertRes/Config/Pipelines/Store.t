@@ -18,7 +18,7 @@ ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::Store->new(
             database    => 'my_database',
-            database_connect_file => '',
+            database_connect_file => 't/data/database_connection_details',
             root_base   => '/path/to/root',
             log_base    => '/path/to/log',
             config_base => $destination_directory
@@ -32,18 +32,18 @@ is_deeply(
     {
         'db' => {
             'database' => 'my_database',
-            'password' => undef,
-            'user'     => 'root',
-            'port'     => 3306,
-            'host'     => 'localhost'
+            'password' => 'some_password',
+            'user'     => 'some_user',
+            'port'     => 1234,
+            'host'     => 'some_hostname'
         },
         'data' => {
             'db' => {
                 'database' => 'my_database',
-                'password' => undef,
-                'user'     => 'root',
-                'port'     => 3306,
-                'host'     => 'localhost'
+                'password' => 'some_password',
+                'user'     => 'some_user',
+                'port'     => 1234,
+                'host'     => 'some_hostname'
             },
             'dont_wait' => 0
         },

@@ -17,7 +17,7 @@ ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::AnnotateAssembly->new(
             database    => 'my_database',
-            database_connect_file => '',
+            database_connect_file => 't/data/database_connection_details',
             limits      => {project => ['Abc def (ghi123)']},
             root_base   => '/path/to/root',
             log_base    => '/path/to/log',
@@ -37,20 +37,20 @@ is_deeply(
               'max_failures' => 3,
               'db' => {
                         'database' => 'my_database',
-                        'password' => undef,
-                        'user' => 'root',
-                        'port' => 3306,
-                        'host' => 'localhost'
+                        'password' => 'some_password',
+                        'user' => 'some_user',
+                        'port' => 1234,
+                        'host' => 'some_hostname'
                       },
               'data' => {
                           'tmp_directory' => '/lustre/scratch108/pathogen/pathpipe/tmp',
                           'memory'        => 3000,
                           'db' => {
                                     'database' => 'my_database',
-                                    'password' => undef,
-                                    'user' => 'root',
-                                    'port' => 3306,
-                                    'host' => 'localhost'
+                                    'password' => 'some_password',
+                                    'user' => 'some_user',
+                                    'port' => 1234,
+                                    'host' => 'some_hostname'
                                   },
                           'dbdir' => '/lustre/scratch108/pathogen/pathpipe/prokka',
                           'annotation_tool' => 'Prokka',
@@ -86,7 +86,7 @@ ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::AnnotateAssembly->new(
             database              => 'my_database',
-            database_connect_file => '',
+            database_connect_file => 't/data/database_connection_details',
             limits                => {
                 project     => [ 'study 1',  'study 2' ],
                 sample      => [ 'sample 1', 'sample 2' ],

@@ -19,7 +19,7 @@ ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::BamImprovement->new(
             database              => 'my_database',
-            database_connect_file => '',
+            database_connect_file => 't/data/database_connection_details',
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
@@ -53,19 +53,19 @@ is_deeply(
                                            },
               'db' => {
                         'database' => 'my_database',
-                        'password' => undef,
-                        'user' => 'root',
-                        'port' => 3306,
-                        'host' => 'localhost'
+                        'password' => 'some_password',
+                        'user' => 'some_user',
+                        'port' => 1234,
+                        'host' => 'some_hostname'
                       },
               'data' => {
                           'reference' => '/path/to/ABC.fa',
                           'db' => {
                                     'database' => 'my_database',
-                                    'password' => undef,
-                                    'user' => 'root',
-                                    'port' => 3306,
-                                    'host' => 'localhost'
+                                    'password' => 'some_password',
+                                    'user' => 'some_user',
+                                    'port' => 1234,
+                                    'host' => 'some_hostname'
                                   },
                           'dont_wait' => 0,
                           'keep_original_bam_files' => 0,

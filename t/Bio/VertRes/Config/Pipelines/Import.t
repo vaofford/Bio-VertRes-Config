@@ -18,7 +18,7 @@ ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::Import->new(
             database    => 'my_database',
-            database_connect_file => '',
+            database_connect_file => 't/data/database_connection_details',
             root_base   => '/path/to/root',
             log_base    => '/path/to/log',
             config_base => $destination_directory
@@ -33,19 +33,19 @@ is_deeply(
         'mpsa_limit' => 500,
         'db'         => {
             'database' => 'my_database',
-            'password' => undef,
-            'user'     => 'root',
-            'port'     => 3306,
-            'host'     => 'localhost'
+            'password' => 'some_password',
+            'user'     => 'some_user',
+            'port'     => 1234,
+            'host'     => 'some_hostname'
         },
         'data' => {
             'exit_on_errors' => 0,
             'db'             => {
                 'database' => 'my_database',
-                'password' => undef,
-                'user'     => 'root',
-                'port'     => 3306,
-                'host'     => 'localhost'
+                'password' => 'some_password',
+                'user'     => 'some_user',
+                'port'     => 1234,
+                'host'     => 'some_hostname'
             },
             'dont_wait' => 0
         },

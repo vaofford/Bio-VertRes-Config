@@ -19,6 +19,7 @@ ok(
             my $obj = Bio::VertRes::Config::Recipes::HelminthRegisterAndQCStudy->new(
             database    => 'my_database',
             config_base => $destination_directory,
+            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
@@ -41,18 +42,18 @@ is_deeply($input_config_file,{
   'max_failures' => 3,
   'db' => {
             'database' => 'my_database',
-            'password' => undef,
-            'user' => 'root',
-            'port' => 3306,
-            'host' => 'localhost'
+            'password' => 'some_password',
+            'user' => 'some_user',
+            'port' => 1234,
+            'host' => 'some_hostname'
           },
   'data' => {
               'db' => {
                         'database' => 'my_database',
-                        'password' => undef,
-                        'user' => 'root',
-                        'port' => 3306,
-                        'host' => 'localhost'
+                        'password' => 'some_password',
+                        'user' => 'some_user',
+                        'port' => 1234,
+                        'host' => 'some_hostname'
                       },
               'chr_regex' => '.*',
               'mapper' => 'bwa',
@@ -90,7 +91,7 @@ ok(
     (
         $obj = Bio::VertRes::Config::Recipes::HelminthRegisterAndQCStudy->new(
             database    => 'my_database',
-            config_base => $destination_directory,
+            config_base => $destination_directory,database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'], species => ['Cat', 'Dog'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
@@ -107,18 +108,18 @@ is_deeply($input_config_file,{
   'max_failures' => 3,
   'db' => {
             'database' => 'my_database',
-            'password' => undef,
-            'user' => 'root',
-            'port' => 3306,
-            'host' => 'localhost'
+            'password' => 'some_password',
+            'user' => 'some_user',
+            'port' => 1234,
+            'host' => 'some_hostname'
           },
   'data' => {
               'db' => {
                         'database' => 'my_database',
-                        'password' => undef,
-                        'user' => 'root',
-                        'port' => 3306,
-                        'host' => 'localhost'
+                        'password' => 'some_password',
+                        'user' => 'some_user',
+                        'port' => 1234,
+                        'host' => 'some_hostname'
                       },
               'chr_regex' => '.*',
               'mapper' => 'bwa',
@@ -162,7 +163,7 @@ ok(
     (
         $obj = Bio::VertRes::Config::Recipes::HelminthRegisterAndQCStudy->new(
             database    => 'my_other_database',
-            config_base => $destination_directory,
+            config_base => $destination_directory,database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['DDD'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
@@ -179,18 +180,18 @@ is_deeply($input_config_file,{
   'max_failures' => 3,
   'db' => {
             'database' => 'pathogen_helminth_track',
-            'password' => undef,
-            'user' => 'root',
-            'port' => 3306,
-            'host' => 'localhost'
+            'password' => 'some_password',
+            'user' => 'some_user',
+            'port' => 1234,
+            'host' => 'some_hostname'
           },
   'data' => {
               'db' => {
                         'database' => 'pathogen_helminth_track',
-                        'password' => undef,
-                        'user' => 'root',
-                        'port' => 3306,
-                        'host' => 'localhost'
+                        'password' => 'some_password',
+                        'user' => 'some_user',
+                        'port' => 1234,
+                        'host' => 'some_hostname'
                       },
               'chr_regex' => '.*',
               'mapper' => 'bwa',
