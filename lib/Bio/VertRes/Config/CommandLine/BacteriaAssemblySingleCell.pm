@@ -1,4 +1,4 @@
-package Bio::VertRes::Config::CommandLine::BacteriaAssemblySingleCellAndAnnotation;
+package Bio::VertRes::Config::CommandLine::BacteriaAssemblySingleCell;
 
 # ABSTRACT: Create assembly and annotation files
 
@@ -9,7 +9,7 @@ Create assembly and annotation files, but QC and store must have been run first,
 =cut
 
 use Moose;
-use Bio::VertRes::Config::Recipes::BacteriaAssemblySingleCellAndAnnotation;
+use Bio::VertRes::Config::Recipes::BacteriaAssemblySingleCell;
 extends 'Bio::VertRes::Config::CommandLine::Common';
 
 has 'database'  => ( is => 'rw', isa => 'Str', default => 'pathogen_prok_track' );

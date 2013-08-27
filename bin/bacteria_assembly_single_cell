@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-package Bio::VertRes::Config::Main::BacteriaAssemblySingleCellAndAnnotation;
+package Bio::VertRes::Config::Main::BacteriaAssemblySingleCell;
 
 # ABSTRACT: Create config scripts for assembly and annotation prokaryote data
 # PODNAME: bacteria_assembly_and_annotation
@@ -14,6 +14,6 @@ Create config scripts for assembly and annotation
 BEGIN { unshift( @INC, '../lib' ) }
 BEGIN { unshift( @INC, './lib' ) }
 BEGIN { unshift( @INC, '/software/pathogen/internal/prod/lib/' ) }
-use Bio::VertRes::Config::CommandLine::BacteriaAssemblySingleCellAndAnnotation;
+use Bio::VertRes::Config::CommandLine::BacteriaAssemblySingleCell;
 
-Bio::VertRes::Config::CommandLine::BacteriaAssemblySingleCellAndAnnotation->new(args => \@ARGV, script_name => $0)->run;
+Bio::VertRes::Config::CommandLine::BacteriaAssemblySingleCell->new(args => \@ARGV, script_name => $0)->run;

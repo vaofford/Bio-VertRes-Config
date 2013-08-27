@@ -19,7 +19,7 @@ extends 'Bio::VertRes::Config::Recipes::Common';
 with 'Bio::VertRes::Config::Recipes::Roles::BacteriaRegisterStudy';
 
 
-has 'assembler'            => ( is => 'ro', isa => 'Str',  default => 'velvet' );
+has 'assembler'            => ( is => 'ro', isa => 'Str',  default => 'spades' );
 has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_pipeline_version'    => ( is => 'ro', isa => 'Num',  default => 5.0 );
