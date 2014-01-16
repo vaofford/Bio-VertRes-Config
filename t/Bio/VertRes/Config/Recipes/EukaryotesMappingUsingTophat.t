@@ -25,7 +25,6 @@ ok(
             limits      => { project => ['ABC study( EFG )'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
-            additional_mapper_params => ' -p library_type fr-unstranded'
         )
     ),
     'initalise creating files' #2
