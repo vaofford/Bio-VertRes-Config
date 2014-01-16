@@ -44,7 +44,6 @@ ok((-e "$destination_directory/my_database/stored/stored_global.conf"), 'stored 
 ok((-e "$destination_directory/my_database/import/import_global.conf"), 'import config file exists');        #10
 ok((-e "$destination_directory/my_database/qc/qc_ABC_study_EFG.conf"), 'QC config file exists' );            #11
 ok((-e "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_tophat.conf"), 'mapping config file exists' ); #12
-ok((-e "$destination_directory/my_database/rna_seq/rna_seq_ABC_study_EFG_ABC.conf"), 'rnaseq config file exists' );         #13
 
 
 my $text = read_file( "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_tophat.conf" );
