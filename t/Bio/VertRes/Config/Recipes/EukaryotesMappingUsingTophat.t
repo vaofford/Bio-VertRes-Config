@@ -8,7 +8,7 @@ BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
     use Test::Most;
-    use_ok('Bio::VertRes::Config::Recipes::EukaryotesMappingUsingTophat');
+    use_ok('Bio::VertRes::Config::Recipes::EukaryotesMappingUsingTophat'); #1
 }
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
@@ -26,24 +26,24 @@ ok(
             additional_mapper_params => ' -p library_type fr-unstranded'
         )
     ),
-    'initalise creating files'
+    'initalise creating files' #2
 );
-ok( ( $obj->create ), 'Create all the config files and toplevel files' );
+ok( ( $obj->create ), 'Create all the config files and toplevel files' ); #3
 
 # Are all the necessary top level files there?
-ok( -e $destination_directory . '/my_database/my_database.ilm.studies' , 'study names file exists');
-ok( -e $destination_directory . '/my_database/my_database_stored_pipeline.conf', 'stored toplevel file');
-ok( -e $destination_directory . '/my_database/my_database_import_pipeline.conf', 'import toplevel file');
-ok( -e $destination_directory . '/my_database/my_database_qc_pipeline.conf', 'qc toplevel file');
-ok( -e $destination_directory . '/my_database/my_database_mapping_pipeline.conf', 'mapping toplevel file');
-ok( -e $destination_directory . '/my_database/my_database_rna_seq_pipeline.conf', 'rnaseq toplevel file');
+ok( -e $destination_directory . '/my_database/my_database.ilm.studies' , 'study names file exists');         #4
+ok( -e $destination_directory . '/my_database/my_database_stored_pipeline.conf', 'stored toplevel file');    #5
+ok( -e $destination_directory . '/my_database/my_database_import_pipeline.conf', 'import toplevel file');    #5
+ok( -e $destination_directory . '/my_database/my_database_qc_pipeline.conf', 'qc toplevel file');            #6
+ok( -e $destination_directory . '/my_database/my_database_mapping_pipeline.conf', 'mapping toplevel file');  #7
+ok( -e $destination_directory . '/my_database/my_database_rna_seq_pipeline.conf', 'rnaseq toplevel file');   #8
 
 # Individual config files
-ok((-e "$destination_directory/my_database/stored/stored_global.conf"), 'stored config file exists');
-ok((-e "$destination_directory/my_database/import/import_global.conf"), 'import config file exists');
-ok((-e "$destination_directory/my_database/qc/qc_ABC_study_EFG.conf"), 'QC config file exists' );
-ok((-e "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_tophat.conf"), 'mapping config file exists' );
-ok((-e "$destination_directory/my_database/rna_seq/rna_seq_ABC_study_EFG_ABC.conf"), 'rnaseq config file exists' );
+ok((-e "$destination_directory/my_database/stored/stored_global.conf"), 'stored config file exists');        #9
+ok((-e "$destination_directory/my_database/import/import_global.conf"), 'import config file exists');        #10
+ok((-e "$destination_directory/my_database/qc/qc_ABC_study_EFG.conf"), 'QC config file exists' );            #11
+ok((-e "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_tophat.conf"), 'mapping config file exists' ); #12
+ok((-e "$destination_directory/my_database/rna_seq/rna_seq_ABC_study_EFG_ABC.conf"), 'rnaseq config file exists' );         #13
 
 
 my $text = read_file( "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_tophat.conf" );
@@ -94,7 +94,7 @@ is_deeply($input_config_file,{
   'prefix' => '_checked_elsewhere_',
   'dont_use_get_lanes' => 1,
   'module' => 'VertRes::Pipelines::Mapping'
-},'Mapping Config file as expected');
+},'Mapping Config file as expected');    #14
 
 
 $text = read_file( "$destination_directory/my_database/rna_seq/rna_seq_ABC_study_EFG_ABC.conf" );
@@ -138,7 +138,7 @@ is_deeply($input_config_file,{
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
   'module' => 'VertRes::Pipelines::RNASeqExpression'
-},'RNA seq expression config file as expected');
+},'RNA seq expression config file as expected');  #15
 
 
 done_testing();
