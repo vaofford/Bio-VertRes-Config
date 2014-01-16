@@ -96,49 +96,4 @@ is_deeply($input_config_file,{
   'module' => 'VertRes::Pipelines::Mapping'
 },'Mapping Config file as expected');    #14
 
-
-$text = read_file( "$destination_directory/my_database/rna_seq/rna_seq_ABC_study_EFG_ABC.conf" );
-$input_config_file = eval($text);
-$input_config_file->{prefix} = '_checked_elsewhere_';
-is_deeply($input_config_file,{
-  'db' => {
-            'database' => 'my_database',
-            'password' => 'some_password',
-            'user' => 'some_user',
-            'port' => 1234,
-            'host' => 'some_hostname'
-          },
-  'data' => {
-              'protocol' => 'StandardProtocol',
-              'annotation_file' => '/path/to/ABC.gff',
-              'intergenic_regions' => 1,
-              'ignore_rnaseq_called_status' => 1,
-              'db' => {
-                        'database' => 'my_database',
-                        'password' => 'some_password',
-                        'user' => 'some_user',
-                        'port' => 1234,
-                        'host' => 'some_hostname'
-                      },
-              'dont_wait' => 0,
-              'sequencing_file_suffix' => 'markdup.bam',
-              'mapping_quality' => 1
-            },
-  'limits' => {
-                'project' => [
-                               'ABC\ study\(\ EFG\ \)'
-                             ]
-              },
-  'vrtrack_processed_flags' => {
-                                 'stored' => 1,
-                                 'import' => 1,
-                                 'mapped' => 1
-                               },
-  'log' => '/nfs/pathnfs05/log/my_database/rna_seq_ABC_study_EFG_ABC.log',
-  'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
-  'prefix' => '_checked_elsewhere_',
-  'module' => 'VertRes::Pipelines::RNASeqExpression'
-},'RNA seq expression config file as expected');  #15
-
-
 done_testing();
