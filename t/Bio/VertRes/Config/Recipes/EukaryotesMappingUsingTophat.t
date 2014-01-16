@@ -14,6 +14,8 @@ BEGIN {
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
 
+print "$destination_directory\n";
+
 ok(
     (
         my $obj = Bio::VertRes::Config::Recipes::EukaryotesMappingUsingTophat->new(
