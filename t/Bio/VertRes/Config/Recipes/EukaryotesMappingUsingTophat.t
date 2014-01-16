@@ -38,7 +38,6 @@ ok( -e $destination_directory . '/my_database/my_database_stored_pipeline.conf',
 ok( -e $destination_directory . '/my_database/my_database_import_pipeline.conf', 'import toplevel file');    #5
 ok( -e $destination_directory . '/my_database/my_database_qc_pipeline.conf', 'qc toplevel file');            #6
 ok( -e $destination_directory . '/my_database/my_database_mapping_pipeline.conf', 'mapping toplevel file');  #7
-ok( -e $destination_directory . '/my_database/my_database_rna_seq_pipeline.conf', 'rnaseq toplevel file');   #8
 
 # Individual config files
 ok((-e "$destination_directory/my_database/stored/stored_global.conf"), 'stored config file exists');        #9
