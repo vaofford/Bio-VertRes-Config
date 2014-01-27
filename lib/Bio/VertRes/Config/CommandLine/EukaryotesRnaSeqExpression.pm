@@ -90,6 +90,10 @@ eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011"
 # Use a different mapper. Available are bwa/stampy/smalt/ssaha2/bowtie2/tophat. The default is tophat and ssaha2 is only for 454 data.
 eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -m bwa
 
+#Default parameters for Tophat
+#The --library_type parameter defaults to fr-unstranded. Other options are: fr-firststrand or fr-secondstrand. 
+eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011" --tophat_mapper_library_type fr-firststrand
+
 # Vary the parameters for tophat
 # Mapping defaults to '-I 10000 -i 70 -g 1'
 eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011" --tophat_mapper_max_intron 10000 --tophat_mapper_min_intron 70 --tophat_mapper_max_multihit 1

@@ -90,6 +90,10 @@ virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -s "Influen
 # Use a different mapper. Available are bwa/stampy/smalt/ssaha2/bowtie2/tophat. The default is smalt and ssaha2 is only for 454 data.
 virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -m bwa
 
+#Default parameters for Tophat
+#The --library_type parameter defaults to fr-unstranded. Other options are: fr-firststrand or fr-secondstrand. 
+virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" --tophat_mapper_library_type fr-firststrand
+
 # Run over a study in a named database specifying location of configs
 virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -d my_database -c /path/to/my/configs
 

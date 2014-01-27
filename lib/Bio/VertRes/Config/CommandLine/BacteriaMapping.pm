@@ -96,6 +96,10 @@ bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15
 # Set orientation of mate pairs for smalt ('pe', 'mp' or 'pp')
 bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --smalt_mapper_l pp
 
+#Default parameters for Tophat
+#The --library_type parameter defaults to fr-unstranded. Other options are: fr-firststrand or fr-secondstrand. 
+bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --tophat_mapper_library_type fr-firststrand
+
 # Map a study in named database specifying location of configs
 bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -c /path/to/my/configs
 
