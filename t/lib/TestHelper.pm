@@ -75,17 +75,15 @@ sub mock_execute_script_create_file_and_check_output {
    eval("use $script_name ;");
    my $returned_values = 0;
    {
-       #local *STDOUT;
-       #open STDOUT, '>/dev/null' or warn "Can't open /dev/null: $!";
-       #local *STDERR;
-       #open STDERR, '>/dev/null' or warn "Can't open /dev/null: $!";
+       local *STDOUT;
+       open STDOUT, '>/dev/null' or warn "Can't open /dev/null: $!";
+       local *STDERR;
+       open STDERR, '>/dev/null' or warn "Can't open /dev/null: $!";
 
        for my $script_parameters ( sort keys %$scripts_and_expected_files ) {
-           my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
+           my $destination_directory_obj = File::Temp->newdir( CLEANUP => 0 );
            my $destination_directory = $destination_directory_obj->dirname();
-		   
-		   print qq(Script Params:\n$script_parameters\n);
-           
+		              
 		   my $full_script = $script_parameters . " -c $destination_directory -l t/data/refs.index";;
            my @input_args = split( " ", $full_script );
 
@@ -94,7 +92,7 @@ sub mock_execute_script_create_file_and_check_output {
            my $actual_output_file_name = $destination_directory . '/' . $scripts_and_expected_files->{$script_parameters}->[0];
            my $expected_output_file_name = $scripts_and_expected_files->{$script_parameters}->[1];
            ok(-e $actual_output_file_name, "Actual output file exists $actual_output_file_name");
-		   print qq(Actual File: $actual_output_file_name\nExpected File: $expected_output_file_name\n);
+
 		   
 		   strip_prefix_attribute($actual_output_file_name);
 
@@ -103,8 +101,8 @@ sub mock_execute_script_create_file_and_check_output {
            is(read_file($actual_output_file_name), read_file($expected_output_file_name), "Actual and expected output match for '$script_parameters'");
            unlink($actual_output_file_name);
        }
-       #close STDOUT;
-       #close STDERR;
+       close STDOUT;
+       close STDERR;
    }
 
    # Restore stdout.
@@ -135,9 +133,7 @@ sub strip_prefix_attribute {
 			push(@lines_wo_prefix_att, $line);		
 		}
 	}
-	write_file($actual_output_file_name,@lines_wo_prefix_att)
-	#print "Starting actual file content:\n@lines_wo_prefix_att\n";
-	
+	write_file($actual_output_file_name,@lines_wo_prefix_att)	
 }
 
 no Moose;

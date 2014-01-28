@@ -217,12 +217,19 @@ sub _construct_tophat_additional_mapper_params {
         $output_param_str =
           join( ' ', ( $output_param_str, '-g', $self->tophat_mapper_g ) );
     }
-	$output_param_str = join( ' ', ( $output_param_str, '--library-type', $self->tophat_mapper_library_type ) );
+	if ( !defined $self->tophat_mapper_library_type) {
+		$output_param_str = join( ' ', ( $output_param_str, '--library-type fr-unstranded', $self->tophat_mapper_library_type ) );
+	}
+	else {
+		$output_param_str = join( ' ', ( $output_param_str, '--library-type', $self->tophat_mapper_library_type ) );
+		
+	}
 
     if ( $output_param_str eq "" ) {
         return undef;
     }
 
+	$output_param_str =~ s/ $//;
     return $output_param_str;
 }
 
