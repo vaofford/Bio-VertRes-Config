@@ -72,36 +72,40 @@ Pipeline for helminths mapping
 helminth_mapping -a "Leishmania"
 
 # Map a study
-helminth_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011"
+helminth_mapping -t study -i 1234 -r "Schistosoma_mansoni_v5"
 
 # Map a single lane
-helminth_mapping -t lane -i 1234_5#6 -r "Leishmania_donovani_21Apr2011"
+helminth_mapping -t lane -i 1234_5#6 -r "Schistosoma_mansoni_v5"
 
 # Map a file of lanes
-helminth_mapping -t file -i file_of_lanes -r "Leishmania_donovani_21Apr2011"
+helminth_mapping -t file -i file_of_lanes -r "Schistosoma_mansoni_v5"
 
 # Map a single species in a study
-helminth_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -s "Leishmania donovani"
+helminth_mapping -t study -i 1234 -r "Schistosoma_mansoni_v5" -s "Schistosoma mansoni"
 
 # Use a different mapper. Available are bwa/stampy/smalt/ssaha2/bowtie2/tophat. The default is smalt and ssaha2 is only for 454 data.
-helminth_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -m bwa
+helminth_mapping -t study -i 1234 -r "Schistosoma_mansoni_v5" -m bwa
 
 # Vary the parameters for smalt
 # Index defaults to '-k 13 -s 2'
 # Mapping defaults to '-r 0 -x -y 0.8'
-helminth_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" --smalt_index_k 13 --smalt_index_s 2 --smalt_mapper_r 0 --smalt_mapper_y 0.8 --smalt_mapper_x
+helminth_mapping -t study -i 1234 -r "Schistosoma_mansoni_v5" --smalt_index_k 13 --smalt_index_s 2 --smalt_mapper_r 0 --smalt_mapper_y 0.8 --smalt_mapper_x
 
 # Set orientation of mate pairs for smalt ('pe', 'mp' or 'pp')
-helminth_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" --smalt_mapper_l pp
+helminth_mapping -t study -i 1234 -r "Schistosoma_mansoni_v5" --smalt_mapper_l pp
+
+#Default parameters for Tophat
+#The --library_type parameter defaults to fr-unstranded. Other options are: fr-firststrand or fr-secondstrand. 
+helminth_mapping -t study -i 1234 -r "Schistosoma_mansoni_v5" --tophat_mapper_library_type fr-firststrand
 
 # Map a study in named database specifying location of configs
-helminth_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -d my_database -c /path/to/my/configs
+helminth_mapping -t study -i 1234 -r "Schistosoma_mansoni_v5" -d my_database -c /path/to/my/configs
 
 # Map a study in named database specifying root and log base directories
-helminth_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -d my_database -root /path/to/root -log /path/to/log
+helminth_mapping -t study -i 1234 -r "Schistosoma_mansoni_v5" -d my_database -root /path/to/root -log /path/to/log
 
 # Map a study in named database specifying a file with database connection details
-helminth_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -d my_database -db_file /path/to/connect/file
+helminth_mapping -t study -i 1234 -r "Schistosoma_mansoni_v5" -d my_database -db_file /path/to/connect/file
 
 # This help message
 helminth_mapping -h

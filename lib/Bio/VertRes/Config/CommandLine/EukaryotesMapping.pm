@@ -94,6 +94,10 @@ eukaryote_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" --smalt_in
 # Set orientation of mate pairs for smalt ('pe', 'mp' or 'pp')
 eukaryote_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" --smalt_mapper_l pp
 
+#Default parameters for Tophat
+#The --library_type parameter defaults to fr-unstranded. Other options are: fr-firststrand or fr-secondstrand. 
+eukaryote_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" --tophat_mapper_library_type fr-firststrand
+
 # Map a study in named database specifying location of configs
 eukaryote_mapping -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -d my_database -c /path/to/my/configs
 

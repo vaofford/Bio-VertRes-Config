@@ -29,7 +29,9 @@ ok(
     ),
     'initalise creating files' #2
 );
+is ( $obj->additional_mapper_params, '--library_type fr-unstranded', 'testing passing params');
 ok( ( $obj->create ), 'Create all the config files and toplevel files' ); #3
+
 
 # Are all the necessary top level files there?
 ok( -e $destination_directory . '/my_database/my_database.ilm.studies' , 'study names file exists');         #4
@@ -76,7 +78,7 @@ is_deeply($input_config_file,{
               'ignore_mapped_status' => 1,
               'slx_mapper' => 'tophat',
               'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/tophat-2.0.8b.Linux_x86_64/tophat',
-              'additional_mapper_params' => ' -p library_type fr-unstranded'
+              'additional_mapper_params' => '--library_type fr-unstranded'
             },
   'limits' => {
                 'project' => [
