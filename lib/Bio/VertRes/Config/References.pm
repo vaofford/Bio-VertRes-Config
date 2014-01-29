@@ -69,8 +69,8 @@ sub invalid_reference_message
     $output_message .= join(
         "\n",
         @{ $search_results
-        }
-    );
+        },
+    "\n");
   } 
   return $output_message;
 }

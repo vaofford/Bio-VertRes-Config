@@ -7,7 +7,7 @@ package Bio::VertRes::Config::CommandLine::ReferenceHandlingRole;
 A role to handle references in a command line script
    with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
    
-   $self->handle_reference_inputs_or_exit($reference_lookup_file, $available_referenes, $reference);
+   $self->handle_reference_inputs_or_exit($reference_lookup_file, $available_references, $reference);
 
 =cut
 
