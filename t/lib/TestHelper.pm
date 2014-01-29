@@ -36,8 +36,8 @@ sub mock_execute_script_and_check_output {
     eval("use $script_name ;");
     my $returned_values = 0;
     {
-        #local *STDOUT;
-        #open STDOUT, '>/dev/null' or warn "Can't open /dev/null: $!";
+        local *STDOUT;
+        open STDOUT, '>/dev/null' or warn "Can't open /dev/null: $!";
 
         for my $script_parameters ( sort keys %$scripts_and_expected_files ) {
             my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
@@ -57,7 +57,7 @@ sub mock_execute_script_and_check_output {
                 "files created as expected for $full_script" );
             @actual_files_found = ();
         }
-        #close STDOUT;
+        close STDOUT;
     }
     # Restore stdout.
     open STDOUT, '>&OLDOUT' or die "Can't restore stdout: $!";
@@ -81,7 +81,7 @@ sub mock_execute_script_create_file_and_check_output {
        open STDERR, '>/dev/null' or warn "Can't open /dev/null: $!";
 
        for my $script_parameters ( sort keys %$scripts_and_expected_files ) {
-           my $destination_directory_obj = File::Temp->newdir( CLEANUP => 0 );
+           my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
            my $destination_directory = $destination_directory_obj->dirname();
 		              
 		   my $full_script = $script_parameters . " -c $destination_directory -l t/data/refs.index";;
