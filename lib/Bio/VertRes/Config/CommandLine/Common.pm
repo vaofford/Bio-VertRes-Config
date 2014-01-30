@@ -51,16 +51,17 @@ has 'overwrite_existing_config_file' =>
 has 'help' => ( is => 'rw', isa => 'Bool', default => 0 );
 
 # mapper specific
-has 'smalt_index_k'              => ( is => 'rw', isa => 'Maybe[Int]' );
-has 'smalt_index_s'              => ( is => 'rw', isa => 'Maybe[Int]' );
-has 'smalt_mapper_r'             => ( is => 'rw', isa => 'Maybe[Int]' );
-has 'smalt_mapper_x'             => ( is => 'rw', isa => 'Maybe[Bool]' );
-has 'smalt_mapper_y'             => ( is => 'rw', isa => 'Maybe[Num]' );
-has 'smalt_mapper_l'             => ( is => 'rw', isa => 'Maybe[Str]' );
-has 'tophat_mapper_I'            => ( is => 'rw', isa => 'Maybe[Int]' );
-has 'tophat_mapper_i'            => ( is => 'rw', isa => 'Maybe[Int]' );
-has 'tophat_mapper_g'            => ( is => 'rw', isa => 'Maybe[Int]' );
-has 'tophat_mapper_library_type' => ( is => 'rw', isa => 'Maybe[Str]' );
+has 'smalt_index_k'   => ( is => 'rw', isa => 'Maybe[Int]' );
+has 'smalt_index_s'   => ( is => 'rw', isa => 'Maybe[Int]' );
+has 'smalt_mapper_r'  => ( is => 'rw', isa => 'Maybe[Int]' );
+has 'smalt_mapper_x'  => ( is => 'rw', isa => 'Maybe[Bool]' );
+has 'smalt_mapper_y'  => ( is => 'rw', isa => 'Maybe[Num]' );
+has 'smalt_mapper_l'  => ( is => 'rw', isa => 'Maybe[Str]' );
+has 'tophat_mapper_I' => ( is => 'rw', isa => 'Maybe[Int]' );
+has 'tophat_mapper_i' => ( is => 'rw', isa => 'Maybe[Int]' );
+has 'tophat_mapper_g' => ( is => 'rw', isa => 'Maybe[Int]' );
+has 'tophat_mapper_library_type' =>
+  ( is => 'rw', isa => 'Bio::VertRes::Config::TophatLib' );
 
 # set assembler
 has 'assembler' => ( is => 'rw', isa => 'Maybe[Str]' );
@@ -217,15 +218,21 @@ sub _construct_tophat_additional_mapper_params {
         $output_param_str =
           join( ' ', ( $output_param_str, '-g', $self->tophat_mapper_g ) );
     }
-	if ( defined $self->tophat_mapper_library_type) {
-		$output_param_str = join( ' ', ( $output_param_str, '--library-type', $self->tophat_mapper_library_type ) );
-	}
+    if ( defined $self->tophat_mapper_library_type ) {
+        $output_param_str = join(
+            ' ',
+            (
+                $output_param_str, '--library-type',
+                $self->tophat_mapper_library_type
+            )
+        );
+    }
 
     if ( $output_param_str eq "" ) {
         return undef;
     }
 
-	$output_param_str =~ s/ $//;
+    $output_param_str =~ s/ $//;
     return $output_param_str;
 }
 

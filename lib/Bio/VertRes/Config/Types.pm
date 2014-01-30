@@ -19,6 +19,8 @@ subtype 'Bio::VertRes::Config::Prefix', as 'Str', where { Bio::VertRes::Config::
 subtype 'Bio::VertRes::Config::File',
   as 'Str',
   where { Bio::VertRes::Config::Validate::File->new()->does_file_exist($_) };
+  
+enum 'Bio::VertRes::Config::TophatLib', [ qw(fr-unstranded fr-firststrand fr-secondstrand) ];
 
 no Moose;
 no Moose::Util::TypeConstraints;
