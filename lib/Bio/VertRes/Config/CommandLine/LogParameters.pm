@@ -39,7 +39,7 @@ sub _build__user_name
 
 sub _build__output_string {
     my ($self) = @_;
-    my $output_str = time()." ";
+    my $output_str = localtime()." ";
     
     if ( defined( $self->_user_name))
     {

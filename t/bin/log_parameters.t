@@ -22,7 +22,7 @@ for my $script_name (  @available_scripts ) {
     system("./bin/$script_name -c $destination_directory >/dev/null 2>&1");
     ok( -e $destination_directory . '/command_line.log', "log file has been created for $script_name" );
     open(my $fh, $destination_directory . '/command_line.log');
-    ok((<$fh> =~ /^[\d]+ .+ \.\/bin\/$script_name -c $destination_directory$/), 'correct format of log file' );
+    ok((<$fh> =~ /^[\w]+ [\w]+ [\d]+ [\d]+:[\d]+:[\d]+ [\d]+ .+ \.\/bin\/$script_name -c $destination_directory$/), 'correct format of log file' );
 
 }
 
