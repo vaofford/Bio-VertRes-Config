@@ -95,11 +95,9 @@ sub mock_execute_script_create_file_and_check_output {
 
 		   
 		   strip_prefix_attribute($actual_output_file_name);
-
-		   
-		   
-           is(read_file($actual_output_file_name), read_file($expected_output_file_name), "Actual and expected output match for '$script_parameters'");
+           is_deeply(eval(read_file($actual_output_file_name)), eval(read_file($expected_output_file_name)), "Actual and expected output match for '$script_parameters'");
            unlink($actual_output_file_name);
+
        }
        close STDOUT;
        close STDERR;
@@ -108,7 +106,7 @@ sub mock_execute_script_create_file_and_check_output {
    # Restore stdout.
    open STDOUT, '>&OLDOUT' or die "Can't restore stdout: $!";
    open STDERR, '>&OLDERR' or die "Can't restore stderr: $!";
-
+   
    # Avoid leaks by closing the independent copies.
    close OLDOUT or die "Can't close OLDOUT: $!";
    close OLDERR or die "Can't close OLDERR: $!";
@@ -121,19 +119,10 @@ sub process_file {
 }
 
 sub strip_prefix_attribute {
-	
 	my ($actual_output_file_name) = @_ ;
-
-	my @lines = read_file($actual_output_file_name);
-	my @lines_wo_prefix_att;
-	for my $line( @lines ) {
-		unless($line =~ m/^  'prefix' =>/) {
-			$line =~ s/(  'module' => 'VertRes::Pipelines::Mapping'),/$1/;
-			$line =~ s/(})\n/$1/;
-			push(@lines_wo_prefix_att, $line);		
-		}
-	}
-	write_file($actual_output_file_name,@lines_wo_prefix_att)	
+	my $lines = read_file($actual_output_file_name);
+	$lines =~ s/'prefix' => '[\w]+'/'prefix' => '_checked_elsewhere_'/i;
+	write_file($actual_output_file_name,$lines);
 }
 
 no Moose;
