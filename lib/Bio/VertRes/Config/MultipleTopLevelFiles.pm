@@ -23,6 +23,7 @@ sub update_or_create {
     my ($self) = @_;
 
     my %short_name_to_configs;
+    my %configs_requiring_approval;
 
     # split by short name
     for my $pipeline_config ( @{ $self->pipeline_configs } ) {
@@ -35,15 +36,34 @@ sub update_or_create {
     }
 
     for my $pipeline_short_name ( keys %short_name_to_configs ) {
-        Bio::VertRes::Config::TopLevel->new(
+        my $toplevel_config = Bio::VertRes::Config::TopLevel->new(
             database            => $self->database,
             pipeline_configs    => $short_name_to_configs{$pipeline_short_name},
             pipeline_short_name => $pipeline_short_name,
             config_base => $self->config_base
-        )->update_or_create();
+        );
+        $toplevel_config->update_or_create();
+
+       # Does an admin email need to be sent telling them about config files which need approval?
+       if( $toplevel_config->admin_email_needs_to_be_sent == 1 )
+       {
+         $configs_requiring_approval{$toplevel_config->overall_config}++;
+       }
 
     }
+    
+    if(keys %configs_requiring_approval > 0)
+    {
+      $self->email_admins_for_approval(\%configs_requiring_approval);
+    }
+    
     return $self;
+}
+
+sub email_admins_for_approval
+{
+  my ($self,$files_requiring_approval) = @_;
+  1;
 }
 
 __PACKAGE__->meta->make_immutable;
