@@ -329,7 +329,7 @@ sub retrieving_mapping_results_text {
     print "  mapfind -t " . $self->type . " -i " . $self->id . " -symlink\n\n";
 
     print "Find out which mapper and reference was used\n";
-    print "  mapfind -t " . $self->type . " -i " . $self->id . " -d\n\n";
+    print "  mapfind -t " . $self->type . " -i " . $self->id . " -v\n\n";
 
     print "More details\n";
     print "  mapfind -h\n\n";
