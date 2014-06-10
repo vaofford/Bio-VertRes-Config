@@ -19,13 +19,14 @@ Method with takes in the pipeline config array and adds the qc config to it.
 
 use Moose::Role;
 use Bio::VertRes::Config::Pipelines::QC;
+use Bio::VertRes::Config::Pipelines::IvaAssembly;
 use Bio::VertRes::Config::Pipelines::VelvetAssembly;
 use Bio::VertRes::Config::Pipelines::SpadesAssembly;
 use Bio::VertRes::Config::Pipelines::AnnotateAssembly;
 use Bio::VertRes::Config::RegisterStudy;
 
 # Register all the studies passed in the project limits array
-after 'create' => sub { 
+after 'create' => sub {
   my ($self) = @_;
   
   if(defined($self->limits->{project}))
@@ -33,8 +34,8 @@ after 'create' => sub {
     for my $study_name ( @{$self->limits->{project}} )
     {
       my $pipeline = Bio::VertRes::Config::RegisterStudy->new(
-        database    => $self->database, 
-        study_name  => $study_name, 
+        database    => $self->database,
+        study_name  => $study_name,
         config_base => $self->config_base
       );
       $pipeline->register_study_name();
@@ -77,8 +78,8 @@ sub add_virus_velvet_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _pipeline_version              => $self->_pipeline_version, 
-          _normalise                     => $self->_normalise 
+          _pipeline_version              => $self->_pipeline_version,
+          _normalise                     => $self->_normalise
       )
   );
   return ;
@@ -99,8 +100,30 @@ sub add_virus_spades_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _pipeline_version              => $self->_pipeline_version, 
-          _normalise                     => $self->_normalise 
+          _pipeline_version              => $self->_pipeline_version,
+          _normalise                     => $self->_normalise
+      )
+  );
+  return ;
+}
+
+sub add_virus_iva_assembly_config
+{
+  my ($self, $pipeline_configs_array) = @_;
+  push(
+      @{$pipeline_configs_array},
+      Bio::VertRes::Config::Pipelines::IvaAssembly->new(
+          database                       => $self->database,
+          database_connect_file          => $self->database_connect_file,
+          config_base                    => $self->config_base,
+          root_base                      => $self->root_base,
+          log_base                       => $self->log_base,
+          overwrite_existing_config_file => $self->overwrite_existing_config_file,
+          limits                         => $self->limits,
+          _error_correct                 => $self->_error_correct,
+          _remove_primers                => $self->_remove_primers,
+          _pipeline_version              => $self->_pipeline_version,
+          _normalise                     => $self->_normalise
       )
   );
   return ;
