@@ -33,6 +33,9 @@ override 'to_hash' => sub {
     $output_hash->{data}{trimmomatic_jar} = $self->_trimmomatic_jar;
     $output_hash->{data}{adapters_file} = $self->_adapters_file;
     $output_hash->{data}{improve_assembly} = $self->_improve_assembly;
+    $output_hash->{data}{error_correct} = 0;
+    $output_hash->{data}{normalise} = 0;
+    $output_hash->{data}{remove_primers} = 0;
 
     return $output_hash;
 };

@@ -91,7 +91,6 @@ is(
     'config file in expected format'
 );
 ok( $obj->create_config_file, 'Can run the create config file method' );
-system("cp " . $destination_directory . "/my_database/assembly/assembly_Abc_def_ghi123_iva.conf ~/test.conf");
 ok( ( -e $obj->config ), 'Config file exists' );
 
 
