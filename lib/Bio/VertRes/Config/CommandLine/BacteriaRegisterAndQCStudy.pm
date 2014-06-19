@@ -25,6 +25,7 @@ sub run {
 
     my %mapping_parameters = %{$self->mapping_parameters};
     $mapping_parameters{'assembler'} = $self->assembler if defined ($self->assembler);
+    $mapping_parameters{'no_ass'} = defined($self->no_ass);
     Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new( \%mapping_parameters )->create();
 
     $self->retrieving_results_text;
@@ -73,6 +74,9 @@ bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_
 
 # Register and QC a study in named database specifying a file with database connection details 
 bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -db_file /path/to/connect/file
+
+# Register and QC a study without generating assembly and annotation configs
+bacteria_register_and_qc_study -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --no_aa
 
 # This help message
 bacteria_register_and_qc_study -h
