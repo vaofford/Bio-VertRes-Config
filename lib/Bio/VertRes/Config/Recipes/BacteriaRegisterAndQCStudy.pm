@@ -24,6 +24,7 @@ with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 
 has 'assembler'            => ( is => 'ro', isa => 'Str',  default => 'velvet' );
+has 'no_ass'               => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_pipeline_version'    => ( is => 'ro', isa => 'Num',  default => 2.1 );
@@ -35,6 +36,12 @@ override '_pipeline_configs' => sub {
     my ($self) = @_;
     my @pipeline_configs;
     $self->add_bacteria_qc_config(\@pipeline_configs);
+
+    if ($self->_no_ass){
+        print "Not generating assembly and annotation configs!\n";
+        return \@pipeline_configs;
+    }
+
     if($self->assembler eq 'spades')
     {
         $self->add_bacteria_spades_assembly_config(\@pipeline_configs);

@@ -65,6 +65,7 @@ has 'tophat_mapper_library_type' =>
 
 # set assembler
 has 'assembler' => ( is => 'rw', isa => 'Maybe[Str]' );
+has 'no_ass'    => ( is => 'rw', isa => 'Bool' );
 
 sub BUILD {
     my ($self) = @_;
@@ -87,7 +88,7 @@ sub BUILD {
         $tophat_mapper_g,                $tophat_mapper_library_type,
         $assembler,                      $root_base,
         $log_base,                       $database_connect_file,
-        $help
+        $no_ass,                         $help
     );
 
     GetOptionsFromArray(
@@ -118,6 +119,7 @@ sub BUILD {
         'root_base=s'                    => \$root_base,
         'log_base=s'                     => \$log_base,
         'db_file:s'                      => \$database_connect_file,
+        'no_aa'                          => \$no_ass,
         'h|help'                         => \$help
     );
 
@@ -150,6 +152,7 @@ sub BUILD {
     $self->assembler($assembler) if ( defined($assembler) );
     $self->database_connect_file($database_connect_file)
       if ( defined($database_connect_file) );
+    $self->no_ass($no_aa) if ( defined $no_ass );
 
     $regeneration_log_file ||=
       join( '/', ( $self->config_base, 'command_line.log' ) );
