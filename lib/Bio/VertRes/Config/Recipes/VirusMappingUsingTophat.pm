@@ -18,7 +18,6 @@ Standard snp calling pipeline for virus.
 
 use Moose;
 extends 'Bio::VertRes::Config::Recipes::Common';
-with 'Bio::VertRes::Config::Recipes::Roles::RegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 with 'Bio::VertRes::Config::Recipes::Roles::VirusMapping';
@@ -29,7 +28,6 @@ override '_pipeline_configs' => sub {
     my ($self) = @_;
     my @pipeline_configs;
     
-    $self->add_qc_config(\@pipeline_configs);
     $self->add_virus_tophat_mapping_config(\@pipeline_configs);
     
     # Insert BAM Improvment here
