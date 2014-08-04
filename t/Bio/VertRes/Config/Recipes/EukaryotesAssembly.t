@@ -66,14 +66,13 @@ is_deeply($input_config_file,{
               'max_threads' => 6,
               'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl'
             },
-  'max_lanes_to_search' => 200,
+  'max_lanes_to_search' => 10000,
   'limits' => {
                 'project' => [
                                'ABC\\ study\\(\\ EFG\\ \\)'
                              ]
               },
   'vrtrack_processed_flags' => {
-                                 'assembled' => 0,
                                  'rna_seq_expression' => 0,
                                  'stored' => 1
                                },
@@ -81,7 +80,7 @@ is_deeply($input_config_file,{
   'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_velvet.log',
   'limit' => 100,
   'module' => 'VertRes::Pipelines::Assembly',
-  'prefix' => '_assembly_'
+  'prefix' => '_velvet_'
 },'Config file as expected');
 
 done_testing();
