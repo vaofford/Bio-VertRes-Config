@@ -34,7 +34,6 @@ override '_pipeline_configs' => sub {
     my ($self) = @_;
     my @pipeline_configs;
     
-    $self->add_qc_config(\@pipeline_configs);
     
     push(
         @pipeline_configs,

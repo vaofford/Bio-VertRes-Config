@@ -37,13 +37,11 @@ ok( ( $obj->create ), 'Create all the config files and toplevel files' ); #3
 ok( -e $destination_directory . '/my_database/my_database.ilm.studies' , 'study names file exists');         #4
 ok( -e $destination_directory . '/my_database/my_database_stored_pipeline.conf', 'stored toplevel file');    #5
 ok( -e $destination_directory . '/my_database/my_database_import_pipeline.conf', 'import toplevel file');    #5
-ok( -e $destination_directory . '/my_database/my_database_qc_pipeline.conf', 'qc toplevel file');            #6
 ok( -e $destination_directory . '/my_database/my_database_mapping_pipeline.conf', 'mapping toplevel file');  #7
 
 # Individual config files
 ok((-e "$destination_directory/my_database/stored/stored_global.conf"), 'stored config file exists');        #9
 ok((-e "$destination_directory/my_database/import/import_global.conf"), 'import config file exists');        #10
-ok((-e "$destination_directory/my_database/qc/qc_ABC_study_EFG.conf"), 'QC config file exists' );            #11
 ok((-e "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_tophat.conf"), 'mapping config file exists' ); #12
 
 

@@ -22,9 +22,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/eukaryotes.ilm.studies',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_ZZZ.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t lane -i 1234_5#6 -r ABC' => [
@@ -33,9 +31,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/mapping/mapping_1234_5_6_ABC_smalt.conf',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_1234_5_6.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t library -i libname -r ABC' => [
@@ -44,9 +40,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/mapping/mapping_libname_ABC_smalt.conf',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_libname.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t sample -i sample -r ABC' => [
@@ -55,9 +49,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/mapping/mapping_sample_ABC_smalt.conf',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_sample.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t file -i t/data/lanes_file -r ABC' => [
@@ -66,11 +58,7 @@ my %scripts_and_expected_files = (
 'eukaryotes/mapping/mapping_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name_ABC_smalt.conf',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
-
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-'eukaryotes/qc/qc_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name.conf',
-
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t study -i ZZZ -r ABC -p "StandardProtocol"' => [
@@ -80,9 +68,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/eukaryotes.ilm.studies',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_ZZZ.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t study -i ZZZ -r ABC -s Staphylococcus_aureus' => [
@@ -92,11 +78,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/eukaryotes.ilm.studies',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
-
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_ZZZ_Staphylococcus_aureus.conf',
-
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t study -i ZZZ -r ABC -m bwa' => [
@@ -106,9 +88,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/eukaryotes.ilm.studies',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_ZZZ.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t study -i ZZZ -r ABC -m stampy' => [
@@ -118,9 +98,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/eukaryotes.ilm.studies',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_ZZZ.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t study -i ZZZ -r ABC -m ssaha2' => [
@@ -130,9 +108,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/eukaryotes.ilm.studies',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_ZZZ.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t study -i ZZZ -r ABC -m tophat' => [
@@ -142,9 +118,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/eukaryotes.ilm.studies',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_ZZZ.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
     '-t study -i ZZZ -r ABC -m bowtie2' => [
@@ -154,9 +128,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/eukaryotes.ilm.studies',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_ZZZ.conf',
         'eukaryotes/stored/stored_global.conf',
     ],
 '-t study -i ZZZ -r ABC -m smalt --smalt_index_k 15 --smalt_index_s 4 --smalt_mapper_r 1 --smalt_mapper_y 0.9 --smalt_mapper_x --smalt_mapper_l pe'
@@ -167,9 +139,7 @@ my %scripts_and_expected_files = (
         'eukaryotes/eukaryotes.ilm.studies',
         'eukaryotes/eukaryotes_import_pipeline.conf',
         'eukaryotes/eukaryotes_mapping_pipeline.conf',
-        'eukaryotes/eukaryotes_qc_pipeline.conf',
         'eukaryotes/eukaryotes_stored_pipeline.conf',
-        'eukaryotes/qc/qc_ZZZ.conf',
         'eukaryotes/stored/stored_global.conf',
       ],
 

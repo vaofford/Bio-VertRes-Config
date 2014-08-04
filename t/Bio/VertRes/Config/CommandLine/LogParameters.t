@@ -38,8 +38,8 @@ ok(
 
 ok((-e $destination_directory . '/x/y/z/logfile'), 'log file exists');
 open(my $fh, $destination_directory . '/x/y/z/logfile');
-ok((<$fh> =~ /^[\w]+ [\w]+ [\d]+ [\d]+:[\d]+:[\d]+ [\d]+ .+ zzz a b c$/), 'correct format of log file' );
-ok((<$fh> =~ /^[\w]+ [\w]+ [\d]+ [\d]+:[\d]+:[\d]+ [\d]+ .+ zzz e f g$/), 'correct format of log file line 2' );
+ok((<$fh> =~ /^[\w]+[\s]+[\w]+[\s]+[\d]+[\s]+[\d]+:[\d]+:[\d]+[\s]+[\d]+[\s]+[\w\d]+[\s]+zzz a b c$/), 'correct format of log file' );
+ok((<$fh> =~ /^[\w]+[\s]+[\w]+[\s]+[\d]+[\s]+[\d]+:[\d]+:[\d]+[\s]+[\d]+[\s]+[\w\d]+[\s]+zzz e f g$/), 'correct format of log file line 2' );
 
 done_testing();
 
