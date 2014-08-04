@@ -22,9 +22,7 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_import_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',
         'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_ZZZ.conf',
         'prokaryotes/stored/stored_global.conf',
     ],
     '-t lane -i 1234_5#6 -r ABC' => [
@@ -33,9 +31,7 @@ my %scripts_and_expected_files = (
         'prokaryotes/mapping/mapping_1234_5_6_ABC_smalt.conf',
         'prokaryotes/prokaryotes_import_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',
         'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_1234_5_6.conf',
         'prokaryotes/stored/stored_global.conf',
     ],
     '-t library -i libname -r ABC' => [
@@ -44,9 +40,7 @@ my %scripts_and_expected_files = (
         'prokaryotes/mapping/mapping_libname_ABC_smalt.conf',
         'prokaryotes/prokaryotes_import_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',
         'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_libname.conf',
         'prokaryotes/stored/stored_global.conf',
     ],
     '-t sample -i sample -r ABC' => [
@@ -55,9 +49,7 @@ my %scripts_and_expected_files = (
         'prokaryotes/mapping/mapping_sample_ABC_smalt.conf',
         'prokaryotes/prokaryotes_import_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',
         'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_sample.conf',
         'prokaryotes/stored/stored_global.conf',
     ],
     '-t file -i t/data/lanes_file -r ABC' => [
@@ -66,10 +58,7 @@ my %scripts_and_expected_files = (
         'prokaryotes/mapping/mapping_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name_ABC_smalt.conf',
         'prokaryotes/prokaryotes_import_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',
         'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name.conf',,
-
         'prokaryotes/stored/stored_global.conf'
     ],
     '-t study -i ZZZ -r ABC -p StandardProtocol' => [
@@ -79,9 +68,7 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_import_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',
         'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_ZZZ.conf',
         'prokaryotes/stored/stored_global.conf',
     ],
     '-t study -i ZZZ -r ABC -s "Staphylococcus_aureus"' => [
@@ -91,11 +78,7 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_import_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',
-
         'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_ZZZ_Staphylococcus_aureus.conf',
-
         'prokaryotes/stored/stored_global.conf'
     ],
     '-t study -i ZZZ -r ABC -m bwa' => [
@@ -105,9 +88,7 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_import_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',
         'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_ZZZ.conf',
         'prokaryotes/stored/stored_global.conf',
     ],
     '-t study -i ZZZ -r ABC -m stampy' => [
@@ -117,9 +98,8 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_import_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',
         'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_ZZZ.conf',
+        
         'prokaryotes/stored/stored_global.conf',
     ],
     '-t study -i ZZZ -r ABC -m ssaha2' => [
@@ -127,8 +107,8 @@ my %scripts_and_expected_files = (
         'prokaryotes/import/import_global.conf',        'prokaryotes/mapping/mapping_ZZZ_ABC_ssaha.conf',
         'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_import_pipeline.conf', 'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',     'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_ZZZ.conf',                   'prokaryotes/stored/stored_global.conf',
+           'prokaryotes/prokaryotes_stored_pipeline.conf',
+                          'prokaryotes/stored/stored_global.conf',
 
     ],
     '-t study -i ZZZ -r ABC -m tophat' => [
@@ -136,8 +116,8 @@ my %scripts_and_expected_files = (
         'prokaryotes/import/import_global.conf',        'prokaryotes/mapping/mapping_ZZZ_ABC_tophat.conf',
         'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_import_pipeline.conf', 'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',     'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_ZZZ.conf',                   'prokaryotes/stored/stored_global.conf',
+            'prokaryotes/prokaryotes_stored_pipeline.conf',
+                          'prokaryotes/stored/stored_global.conf',
 
     ],
     '-t study -i ZZZ -r ABC -m bowtie2' => [
@@ -145,8 +125,8 @@ my %scripts_and_expected_files = (
         'prokaryotes/import/import_global.conf',        'prokaryotes/mapping/mapping_ZZZ_ABC_bowtie2.conf',
         'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_import_pipeline.conf', 'prokaryotes/prokaryotes_mapping_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',     'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_ZZZ.conf',                   'prokaryotes/stored/stored_global.conf',
+           'prokaryotes/prokaryotes_stored_pipeline.conf',
+                       'prokaryotes/stored/stored_global.conf',
 
     ],
 
