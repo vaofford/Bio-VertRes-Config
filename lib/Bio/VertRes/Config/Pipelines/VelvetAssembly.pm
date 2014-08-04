@@ -19,6 +19,7 @@ use Moose;
 extends 'Bio::VertRes::Config::Pipelines::Assembly';
 
 has '_assembler'           => ( is => 'ro', isa => 'Str', default => 'velvet' );
+has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default => '_velvet_' );
 has '_assembler_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/velvet' );
 has '_optimiser_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl' );
 has '_max_threads'         => ( is => 'ro', isa => 'Int', default => 2 );
