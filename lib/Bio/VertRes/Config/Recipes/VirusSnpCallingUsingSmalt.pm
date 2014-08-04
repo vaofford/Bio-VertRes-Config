@@ -20,7 +20,9 @@ use Moose;
 use Bio::VertRes::Config::Pipelines::QC;
 use Bio::VertRes::Config::Pipelines::SmaltMapping;
 use Bio::VertRes::Config::Pipelines::SnpCalling;
+use Bio::VertRes::Config::RegisterStudy;
 extends 'Bio::VertRes::Config::Recipes::Common';
+with 'Bio::VertRes::Config::Recipes::Roles::RegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 with 'Bio::VertRes::Config::Recipes::Roles::VirusSnpCalling';
@@ -31,6 +33,8 @@ has 'mapper_index_params'      => ( is => 'ro', isa => 'Maybe[Str]' );
 override '_pipeline_configs' => sub {
     my ($self) = @_;
     my @pipeline_configs;
+    
+    $self->add_qc_config(\@pipeline_configs);
     
     push(
         @pipeline_configs,
