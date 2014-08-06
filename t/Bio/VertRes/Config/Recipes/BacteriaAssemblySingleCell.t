@@ -76,7 +76,7 @@ is_deeply($input_config_file,{
                                  'rna_seq_expression' => 0,
                                  'stored' => 1
                                },
-  'limit' => 100,
+  'limit' => 1000,
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_spades.log',
   'prefix' => '_spades_',
