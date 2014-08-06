@@ -78,7 +78,7 @@ is_deeply($input_config_file,{
                                },
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_velvet.log',
-  'limit' => 100,
+  'limit' => 1000,
   'module' => 'VertRes::Pipelines::Assembly',
   'prefix' => '_velvet_'
 },'Config file as expected');

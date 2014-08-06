@@ -77,7 +77,7 @@ is_deeply(
         },
         'root'   => '/path/to/root/my_database/seq-pipelines',
         'log'    => '/path/to/log/my_database/assembly_Abc_def_ghi123_iva.log',
-        'limit'  => 100,
+        'limit'  => 1000,
         'module' => 'VertRes::Pipelines::Assembly',
         'prefix' => '_iva_'
     },
