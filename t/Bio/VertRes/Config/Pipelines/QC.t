@@ -70,6 +70,7 @@ is_deeply(
             'bwa_exec'          => '/software/pathogen/external/apps/usr/local/bwa-0.6.1/bwa',
             'samtools'          => '/software/pathogen/external/apps/usr/bin/samtools',
             'adapters'          => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta',
+            'kraken_db'         => '/lustre/scratch108/pathogen/pathpipe/kraken/minikraken_20140330/',
             'fa_ref'            => '/path/to/ABC.fa',
             'gcdepth_R'         => '/software/pathogen/external/apps/usr/local/gcdepth/gcdepth.R',
             'snps'              => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin'
