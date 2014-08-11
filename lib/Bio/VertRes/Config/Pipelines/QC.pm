@@ -44,6 +44,7 @@ has '_samtools'             => ( is => 'ro', isa => 'Str', default => '/software
 has '_glf'                  => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/glf' );
 has '_mapviewdepth'         => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/bindepth' );
 has '_adapters'             => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta' );
+has '_kraken_db'            => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/kraken/minikraken_20140330/' );
 has '_snps'                 => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin' );
 has '_skip_genotype'        => ( is => 'ro', isa => 'Int', default => 1 );
 has '_gtype_confidence'     => ( is => 'ro', isa => 'Num', default => 1.2 );
@@ -93,6 +94,7 @@ override 'to_hash' => sub {
     $output_hash->{data}{glf}               = $self->_glf;
     $output_hash->{data}{mapviewdepth}      = $self->_mapviewdepth;
     $output_hash->{data}{adapters}          = $self->_adapters;
+    $output_hash->{data}{kraken_db}         = $self->_kraken_db;
     $output_hash->{data}{snps}              = $self->_snps;
     $output_hash->{data}{skip_genotype}     = $self->_skip_genotype;
     $output_hash->{data}{gtype_confidence}  = $self->_gtype_confidence;
