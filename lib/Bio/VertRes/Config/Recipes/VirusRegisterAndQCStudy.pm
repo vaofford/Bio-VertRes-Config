@@ -26,7 +26,7 @@ with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 has 'assembler'            => ( is => 'ro', isa => 'Str',  default => 'spades' );
 has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 1 );
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 1 );
-has '_pipeline_version'    => ( is => 'ro', isa => 'Num',  default => 3.1 );
+has '_pipeline_version'    => ( is => 'ro', isa => 'Str',  default => '2.1.1' );
 has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 1 );
 
 
