@@ -8,14 +8,14 @@ BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
     use Test::Most;
-    use_ok('Bio::VertRes::Config::Pipelines::VelvetAssembly');
+    use_ok('Bio::VertRes::Config::Pipelines::IvaAssembly');
 }
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
 
 ok(
     (
-        my $obj = Bio::VertRes::Config::Pipelines::VelvetAssembly->new(
+        my $obj = Bio::VertRes::Config::Pipelines::IvaAssembly->new(
             database    => 'my_database',
             database_connect_file => 't/data/database_connection_details',
             limits      => {project => ['Abc def (ghi123)']},
@@ -52,20 +52,23 @@ is_deeply(
                 'port'     => 1234,
                 'host'     => 'some_hostname'
             },
-            'assembler_exec'    => '/software/pathogen/external/apps/usr/bin/velvet',
+            'assembler_exec'    => '/software/pathogen/external/bin/iva',
             'dont_wait'         => 0,
-            'assembler'         => 'velvet',
+            'assembler'         => 'iva',
             'seq_pipeline_root' => '/path/to/root/my_database/seq-pipelines',
             'tmp_directory'     => '/lustre/scratch108/pathogen/pathpipe/tmp',
-            'max_threads'       => 2,
-            'pipeline_version'  => '2.0.1',
+            'max_threads'       => 8,
+            'pipeline_version'  => 2.1,
             'post_contig_filtering' => 300,
             'error_correct'     => 0,
             'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',
-            'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl',
+            'optimiser_exec'    => '/software/pathogen/external/bin/iva',
             'primers_file'      => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
+            'trimmomatic_jar'   => '/software/pathogen/external/apps/usr/local/Trimmomatic-0.32/trimmomatic-0.32.jar',
+            'adapters_file'     => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta',
             'remove_primers'    => 0,
-            'normalise'         => 0
+            'normalise'         => 0,
+            'improve_assembly'  => 0,
         },
         'max_lanes_to_search'     => 10000,
         'vrtrack_processed_flags' => {
@@ -73,68 +76,22 @@ is_deeply(
             'stored'             => 1
         },
         'root'   => '/path/to/root/my_database/seq-pipelines',
-        'log'    => '/path/to/log/my_database/assembly_Abc_def_ghi123_velvet.log',
+        'log'    => '/path/to/log/my_database/assembly_Abc_def_ghi123_iva.log',
         'limit'  => 1000,
         'module' => 'VertRes::Pipelines::Assembly',
-        'prefix' => '_velvet_'
+        'prefix' => '_iva_'
     },
     'output hash constructed correctly'
 );
 
 is(
     $obj->config,
-    $destination_directory . '/my_database/assembly/assembly_Abc_def_ghi123_velvet.conf',
+    $destination_directory . '/my_database/assembly/assembly_Abc_def_ghi123_iva.conf',
     'config file in expected format'
 );
 ok( $obj->create_config_file, 'Can run the create config file method' );
 ok( ( -e $obj->config ), 'Config file exists' );
 
-# Test limits
-ok(
-    (
-        $obj = Bio::VertRes::Config::Pipelines::VelvetAssembly->new(
-            database              => 'my_database',
-            database_connect_file => 't/data/database_connection_details',
-            limits                => {
-                project     => [ 'study 1',  'study 2' ],
-                sample      => [ 'sample 1', 'sample 2' ],
-                species     => ['species 1'],
-                other_stuff => ['some other stuff']
-            },
-            root_base           => '/path/to/root',
-            log_base            => '/path/to/log',
-            config_base         => '/path/to/config_base'
-        )
-    ),
-    'initialise annotation config with multiple limits'
-);
 
-is_deeply(
-    $obj->_escaped_limits,
-    {
-        'project'     => [ 'study\ 1',  'study\ 2' ],
-        'sample'      => [ 'sample\ 1', 'sample\ 2' ],
-        'species'     => [ 'species\ 1' ],
-        'other_stuff' => [ 'some\ other\ stuff' ]
-    },
-    'Check escaped limits are as expected'
-);
-is_deeply(
-    $obj->limits,
-    {
-        'project'     => [ 'study 1',  'study 2' ],
-        'sample'      => [ 'sample 1', 'sample 2' ],
-        'species'     => ['species 1'],
-        'other_stuff' => ['some other stuff']
-    },
-    'Check the input limits are unchanged'
-);
-
-# check config file name
-is(
-    $obj->config,
-    '/path/to/config_base/my_database/assembly/assembly_study_1_study_2_sample_1_sample_2_species_1_velvet.conf',
-    'config file name in expected format'
-);
 
 done_testing();

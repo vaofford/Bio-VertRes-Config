@@ -25,8 +25,8 @@ has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix
 has 'toplevel_action'      => ( is => 'ro', isa => 'Str', default => '__VRTrack_Assembly__' );
 
 has '_max_failures'        => ( is => 'ro', isa => 'Int', default => 3 );
-has '_max_lanes_to_search' => ( is => 'ro', isa => 'Int', default => 200 );
-has '_limit'               => ( is => 'ro', isa => 'Int', default => 100 );
+has '_max_lanes_to_search' => ( is => 'ro', isa => 'Int', default => 10000 );
+has '_limit'               => ( is => 'ro', isa => 'Int', default => 1000 );
 has '_tmp_directory'       => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/tmp' );
 has '_genome_size'         => ( is => 'ro', isa => 'Int', default => 10000000 );
 has '_assembler'           => ( is => 'ro', isa => 'Str', default => 'velvet' );
@@ -38,7 +38,7 @@ has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_sga_exec'            => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/sga' );
 has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_post_contig_filtering' => ( is => 'ro', isa => 'Int', default => 300 );
-has '_primers_file'        => ( is => 'ro', isa => 'Str',  default => '/nfs/pathnfs05/conf/primers/virus_primers' );
+has '_primers_file'        => ( is => 'ro', isa => 'Str',  default => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr' );
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 0 );
 
 
@@ -48,7 +48,7 @@ override 'to_hash' => sub {
     $output_hash->{limit}                   = $self->_limit;
     $output_hash->{max_lanes_to_search}     = $self->_max_lanes_to_search;
     $output_hash->{max_failures}            = $self->_max_failures;
-    $output_hash->{vrtrack_processed_flags} = { stored => 1, assembled => 0, rna_seq_expression => 0 };
+    $output_hash->{vrtrack_processed_flags} = { stored => 1, rna_seq_expression => 0 };
     $output_hash->{limits}                  = $self->_escaped_limits;
 
     $output_hash->{data}{tmp_directory} = $self->_tmp_directory;

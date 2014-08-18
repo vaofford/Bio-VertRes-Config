@@ -55,7 +55,7 @@ is_deeply($input_config_file,{
               'error_correct' => 0,
               'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'assembler' => 'spades',
-              'primers_file' => '/nfs/pathnfs05/conf/primers/virus_primers',
+              'primers_file' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
               'normalise' => 0,
               'tmp_directory' => '/lustre/scratch108/pathogen/pathpipe/tmp',
               'sga_exec' => '/software/pathogen/external/apps/usr/bin/sga',
@@ -66,21 +66,20 @@ is_deeply($input_config_file,{
               'post_contig_filtering' => 300,
               'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py'
             },
-  'max_lanes_to_search' => 200,
+  'max_lanes_to_search' => 10000,
   'limits' => {
                 'project' => [
                                'ABC\\ study\\(\\ EFG\\ \\)'
                              ]
               },
   'vrtrack_processed_flags' => {
-                                 'assembled' => 0,
                                  'rna_seq_expression' => 0,
                                  'stored' => 1
                                },
-  'limit' => 100,
+  'limit' => 1000,
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_spades.log',
-  'prefix' => '_assembly_',
+  'prefix' => '_spades_',
   'module' => 'VertRes::Pipelines::Assembly'
 },'Config file as expected');
 

@@ -31,6 +31,10 @@ override '_pipeline_configs' => sub {
     {
         $self->add_virus_velvet_assembly_config(\@pipeline_configs);
     }
+    elsif ($self->assembler eq 'iva')
+    {
+        $self->add_virus_iva_assembly_config(\@pipeline_configs);
+    }
     else
     {
         $self->add_virus_spades_assembly_config(\@pipeline_configs);

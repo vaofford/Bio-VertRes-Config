@@ -63,19 +63,18 @@ is_deeply(
             'error_correct'     => 0,
             'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',
             'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl',
-            'primers_file'      => '/nfs/pathnfs05/conf/primers/virus_primers',
+            'primers_file'      => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
             'remove_primers'    => 0,
             'normalise'         => 0
         },
-        'max_lanes_to_search'     => 200,
+        'max_lanes_to_search'     => 10000,
         'vrtrack_processed_flags' => {
-            'assembled'          => 0,
             'rna_seq_expression' => 0,
             'stored'             => 1
         },
         'root'   => '/path/to/root/my_database/seq-pipelines',
         'log'    => '/path/to/log/my_database/assembly_Abc_def_ghi123_velvet.log',
-        'limit'  => 100,
+        'limit'  => 1000,
         'module' => 'VertRes::Pipelines::Assembly',
         'prefix' => '_assembly_'
     },

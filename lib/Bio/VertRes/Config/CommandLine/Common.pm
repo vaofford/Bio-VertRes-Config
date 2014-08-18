@@ -152,7 +152,7 @@ sub BUILD {
     $self->assembler($assembler) if ( defined($assembler) );
     $self->database_connect_file($database_connect_file)
       if ( defined($database_connect_file) );
-    $self->no_ass($no_aa) if ( defined $no_ass );
+    $self->no_ass($no_ass) if ( defined $no_ass );
 
     $regeneration_log_file ||=
       join( '/', ( $self->config_base, 'command_line.log' ) );

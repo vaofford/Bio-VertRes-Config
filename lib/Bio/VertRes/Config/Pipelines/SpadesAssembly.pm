@@ -19,6 +19,7 @@ use Moose;
 extends 'Bio::VertRes::Config::Pipelines::Assembly';
 
 has '_assembler'           => ( is => 'ro', isa => 'Str',  default => 'spades' );
+has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default => '_spades_' );
 has '_assembler_exec'      => ( is => 'ro', isa => 'Str',  default => '/software/pathogen/external/apps/usr/bin/spades.py' );
 has '_optimiser_exec'      => ( is => 'ro', isa => 'Str',  default => '/software/pathogen/external/apps/usr/bin/spades.py' );
 has '_max_threads'         => ( is => 'ro', isa => 'Int',  default => 2 );

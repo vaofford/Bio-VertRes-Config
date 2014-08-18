@@ -54,7 +54,7 @@ is_deeply($input_config_file,{
               'error_correct' => 0,
               'assembler_exec' => '/software/pathogen/external/apps/usr/bin/velvet',
               'dont_wait' => 0,
-              'primers_file' => '/nfs/pathnfs05/conf/primers/virus_primers',
+              'primers_file' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
               'assembler' => 'velvet',
               'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'normalise' => 0,
@@ -65,22 +65,21 @@ is_deeply($input_config_file,{
               'max_threads' => 2,
               'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl'
             },
-  'max_lanes_to_search' => 200,
+  'max_lanes_to_search' => 10000,
   'limits' => {
                 'project' => [
                                'ABC\\ study\\(\\ EFG\\ \\)'
                              ]
               },
   'vrtrack_processed_flags' => {
-                                 'assembled' => 0,
                                  'rna_seq_expression' => 0,
                                  'stored' => 1
                                },
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_velvet.log',
-  'limit' => 100,
+  'limit' => 1000,
   'module' => 'VertRes::Pipelines::Assembly',
-  'prefix' => '_assembly_'
+  'prefix' => '_velvet_'
 },'Config file as expected');
 
 # Check annotation file

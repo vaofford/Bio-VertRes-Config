@@ -70,6 +70,7 @@ is_deeply($input_config_file,{
               'exit_on_errors' => 0,
               'bwa_exec' => '/software/pathogen/external/apps/usr/local/bwa-0.6.1/bwa',
               'adapters' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta',
+              'kraken_db' => '/lustre/scratch108/pathogen/pathpipe/kraken/minikraken_20140330/',
               'samtools' => '/software/pathogen/external/apps/usr/bin/samtools',
               'fa_ref' => '/path/to/ABC.fa',
               'gcdepth_R'         => '/software/pathogen/external/apps/usr/local/gcdepth/gcdepth.R',
@@ -113,7 +114,7 @@ is_deeply($input_config_file,{
               'error_correct' => 0,
               'assembler_exec' => '/software/pathogen/external/apps/usr/bin/velvet',
               'dont_wait' => 0,
-              'primers_file' => '/nfs/pathnfs05/conf/primers/virus_primers',
+              'primers_file' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
               'assembler' => 'velvet',
               'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'normalise' => 0,
@@ -124,22 +125,21 @@ is_deeply($input_config_file,{
               'max_threads' => 2,
               'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl'
             },
-  'max_lanes_to_search' => 200,
+  'max_lanes_to_search' => 10000,
   'limits' => {
                 'project' => [
                                'ABC\\ study\\(\\ EFG\\ \\)'
                              ]
               },
   'vrtrack_processed_flags' => {
-                                 'assembled' => 0,
                                  'rna_seq_expression' => 0,
                                  'stored' => 1
                                },
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_velvet.log',
-  'limit' => 100,
+  'limit' => 1000,
   'module' => 'VertRes::Pipelines::Assembly',
-  'prefix' => '_assembly_'
+  'prefix' => '_velvet_'
 },'Config file as expected');
 
 # Check annotation file
@@ -242,6 +242,7 @@ is_deeply($input_config_file,{
               'exit_on_errors' => 0,
               'bwa_exec' => '/software/pathogen/external/apps/usr/local/bwa-0.6.1/bwa',
               'adapters' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta',
+              'kraken_db' => '/lustre/scratch108/pathogen/pathpipe/kraken/minikraken_20140330/',
               'samtools' => '/software/pathogen/external/apps/usr/bin/samtools',
               'fa_ref' => '/path/to/ABC.fa',
               'gcdepth_R'         => '/software/pathogen/external/apps/usr/local/gcdepth/gcdepth.R',
@@ -304,7 +305,7 @@ is_deeply($input_config_file,{
               'error_correct' => 0,
               'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades.py',
               'dont_wait' => 0,
-              'primers_file' => '/nfs/pathnfs05/conf/primers/virus_primers',
+              'primers_file' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
               'assembler' => 'spades',
               'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'normalise' => 0,
@@ -316,22 +317,21 @@ is_deeply($input_config_file,{
               'single_cell' => 0,
               'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py'
             },
-  'max_lanes_to_search' => 200,
+  'max_lanes_to_search' => 10000,
   'limits' => {
                 'project' => [
                                'ABC\\ study\\(\\ EFG\\ \\)'
                              ]
               },
   'vrtrack_processed_flags' => {
-                                 'assembled' => 0,
                                  'rna_seq_expression' => 0,
                                  'stored' => 1
                                },
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_spades.log',
-  'limit' => 100,
+  'limit' => 1000,
   'module' => 'VertRes::Pipelines::Assembly',
-  'prefix' => '_assembly_'
+  'prefix' => '_spades_'
 },'Config file as expected with spades assembler');
 
 # Populate a new study
@@ -387,6 +387,7 @@ is_deeply($input_config_file,{
               'exit_on_errors' => 0,
               'bwa_exec' => '/software/pathogen/external/apps/usr/local/bwa-0.6.1/bwa',
               'adapters' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta',
+              'kraken_db' => '/lustre/scratch108/pathogen/pathpipe/kraken/minikraken_20140330/',
               'samtools' => '/software/pathogen/external/apps/usr/bin/samtools',
               'fa_ref' => '/path/to/ABC.fa',
               'gcdepth_R'         => '/software/pathogen/external/apps/usr/local/gcdepth/gcdepth.R',

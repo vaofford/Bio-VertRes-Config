@@ -37,10 +37,7 @@ override '_pipeline_configs' => sub {
     my @pipeline_configs;
     $self->add_bacteria_qc_config(\@pipeline_configs);
 
-    if ($self->_no_ass){
-        print "Not generating assembly and annotation configs!\n";
-        return \@pipeline_configs;
-    }
+    return \@pipeline_configs if ($self->no_ass);
 
     if($self->assembler eq 'spades')
     {
