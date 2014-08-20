@@ -33,14 +33,32 @@ has '_assembler'           => ( is => 'ro', isa => 'Str', default => 'velvet' );
 has '_assembler_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/velvet' );
 has '_optimiser_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl' );
 has '_max_threads'         => ( is => 'ro', isa => 'Int', default => 1 );
-has '_pipeline_version'    => ( is => 'ro', isa => 'Str', default => '2.0.1' );
+has '_pipeline_version'    => ( is => 'ro', isa => 'Str', lazy_build => 1 );
 has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_sga_exec'            => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/sga' );
 has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_post_contig_filtering' => ( is => 'ro', isa => 'Int', default => 300 );
 has '_primers_file'        => ( is => 'ro', isa => 'Str',  default => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr' );
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 0 );
+has '_improve_assembly'    => ( is => 'ro', isa => 'Bool', lazy_build => 1 );
 
+sub _build__improve_assembly {
+    my $self = shift;
+    return (defined $self->_optimiser_exec) ? 1 : 0;
+}
+
+sub _build__pipeline_version {
+    my $self = shift;
+
+    my $flag = $self->_assembler . '_'
+               $self->_error_correct . 
+               $self->_normalise .
+               $self->_remove_primers .
+               $self->_improve_assembly;
+
+    my $version_hash = $self->_versions;
+    return $version_hash->{$flag};
+}
 
 override 'to_hash' => sub {
     my ($self) = @_;
@@ -51,7 +69,7 @@ override 'to_hash' => sub {
     $output_hash->{vrtrack_processed_flags} = { stored => 1, rna_seq_expression => 0 };
     $output_hash->{limits}                  = $self->_escaped_limits;
 
-    $output_hash->{data}{tmp_directory} = $self->_tmp_directory;
+    $output_hash->{data}{tmp_directory}     = $self->_tmp_directory;
 
     # rough guess at the maximum you expect to get
     $output_hash->{data}{genome_size}       = $self->_genome_size;
@@ -65,6 +83,8 @@ override 'to_hash' => sub {
     $output_hash->{data}{sga_exec}          = $self->_sga_exec;
     $output_hash->{data}{normalise}         = $self->_normalise;
     $output_hash->{data}{post_contig_filtering} = $self->_post_contig_filtering;
+    $output_hash->{data}{improve_assembly}  = $self->_improve_assembly;
+
 
     # Remove primers
     $output_hash->{data}{primers_file}   = $self->_primers_file;

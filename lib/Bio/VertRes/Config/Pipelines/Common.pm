@@ -49,6 +49,61 @@ has 'password' => ( is => 'ro', isa => 'Maybe[Str]', lazy     => 1, builder => '
 has 'database_connect_file' => ( is => 'ro', isa => 'Str', required => 1 );
 has '_database_connection_details' =>
   ( is => 'ro', isa => 'Maybe[HashRef]', lazy => 1, builder => '_build__database_connection_details' );
+has '_versions' => ( is => 'rw', isa => 'HashRef', lazy_build => 1 );
+
+sub _build__versions {
+    my %versions = (
+        'velvet_0000' => '2.0.0',
+        'velvet_1110' => '2.1.0',
+        'velvet_1100' => '2.2.0',
+        'velvet_1010' => '2.3.0',
+        'velvet_0110' => '2.4.0',
+        'velvet_1000' => '2.5.0',
+        'velvet_0100' => '2.6.0',
+        'velvet_0010' => '2.7.0',
+        'velvet_0001' => '2.0.1',
+        'velvet_1111' => '2.1.1',
+        'velvet_1101' => '2.2.1',
+        'velvet_1011' => '2.3.1',
+        'velvet_0111' => '2.4.1',
+        'velvet_1001' => '2.5.1',
+        'velvet_0101' => '2.6.1',
+        'velvet_0011' => '2.7.1',
+        'spades_0000' => '3.0.0',
+        'spades_1110' => '3.1.0',
+        'spades_1100' => '3.2.0',
+        'spades_1010' => '3.3.0',
+        'spades_0110' => '3.4.0',
+        'spades_1000' => '3.5.0',
+        'spades_0100' => '3.6.0',
+        'spades_0010' => '3.7.0',
+        'spades_0001' => '3.0.1',
+        'spades_1111' => '3.1.1',
+        'spades_1101' => '3.2.1',
+        'spades_1011' => '3.3.1',
+        'spades_0111' => '3.4.1',
+        'spades_1001' => '3.5.1',
+        'spades_0101' => '3.6.1',
+        'spades_0011' => '3.7.1',
+        'iva_0000'    => '5.0.0',
+        'iva_1110'    => '5.1.0',
+        'iva_1100'    => '5.2.0',
+        'iva_1010'    => '5.3.0',
+        'iva_0110'    => '5.4.0',
+        'iva_1000'    => '5.5.0',
+        'iva_0100'    => '5.6.0',
+        'iva_0010'    => '5.7.0',
+        'iva_0001'    => '5.0.1',
+        'iva_1111'    => '5.1.1',
+        'iva_1101'    => '5.2.1',
+        'iva_1011'    => '5.3.1',
+        'iva_0111'    => '5.4.1',
+        'iva_1001'    => '5.5.1',
+        'iva_0101'    => '5.6.1',
+        'iva_0011'    => '5.7.1'
+    );
+    return \%versions;
+}
 
 sub _build_root {
     my ($self) = @_;
