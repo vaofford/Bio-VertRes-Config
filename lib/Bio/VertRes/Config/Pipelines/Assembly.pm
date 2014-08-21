@@ -33,7 +33,7 @@ has '_assembler'           => ( is => 'ro', isa => 'Str', default => 'velvet' );
 has '_assembler_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/velvet' );
 has '_optimiser_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl' );
 has '_max_threads'         => ( is => 'ro', isa => 'Int', default => 1 );
-has '_pipeline_version'    => ( is => 'ro', isa => 'Str', lazy_build => 1 );
+has '_pipeline_version'    => ( is => 'ro', isa => 'Maybe[Str]', lazy_build => 1 );
 has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_sga_exec'            => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/sga' );
 has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
@@ -50,18 +50,22 @@ sub _build__improve_assembly {
 sub _build__pipeline_version {
     my $self = shift;
 
-    my $flag = $self->_assembler . '_'
+    my $flag = $self->_assembler . '_' .
                $self->_error_correct . 
                $self->_normalise .
                $self->_remove_primers .
                $self->_improve_assembly;
 
     my $version_hash = $self->_versions;
+    print "FLAG: $flag\n";
     return $version_hash->{$flag};
 }
 
 override 'to_hash' => sub {
     my ($self) = @_;
+
+    print "_pipeline_version: " . $self->_pipeline_version . "\n";
+
     my $output_hash = super();
     $output_hash->{limit}                   = $self->_limit;
     $output_hash->{max_lanes_to_search}     = $self->_max_lanes_to_search;

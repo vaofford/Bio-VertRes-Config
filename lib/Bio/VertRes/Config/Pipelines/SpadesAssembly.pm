@@ -14,7 +14,7 @@ A class for generating the Assembly pipeline config file using the velvet assemb
 
 =cut
 
-
+use Data::Dumper;
 use Moose;
 extends 'Bio::VertRes::Config::Pipelines::Assembly';
 
@@ -28,6 +28,8 @@ has '_single_cell'         => ( is => 'ro', isa => 'Bool',  default => 0 );
 override 'to_hash' => sub {
     my ($self) = @_;
     my $output_hash = super();
+
+    print Dumper $output_hash;
 
     $output_hash->{data}{single_cell} = $self->_single_cell;
 

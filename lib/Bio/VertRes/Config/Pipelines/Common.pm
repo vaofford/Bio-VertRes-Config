@@ -210,12 +210,18 @@ sub create_config_file {
 
     # dont print out an extra wrapper variable
     $Data::Dumper::Terse = 1;
+
+    print "to_hash dump: ";
+    print Dumper $self->to_hash;
+
     write_file( $self->config, Dumper( $self->to_hash ) );
     chmod $mode, $self->config;
 }
 
 sub to_hash {
     my ($self) = @_;
+
+    print "Common\n";
 
     my %output_hash = (
         root   => $self->root,
