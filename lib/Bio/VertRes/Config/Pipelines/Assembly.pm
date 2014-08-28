@@ -33,7 +33,6 @@ has '_assembler'           => ( is => 'ro', isa => 'Str', default => 'velvet' );
 has '_assembler_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/velvet' );
 has '_optimiser_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl' );
 has '_max_threads'         => ( is => 'ro', isa => 'Int', default => 1 );
-#has '_pipeline_version'    => ( is => 'rw', isa => 'Maybe[Str]', lazy_build => 1 );
 has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_sga_exec'            => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/sga' );
 has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
