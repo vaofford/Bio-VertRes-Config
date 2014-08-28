@@ -77,7 +77,6 @@ sub add_bacteria_velvet_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _pipeline_version              => $self->_pipeline_version,
           _normalise                     => $self->_normalise
       )
   );
@@ -99,7 +98,6 @@ sub add_bacteria_spades_single_cell_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _pipeline_version              => $self->_pipeline_version,
           _normalise                     => $self->_normalise,
           _single_cell                   => $self->_single_cell,
       )
@@ -110,6 +108,7 @@ sub add_bacteria_spades_single_cell_assembly_config
 sub add_bacteria_spades_assembly_config
 {
   my ($self, $pipeline_configs_array) = @_;
+
   push(
       @{$pipeline_configs_array},
       Bio::VertRes::Config::Pipelines::SpadesAssembly->new(
@@ -122,7 +121,6 @@ sub add_bacteria_spades_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _pipeline_version              => $self->_pipeline_version,
           _normalise                     => $self->_normalise
       )
   );

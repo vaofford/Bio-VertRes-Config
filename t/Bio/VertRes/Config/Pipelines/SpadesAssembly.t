@@ -21,7 +21,11 @@ ok(
             limits      => {project => ['Abc def (ghi123)']},
             root_base   => '/path/to/root',
             log_base    => '/path/to/log',
-            config_base => $destination_directory
+            config_base => $destination_directory,
+            _error_correct        => 1,
+            _normalise            => 0,
+            _remove_primers       => 1,
+            _improve_assembly     => 0
         )
     ),
     'initialise assembly config'
@@ -58,13 +62,14 @@ is_deeply(
             'seq_pipeline_root' => '/path/to/root/my_database/seq-pipelines',
             'tmp_directory'     => '/lustre/scratch108/pathogen/pathpipe/tmp',
             'max_threads'       => 2,
-            'pipeline_version'  => '2.0.1',
+            'pipeline_version'  => '3.3.0',
             'post_contig_filtering' => 300,
-            'error_correct'     => 0,
+            'error_correct'     => 1,
+            'improve_assembly'  => 0,
             'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',
             'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/spades.py',
             'primers_file'      => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
-            'remove_primers'    => 0,
+            'remove_primers'    => 1,
             'normalise'         => 0,
             'single_cell'       => 0
         },

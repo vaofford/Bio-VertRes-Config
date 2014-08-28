@@ -23,15 +23,18 @@ with 'Bio::VertRes::Config::Recipes::Roles::VirusRegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 
+use Data::Dumper;
+
 has 'assembler'            => ( is => 'ro', isa => 'Str',  default => 'spades' );
 has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 1 );
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 1 );
-has '_pipeline_version'    => ( is => 'ro', isa => 'Str',  default => '2.1.1' );
+has '_pipeline_version'    => ( is => 'ro', isa => 'Str' );
 has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 1 );
 
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
+
     my @pipeline_configs;
     $self->add_virus_qc_config(\@pipeline_configs);
     #if($self->assembler eq 'velvet')

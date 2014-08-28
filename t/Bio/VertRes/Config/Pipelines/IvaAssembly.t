@@ -58,7 +58,7 @@ is_deeply(
             'seq_pipeline_root' => '/path/to/root/my_database/seq-pipelines',
             'tmp_directory'     => '/lustre/scratch108/pathogen/pathpipe/tmp',
             'max_threads'       => 8,
-            'pipeline_version'  => 2.1,
+            'pipeline_version'  => '5.0.0',
             'post_contig_filtering' => 300,
             'error_correct'     => 0,
             'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',

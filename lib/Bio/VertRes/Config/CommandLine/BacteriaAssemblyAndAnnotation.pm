@@ -13,12 +13,12 @@ use lib './lib';
 use Bio::VertRes::Config::Recipes::BacteriaAssemblyAndAnnotation;
 extends 'Bio::VertRes::Config::CommandLine::Common';
 
+print "Bio::VertRes::Config::CommandLine::BacteriaAssemblyAndAnnotation\n";
+
 has 'database'  => ( is => 'rw', isa => 'Str', default => 'pathogen_prok_track' );
 
 sub run {
     my ($self) = @_;
-
-    print "local\n\n";
 
     ($self->type && $self->id  && !$self->help ) or die $self->usage_text;
 

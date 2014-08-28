@@ -77,7 +77,6 @@ sub add_eukaryotes_velvet_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _pipeline_version              => $self->_pipeline_version, 
           _normalise                     => $self->_normalise,
           _primers_file                  => $self->_primers_file,
           _max_threads                   => $self->_max_threads
@@ -101,7 +100,6 @@ sub add_eukaryotes_spades_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _pipeline_version              => $self->_pipeline_version, 
           _normalise                     => $self->_normalise,
           _primers_file                  => $self->_primers_file,
           _max_threads                   => $self->_max_threads

@@ -61,6 +61,7 @@ is_deeply($input_config_file,{
               'sga_exec' => '/software/pathogen/external/apps/usr/bin/sga',
               'tmp_directory' => '/lustre/scratch108/pathogen/pathpipe/tmp',
               'pipeline_version' => '2.0.1',
+              'improve_assembly' => 1,
               'post_contig_filtering' => 300,
               'max_threads' => 2,
               'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl'
