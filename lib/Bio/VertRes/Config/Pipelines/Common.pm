@@ -155,6 +155,7 @@ sub create_config_file {
 
     # dont print out an extra wrapper variable
     $Data::Dumper::Terse = 1;
+
     write_file( $self->config, Dumper( $self->to_hash ) );
     chmod $mode, $self->config;
 }

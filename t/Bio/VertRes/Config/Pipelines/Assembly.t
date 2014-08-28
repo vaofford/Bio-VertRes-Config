@@ -58,14 +58,14 @@ is_deeply(
             'seq_pipeline_root' => '/path/to/root/my_database/seq-pipelines',
             'tmp_directory'     => '/lustre/scratch108/pathogen/pathpipe/tmp',
             'max_threads'       => 1,
-            'pipeline_version'  => 2.1,
             'post_contig_filtering' => 300,
             'error_correct'     => 0,
             'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',
             'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl',
             'primers_file'      => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
             'remove_primers'    => 0,
-            'normalise'         => 0
+            'normalise'         => 0,
+            'improve_assembly'  => 1
         },
         'max_lanes_to_search'     => 10000,
         'vrtrack_processed_flags' => {

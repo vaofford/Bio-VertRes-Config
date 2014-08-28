@@ -18,10 +18,14 @@ ok(
         my $obj = Bio::VertRes::Config::Pipelines::VelvetAssembly->new(
             database    => 'my_database',
             database_connect_file => 't/data/database_connection_details',
-            limits      => {project => ['Abc def (ghi123)']},
-            root_base   => '/path/to/root',
-            log_base    => '/path/to/log',
-            config_base => $destination_directory
+            limits                => {project => ['Abc def (ghi123)']},
+            root_base             => '/path/to/root',
+            log_base              => '/path/to/log',
+            config_base           => $destination_directory,
+            _error_correct        => 1,
+            _normalise            => 1,
+            _remove_primers       => 1,
+            _improve_assembly     => 1
         )
     ),
     'initialise assembly config'
@@ -58,14 +62,15 @@ is_deeply(
             'seq_pipeline_root' => '/path/to/root/my_database/seq-pipelines',
             'tmp_directory'     => '/lustre/scratch108/pathogen/pathpipe/tmp',
             'max_threads'       => 2,
-            'pipeline_version'  => 2.1,
+            'pipeline_version'  => '2.1.1',
             'post_contig_filtering' => 300,
-            'error_correct'     => 0,
+            'error_correct'     => 1,
+            'improve_assembly'  => 1,
             'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',
             'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl',
             'primers_file'      => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
-            'remove_primers'    => 0,
-            'normalise'         => 0
+            'remove_primers'    => 1,
+            'normalise'         => 1
         },
         'max_lanes_to_search'     => 10000,
         'vrtrack_processed_flags' => {

@@ -24,6 +24,37 @@ has '_assembler_exec'      => ( is => 'ro', isa => 'Str', default => '/software/
 has '_optimiser_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl' );
 has '_max_threads'         => ( is => 'ro', isa => 'Int', default => 2 );
 
+has '_pipeline_version'    => ( is => 'rw', isa => 'Str',  lazy_build => 1 );
+has '_flag'                => ( is => 'ro', isa => 'Str',  lazy_build => 1 );
+
+sub _build__flag {
+    my $self = shift;
+
+    my $flag = $self->_error_correct . 
+               $self->_normalise .
+               $self->_remove_primers .
+               $self->_improve_assembly;
+    return $flag;
+}
+
+sub _build__pipeline_version {
+    my $self = shift;
+    my %subversions = %{ $self->_subversions };
+
+    my $version = '2' . $subversions{$self->_flag};
+    $self->_pipeline_version($version);
+}
+
+override 'to_hash' => sub {
+    my ($self) = @_;
+
+    my $output_hash = super();
+
+    $output_hash->{data}{pipeline_version} = $self->_pipeline_version;
+
+    return $output_hash;
+};
+
 __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
