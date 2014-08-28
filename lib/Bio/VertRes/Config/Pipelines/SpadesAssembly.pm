@@ -14,7 +14,6 @@ A class for generating the Assembly pipeline config file using the velvet assemb
 
 =cut
 
-use Data::Dumper;
 use Moose;
 extends 'Bio::VertRes::Config::Pipelines::Assembly';
 

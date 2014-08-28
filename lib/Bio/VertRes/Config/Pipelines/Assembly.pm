@@ -15,7 +15,6 @@ A base class for generating the Assembly pipeline config file
 =cut
 
 use Moose;
-use Data::Dumper;
 use Bio::VertRes::Config::Pipelines::Common;
 extends 'Bio::VertRes::Config::Pipelines::Common';
 with 'Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter';
@@ -74,7 +73,6 @@ sub _build__improve_assembly {
 
 override 'to_hash' => sub {
     my ($self) = @_;
-
     my $output_hash = super();
 
     $output_hash->{limit}                   = $self->_limit;
@@ -82,7 +80,6 @@ override 'to_hash' => sub {
     $output_hash->{max_failures}            = $self->_max_failures;
     $output_hash->{vrtrack_processed_flags} = { stored => 1, rna_seq_expression => 0 };
     $output_hash->{limits}                  = $self->_escaped_limits;
-
     $output_hash->{data}{tmp_directory}     = $self->_tmp_directory;
 
     # rough guess at the maximum you expect to get
@@ -92,13 +89,11 @@ override 'to_hash' => sub {
     $output_hash->{data}{assembler_exec}    = $self->_assembler_exec;
     $output_hash->{data}{optimiser_exec}    = $self->_optimiser_exec;
     $output_hash->{data}{max_threads}       = $self->_max_threads;
-    #$output_hash->{data}{pipeline_version}  = $self->_pipeline_version;
     $output_hash->{data}{error_correct}     = $self->_error_correct;
     $output_hash->{data}{sga_exec}          = $self->_sga_exec;
     $output_hash->{data}{normalise}         = $self->_normalise;
     $output_hash->{data}{post_contig_filtering} = $self->_post_contig_filtering;
     $output_hash->{data}{improve_assembly}  = $self->_improve_assembly;
-
 
     # Remove primers
     $output_hash->{data}{primers_file}   = $self->_primers_file;

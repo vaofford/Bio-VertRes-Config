@@ -9,11 +9,8 @@ Create assembly and annotation files, but QC and store must have been run first,
 =cut
 
 use Moose;
-use lib './lib';
 use Bio::VertRes::Config::Recipes::BacteriaAssemblyAndAnnotation;
 extends 'Bio::VertRes::Config::CommandLine::Common';
-
-print "Bio::VertRes::Config::CommandLine::BacteriaAssemblyAndAnnotation\n";
 
 has 'database'  => ( is => 'rw', isa => 'Str', default => 'pathogen_prok_track' );
 
