@@ -40,9 +40,13 @@ has 'toplevel_admin_approval_required'   => ( is => 'ro', isa => 'Bool', default
 has '_annotation_file'             => ( is => 'ro', isa => 'Str', lazy => 1, builder => '_build__annotation_file' );
 has '_sequencing_file_suffix'      => ( is => 'ro', isa => 'Str',  default => 'markdup.bam' );
 has 'protocol'                     => ( is => 'ro', isa => 'Str',  required => 1 );
-has '_mapping_quality'             => ( is => 'ro', isa => 'Int',  default => 1 );
+has '_mapping_quality'             => ( is => 'ro', isa => 'Int',  default => 10 );
 has '_intergenic_regions'          => ( is => 'ro', isa => 'Bool', default => 1 );
 has '_ignore_rnaseq_called_status' => ( is => 'ro', isa => 'Bool', default => 1 );
+
+has '_window_margins'     => ( is => 'ro', isa => 'Int', default => 0 );
+has '_no_coverage_plots'  => ( is => 'ro', isa => 'Bool', default => 0 );
+
 
 sub _build__annotation_file {
     my ($self) = @_;
@@ -65,6 +69,8 @@ override 'to_hash' => sub {
     $output_hash->{data}{mapping_quality}             = $self->_mapping_quality;
     $output_hash->{data}{intergenic_regions}          = $self->_intergenic_regions;
     $output_hash->{data}{ignore_rnaseq_called_status} = $self->_ignore_rnaseq_called_status;
+    $output_hash->{data}{window_margins}              = $self->_window_margins;
+    $output_hash->{data}{no_coverage_plots}           = $self->_no_coverage_plots;
 
     return $output_hash;
 };

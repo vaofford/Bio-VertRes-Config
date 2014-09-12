@@ -63,6 +63,9 @@ is_deeply(
                           'protocol' => 'StrandSpecificProtocol',
                           'ignore_rnaseq_called_status' => 1,
                           'intergenic_regions' => 1,
+                          'no_coverage_plots' => 0,
+                          'mapping_quality' => 10,
+                          'window_margins'  => 0,
                           'db' => {
                                     'database' => 'my_database',
                                     'password' => 'some_password',
@@ -71,7 +74,6 @@ is_deeply(
                                     'host' => 'some_hostname'
                                   },
                           'dont_wait' => 0,
-                          'mapping_quality' => 1,
                           'sequencing_file_suffix' => 'markdup.bam'
                         },
               'log' => '/path/to/log/my_database/rna_seq_ABC_study_EFG_ABC.log',

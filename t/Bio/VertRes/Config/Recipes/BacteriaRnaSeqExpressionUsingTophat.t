@@ -8,7 +8,7 @@ BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
     use Test::Most;
-    use_ok('Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingTophat');
+    use_ok('Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingTophat');
 }
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
@@ -16,14 +16,13 @@ my $destination_directory = $destination_directory_obj->dirname();
 
 ok(
     (
-        my $obj = Bio::VertRes::Config::Recipes::EukaryotesRnaSeqExpressionUsingTophat->new(
+        my $obj = Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingTophat->new(
             database    => 'my_database',
             config_base => $destination_directory,
             database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'] },
             reference_lookup_file => 't/data/refs.index',
-            reference             => 'ABC',
-            additional_mapper_params => ' -I 10000 -i 70 -g 1'
+            reference             => 'ABC'
         )
     ),
     'initalise creating files'
@@ -74,8 +73,7 @@ is_deeply($input_config_file,{
               'do_cleanup' => 1,
               'ignore_mapped_status' => 1,
               'slx_mapper' => 'tophat',
-              'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/tophat-2.0.8b.Linux_x86_64/tophat',
-              'additional_mapper_params' => ' -I 10000 -i 70 -g 1'
+              'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/tophat-2.0.8b.Linux_x86_64/tophat'
             },
   'limits' => {
                 'project' => [
@@ -107,7 +105,7 @@ is_deeply($input_config_file,{
             'host' => 'some_hostname'
           },
   'data' => {
-              'protocol' => 'StandardProtocol',
+              'protocol' => 'StrandSpecificProtocol',
               'annotation_file' => '/path/to/ABC.gff',
               'intergenic_regions' => 0,
               'no_coverage_plots' => 1,

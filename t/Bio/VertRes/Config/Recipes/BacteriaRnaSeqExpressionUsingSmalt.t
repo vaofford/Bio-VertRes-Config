@@ -108,6 +108,9 @@ is_deeply($input_config_file,{
               'protocol' => 'StrandSpecificProtocol',
               'annotation_file' => '/path/to/ABC.gff',
               'intergenic_regions' => 1,
+              'no_coverage_plots' => 0,
+              'mapping_quality' => 10,
+              'window_margins'  => 0,
               'ignore_rnaseq_called_status' => 1,
               'db' => {
                         'database' => 'my_database',
@@ -117,8 +120,7 @@ is_deeply($input_config_file,{
                         'host' => 'some_hostname'
                       },
               'dont_wait' => 0,
-              'sequencing_file_suffix' => 'markdup.bam',
-              'mapping_quality' => 1
+              'sequencing_file_suffix' => 'markdup.bam'
             },
   'limits' => {
                 'project' => [

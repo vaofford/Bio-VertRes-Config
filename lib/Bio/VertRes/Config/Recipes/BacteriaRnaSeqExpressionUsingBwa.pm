@@ -28,6 +28,8 @@ with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 with 'Bio::VertRes::Config::Recipes::Roles::BacteriaRnaSeqExpression';
 
 has 'protocol'  => ( is => 'ro', isa => 'Str',  default => 'StrandSpecificProtocol' );
+has '_intergenic_regions' => ( is => 'ro', isa => 'Bool', default => 1 );
+has '_no_coverage_plots'  => ( is => 'ro', isa => 'Bool', default => 0 );
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
