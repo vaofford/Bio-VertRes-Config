@@ -32,7 +32,9 @@ sub add_bacteria_rna_seq_expression_config
           limits                         => $self->limits,
           reference                      => $self->reference,
           reference_lookup_file          => $self->reference_lookup_file,
-          protocol                       => $self->protocol
+          protocol                       => $self->protocol,
+          _intergenic_regions            => $self->_intergenic_regions,
+          _no_coverage_plots             => $self->_no_coverage_plots,
       )
   );
   return ;
