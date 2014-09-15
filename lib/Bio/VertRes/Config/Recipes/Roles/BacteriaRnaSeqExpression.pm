@@ -35,6 +35,7 @@ sub add_bacteria_rna_seq_expression_config
           protocol                       => $self->protocol,
           _intergenic_regions            => $self->_intergenic_regions,
           _no_coverage_plots             => $self->_no_coverage_plots,
+          _sequencing_file_suffix        => $self->_sequencing_file_suffix
       )
   );
   return ;

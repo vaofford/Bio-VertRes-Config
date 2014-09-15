@@ -122,7 +122,7 @@ is_deeply($input_config_file,{
                         'host' => 'some_hostname'
                       },
               'dont_wait' => 0,
-              'sequencing_file_suffix' => 'markdup.bam'
+              'sequencing_file_suffix' => 'raw.sorted.bam'
             },
   'limits' => {
                 'project' => [

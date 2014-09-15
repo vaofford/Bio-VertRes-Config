@@ -36,6 +36,7 @@ has '_no_coverage_plots'  => ( is => 'ro', isa => 'Bool', default => 0 );
 
 has 'additional_mapper_params' => ( is => 'ro', isa => 'Maybe[Str]' );
 has 'mapper_index_params'      => ( is => 'ro', isa => 'Maybe[Str]' );
+has '_sequencing_file_suffix'      => ( is => 'ro', isa => 'Str',  default => 'markdup.bam' );
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
