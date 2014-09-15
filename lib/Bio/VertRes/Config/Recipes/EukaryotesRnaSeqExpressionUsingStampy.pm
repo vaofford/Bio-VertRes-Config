@@ -28,7 +28,7 @@ with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 with 'Bio::VertRes::Config::Recipes::Roles::EukaryotesRnaSeqExpression';
 has '_intergenic_regions' => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_no_coverage_plots'  => ( is => 'ro', isa => 'Bool', default => 1 );
-
+has '_sequencing_file_suffix'      => ( is => 'ro', isa => 'Str',  default => 'markdup.bam' );
 has 'protocol'  => ( is => 'ro', isa => 'Str',  default => 'StrandSpecificProtocol' );
 
 override '_pipeline_configs' => sub {

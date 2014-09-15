@@ -33,7 +33,7 @@ with 'Bio::VertRes::Config::Recipes::Roles::VirusRnaSeqExpression';
 has '_intergenic_regions' => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_no_coverage_plots'  => ( is => 'ro', isa => 'Bool', default => 1 );
 has 'protocol'  => ( is => 'ro', isa => 'Str',  default => 'StrandSpecificProtocol' );
-
+has '_sequencing_file_suffix'      => ( is => 'ro', isa => 'Str',  default => 'markdup.bam' );
 has 'additional_mapper_params' => ( is => 'ro', isa => 'Maybe[Str]' );
 has 'mapper_index_params'      => ( is => 'ro', isa => 'Maybe[Str]' );
 
