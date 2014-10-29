@@ -18,8 +18,6 @@ use Moose;
 extends 'Bio::VertRes::Config::Recipes::Common';
 with 'Bio::VertRes::Config::Recipes::Roles::BacteriaRegisterStudy';
 
-print "Bio::VertRes::Config::Recipes::BacteriaAssemblyAndAnnotation\n";
-
 has 'assembler'            => ( is => 'ro', isa => 'Str',  default => 'velvet' );
 has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 0 );
