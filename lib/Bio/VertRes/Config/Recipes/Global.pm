@@ -14,7 +14,7 @@ Setting up global config files. Done once per database
 
 use Moose;
 use Bio::VertRes::Config::Pipelines::Assembly;
-use Bio::VertRes::Config::Pipelines::Import;
+use Bio::VertRes::Config::Pipelines::ImportCram;
 use Bio::VertRes::Config::Pipelines::Store;
 use Bio::VertRes::Config::Pipelines::AnnotateAssembly;
 extends 'Bio::VertRes::Config::Recipes::Common';
@@ -24,7 +24,7 @@ override '_pipeline_configs' => sub {
     my @pipeline_configs;
     push(
         @pipeline_configs,
-        Bio::VertRes::Config::Pipelines::Import->new(
+        Bio::VertRes::Config::Pipelines::ImportCram->new(
             database                       => $self->database,
             database_connect_file          => $self->database_connect_file,
             config_base                    => $self->config_base,
