@@ -7,7 +7,7 @@ use File::Slurp;
 BEGIN { unshift( @INC, './lib' ) }
 
 use Bio::VertRes::Config::Pipelines::BwaMapping;
-use Bio::VertRes::Config::Pipelines::Import;
+use Bio::VertRes::Config::Pipelines::ImportCram;
 use Bio::VertRes::Config::Pipelines::Store;
 use Bio::VertRes::Config::Pipelines::SnpCalling;
 use Bio::VertRes::Config::Pipelines::SmaltMapping;
@@ -24,7 +24,7 @@ my $destination_directory = $destination_directory_obj->dirname();
 
 # Create a few config objects for testing
 my @pipeline_configs;
-push(@pipeline_configs, Bio::VertRes::Config::Pipelines::Import->new(
+push(@pipeline_configs, Bio::VertRes::Config::Pipelines::ImportCram->new(
     database              => 'my_database',
     database_connect_file => 't/data/database_connection_details',
     root_base             => '/path/to/root',
@@ -78,7 +78,7 @@ ok(($obj->update_or_create()), 'Create all the toplevel files');
 
 ok(-e $destination_directory.'/my_database/my_database_mapping_pipeline.conf', 'mapping toplevel file');
 ok(-e $destination_directory.'/my_database/my_database_stored_pipeline.conf', 'stored toplevel file');
-ok(-e $destination_directory.'/my_database/my_database_import_pipeline.conf', 'import toplevel file');
+ok(-e $destination_directory.'/my_database/my_database_import_cram_pipeline.conf', 'import toplevel file');
 ok(-e $destination_directory.'/my_database/my_database_snps_pipeline.conf', 'snps toplevel file');
 
 my $text = read_file( $destination_directory.'/my_database/my_database_mapping_pipeline.conf' );
@@ -91,9 +91,9 @@ $text = read_file( $destination_directory.'/my_database/my_database_stored_pipel
 chomp($text);
 is($text, "__VRTrack_Storing__ $destination_directory/my_database/stored/stored_global.conf", 'content of stored toplevel file as expected');
 
-$text = read_file( $destination_directory.'/my_database/my_database_import_pipeline.conf' );
+$text = read_file( $destination_directory.'/my_database/my_database_import_cram_pipeline.conf' );
 chomp($text);
-is($text, "__VRTrack_Import__ $destination_directory/my_database/import/import_global.conf", 'content of import toplevel file as expected');
+is($text, "__VRTrack_Import_cram__ $destination_directory/my_database/import_cram/import_cram_global.conf", 'content of import toplevel file as expected');
 
 $text = read_file( $destination_directory.'/my_database/my_database_snps_pipeline.conf' );
 chomp($text);

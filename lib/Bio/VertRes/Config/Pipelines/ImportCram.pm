@@ -16,7 +16,7 @@ use Moose;
 use Bio::VertRes::Config::Pipelines::Common;
 extends 'Bio::VertRes::Config::Pipelines::Common';
 
-has 'pipeline_short_name' => ( is => 'ro', isa => 'Str', default => 'import' );
+has 'pipeline_short_name' => ( is => 'ro', isa => 'Str', default => 'import_cram' );
 has 'module'              => ( is => 'ro', isa => 'Str', default => 'VertRes::Pipelines::Import_iRODS_cram' );
 has 'toplevel_action'     => ( is => 'ro', isa => 'Str', default => '__VRTrack_Import_cram__' );
 

@@ -32,13 +32,13 @@ ok( ( $obj->create ), 'Create all the config files and toplevel files' );
 # Are all the nessisary top level files there?
 ok( -e $destination_directory . '/my_database/my_database.ilm.studies' , 'study names file exists');
 ok( -e $destination_directory . '/my_database/my_database_stored_pipeline.conf', 'stored toplevel file');
-ok( -e $destination_directory . '/my_database/my_database_import_pipeline.conf', 'import toplevel file');
+ok( -e $destination_directory . '/my_database/my_database_import_cram_pipeline.conf', 'import toplevel file');
 ok( -e $destination_directory . '/my_database/my_database_mapping_pipeline.conf', 'mapping toplevel file');
 
 
 # Individual config files
 ok((-e "$destination_directory/my_database/stored/stored_global.conf"), 'stored config file exists');
-ok((-e "$destination_directory/my_database/import/import_global.conf"), 'import config file exists');
+ok((-e "$destination_directory/my_database/import_cram/import_cram_global.conf"), 'import config file exists');
 ok((-e "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_bwa.conf"), 'mapping config file exists' );
 
 
