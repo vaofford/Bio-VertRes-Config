@@ -38,7 +38,7 @@ is_deeply(
                         'host' => 'some_hostname'
                       },
               'data' => {
-                          'samtools_exec' => '/software/pathogen/external/apps/usr/local/samtools-1.1/samtools',
+                          'samtools_exec' => '/software/pathogen/external/apps/usr/bin/samtools-1.1.30',
                           'db' => {
                                     'database' => 'my_database',
                                     'password' => 'some_password',

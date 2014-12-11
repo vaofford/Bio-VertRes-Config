@@ -22,7 +22,7 @@ has 'toplevel_action'     => ( is => 'ro', isa => 'Str', default => '__VRTrack_I
 
 has '_cramtools_jar'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/share/java/cramtools-2.1.jar' );
 has '_cramtools_java'     => ( is => 'ro', isa => 'Str', default => '/software/jdk1.8.0_11/bin/java' );
-has '_samtools_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/local/samtools-1.1/samtools' );
+has '_samtools_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/samtools-1.1.30' );
 
 override 'to_hash' => sub {
     my ($self) = @_;
