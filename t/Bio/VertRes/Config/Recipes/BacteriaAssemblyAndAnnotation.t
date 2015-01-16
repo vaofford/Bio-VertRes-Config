@@ -72,7 +72,8 @@ is_deeply($input_config_file,{
                                'ABC\\ study\\(\\ EFG\\ \\)'
                              ]
               },
-  'vrtrack_processed_flags' => {
+  'vrtrack_processed_flags' => { 
+                                 'assembled' => 0,
                                  'rna_seq_expression' => 0,
                                  'stored' => 1
                                },

@@ -133,6 +133,7 @@ is_deeply($input_config_file,{
                              ]
               },
   'vrtrack_processed_flags' => {
+                                 'assembled' => 0,
                                  'rna_seq_expression' => 0,
                                  'stored' => 1
                                },

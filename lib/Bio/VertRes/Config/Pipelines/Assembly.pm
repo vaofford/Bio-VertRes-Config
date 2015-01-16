@@ -41,6 +41,8 @@ has '_primers_file'        => ( is => 'ro', isa => 'Str',  default => '/lustre/s
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_improve_assembly'    => ( is => 'ro', isa => 'Bool', lazy_build => 1 );
 
+has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ stored => 1, rna_seq_expression => 0 }} );
+
 has '_subversions' => ( is => 'rw', isa => 'HashRef', lazy_build => 1 );
 
 sub _build__subversions {
@@ -79,7 +81,7 @@ override 'to_hash' => sub {
     $output_hash->{limit}                   = $self->_limit;
     $output_hash->{max_lanes_to_search}     = $self->_max_lanes_to_search;
     $output_hash->{max_failures}            = $self->_max_failures;
-    $output_hash->{vrtrack_processed_flags} = { stored => 1, rna_seq_expression => 0 };
+    $output_hash->{vrtrack_processed_flags} = $self->_vrtrack_processed_flags;
     $output_hash->{limits}                  = $self->_escaped_limits;
     $output_hash->{data}{tmp_directory}     = $self->_tmp_directory;
 
