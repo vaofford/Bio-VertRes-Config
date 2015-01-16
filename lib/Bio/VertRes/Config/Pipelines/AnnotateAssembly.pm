@@ -26,8 +26,8 @@ has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix
 has 'toplevel_action'      => ( is => 'ro', isa => 'Str', default => '__VRTrack_AnnotateAssembly__' );
 
 has '_max_failures'        => ( is => 'ro', isa => 'Int', default => 3 );
-has '_max_lanes_to_search' => ( is => 'ro', isa => 'Int', default => 1000 );
-has '_limit'               => ( is => 'ro', isa => 'Int', default => 100 );
+has '_max_lanes_to_search' => ( is => 'ro', isa => 'Int', default => 10000 );
+has '_limit'               => ( is => 'ro', isa => 'Int', default => 1000 );
 has '_tmp_directory'       => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/tmp' );
 has '_assembler'           => ( is => 'ro', isa => 'Str', default => 'velvet' );
 has '_annotation_tool'     => ( is => 'ro', isa => 'Str', default => 'Prokka' );

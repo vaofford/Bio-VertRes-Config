@@ -115,7 +115,7 @@ is_deeply($input_config_file,{
               'pipeline_version' => 1,
               'kingdom' => 'Bacteria',
             },
-  'max_lanes_to_search' => 1000,
+  'max_lanes_to_search' => 10000,
   'limits' => {
                 'project' => [
                                'ABC\\ study\\(\\ EFG\\ \\)'
@@ -127,7 +127,7 @@ is_deeply($input_config_file,{
                                },
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'log' => '/nfs/pathnfs05/log/my_database/annotate_assembly_ABC_study_EFG_velvet.log',
-  'limit' => 100,
+  'limit' => 1000,
   'module' => 'VertRes::Pipelines::AnnotateAssembly',
   'prefix' => '_annotate_'
 },'Config file as expected');
