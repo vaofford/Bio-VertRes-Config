@@ -59,14 +59,14 @@ is_deeply(
                           'pipeline_version' => 1,
                           'kingdom'        => 'Bacteria'
                         },
-              'max_lanes_to_search' => 1000,
+              'max_lanes_to_search' => 10000,
               'vrtrack_processed_flags' => {
                                              'assembled' => 1,
                                              'annotated' => 0
                                            },
               'root' => '/path/to/root/my_database/seq-pipelines',
               'log' => '/path/to/log/my_database/annotate_assembly_Abc_def_ghi123_velvet.log',
-              'limit' => 100,
+              'limit' => 1000,
               'module' => 'VertRes::Pipelines::AnnotateAssembly',
               'prefix' => '_annotate_'
             },

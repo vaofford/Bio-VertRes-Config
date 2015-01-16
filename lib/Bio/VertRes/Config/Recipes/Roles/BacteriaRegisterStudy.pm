@@ -77,7 +77,8 @@ sub add_bacteria_velvet_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _normalise                     => $self->_normalise
+          _normalise                     => $self->_normalise,
+          _vrtrack_processed_flags       => $self->_vrtrack_processed_flags
       )
   );
   return ;
