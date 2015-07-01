@@ -155,7 +155,7 @@ sub BUILD {
     $self->no_ass($no_ass) if ( defined $no_ass );
 
     $regeneration_log_file ||=
-      join( '/', ( $self->config_base, 'command_line.log' ) );
+      join( '/', ( $self->log_base, 'command_line.log' ) );
     $self->regeneration_log_file($regeneration_log_file)
       if ( defined($regeneration_log_file) );
     $self->overwrite_existing_config_file($overwrite_existing_config_file)
