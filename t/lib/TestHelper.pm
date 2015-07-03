@@ -7,6 +7,8 @@ use Test::Most;
 use Data::Dumper;
 
 our @actual_files_found;
+# default db file to be used for testing
+our $test_database_connection_file = "t/data/database_connection_details"; 
 
 sub execute_script_and_check_output {
     my ( $script_name, $scripts_and_expected_files ) = @_;
@@ -14,8 +16,7 @@ sub execute_script_and_check_output {
     for my $script_parameters ( sort keys %$scripts_and_expected_files ) {
         my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
         my $destination_directory = $destination_directory_obj->dirname();
-        my $full_script =
-          './bin/' . $script_name . ' ' . $script_parameters . " -c $destination_directory -l t/data/refs.index";
+        my $full_script = './bin/' . $script_name . ' ' . $script_parameters . " --db_file $test_database_connection_file -c $destination_directory -l t/data/refs.index";
         system("$full_script >/dev/null 2>&1");
 
         find( { wanted => \&process_file, no_chdir => 1 }, ($destination_directory) );
@@ -43,7 +44,7 @@ sub mock_execute_script_and_check_output {
             my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
             my $destination_directory = $destination_directory_obj->dirname();
 
-            my $full_script = $script_parameters . " -c $destination_directory -l t/data/refs.index";
+            my $full_script = $script_parameters . " --db_file $test_database_connection_file -c $destination_directory -l t/data/refs.index";
             my @input_args = split( " ", $full_script );
 
             my $cmd = "$script_name->new(args => \\\@input_args, script_name => '$script_name')->run;";
@@ -75,16 +76,16 @@ sub mock_execute_script_create_file_and_check_output {
    eval("use $script_name ;");
    my $returned_values = 0;
    {
-       local *STDOUT;
-       open STDOUT, '>/dev/null' or warn "Can't open /dev/null: $!";
-       local *STDERR;
-       open STDERR, '>/dev/null' or warn "Can't open /dev/null: $!";
+		local *STDOUT;
+        open STDOUT, '>/dev/null' or warn "Can't open /dev/null: $!";
+        local *STDERR;
+        open STDERR, '>/dev/null' or warn "Can't open /dev/null: $!";
 
        for my $script_parameters ( sort keys %$scripts_and_expected_files ) {
            my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
            my $destination_directory = $destination_directory_obj->dirname();
-		              
-		   my $full_script = $script_parameters . " -c $destination_directory -l t/data/refs.index";;
+		
+		   my $full_script = $script_parameters . " --db_file $test_database_connection_file -c $destination_directory -l t/data/refs.index";
            my @input_args = split( " ", $full_script );
 
            my $cmd = "$script_name->new(args => \\\@input_args, script_name => '$script_name')->run;";
