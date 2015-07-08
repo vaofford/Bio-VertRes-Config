@@ -41,6 +41,9 @@ $overwrite_existing_config_file ||= 0;
 $regeneration_log_file ||= join('/',($log_base,'command_line.log'));
 $database_connect_file = '/software/pathogen/config/database_connection_details' unless defined $database_connect_file;
 
+	print "CONFIG_BASE ".$config_base."\n";
+	print "LOG_BASE ".$log_base."\n";
+
 $log_params->log_file($regeneration_log_file);
 $log_params->create();
 
