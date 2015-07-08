@@ -160,9 +160,6 @@ sub BUILD {
     $self->no_ass($no_ass) if ( defined $no_ass );
     $self->test_mode($test_mode) if ( defined $test_mode );
 
-	print "CONFIG_BASE ".$self->config_base()."\n";
-	print "LOG_BASE ".$self->log_base()."\n";
-
     $regeneration_log_file ||=
       join( '/', ( $self->log_base(), 'command_line.log' ) );
     $self->regeneration_log_file($regeneration_log_file)
