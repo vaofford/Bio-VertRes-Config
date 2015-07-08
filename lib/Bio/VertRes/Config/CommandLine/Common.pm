@@ -67,6 +67,9 @@ has 'tophat_mapper_library_type' =>
 has 'assembler' => ( is => 'rw', isa => 'Maybe[Str]' );
 has 'no_ass'    => ( is => 'rw', isa => 'Bool' );
 
+# test mode
+has 'test_mode' => ( is => 'rw', isa => 'Bool', default => 0);
+
 sub BUILD {
     my ($self) = @_;
     my $log_params = Bio::VertRes::Config::CommandLine::LogParameters->new(
@@ -88,7 +91,8 @@ sub BUILD {
         $tophat_mapper_g,                $tophat_mapper_library_type,
         $assembler,                      $root_base,
         $log_base,                       $database_connect_file,
-        $no_ass,                         $help
+        $no_ass,                         $help,
+        $test_mode
     );
 
     GetOptionsFromArray(
@@ -120,6 +124,7 @@ sub BUILD {
         'log_base=s'                     => \$log_base,
         'db_file:s'                      => \$database_connect_file,
         'no_aa'                          => \$no_ass,
+        'test'							 => \$test_mode,
         'h|help'                         => \$help
     );
 
@@ -153,16 +158,20 @@ sub BUILD {
     $self->database_connect_file($database_connect_file)
       if ( defined($database_connect_file) );
     $self->no_ass($no_ass) if ( defined $no_ass );
+    $self->test_mode($test_mode) if ( defined $test_mode );
 
     $regeneration_log_file ||=
-      join( '/', ( $self->config_base, 'command_line.log' ) );
+      join( '/', ( $self->log_base(), 'command_line.log' ) );
     $self->regeneration_log_file($regeneration_log_file)
       if ( defined($regeneration_log_file) );
     $self->overwrite_existing_config_file($overwrite_existing_config_file)
       if ( defined($overwrite_existing_config_file) );
 
     $log_params->log_file( $self->regeneration_log_file );
-    $log_params->create();
+    # Only create log files if not in test mode
+    if(!$self->test_mode()){
+    	$log_params->create();
+    }
 }
 
 sub _construct_smalt_index_params {
@@ -257,7 +266,8 @@ sub mapping_parameters {
         reference                      => $self->reference,
         overwrite_existing_config_file => $self->overwrite_existing_config_file,
         protocol                       => $self->protocol,
-        database_connect_file          => $self->database_connect_file
+        database_connect_file          => $self->database_connect_file,
+        regeneration_log_file		   => $self->regeneration_log_file,
     );
 
     if ( defined( $self->_construct_smalt_index_params ) ) {
