@@ -23,6 +23,11 @@ has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 1 );
 has '_pipeline_version'    => ( is => 'ro', isa => 'Str' );
 has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 1 );
 has '_kingdom'             => ( is => 'ro', isa => 'Str',  default => "Viruses" );
+has '_iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 1 ); # always run iva_qc for viruses
+has '_kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/path/to.kraken" );
+#iva options
+has '_iva_insert_size'		=> (is => 'rw', isa => 'Int',  default => 800 );
+has '_iva_strand_bias'		=> (is => 'rw', isa => 'Int',  default => 0 );		
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
