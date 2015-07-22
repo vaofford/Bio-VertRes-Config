@@ -41,6 +41,9 @@ has '_primers_file'        => ( is => 'ro', isa => 'Str',  default => '/lustre/s
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_improve_assembly'    => ( is => 'ro', isa => 'Bool', lazy_build => 1 );
 
+has '_iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 0 );
+has '_kraken_db'		   => ( is => 'ro', isa => 'Str',  default => '/path/to.kraken' );
+
 has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ stored => 1, rna_seq_expression => 0 }} );
 
 has '_subversions' => ( is => 'rw', isa => 'HashRef', lazy_build => 1 );
@@ -101,6 +104,10 @@ override 'to_hash' => sub {
     # Remove primers
     $output_hash->{data}{primers_file}   = $self->_primers_file;
     $output_hash->{data}{remove_primers} = $self->_remove_primers;
+    
+    # iva_qc
+	$output_hash->{data}{iva_qc}   = $self->_iva_qc;
+    $output_hash->{data}{kraken_db} = $self->_kraken_db;    
 
     return $output_hash;
 };
