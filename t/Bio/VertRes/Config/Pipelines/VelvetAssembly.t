@@ -70,7 +70,9 @@ is_deeply(
             'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl',
             'primers_file'      => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
             'remove_primers'    => 1,
-            'normalise'         => 1
+            'normalise'         => 1,
+            'iva_qc'		    => 0,
+            'kraken_db'		    => '/path/to.kraken',
         },
         'max_lanes_to_search'     => 10000,
         'vrtrack_processed_flags' => {

@@ -74,7 +74,7 @@ is_deeply($input_config_file,{
               'samtools' => '/software/pathogen/external/apps/usr/bin/samtools',
               'fa_ref' => '/path/to/ABC.fa',
               'gcdepth_R'         => '/software/pathogen/external/apps/usr/local/gcdepth/gcdepth.R',
-              'snps' => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin'
+              'snps' => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin',
             },
   'limits' => {
                 'project' => [
@@ -124,7 +124,10 @@ is_deeply($input_config_file,{
               'pipeline_version' => '2.0.1',
               'post_contig_filtering' => 300,
               'max_threads' => 2,
-              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl'
+              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/VelvetOptimiser.pl',
+              'iva_qc'		    => 0,
+              'kraken_db'		    => '/path/to.kraken',
+              
             },
   'max_lanes_to_search' => 10000,
   'limits' => {
@@ -209,6 +212,7 @@ ok(
 );
 ok( ( $obj->create ), 'Create all the config files and toplevel files with species' );
 
+# QC file
 ok( -e $destination_directory . '/my_database/qc/qc_ABC_study_EFG_Cat_Dog.conf', 'QC toplevel file with species' );
 $text = read_file( $destination_directory . '/my_database/qc/qc_ABC_study_EFG_Cat_Dog.conf' );
 $input_config_file = eval($text);
@@ -265,7 +269,7 @@ is_deeply($input_config_file,{
   'module' => 'VertRes::Pipelines::TrackQC_Fastq'
 },'Config file as expected with species limit');
 
-
+# spades assembly file
 ok(
     (
         $obj = Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new(
@@ -318,7 +322,9 @@ is_deeply($input_config_file,{
               'post_contig_filtering' => 300,
               'max_threads' => 2,
               'single_cell' => 0,
-              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py'
+              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py',
+              'iva_qc'		    => 0,
+              'kraken_db'		    => '/path/to.kraken',
             },
   'max_lanes_to_search' => 10000,
   'limits' => {

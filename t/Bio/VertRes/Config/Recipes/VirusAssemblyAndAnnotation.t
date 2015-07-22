@@ -66,7 +66,9 @@ is_deeply($input_config_file,{
               'post_contig_filtering' => 300,
               'max_threads' => 2,
               'single_cell' => 0,
-              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py'
+              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py',
+              'iva_qc'		    => 1,
+			  'kraken_db'		    => '/path/to.kraken',
             },
   'max_lanes_to_search' => 10000,
   'limits' => {
