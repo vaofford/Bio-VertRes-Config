@@ -23,6 +23,7 @@ with 'Bio::VertRes::Config::Recipes::Roles::RegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::Reference';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 
+
 override '_pipeline_configs' => sub {
     my ($self) = @_;
     my @pipeline_configs;
