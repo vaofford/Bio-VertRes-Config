@@ -89,6 +89,7 @@ is_deeply($input_config_file,{
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
   'dont_use_get_lanes' => 1,
+  'limit' => 40,
   'module' => 'VertRes::Pipelines::Mapping'
 },'Mapping Config file as expected');
 

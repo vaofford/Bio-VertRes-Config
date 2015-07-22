@@ -50,6 +50,7 @@ has '_get_genome_coverage'  => ( is => 'ro', isa => 'Int', default => 1 );
 has '_add_index'            => ( is => 'ro', isa => 'Int', default => 1 );
 has '_ignore_mapped_status' => ( is => 'ro', isa => 'Int', default => 1 );
 has '_dont_use_get_lanes'   => ( is => 'ro', isa => 'Bool', default => 1 );
+has '_limit'                => ( is => 'ro', isa => 'Int', default => 40 );
 
 sub _build__reference_fasta {
     my ($self) = @_;
@@ -98,6 +99,7 @@ override 'to_hash' => sub {
     $output_hash->{data}{slx_mapper}           = $self->slx_mapper;
     $output_hash->{data}{slx_mapper_exe}       = $self->slx_mapper_exe;
     $output_hash->{dont_use_get_lanes}         = $self->_dont_use_get_lanes;
+	$output_hash->{limit}                      = $self->_limit;
 
     return $output_hash;
 };

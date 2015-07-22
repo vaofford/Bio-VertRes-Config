@@ -80,7 +80,8 @@ is_deeply(
               'root' => '/path/to/root/my_database/seq-pipelines',
               'prefix' => '_checked_elsewhere_',
               'dont_use_get_lanes' => 1,
-              'module' => 'VertRes::Pipelines::Mapping'
+              'module' => 'VertRes::Pipelines::Mapping',
+              'limit' => 40,
             },
     'Expected smalt base config file'
 );
