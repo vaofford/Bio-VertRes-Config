@@ -67,6 +67,12 @@ has 'tophat_mapper_library_type' =>
 has 'assembler' => ( is => 'rw', isa => 'Maybe[Str]' );
 has 'no_ass'    => ( is => 'rw', isa => 'Bool' );
 
+# iva paramters, iva_qc 
+has 'iva_qc'    => ( is => 'rw', isa => 'Bool', default => 0 );
+has 'kraken_db' => ( is => 'rw', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728' );
+has 'iva_insert_size' => (is => 'rw', isa => 'Int', default => 500);
+has 'iva_strand_bias' => (is => 'rw', isa => 'Num', default => 0.1);
+
 # test mode
 has 'test_mode' => ( is => 'rw', isa => 'Bool', default => 0);
 
@@ -92,7 +98,9 @@ sub BUILD {
         $assembler,                      $root_base,
         $log_base,                       $database_connect_file,
         $no_ass,                         $help,
-        $test_mode
+        $test_mode,						 $iva_qc,
+        $kraken_db,	                     $iva_insert_size,
+        $iva_strand_bias,
     );
 
     GetOptionsFromArray(
@@ -125,6 +133,10 @@ sub BUILD {
         'db_file:s'                      => \$database_connect_file,
         'no_aa'                          => \$no_ass,
         'test'							 => \$test_mode,
+        'iva_qc'                         => \$iva_qc,
+        'kraken_db'                      => \$kraken_db,
+        'iva_insert_size'                => \$iva_insert_size,
+        'iva_strand_bias'                => \$iva_strand_bias,
         'h|help'                         => \$help
     );
 
@@ -158,10 +170,15 @@ sub BUILD {
     $self->database_connect_file($database_connect_file)
       if ( defined($database_connect_file) );
     $self->no_ass($no_ass) if ( defined $no_ass );
-    $self->test_mode($test_mode) if ( defined $test_mode );
+    $self->test_mode($test_mode) if ( defined $test_mode ); 
+   
+    # iva, iva_qc
+    $self->iva_qc($iva_qc) if ( defined($iva_qc) );
+    $self->kraken_db($kraken_db) if ( defined($kraken_db) ) ;
+    $self->iva_insert_size($iva_insert_size) if ( defined($iva_insert_size) );
+    $self->iva_strand_bias($iva_strand_bias) if ( defined($iva_strand_bias) );
 
-    $regeneration_log_file ||=
-      join( '/', ( $self->log_base(), 'command_line.log' ) );
+    $regeneration_log_file ||= join( '/', ( $self->log_base(), 'command_line.log' ) );
     $self->regeneration_log_file($regeneration_log_file)
       if ( defined($regeneration_log_file) );
     $self->overwrite_existing_config_file($overwrite_existing_config_file)
