@@ -68,7 +68,7 @@ is_deeply($input_config_file,{
               'single_cell' => 0,
               'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py',
               'iva_qc'		    => 1,
-			  'kraken_db'		    => '/path/to.kraken',
+			  'kraken_db'		    => '/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728',
             },
   'max_lanes_to_search' => 10000,
   'limits' => {

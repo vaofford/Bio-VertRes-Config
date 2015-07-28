@@ -24,10 +24,10 @@ has '_pipeline_version'    => ( is => 'ro', isa => 'Str' );
 has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 1 );
 has '_kingdom'             => ( is => 'ro', isa => 'Str',  default => "Viruses" );
 has '_iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 1 ); # always run iva_qc for viruses
-has '_kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/path/to.kraken" );
+has '_kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728" );
 #iva options
-has '_iva_insert_size'		=> (is => 'rw', isa => 'Int',  default => 800 );
-has '_iva_strand_bias'		=> (is => 'rw', isa => 'Int',  default => 0 );		
+has '_iva_insert_size'		=> (is => 'rw', isa => 'Int',  default => 500 );
+has '_iva_strand_bias'		=> (is => 'rw', isa => 'Num',  default => 0.1 );		
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;

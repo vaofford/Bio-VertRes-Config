@@ -32,7 +32,7 @@ has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_kingdom'             => ( is => 'ro', isa => 'Str',  default => "Bacteria" );
 has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ assembled => 0, stored => 1, rna_seq_expression => 0 }} );
 has '_iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 0 );
-has '_kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/path/to.kraken" );
+has '_kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728" );
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;

@@ -25,7 +25,7 @@ has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_primers_file'        => ( is => 'ro', isa => 'Str',  default => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr' );
 has '_max_threads'         => ( is => 'ro', isa => 'Int',  default => 6 );
 has '_iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 0 );
-has '_kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/path/to.kraken" );
+has '_kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728" );
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
