@@ -79,8 +79,8 @@ sub add_bacteria_velvet_assembly_config
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
           _vrtrack_processed_flags       => $self->_vrtrack_processed_flags,
-          _iva_qc						 => $self->_iva_qc,
-          _kraken_db				     => $self->_kraken_db,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				     => $self->kraken_db,
       )
   );
   return ;
@@ -103,8 +103,8 @@ sub add_bacteria_spades_single_cell_assembly_config
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
           _single_cell                   => $self->_single_cell,
-          _iva_qc						 => $self->_iva_qc,
-          _kraken_db				     => $self->_kraken_db,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				     => $self->kraken_db,
       )
   );
   return ;
@@ -127,8 +127,8 @@ sub add_bacteria_spades_assembly_config
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
-          _iva_qc						 => $self->_iva_qc,
-          _kraken_db				     => $self->_kraken_db,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				     => $self->kraken_db,
       )
   );
   return ;

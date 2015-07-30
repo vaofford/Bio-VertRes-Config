@@ -35,8 +35,8 @@ has '_primers_file'         => (is => 'ro', isa => 'Str' );
 has '_improve_assembly'     => ( is => 'ro', isa => 'Bool', default => 0 );
 
 #iva options
-has '_iva_insert_size'		=> (is => 'rw', isa => 'Int',  default => 500 );
-has '_iva_strand_bias'		=> (is => 'rw', isa => 'Num',  default => 0.1 );		    
+has 'iva_insert_size'		=> (is => 'rw', isa => 'Int',  default => 500 );
+has 'iva_strand_bias'		=> (is => 'rw', isa => 'Num',  default => 0.1 );		    
 
 has '_pipeline_version'     => ( is => 'rw', isa => 'Str',  lazy_build => 1 );
 has '_flag'                 => ( is => 'ro', isa => 'Str',  lazy_build => 1 );
@@ -84,10 +84,9 @@ override 'to_hash' => sub {
     $output_hash->{data}{pipeline_version} = $self->_pipeline_version;
     $output_hash->{data}{primer_removal_tool} = $self->_primer_removal_tool;
     $output_hash->{data}{adapter_removal_tool} = $self->_adapter_removal_tool;
-    $output_hash->{data}{iva_insert_size} = $self->_iva_insert_size;
-    $output_hash->{data}{iva_strand_bias} = $self->_iva_strand_bias;
-    $output_hash->{data}{iva_qc}		    = $self->_iva_qc;
-    $output_hash->{data}{kraken_db}		    = $self->_kraken_db;
+    $output_hash->{data}{iva_insert_size} = $self->iva_insert_size;
+    $output_hash->{data}{iva_strand_bias} = $self->iva_strand_bias;
+
 
     return $output_hash;
 };

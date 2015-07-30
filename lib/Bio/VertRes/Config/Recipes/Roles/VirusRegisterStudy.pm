@@ -79,8 +79,8 @@ sub add_virus_velvet_assembly_config
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
-          _iva_qc						 => $self->_iva_qc,
-          _kraken_db				     => $self->_kraken_db,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				         => $self->kraken_db,
       )
   );
   return ;
@@ -102,8 +102,8 @@ sub add_virus_spades_assembly_config
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
-          _iva_qc						 => $self->_iva_qc,
-          _kraken_db				     => $self->_kraken_db,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				     => $self->kraken_db,
       )
   );
   return ;
@@ -125,10 +125,10 @@ sub add_virus_iva_assembly_config
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
-          _iva_qc						 => $self->_iva_qc,
-          _kraken_db				     => $self->_kraken_db,
-          _iva_insert_size				 => $self->_iva_insert_size,
-          _iva_strand_bias			     => $self->_iva_strand_bias,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				         => $self->kraken_db,
+          iva_insert_size				 => $self->iva_insert_size,
+          iva_strand_bias			     => $self->iva_strand_bias,
       )
   );
   return ;
