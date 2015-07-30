@@ -13,6 +13,7 @@ use Bio::VertRes::Config::Recipes::VirusAssemblyAndAnnotation;
 extends 'Bio::VertRes::Config::CommandLine::Common';
 
 has 'database'  => ( is => 'rw', isa => 'Str', default => 'pathogen_virus_track' );
+has 'iva_qc'    => ( is => 'rw', isa => 'Bool', default => 1 ); # Always run iva_qc for viruses
 
 sub run {
     my ($self) = @_;
@@ -21,6 +22,7 @@ sub run {
 
     my %mapping_parameters = %{$self->mapping_parameters};
     $mapping_parameters{'assembler'} = $self->assembler if defined ($self->assembler);
+
     Bio::VertRes::Config::Recipes::VirusAssemblyAndAnnotation->new( \%mapping_parameters )->create();
 
     $self->retrieving_results_text;
