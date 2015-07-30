@@ -134,9 +134,9 @@ sub BUILD {
         'no_aa'                          => \$no_ass,
         'test'							 => \$test_mode,
         'iva_qc'                         => \$iva_qc,
-        'kraken_db'                      => \$kraken_db,
-        'iva_insert_size'                => \$iva_insert_size,
-        'iva_strand_bias'                => \$iva_strand_bias,
+        'kraken_db=s'                    => \$kraken_db,
+        'iva_insert_size=i'                => \$iva_insert_size,
+        'iva_strand_bias=f'                => \$iva_strand_bias,
         'h|help'                         => \$help
     );
 
