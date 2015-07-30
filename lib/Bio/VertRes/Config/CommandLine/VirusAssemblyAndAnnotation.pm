@@ -22,7 +22,10 @@ sub run {
 
     my %mapping_parameters = %{$self->mapping_parameters};
     $mapping_parameters{'assembler'} = $self->assembler if defined ($self->assembler);
-
+	$mapping_parameters{'iva_qc'} = $self->iva_qc if defined ($self->iva_qc);
+    $mapping_parameters{'kraken_db'} = $self->kraken_db if defined ($self->kraken_db);
+    $mapping_parameters{'iva_insert_size'} = $self->iva_insert_size if defined ($self->iva_insert_size);
+    $mapping_parameters{'iva_strand_bias'} = $self->iva_strand_bias if defined ($self->iva_strand_bias);
     Bio::VertRes::Config::Recipes::VirusAssemblyAndAnnotation->new( \%mapping_parameters )->create();
 
     $self->retrieving_results_text;
