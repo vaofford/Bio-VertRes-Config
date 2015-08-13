@@ -35,8 +35,8 @@ has '_primers_file'         => (is => 'ro', isa => 'Str' );
 has '_improve_assembly'     => ( is => 'ro', isa => 'Bool', default => 0 );
 
 #iva options
-has 'iva_insert_size'		=> (is => 'rw', isa => 'Int',  default => 500 );
-has 'iva_strand_bias'		=> (is => 'rw', isa => 'Num',  default => 0.1 );		    
+has 'iva_insert_size'		=> (is => 'rw', isa => 'Int',  default => 800 );
+has 'iva_strand_bias'		=> (is => 'rw', isa => 'Num',  default => 0 );		    
 
 has '_pipeline_version'     => ( is => 'rw', isa => 'Str',  lazy_build => 1 );
 has '_flag'                 => ( is => 'ro', isa => 'Str',  lazy_build => 1 );

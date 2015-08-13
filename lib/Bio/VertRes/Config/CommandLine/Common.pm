@@ -70,8 +70,8 @@ has 'no_ass'    => ( is => 'rw', isa => 'Bool' );
 # iva paramters, iva_qc 
 has 'iva_qc'    => ( is => 'rw', isa => 'Bool', default => 0 );
 has 'kraken_db' => ( is => 'rw', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728' );
-has 'iva_insert_size' => (is => 'rw', isa => 'Int', default => 500);
-has 'iva_strand_bias' => (is => 'rw', isa => 'Num', default => 0.1);
+has 'iva_insert_size' => (is => 'rw', isa => 'Int', default => 800);
+has 'iva_strand_bias' => (is => 'rw', isa => 'Num', default => 0);
 
 # test mode
 has 'test_mode' => ( is => 'rw', isa => 'Bool', default => 0);
