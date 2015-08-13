@@ -79,7 +79,9 @@ sub add_eukaryotes_velvet_assembly_config
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
           _primers_file                  => $self->_primers_file,
-          _max_threads                   => $self->_max_threads
+          _max_threads                   => $self->_max_threads,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				     => $self->kraken_db,
       )
   );
   return ;
@@ -102,7 +104,9 @@ sub add_eukaryotes_spades_assembly_config
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
           _primers_file                  => $self->_primers_file,
-          _max_threads                   => $self->_max_threads
+          _max_threads                   => $self->_max_threads,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				     => $self->kraken_db,
       )
   );
   return ;

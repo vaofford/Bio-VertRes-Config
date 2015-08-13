@@ -31,12 +31,13 @@ has '_pipeline_version'    => ( is => 'ro', isa => 'Str' );
 has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_kingdom'             => ( is => 'ro', isa => 'Str',  default => "Bacteria" );
 has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ assembled => 0, stored => 1, rna_seq_expression => 0 }} );
+has 'iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 0 );
+has 'kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728" );
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
     my @pipeline_configs;
     $self->add_bacteria_qc_config(\@pipeline_configs);
-
     return \@pipeline_configs if ($self->no_ass);
 
     if($self->assembler eq 'spades')

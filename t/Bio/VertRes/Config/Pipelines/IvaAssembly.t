@@ -72,6 +72,10 @@ is_deeply(
             'primer_removal_tool' => 'iva',
             'normalise'         => 0,
             'improve_assembly'  => 0,
+            'iva_insert_size'   => 800,
+            'iva_strand_bias'   => 0,
+            'iva_qc'		    => 0,
+            'kraken_db'		    => '/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728',
         },
         'max_lanes_to_search'     => 10000,
         'vrtrack_processed_flags' => {

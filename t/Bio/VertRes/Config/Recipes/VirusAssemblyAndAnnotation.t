@@ -4,6 +4,7 @@ use warnings;
 use Data::Dumper;
 use File::Temp;
 use File::Slurp;
+
 BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
@@ -13,7 +14,6 @@ BEGIN {
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
-
 
 ok(
     (
@@ -28,7 +28,7 @@ ok(
 );
 ok( ( $obj->create ), 'Create all the config files and toplevel files' );
 
-# Check assembly file
+# Check assembly file - spades
 ok( -e $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_spades.conf', 'assembly toplevel file' );
 my $text = read_file( $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_spades.conf' );
 my $input_config_file = eval($text);
@@ -66,7 +66,9 @@ is_deeply($input_config_file,{
               'post_contig_filtering' => 300,
               'max_threads' => 2,
               'single_cell' => 0,
-              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py'
+              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py',
+              'iva_qc'		    => 1,
+			  'kraken_db'		    => '/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728',
             },
   'max_lanes_to_search' => 10000,
   'limits' => {
@@ -132,5 +134,91 @@ is_deeply($input_config_file,{
   'module' => 'VertRes::Pipelines::AnnotateAssembly',
   'prefix' => '_annotate_'
 },'Config file as expected');
+
+
+# Check iva config file with non-default options for iva_qc, iva_insert_size and iva_strand_bias
+ok(
+    (
+            my $obj_iva = Bio::VertRes::Config::Recipes::VirusAssemblyAndAnnotation->new(
+            database    => 'my_database',
+            config_base => $destination_directory,
+            database_connect_file => 't/data/database_connection_details',
+            limits      => { project => ['ABC study( EFG )'] },
+            assembler   => 'iva',
+            iva_qc      => 0,
+            kraken_db   => '/some/path',
+            iva_insert_size => 750,
+            iva_strand_bias => 0.2,            
+        )
+    ),
+    'initalise creating files'
+);
+ok( ( $obj_iva->create ), 'Create all the config files and toplevel files' );
+
+# Check assembly file - iva
+ok( -e $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_iva.conf', 'assembly toplevel file' );
+my $text_iva = read_file( $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_iva.conf' );
+my $input_config_file_iva = eval($text_iva);
+
+is_deeply($input_config_file_iva,{
+ 'max_failures' => 3,
+  'db' => {
+            'database' => 'my_database',
+            'password' => 'some_password',
+            'user' => 'some_user',
+            'port' => 1234,
+            'host' => 'some_hostname'
+          },
+  'data' => {
+              'remove_primers' => 0,
+              'genome_size' => 10000000,
+              'db' => {
+                        'database' => 'my_database',
+                        'password' => 'some_password',
+                        'user' => 'some_user',
+                        'port' => 1234,
+                        'host' => 'some_hostname'
+                      },
+              'iva_strand_bias' => '0.2',
+              'improve_assembly' => 0,
+              'error_correct' => 0,
+              'assembler_exec' => '/software/pathogen/external/bin/iva',
+              'adapter_removal_tool' => 'iva',
+              'kraken_db' => '/some/path',
+              'primers_file' => undef,
+              'assembler' => 'iva',
+              'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+              'iva_insert_size' => 750,
+              'normalise' => 0,
+              'sga_exec' => '/software/pathogen/external/apps/usr/bin/sga',
+              'tmp_directory' => '/lustre/scratch108/pathogen/pathpipe/tmp',
+              'pipeline_version' => '5.0.0',
+              'max_threads' => 8,
+              'primer_removal_tool' => 'iva',
+              'dont_wait' => 0,
+              'trimmomatic_jar' => '/software/pathogen/external/apps/usr/local/Trimmomatic-0.32/trimmomatic-0.32.jar',
+              'post_contig_filtering' => 300,
+              'iva_qc' => 0,
+              'adapters_file' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta',
+              'remove_adapters' => 0,
+              'optimiser_exec' => '/software/pathogen/external/bin/iva'
+            },
+  'max_lanes_to_search' => 10000,
+  'limits' => {
+                'project' => [
+                               'ABC\\ study\\(\\ EFG\\ \\)'
+                             ]
+              },
+  'vrtrack_processed_flags' => {
+                                 'rna_seq_expression' => 0,
+                                 'stored' => 1
+                               },
+  'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+  'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_iva.log',
+  'limit' => 1000,
+  'module' => 'VertRes::Pipelines::Assembly',
+  'prefix' => '_iva_'
+},'Config file as expected');
+
 
 done_testing();

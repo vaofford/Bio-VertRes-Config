@@ -71,7 +71,9 @@ is_deeply(
             'primers_file'      => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
             'remove_primers'    => 1,
             'normalise'         => 0,
-            'single_cell'       => 0
+            'single_cell'       => 0,
+            'iva_qc'		    => 0,
+            'kraken_db'		    => '/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728',
         },
         'max_lanes_to_search'     => 10000,
         'vrtrack_processed_flags' => {

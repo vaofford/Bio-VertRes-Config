@@ -26,6 +26,8 @@ sub run {
     my %mapping_parameters = %{$self->mapping_parameters};
     $mapping_parameters{'assembler'} = $self->assembler if defined ($self->assembler);
     $mapping_parameters{'no_ass'} = defined($self->no_ass);
+    $mapping_parameters{'iva_qc'} = $self->iva_qc if defined ($self->iva_qc);
+    $mapping_parameters{'kraken_db'} = $self->kraken_db if defined ($self->kraken_db);
     Bio::VertRes::Config::Recipes::BacteriaRegisterAndQCStudy->new( \%mapping_parameters )->create();
 
     $self->retrieving_results_text;

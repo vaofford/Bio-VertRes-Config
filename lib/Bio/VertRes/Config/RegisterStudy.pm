@@ -24,6 +24,11 @@ has 'config_base'         => ( is => 'ro', isa => 'Str', default => '/nfs/pathnf
 
 has 'study_file_name'    => ( is => 'ro', isa => 'Str', lazy    => 1, builder => '_build_study_file_name' );
 
+has '_iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 0 );
+has '_kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/path/to.kraken" );
+
+
+
 sub _build_study_file_name
 {
   my ($self) = @_;

@@ -57,7 +57,7 @@ sub add_virus_qc_config
           overwrite_existing_config_file => $self->overwrite_existing_config_file,
           limits                         => $self->limits,
           reference                      => $self->reference,
-          reference_lookup_file          => $self->reference_lookup_file
+          reference_lookup_file          => $self->reference_lookup_file,
       )
   );
   return ;
@@ -78,7 +78,9 @@ sub add_virus_velvet_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _normalise                     => $self->_normalise
+          _normalise                     => $self->_normalise,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				         => $self->kraken_db,
       )
   );
   return ;
@@ -99,7 +101,9 @@ sub add_virus_spades_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _normalise                     => $self->_normalise
+          _normalise                     => $self->_normalise,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				     => $self->kraken_db,
       )
   );
   return ;
@@ -120,7 +124,11 @@ sub add_virus_iva_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _normalise                     => $self->_normalise
+          _normalise                     => $self->_normalise,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				         => $self->kraken_db,
+          iva_insert_size				 => $self->iva_insert_size,
+          iva_strand_bias			     => $self->iva_strand_bias,
       )
   );
   return ;

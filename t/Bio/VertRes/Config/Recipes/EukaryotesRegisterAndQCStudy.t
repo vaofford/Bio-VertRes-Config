@@ -74,7 +74,7 @@ is_deeply($input_config_file,{
               'samtools' => '/software/pathogen/external/apps/usr/bin/samtools',
               'fa_ref' => '/path/to/ABC.fa',
               'gcdepth_R'         => '/software/pathogen/external/apps/usr/local/gcdepth/gcdepth.R',
-              'snps' => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin'
+              'snps' => '/lustre/scratch108/pathogen/pathpipe/usr/share/mousehapmap.snps.bin',
             },
   'limits' => {
                 'project' => [

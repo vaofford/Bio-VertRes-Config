@@ -56,7 +56,7 @@ sub add_bacteria_qc_config
           overwrite_existing_config_file => $self->overwrite_existing_config_file,
           limits                         => $self->limits,
           reference                      => $self->reference,
-          reference_lookup_file          => $self->reference_lookup_file
+          reference_lookup_file          => $self->reference_lookup_file,
       )
   );
   return ;
@@ -78,7 +78,9 @@ sub add_bacteria_velvet_assembly_config
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
-          _vrtrack_processed_flags       => $self->_vrtrack_processed_flags
+          _vrtrack_processed_flags       => $self->_vrtrack_processed_flags,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				     => $self->kraken_db,
       )
   );
   return ;
@@ -101,6 +103,8 @@ sub add_bacteria_spades_single_cell_assembly_config
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
           _single_cell                   => $self->_single_cell,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				     => $self->kraken_db,
       )
   );
   return ;
@@ -122,7 +126,9 @@ sub add_bacteria_spades_assembly_config
           limits                         => $self->limits,
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
-          _normalise                     => $self->_normalise
+          _normalise                     => $self->_normalise,
+          iva_qc						 => $self->iva_qc,
+          kraken_db				     => $self->kraken_db,
       )
   );
   return ;
