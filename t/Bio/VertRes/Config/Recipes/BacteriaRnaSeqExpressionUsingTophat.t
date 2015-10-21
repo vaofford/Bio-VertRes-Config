@@ -29,7 +29,7 @@ ok(
 );
 ok( ( $obj->create ), 'Create all the config files and toplevel files' );
 
-# Are all the nessisary top level files there?
+# Are all the necessary top level files there?
 ok( -e $destination_directory . '/my_database/my_database.ilm.studies' , 'study names file exists');
 ok( -e $destination_directory . '/my_database/my_database_stored_pipeline.conf', 'stored toplevel file');
 ok( -e $destination_directory . '/my_database/my_database_import_cram_pipeline.conf', 'import toplevel file');
@@ -73,7 +73,7 @@ is_deeply($input_config_file,{
               'do_cleanup' => 1,
               'ignore_mapped_status' => 1,
               'slx_mapper' => 'tophat',
-              'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/tophat-2.0.8b.Linux_x86_64/tophat'
+              'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/tophat-2.1.0.Linux_x86_64/tophat'
             },
   'limits' => {
                 'project' => [
