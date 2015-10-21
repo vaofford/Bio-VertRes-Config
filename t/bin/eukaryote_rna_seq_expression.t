@@ -146,7 +146,7 @@ mock_execute_script_and_check_output( $script_name, \%scripts_and_expected_files
 %scripts_and_expected_files = (
     '-t study -i ZZZ -r ABC -m tophat' => [
         'eukaryotes/mapping/mapping_ZZZ_ABC_tophat.conf',
-        't/data/expected/eukaryote_mapping_ZZZ_ABC_tophat.conf'
+        't/data/expected/eukaryote_mapping_ZZZ_ABC_tophat_fstrand.conf'
     ],
 '-t study -i ZZZ -r ABC -m tophat --tophat_mapper_library_type fr-unstranded'
       => [
