@@ -90,8 +90,8 @@ bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aur
 bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -m smalt
 
 #Default parameters for Tophat
-#The --library_type parameter defaults to fr-unstranded. Other options are: fr-firststrand or fr-secondstrand. 
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --tophat_mapper_library_type fr-firststrand
+#The --library_type parameter defaults to fr-firststrand for rnaseq data. Other options are: fr-unstranded or fr-secondstrand. 
+bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --tophat_mapper_library_type fr-unstranded
 
 # Run over a study in a named database specifying location of configs
 bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -c /path/to/my/configs

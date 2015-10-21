@@ -92,8 +92,8 @@ eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011"
 eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011" -m bwa
 
 #Default parameters for Tophat
-#The --library_type parameter defaults to fr-unstranded. Other options are: fr-firststrand or fr-secondstrand. 
-eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011" --tophat_mapper_library_type fr-firststrand
+#The --library_type parameter defaults to fr-firststrand for rnaseq data. Other options are: fr-unstranded or fr-secondstrand. . 
+eukaryote_rna_seq_expression -t study -i 1234 -r "Leishmania_donovani_21Apr2011" --tophat_mapper_library_type fr-unstranded
 
 # Vary the parameters for tophat
 # Mapping defaults to '-I 10000 -i 70 -g 1'
