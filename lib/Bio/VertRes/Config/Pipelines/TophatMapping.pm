@@ -24,7 +24,7 @@ use Moose;
 extends 'Bio::VertRes::Config::Pipelines::Mapping';
 
 has 'slx_mapper'     => ( is => 'ro', isa => 'Str', default => 'tophat' );
-has 'slx_mapper_exe' => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/local/tophat-2.0.8b.Linux_x86_64/tophat' );
+has 'slx_mapper_exe' => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/local/tophat-2.1.0.Linux_x86_64/tophat' );
 has '_mark_duplicates' => ( is => 'ro', isa => 'Int', default => 0 );
 has 'additional_mapper_params' => ( is => 'ro', isa => 'Maybe[Str]' );
 

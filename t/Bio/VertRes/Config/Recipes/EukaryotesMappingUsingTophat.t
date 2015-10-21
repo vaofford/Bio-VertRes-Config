@@ -75,7 +75,7 @@ is_deeply($input_config_file,{
               'do_cleanup' => 1,
               'ignore_mapped_status' => 1,
               'slx_mapper' => 'tophat',
-              'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/tophat-2.0.8b.Linux_x86_64/tophat',
+              'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/tophat-2.1.0.Linux_x86_64/tophat',
               'additional_mapper_params' => ' --library-type fr-unstranded'
             },
   'limits' => {
