@@ -17,6 +17,8 @@ use Bio::VertRes::Config::Recipes::BacteriaRnaSeqExpressionUsingBowtie2;
 with 'Bio::VertRes::Config::CommandLine::ReferenceHandlingRole';
 extends 'Bio::VertRes::Config::CommandLine::Common';
 
+has 'tophat_mapper_library_type' =>( is => 'rw', isa => 'Bio::VertRes::Config::TophatLib', default => 'fr-firststrand' );
+
 sub run {
     my ($self) = @_;
 

@@ -19,6 +19,7 @@ extends 'Bio::VertRes::Config::CommandLine::Common';
 
 has 'database'    => ( is => 'rw', isa => 'Str', default => 'pathogen_euk_track' );
 has 'protocol'    => ( is => 'rw', isa => 'Str', default => 'StandardProtocol' );
+has 'tophat_mapper_library_type' => ( is => 'rw', isa => 'Bio::VertRes::Config::TophatLib', default => 'fr-firststrand' );
 
 sub run {
     my ($self) = @_;
