@@ -19,6 +19,7 @@ extends 'Bio::VertRes::Config::CommandLine::Common';
 
 has 'database'    => ( is => 'rw', isa => 'Str', default => 'pathogen_virus_track' );
 has 'protocol'    => ( is => 'rw', isa => 'Str', default => 'StandardProtocol' );
+has 'tophat_mapper_library_type' => ( is => 'rw', isa => 'Bio::VertRes::Config::TophatLib', default => 'fr-firststrand' );
 
 sub run {
     my ($self) = @_;
@@ -91,8 +92,8 @@ virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -s "Influen
 virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -m bwa
 
 #Default parameters for Tophat
-#The --library_type parameter defaults to fr-unstranded. Other options are: fr-firststrand or fr-secondstrand. 
-virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" --tophat_mapper_library_type fr-firststrand
+#The --library_type parameter defaults to fr-firststrand for rnaseq data. Other options are: fr-unstranded or fr-secondstrand. 
+virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" --tophat_mapper_library_type fr-unstranded
 
 # Run over a study in a named database specifying location of configs
 virus_rna_seq_expression -t study -i 1234 -r "Influenzavirus_A_H1N1" -d my_database -c /path/to/my/configs

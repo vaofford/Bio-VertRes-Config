@@ -19,6 +19,7 @@ extends 'Bio::VertRes::Config::CommandLine::Common';
 
 has 'database'    => ( is => 'rw', isa => 'Str', default => 'pathogen_helminth_track' );
 has 'protocol'    => ( is => 'rw', isa => 'Str', default => 'StandardProtocol' );
+has 'tophat_mapper_library_type' => ( is => 'rw', isa => 'Bio::VertRes::Config::TophatLib', default => 'fr-firststrand' );
 
 sub run {
     my ($self) = @_;
@@ -100,8 +101,8 @@ helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" --topha
 helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" -m smalt --smalt_index_k 13 --smalt_index_s 2 --smalt_mapper_r 0 --smalt_mapper_y 0.8 --smalt_mapper_x
 
 #Default parameters for Tophat
-#The --library_type parameter defaults to fr-unstranded. Other options are: fr-firststrand or fr-secondstrand. 
-helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" --tophat_mapper_library_type fr-firststrand
+#The --library_type parameter defaults to fr-firststrand for rnaseq data. Other options are: fr-unstranded or fr-secondstrand. 
+helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" --tophat_mapper_library_type fr-unstranded
 
 # Run over a study in a named database specifying location of configs
 helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" -d my_database -c /path/to/my/configs
