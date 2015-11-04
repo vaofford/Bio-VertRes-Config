@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 
 BEGIN { unshift( @INC, './lib' ) }
 
@@ -28,7 +28,7 @@ ok(
 is($obj->study_file_name, $destination_directory.'/my_database/my_database.ilm.studies', 'Study name file constucted correctly');
 ok(($obj->register_study_name), 'register the study name');
 ok((-e $destination_directory.'/my_database/my_database.ilm.studies'), 'study names file exists');
-my $text = read_file( $destination_directory.'/my_database/my_database.ilm.studies' );
+my $text = read_text( $destination_directory.'/my_database/my_database.ilm.studies' );
 chomp($text);
 is($text, "First Study", 'Study is in file');
 
@@ -44,7 +44,7 @@ ok(
 );
 ok(($obj->register_study_name), 'register the study name');
 ok((-e $destination_directory.'/my_database/my_database.ilm.studies'), 'study names file exists');
-$text = read_file( $destination_directory.'/my_database/my_database.ilm.studies' );
+$text = read_text( $destination_directory.'/my_database/my_database.ilm.studies' );
 chomp($text);
 is($text, "First Study
 Another Study", 'Study appended to the end of the file');
@@ -61,7 +61,7 @@ ok(
 );
 ok(($obj->register_study_name), 'register the study name again');
 ok((-e $destination_directory.'/my_database/my_database.ilm.studies'), 'study names file exists');
-$text = read_file( $destination_directory.'/my_database/my_database.ilm.studies' );
+$text = read_text( $destination_directory.'/my_database/my_database.ilm.studies' );
 chomp($text);
 is($text, "First Study
 Another Study", 'Study name is not added if it already exists');

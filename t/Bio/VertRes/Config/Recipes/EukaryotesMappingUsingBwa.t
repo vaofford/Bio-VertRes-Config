@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
@@ -42,7 +42,7 @@ ok((-e "$destination_directory/my_database/import_cram/import_cram_global.conf")
 ok((-e "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_bwa.conf"), 'mapping config file exists' );
 
 
-my $text = read_file( "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_bwa.conf" );
+my $text = read_text( "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_bwa.conf" );
 my $input_config_file = eval($text);
 $input_config_file->{prefix} = '_checked_elsewhere_';
 is_deeply($input_config_file,{
@@ -89,6 +89,9 @@ is_deeply($input_config_file,{
   'prefix' => '_checked_elsewhere_',
   'dont_use_get_lanes' => 1,
   'module' => 'VertRes::Pipelines::Mapping',
+  'umask' => 23,
+  'octal_permissions' => 488,
+  'unix_group' => 'pathogen',
   'limit' => 40,
 },'Mapping Config file as expected');
 

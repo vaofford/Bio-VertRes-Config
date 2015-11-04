@@ -79,6 +79,9 @@ is_deeply(
               'log' => '/path/to/log/my_database/rna_seq_ABC_study_EFG_ABC.log',
               'root' => '/path/to/root/my_database/seq-pipelines',
               'prefix' => '_checked_elsewhere_',
+			  'umask' => 23,
+			  'octal_permissions' => 488,
+			  'unix_group' => 'pathogen',
               'module' => 'VertRes::Pipelines::RNASeqExpression'
             },
     'Expected base config file'

@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 BEGIN { unshift( @INC, './lib' ) }
 
 use Bio::VertRes::Config::Pipelines::BwaMapping;
@@ -58,7 +58,7 @@ ok(($obj->update_or_create()), 'Create the toplevel file');
 
 ok(-e $destination_directory.'/my_database/my_database_mapping_pipeline.conf', 'mapping toplevel file');
 
-my $text = read_file( $destination_directory.'/my_database/my_database_mapping_pipeline.conf' );
+my $text = read_text( $destination_directory.'/my_database/my_database_mapping_pipeline.conf' );
 chomp($text);
 my @mapping_rows = sort(split("\n",$text));
 is_deeply(\@mapping_rows , ["#admin_approval_required#__VRTrack_Mapping__ $destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_bwa.conf",
@@ -73,7 +73,7 @@ ok((my $obj_rerun = Bio::VertRes::Config::TopLevel->new(
   pipeline_short_name => 'mapping'
 )), 'initialise object to run it again');
 ok(($obj_rerun->update_or_create()), 'Create the toplevel file thats been rerun');
-$text = read_file( $destination_directory.'/my_database/my_database_mapping_pipeline.conf' );
+$text = read_text( $destination_directory.'/my_database/my_database_mapping_pipeline.conf' );
 chomp($text);
 @mapping_rows = sort(split("\n",$text));
 is_deeply(\@mapping_rows , ["#admin_approval_required#__VRTrack_Mapping__ $destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_bwa.conf",
@@ -99,7 +99,7 @@ ok((my $obj_append = Bio::VertRes::Config::TopLevel->new(
   pipeline_short_name => 'mapping'
 )), 'initialise object to append a new mapping');
 ok(($obj_append->update_or_create()), 'Create the toplevel file to append a new mapping');
-$text = read_file( $destination_directory.'/my_database/my_database_mapping_pipeline.conf' );
+$text = read_text( $destination_directory.'/my_database/my_database_mapping_pipeline.conf' );
 chomp($text);
 @mapping_rows = sort(split("\n",$text));
 is_deeply(\@mapping_rows , [

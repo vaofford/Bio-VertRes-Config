@@ -78,6 +78,9 @@ is_deeply(
         'log'    => '/path/to/log/my_database/qc_ABC_study_EFG.log',
         'root'   => '/path/to/root/my_database/seq-pipelines',
         'prefix' => '_',
+	    'umask' => 23,
+	    'octal_permissions' => 488,
+	    'unix_group' => 'pathogen',
         'module' => 'VertRes::Pipelines::TrackQC_Fastq'
     },
     'output hash constructed correctly'

@@ -52,6 +52,9 @@ is_deeply(
         'log'    => '/path/to/log/my_database/import_logfile.log',
         'root'   => '/path/to/root/my_database/seq-pipelines',
         'prefix' => '_',
+	    'umask' => 23,
+	    'octal_permissions' => 488,
+	    'unix_group' => 'pathogen',
         'module' => 'VertRes::Pipelines::Import_iRODS_fastq'
     },
     'output hash constructed correctly'

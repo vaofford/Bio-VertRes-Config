@@ -13,7 +13,7 @@ A class to represent multiple top level files. It splits out mixed config files 
 
 use Moose;
 use Bio::VertRes::Config::Exceptions;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 use DBI;
 
 
@@ -32,12 +32,6 @@ sub limits_hash
     my $dbh = DBI->connect("DBI:mysql:host=seqw-db:port=3379;database=sequencescape_warehouse", "warehouse_ro",undef, {'RaiseError' => 1, 'PrintError' => 0});
     my $sql = "select name from current_studies where internal_id = '".$self->input_id."' ";
     my @study_names = $dbh->selectrow_array($sql );
-    
-    #
-    #for my $study_name( @study_names)
-    #{
-    #      $study_name =~ s/^\\([^-\w$()*+.\/?@\[\\\]^{|}])$/$1/;
-    #}
     
     $limits{project} = \@study_names;
 
@@ -82,7 +76,7 @@ sub _extract_lanes_from_file
 {
   my ($self) = @_;
   
-  my $file_contents  = read_file( $self->input_id ) or Bio::VertRes::Config::Exceptions::FileDoesntExist->throw(error => 'Couldnt open the file '.$self->input_id);
+  my $file_contents  = read_text( $self->input_id ) or Bio::VertRes::Config::Exceptions::FileDoesntExist->throw(error => 'Couldnt open the file '.$self->input_id);
   my @lanes = split(/[\n\r]+/, $file_contents);
   my @filtered_lanes;
   for my $lane (@lanes)
