@@ -13,7 +13,7 @@ A set of attributes common to all pipeline config files. It is ment to be extend
 =cut
 
 use Moose;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 use Bio::VertRes::Config::Types;
 use Data::Dumper;
 use File::Basename;
@@ -21,6 +21,9 @@ use File::Path qw(make_path);
 with 'Bio::VertRes::Config::Pipelines::Roles::RootDatabaseLookup';
 
 has 'prefix'              => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default  => '_' );
+has 'umask'               => ( is => 'ro', isa => 'Num',                          default  => 0027 );
+has 'octal_permissions'   => ( is => 'ro', isa => 'Num',                          default  => 0750 );
+has 'unix_group'          => ( is => 'ro', isa => 'Str',                          default  => 'pathogen' );
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str',                          required => 1 );
 has 'module'              => ( is => 'ro', isa => 'Str',                          required => 1 );
 has 'toplevel_action'     => ( is => 'ro', isa => 'Str',                          required => 1 );
@@ -103,7 +106,7 @@ sub _build__database_connection_details {
     my ($self) = @_;
     my $connection_details;
     if ( -f $self->database_connect_file ) {
-        my $text = read_file( $self->database_connect_file );
+        my $text = read_text( $self->database_connect_file );
         $connection_details = eval($text);
     }
     return $connection_details;
@@ -156,7 +159,7 @@ sub create_config_file {
     # dont print out an extra wrapper variable
     $Data::Dumper::Terse = 1;
 
-    write_file( $self->config, Dumper( $self->to_hash ) );
+    write_text( $self->config, Dumper( $self->to_hash ) );
     chmod $mode, $self->config;
 }
 
@@ -168,6 +171,9 @@ sub to_hash {
         module => $self->module,
         prefix => $self->prefix,
         log    => $self->log,
+		umask  => $self->umask,
+		octal_permissions => $self->octal_permissions,
+		unix_group        => $self->unix_group,
         db     => {
             database => $self->database,
             host     => $self->host,

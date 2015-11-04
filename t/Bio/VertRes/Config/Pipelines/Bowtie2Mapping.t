@@ -82,6 +82,9 @@ is_deeply(
               'prefix' => '_checked_elsewhere_',
               'dont_use_get_lanes' => 1,
               'module' => 'VertRes::Pipelines::Mapping',
+			  'umask' => 23,
+			  'octal_permissions' => 488,
+			  'unix_group' => 'pathogen',
 			  'limit' => 40,
             },
     'Expected bowtie2 base config file'

@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {

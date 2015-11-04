@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
@@ -44,7 +44,7 @@ ok((-e "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_top
 ok((-e "$destination_directory/my_database/rna_seq/rna_seq_ABC_study_EFG_ABC.conf"), 'rnaseq config file exists' );
 
 
-my $text = read_file( "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_tophat.conf" );
+my $text = read_text( "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_tophat.conf" );
 my $input_config_file = eval($text);
 $input_config_file->{prefix} = '_checked_elsewhere_';
 is_deeply($input_config_file,{
@@ -92,11 +92,14 @@ is_deeply($input_config_file,{
   'prefix' => '_checked_elsewhere_',
   'dont_use_get_lanes' => 1,
   'module' => 'VertRes::Pipelines::Mapping',
+  'umask' => 23,
+  'octal_permissions' => 488,
+  'unix_group' => 'pathogen',
   'limit' => 40,
 },'Mapping Config file as expected');
 
 
-$text = read_file( "$destination_directory/my_database/rna_seq/rna_seq_ABC_study_EFG_ABC.conf" );
+$text = read_text( "$destination_directory/my_database/rna_seq/rna_seq_ABC_study_EFG_ABC.conf" );
 $input_config_file = eval($text);
 $input_config_file->{prefix} = '_checked_elsewhere_';
 is_deeply($input_config_file,{
@@ -138,6 +141,9 @@ is_deeply($input_config_file,{
   'log' => '/nfs/pathnfs05/log/my_database/rna_seq_ABC_study_EFG_ABC.log',
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
+  'umask' => 23,
+  'octal_permissions' => 488,
+  'unix_group' => 'pathogen',
   'module' => 'VertRes::Pipelines::RNASeqExpression'
 },'RNA seq expression config file as expected');
 

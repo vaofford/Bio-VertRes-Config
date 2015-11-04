@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+
 
 BEGIN { unshift( @INC, './lib' ) }
 

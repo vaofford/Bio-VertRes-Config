@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 
 BEGIN { unshift( @INC, './lib' ) }
 
@@ -54,6 +54,9 @@ is_deeply(
         'log'    => '/path/to/log/my_database/new_pipeline_logfile.log',
         'root'   => '/path/to/root/my_database/seq-pipelines',
         'prefix' => '_',
+	    'umask' => 23,
+	    'octal_permissions' => 488,
+	    'unix_group' => 'pathogen',
         'module' => 'Bio::Example'
     },
     'output hash constructed correctly'
@@ -67,7 +70,7 @@ is(
 ok( $obj->create_config_file, 'Can run the create config file method' );
 ok( ( -e $obj->config ), 'Config file exists' );
 
-my $text              = read_file( $obj->config );
+my $text              = read_text( $obj->config );
 my $input_config_file = eval($text);
 is_deeply(
     $input_config_file,
@@ -92,6 +95,9 @@ is_deeply(
         'log'    => '/path/to/log/my_database/new_pipeline_logfile.log',
         'root'   => '/path/to/root/my_database/seq-pipelines',
         'prefix' => '_',
+	    'umask' => 23,
+	    'octal_permissions' => 488,
+	    'unix_group' => 'pathogen',
         'module' => 'Bio::Example'
     },
     'Can pull in file correctly and parse it'
@@ -135,6 +141,9 @@ is_deeply(
         'log'    => '/path/to/log/prokaryotes/new_pipeline_logfile.log',
         'root'   => '/path/to/root/prokaryotes/seq-pipelines',
         'prefix' => '_',
+	    'umask' => 23,
+	    'octal_permissions' => 488,
+	    'unix_group' => 'pathogen',
         'module' => 'Bio::Example'
     },
     'output hash has translated db name in root path'
@@ -180,6 +189,9 @@ is_deeply(
         'log'    => '/path/to/log/prokaryotes/new_pipeline_logfile.log',
         'root'   => '/path/to/root/prokaryotes/seq-pipelines',
         'prefix' => '_',
+	    'umask' => 23,
+	    'octal_permissions' => 488,
+	    'unix_group' => 'pathogen',
         'module' => 'Bio::Example'
     },
     'output hash with default database connection details.'

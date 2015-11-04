@@ -3,7 +3,7 @@ package Bio::VertRes::Config::Tests;
 use Moose;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+
 use Test::Most;
 
 BEGIN { unshift( @INC, './lib' ) }

@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 BEGIN { unshift( @INC, './lib' ) }
 
 use Bio::VertRes::Config::Pipelines::BwaMapping;
@@ -81,21 +81,21 @@ ok(-e $destination_directory.'/my_database/my_database_stored_pipeline.conf', 's
 ok(-e $destination_directory.'/my_database/my_database_import_cram_pipeline.conf', 'import toplevel file');
 ok(-e $destination_directory.'/my_database/my_database_snps_pipeline.conf', 'snps toplevel file');
 
-my $text = read_file( $destination_directory.'/my_database/my_database_mapping_pipeline.conf' );
+my $text = read_text( $destination_directory.'/my_database/my_database_mapping_pipeline.conf' );
 chomp($text);
 my @mapping_rows = sort(split("\n",$text));
 is_deeply(\@mapping_rows , ["#admin_approval_required#__VRTrack_Mapping__ $destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_bwa.conf",
 "#admin_approval_required#__VRTrack_Mapping__ $destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_smalt.conf"], 'content of mapping toplevel file as expected');
 
-$text = read_file( $destination_directory.'/my_database/my_database_stored_pipeline.conf' );
+$text = read_text( $destination_directory.'/my_database/my_database_stored_pipeline.conf' );
 chomp($text);
 is($text, "__VRTrack_Storing__ $destination_directory/my_database/stored/stored_global.conf", 'content of stored toplevel file as expected');
 
-$text = read_file( $destination_directory.'/my_database/my_database_import_cram_pipeline.conf' );
+$text = read_text( $destination_directory.'/my_database/my_database_import_cram_pipeline.conf' );
 chomp($text);
 is($text, "__VRTrack_Import_cram__ $destination_directory/my_database/import_cram/import_cram_global.conf", 'content of import toplevel file as expected');
 
-$text = read_file( $destination_directory.'/my_database/my_database_snps_pipeline.conf' );
+$text = read_text( $destination_directory.'/my_database/my_database_snps_pipeline.conf' );
 chomp($text);
 is($text, "#admin_approval_required#__VRTrack_SNPs__ $destination_directory/my_database/snps/snps_XYZ_study_EFG_ABC.conf", 'content of snps toplevel file as expected');
 

@@ -3,7 +3,7 @@ package Bio::VertRes::Config::Tests;
 use Moose;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+
 use File::Find;
 use Test::Most;
 

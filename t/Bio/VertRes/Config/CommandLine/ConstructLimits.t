@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
@@ -20,17 +20,6 @@ is_deeply(
     { project => ['study name'] },
     'Study with name and no species'
 );
-
-## This runs over a live database so probably best to remove it
-#is_deeply(
-#    Bio::VertRes::Config::CommandLine::ConstructLimits->new(
-#        input_type => 'study',
-#        input_id   => "8",
-#        species    => undef
-#      )->limits_hash,
-#    { project => ['Test BAC'] },
-#    'Study with ssid and no species'
-#);
 
 is_deeply(
     Bio::VertRes::Config::CommandLine::ConstructLimits->new(

@@ -2,8 +2,9 @@ package TestHelper;
 
 use Moose::Role;
 use File::Find;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 use Test::Most;
+use Test::Files;
 use Data::Dumper;
 
 our @actual_files_found;
@@ -76,15 +77,15 @@ sub mock_execute_script_and_check_output {
 sub mock_execute_script_create_file_and_check_output {
    my ( $script_name, $scripts_and_expected_files ) = @_;
 
-    open OLDOUT, '>&STDOUT';
-    open OLDERR, '>&STDERR';
+   open OLDOUT, '>&STDOUT';
+   open OLDERR, '>&STDERR';
    eval("use $script_name ;");
    my $returned_values = 0;
    {
  		local *STDOUT;
-         open STDOUT, '>/dev/null' or warn "Can't open /dev/null: $!";
-         local *STDERR;
-         open STDERR, '>/dev/null' or warn "Can't open /dev/null: $!";
+        open STDOUT, '>/dev/null' or warn "Can't open /dev/null: $!";
+        local *STDERR;
+        open STDERR, '>/dev/null' or warn "Can't open /dev/null: $!";
 
        for my $script_parameters ( sort keys %$scripts_and_expected_files ) {
            my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
@@ -98,23 +99,22 @@ sub mock_execute_script_create_file_and_check_output {
            my $actual_output_file_name = $destination_directory . '/' . $scripts_and_expected_files->{$script_parameters}->[0];
            my $expected_output_file_name = $scripts_and_expected_files->{$script_parameters}->[1];
            ok(-e $actual_output_file_name, "Actual output file exists $actual_output_file_name");
-	   
-		   strip_prefix_attribute($actual_output_file_name);
-           is_deeply(eval(read_file($actual_output_file_name)), eval(read_file($expected_output_file_name)), "Actual and expected output match for '$script_parameters'");
+	       strip_prefix_attribute($actual_output_file_name);
+	       compare_ok($actual_output_file_name,$expected_output_file_name,"Actual and expected output match for '$script_parameters'");
            unlink($actual_output_file_name);
 
        }
-        close STDOUT;
-        close STDERR;
+       close STDOUT;
+       close STDERR;
    }
 
    # Restore stdout.
-    open STDOUT, '>&OLDOUT' or die "Can't restore stdout: $!";
-    open STDERR, '>&OLDERR' or die "Can't restore stderr: $!";
+   open STDOUT, '>&OLDOUT' or die "Can't restore stdout: $!";
+   open STDERR, '>&OLDERR' or die "Can't restore stderr: $!";
    
    # Avoid leaks by closing the independent copies.
-    close OLDOUT or die "Can't close OLDOUT: $!";
-    close OLDERR or die "Can't close OLDERR: $!";
+   close OLDOUT or die "Can't close OLDOUT: $!";
+   close OLDERR or die "Can't close OLDERR: $!";
 }
 
 sub process_file {
@@ -125,9 +125,9 @@ sub process_file {
 
 sub strip_prefix_attribute {
 	my ($actual_output_file_name) = @_ ;
-	my $lines = read_file($actual_output_file_name);
+	my $lines = read_text($actual_output_file_name);
 	$lines =~ s/'prefix' => '[\w]+'/'prefix' => '_checked_elsewhere_'/i;
-	write_file($actual_output_file_name,$lines);
+	write_text($actual_output_file_name,$lines);
 }
 
 no Moose;

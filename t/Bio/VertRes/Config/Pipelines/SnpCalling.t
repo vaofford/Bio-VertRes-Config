@@ -80,6 +80,9 @@ is_deeply(
               'log' => '/path/to/log/my_database/snps_ABC_study_EFG_ABC.log',
               'module' => 'VertRes::Pipelines::SNPs',
               'prefix' => '_checked_elsewhere_',
+			  'umask' => 23,
+			  'octal_permissions' => 488,
+			  'unix_group' => 'pathogen',
               'limits' => {
                   'project' => ['ABC\ study\(\ EFG\ \)']
               },

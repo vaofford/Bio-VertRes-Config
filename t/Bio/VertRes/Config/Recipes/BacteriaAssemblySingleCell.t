@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
@@ -29,7 +29,7 @@ ok( ( $obj->create ), 'Create all the config files and toplevel files' );
 
 # Check assembly file
 ok( -e $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_spades.conf', 'assembly toplevel file' );
-my $text = read_file( $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_spades.conf' );
+my $text = read_text( $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_spades.conf' );
 my $input_config_file = eval($text);
 
 is_deeply($input_config_file,{
@@ -83,12 +83,15 @@ is_deeply($input_config_file,{
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_spades.log',
   'prefix' => '_spades_',
+  'umask' => 23,
+  'octal_permissions' => 488,
+  'unix_group' => 'pathogen',
   'module' => 'VertRes::Pipelines::Assembly'
 },'Config file as expected');
 
 # Check annotation file
 ok( -e $destination_directory . '/my_database/annotate_assembly/annotate_assembly_ABC_study_EFG_spades.conf', 'annotate assembly toplevel file' );
-$text = read_file( $destination_directory . '/my_database/annotate_assembly/annotate_assembly_ABC_study_EFG_spades.conf' );
+$text = read_text( $destination_directory . '/my_database/annotate_assembly/annotate_assembly_ABC_study_EFG_spades.conf' );
 $input_config_file = eval($text);
 
 is_deeply($input_config_file,{
@@ -131,6 +134,9 @@ is_deeply($input_config_file,{
   'log' => '/nfs/pathnfs05/log/my_database/annotate_assembly_ABC_study_EFG_spades.log',
   'limit' => 1000,
   'module' => 'VertRes::Pipelines::AnnotateAssembly',
+  'umask' => 23,
+  'octal_permissions' => 488,
+  'unix_group' => 'pathogen',
   'prefix' => '_annotate_'
 },'Config file as expected');
 

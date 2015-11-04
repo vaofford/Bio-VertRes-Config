@@ -86,6 +86,9 @@ is_deeply(
         'log'    => '/path/to/log/my_database/assembly_Abc_def_ghi123_iva.log',
         'limit'  => 1000,
         'module' => 'VertRes::Pipelines::Assembly',
+	    'umask' => 23,
+	    'octal_permissions' => 488,
+	    'unix_group' => 'pathogen',
         'prefix' => '_iva_'
     },
     'output hash constructed correctly'

@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use File::Temp;
-use File::Slurp;
+use File::Slurper qw[write_text read_text];
 BEGIN { unshift( @INC, './lib' ) }
 
 BEGIN {
@@ -30,12 +30,12 @@ ok(
 ok( ( $obj->create ), 'Create all the config files and toplevel files' );
 
 ok((-e $destination_directory.'/my_database/my_database.ilm.studies'), 'study names file exists');
-my $text = read_file( $destination_directory.'/my_database/my_database.ilm.studies' );
+my $text = read_text( $destination_directory.'/my_database/my_database.ilm.studies' );
 chomp($text);
 is($text, "ABC study( EFG )", 'Study is in file');
 
 ok( -e $destination_directory . '/my_database/qc/qc_ABC_study_EFG.conf', 'QC toplevel file' );
-$text = read_file( $destination_directory . '/my_database/qc/qc_ABC_study_EFG.conf' );
+$text = read_text( $destination_directory . '/my_database/qc/qc_ABC_study_EFG.conf' );
 my $input_config_file = eval($text);
 
 is_deeply($input_config_file,{
@@ -84,6 +84,9 @@ is_deeply($input_config_file,{
   'log' => '/nfs/pathnfs05/log/my_database/qc_ABC_study_EFG.log',
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_',
+  'umask' => 23,
+  'octal_permissions' => 488,
+  'unix_group' => 'pathogen',
   'module' => 'VertRes::Pipelines::TrackQC_Fastq'
 },'Config file as expected');
 
@@ -104,7 +107,7 @@ ok(
 ok( ( $obj->create ), 'Create all the config files and toplevel files with species' );
 
 ok( -e $destination_directory . '/my_database/qc/qc_ABC_study_EFG_Cat_Dog.conf', 'QC toplevel file with species' );
-$text = read_file( $destination_directory . '/my_database/qc/qc_ABC_study_EFG_Cat_Dog.conf' );
+$text = read_text( $destination_directory . '/my_database/qc/qc_ABC_study_EFG_Cat_Dog.conf' );
 $input_config_file = eval($text);
 is_deeply($input_config_file,{
   'max_failures' => 3,
@@ -156,6 +159,9 @@ is_deeply($input_config_file,{
   'log' => '/nfs/pathnfs05/log/my_database/qc_ABC_study_EFG_Cat_Dog.log',
   'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_',
+  'umask' => 23,
+  'octal_permissions' => 488,
+  'unix_group' => 'pathogen',
   'module' => 'VertRes::Pipelines::TrackQC_Fastq'
 },'Config file as expected with species limit');
 
@@ -178,7 +184,7 @@ ok(
 ok( ( $obj->create ), 'the database name should have been updated to prevent the same study being registered in 2 different places' );
 
 ok( -e $destination_directory . '/helminths/qc/qc_DDD.conf', 'QC toplevel file with modified database' );
-$text = read_file( $destination_directory . '/helminths/qc/qc_DDD.conf' );
+$text = read_text( $destination_directory . '/helminths/qc/qc_DDD.conf' );
 $input_config_file = eval($text);
 is_deeply($input_config_file,{
   'max_failures' => 3,
@@ -227,6 +233,9 @@ is_deeply($input_config_file,{
   'log' => '/nfs/pathnfs05/log/helminths/qc_DDD.log',
   'root' => '/lustre/scratch108/pathogen/pathpipe/helminths/seq-pipelines',
   'prefix' => '_',
+  'umask' => 23,
+  'octal_permissions' => 488,
+  'unix_group' => 'pathogen',
   'module' => 'VertRes::Pipelines::TrackQC_Fastq'
 },'Config file has modified database names');
 

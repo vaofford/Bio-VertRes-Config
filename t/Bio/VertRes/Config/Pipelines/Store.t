@@ -55,6 +55,9 @@ is_deeply(
         'log'    => '/path/to/log/my_database/stored_logfile.log',
         'limit'  => 100,
         'module' => 'VertRes::Pipelines::StoreLane',
+	    'umask' => 23,
+	    'octal_permissions' => 488,
+	    'unix_group' => 'pathogen',
         'prefix' => '_'
     },
     'output hash constructed correctly'
