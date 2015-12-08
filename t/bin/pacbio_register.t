@@ -38,6 +38,10 @@ mock_execute_script_and_check_output( $script_name, \%scripts_and_expected_files
         'pathogen_pacbio_track/assembly/assembly_ZZZ_hgap.conf',
         't/data/expected/assembly_ZZZ_hgap.conf'
     ],
+     '-t study -i ZZZ -circularise' => [
+        'pathogen_pacbio_track/assembly/assembly_ZZZ_hgap.conf',
+        't/data/expected/assembly_ZZZ_hgap_circularise.conf'
+    ],
     '-t study -i ZZZ' => [
         'pathogen_pacbio_track/annotate_assembly/annotate_assembly_ZZZ_hgap.conf',
         't/data/expected/annotate_assembly_ZZZ_hgap.conf'
