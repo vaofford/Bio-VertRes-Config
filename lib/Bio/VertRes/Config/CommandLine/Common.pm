@@ -73,6 +73,9 @@ has 'kraken_db' => ( is => 'rw', isa => 'Str', default => '/lustre/scratch108/pa
 has 'iva_insert_size' => (is => 'rw', isa => 'Int', default => 800);
 has 'iva_strand_bias' => (is => 'rw', isa => 'Num', default => 0);
 
+# circularisation
+has 'circularise'  => ( is => 'rw', isa => 'Bool', default => 0 );
+
 # test mode
 has 'test_mode' => ( is => 'rw', isa => 'Bool', default => 0);
 
@@ -100,7 +103,7 @@ sub BUILD {
         $no_ass,                         $help,
         $test_mode,						 $iva_qc,
         $kraken_db,	                     $iva_insert_size,
-        $iva_strand_bias,
+        $iva_strand_bias,				 $circularise,
     );
 
     GetOptionsFromArray(
@@ -135,8 +138,9 @@ sub BUILD {
         'test'							 => \$test_mode,
         'iva_qc'                         => \$iva_qc,
         'kraken_db=s'                    => \$kraken_db,
-        'iva_insert_size=i'                => \$iva_insert_size,
-        'iva_strand_bias=f'                => \$iva_strand_bias,
+        'iva_insert_size=i'              => \$iva_insert_size,
+        'iva_strand_bias=f'              => \$iva_strand_bias,
+        'circularise'					 => \$circularise,
         'h|help'                         => \$help
     );
 
@@ -177,6 +181,9 @@ sub BUILD {
     $self->kraken_db($kraken_db) if ( defined($kraken_db) ) ;
     $self->iva_insert_size($iva_insert_size) if ( defined($iva_insert_size) );
     $self->iva_strand_bias($iva_strand_bias) if ( defined($iva_strand_bias) );
+    
+    # circularise
+    $self->circularise($circularise) if ( defined($circularise) );
 
     $regeneration_log_file ||= join( '/', ( $self->log_base(), 'command_line.log' ) );
     $self->regeneration_log_file($regeneration_log_file)
