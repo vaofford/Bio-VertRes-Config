@@ -18,7 +18,7 @@ use Moose;
 extends 'Bio::VertRes::Config::Pipelines::Assembly';
 
 has 'pipeline_short_name'  => ( is => 'ro', isa => 'Str', default => 'assembly' );
-has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default => '_hgap_' );
+has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default => '_pacbio_' );
 has 'module'               => ( is => 'ro', isa => 'Str', default => 'VertRes::Pipelines::PacbioAssembly' );
 has '_assembler'           => ( is => 'ro', isa => 'Str',  default => 'hgap' );
 has '_assembler_exec'      => ( is => 'ro', isa => 'Str',  default => '/software/pathogen/internal/prod/bin/pacbio_assemble_smrtanalysis' );
