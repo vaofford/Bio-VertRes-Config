@@ -17,7 +17,7 @@ my %scripts_and_expected_files = (
     '-a ABC '                  => ['command_line.log'],
     '-t study -i ZZZ' => [
         'command_line.log',
-        'pathogen_pacbio_track/annotate_assembly/annotate_assembly_ZZZ_hgap.conf',
+        'pathogen_pacbio_track/annotate_assembly/annotate_assembly_ZZZ_pacbio.conf',
         'pathogen_pacbio_track/assembly/assembly_ZZZ_hgap.conf',
         'pathogen_pacbio_track/import_cram/import_cram_global.conf',
         'pathogen_pacbio_track/pathogen_pacbio_track.ilm.studies',       
@@ -34,17 +34,17 @@ mock_execute_script_and_check_output( $script_name, \%scripts_and_expected_files
 
 # Check the format of assembly and annotate config file
 %scripts_and_expected_files = (
-    '-t study -i ZZZ' => [
+    '-t study -i ZZZ --no_circularise' => [
         'pathogen_pacbio_track/assembly/assembly_ZZZ_hgap.conf',
         't/data/expected/assembly_ZZZ_hgap.conf'
     ],
-     '-t study -i ZZZ -circularise' => [
+     '-t study -i ZZZ' => [
         'pathogen_pacbio_track/assembly/assembly_ZZZ_hgap.conf',
         't/data/expected/assembly_ZZZ_hgap_circularise.conf'
     ],
     '-t study -i ZZZ' => [
-        'pathogen_pacbio_track/annotate_assembly/annotate_assembly_ZZZ_hgap.conf',
-        't/data/expected/annotate_assembly_ZZZ_hgap.conf'
+        'pathogen_pacbio_track/annotate_assembly/annotate_assembly_ZZZ_pacbio.conf',
+        't/data/expected/annotate_assembly_ZZZ_pacbio.conf'
     ],
 );
 

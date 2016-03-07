@@ -51,6 +51,9 @@ Pipeline to register a pacbio study.
 # Register a study (assemble and annotate)
 pacbio_register_study -t study -i 1234 
 
+# Dont circularise
+pacbio_register_study -t study -i 1234 --no_circularise
+
 # This help message
 pacbio_register_study -h
 

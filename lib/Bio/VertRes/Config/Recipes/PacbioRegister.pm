@@ -23,6 +23,7 @@ with 'Bio::VertRes::Config::Recipes::Roles::PacbioRegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 
 has 'assembler'                   => ( is => 'ro', isa => 'Str',  default => 'hgap' );
+has 'assembler_alias_for_annotation'    => ( is => 'ro', isa => 'Str',  default => 'pacbio' );
 has 'no_ass'                      => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_pipeline_version'           => ( is => 'ro', isa => 'Str' );
 has '_kingdom'                    => ( is => 'ro', isa => 'Str',  default => "Bacteria" );
@@ -34,7 +35,7 @@ has '_memory'         	   => ( is => 'ro', isa => 'Int', default => 100000 ); # 
 has '_memory_in_mb'		   => ( is => 'ro', isa => 'Int', default => 4000 ); # for annotation
 has '_target_coverage'	   => ( is => 'ro', isa => 'Int', default => 30 );
 has '_no_bsub'			   => ( is => 'ro', isa => 'Bool', default => 1 );
-has 'circularise'		   => ( is => 'ro', isa => 'Bool', default => 0 );
+has 'circularise'		   => ( is => 'ro', isa => 'Bool', default => 1 );
 
 
 override '_pipeline_configs' => sub {
@@ -46,6 +47,7 @@ override '_pipeline_configs' => sub {
         $self->add_hgap_assembly_config(\@pipeline_configs);
     }
  
+    
     $self->add_bacteria_annotate_config(\@pipeline_configs);
 
     return \@pipeline_configs;
