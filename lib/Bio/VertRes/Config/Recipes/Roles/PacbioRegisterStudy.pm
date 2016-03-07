@@ -76,7 +76,7 @@ sub add_bacteria_annotate_config
           overwrite_existing_config_file => $self->overwrite_existing_config_file,
           limits                         => $self->limits,
           _kingdom                       => $self->_kingdom,
-          _assembler                     => $self->assembler,
+          _assembler                     => $self->assembler_alias_for_annotation,
           _memory_in_mb					 => $self->_memory_in_mb,
       )
   );
