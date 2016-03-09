@@ -109,7 +109,7 @@ is_deeply($input_config_file,{
             'host' => 'some_hostname'
           },
   'data' => {
-              'protocol' => 'StrandSpecificProtocol',
+              'protocol' => 'StandardProtocol',
               'annotation_file' => '/path/to/ABC.gff',
               'intergenic_regions' => 0,
               'no_coverage_plots' => 1,
