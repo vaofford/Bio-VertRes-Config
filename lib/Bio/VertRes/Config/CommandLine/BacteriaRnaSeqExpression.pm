@@ -81,8 +81,8 @@ bacteria_rna_seq_expression -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_
 # Run over a file of lanes
 bacteria_rna_seq_expression -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
 
-# Use the Standard FRT Protocol. The default is the Croucher Protocol
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -p "StandardProtocol"
+#  The default is the Standard FRT Protocol. Use the Strand Specific Protocol.
+bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -p "StrandSpecificProtocol"
 
 # Run over a single species in a study
 bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
