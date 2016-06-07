@@ -26,4 +26,4 @@ ok(my $obj = Bio::VertRes::Config::CommandLine::BacteriaRnaSeqExpression->new(
 ), 'initialise dummy object');
 is( $obj->protocol, 'StandardProtocol', 'check protocol');
 
-$destination_directory,done_testing();
+done_testing();
