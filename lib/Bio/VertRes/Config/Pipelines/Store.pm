@@ -27,6 +27,8 @@ override 'to_hash' => sub {
     my $output_hash = super();
     $output_hash->{limit} = $self->_limit;
     $output_hash->{vrtrack_processed_flags} = { qc => 1, stored => 0 };
+		
+		delete($output_hash->{umask}) if(defined($output_hash->{umask}));
 
     return $output_hash;
 };
