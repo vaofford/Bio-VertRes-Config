@@ -103,8 +103,9 @@ sub add_bacteria_spades_single_cell_assembly_config
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
           _single_cell                   => $self->_single_cell,
-          iva_qc						 => $self->iva_qc,
-          kraken_db				     => $self->kraken_db,
+          iva_qc			 => $self->iva_qc,
+          kraken_db			=> $self->kraken_db,
+
       )
   );
   return ;
@@ -113,7 +114,6 @@ sub add_bacteria_spades_single_cell_assembly_config
 sub add_bacteria_spades_assembly_config
 {
   my ($self, $pipeline_configs_array) = @_;
-
   push(
       @{$pipeline_configs_array},
       Bio::VertRes::Config::Pipelines::SpadesAssembly->new(
@@ -127,8 +127,9 @@ sub add_bacteria_spades_assembly_config
           _error_correct                 => $self->_error_correct,
           _remove_primers                => $self->_remove_primers,
           _normalise                     => $self->_normalise,
-          iva_qc						 => $self->iva_qc,
-          kraken_db				     => $self->kraken_db,
+          iva_qc			 => $self->iva_qc,
+          kraken_db			 => $self->kraken_db,
+	  _spades_opts                   => $self->_spades_opts,
       )
   );
   return ;

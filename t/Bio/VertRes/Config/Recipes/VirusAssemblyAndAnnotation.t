@@ -53,7 +53,7 @@ is_deeply($input_config_file,{
                         'host' => 'some_hostname'
                       },
               'error_correct' => 1,
-              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades.py',
+              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py',
               'dont_wait' => 0,
               'primers_file' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
               'assembler' => 'spades',
@@ -66,7 +66,7 @@ is_deeply($input_config_file,{
               'post_contig_filtering' => 300,
               'max_threads' => 2,
               'single_cell' => 0,
-              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades.py',
+              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py',
               'iva_qc'		    => 1,
 			  'kraken_db'		    => '/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728',
             },
