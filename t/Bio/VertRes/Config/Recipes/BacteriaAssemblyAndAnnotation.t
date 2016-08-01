@@ -140,4 +140,90 @@ is_deeply($input_config_file,{
   'prefix' => '_annotate_'
 },'Config file as expected');
 
+
+
+ok(
+    (
+            $obj = Bio::VertRes::Config::Recipes::BacteriaAssemblyAndAnnotation->new(
+            database    => 'my_database',
+	    assembler   => 'spades',
+            config_base => $destination_directory,
+            database_connect_file => 't/data/database_connection_details',
+            limits      => { project => ['ABC study( EFG )'] },
+        )
+    ),
+    'initalise creating files with spades as the assembler'
+);
+ok( ( $obj->create ), 'Create all the config files and toplevel files' );
+# Check assembly file
+$text = read_text( $destination_directory . '/my_database/assembly/assembly_ABC_study_EFG_spades.conf' );
+$input_config_file = eval($text);
+
+is_deeply($input_config_file,{
+  'max_failures' => 3,
+  'db' => {
+            'database' => 'my_database',
+            'password' => 'some_password',
+            'user' => 'some_user',
+            'port' => 1234,
+            'host' => 'some_hostname'
+          },
+  'data' => {
+              'genome_size' => 10000000,
+              'remove_primers' => 0,
+              'db' => {
+                        'database' => 'my_database',
+                        'password' => 'some_password',
+                        'user' => 'some_user',
+                        'port' => 1234,
+                        'host' => 'some_hostname'
+                      },
+              'improve_assembly' => 1,
+              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py',
+              'error_correct' => 0,
+              'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+              'assembler' => 'spades',
+              'primers_file' => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
+              'kraken_db' => '/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728',
+              'normalise' => 0,
+              'tmp_directory' => '/lustre/scratch108/pathogen/pathpipe/tmp',
+              'sga_exec' => '/software/pathogen/external/apps/usr/bin/sga',
+              'max_threads' => 2,
+              'pipeline_version' => '3.0.1',
+              'single_cell' => 0,
+              'dont_wait' => 0,
+              'spades_opts' => ' ',
+              'post_contig_filtering' => 300,
+              'iva_qc' => 0,
+              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py'
+            },
+  'max_lanes_to_search' => 10000,
+  'limits' => {
+                'project' => [
+                               'ABC\\ study\\(\\ EFG\\ \\)'
+                             ]
+              },
+  'octal_permissions' => 488,
+  'unix_group' => 'pathogen',
+  'vrtrack_processed_flags' => {
+                                 'rna_seq_expression' => 0,
+                                 'stored' => 1
+                               },
+  'umask' => 23,
+  'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_spades.log',
+  'root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
+  'limit' => 1000,
+  'prefix' => '_spades_',
+  'module' => 'VertRes::Pipelines::Assembly'
+},'Config file as expected');
+
+
+
+
+
+
+
+
+
+
 done_testing();
