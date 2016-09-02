@@ -33,7 +33,7 @@ has '_assembler'           => ( is => 'ro', isa => 'Str', default => 'velvet' );
 has '_annotation_tool'     => ( is => 'ro', isa => 'Str', default => 'Prokka' );
 has '_dbdir'               => ( is => 'ro', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/prokka' );
 has '_pipeline_version'    => ( is => 'ro', isa => 'Int', default => 1 );
-has '_memory_in_mb'        => ( is => 'ro', isa => 'Int', default => 3000 );
+has '_memory_in_mb'        => ( is => 'ro', isa => 'Int', default => 5000 );
 has '_kingdom'             => ( is => 'ro', isa => 'Str', default => 'Bacteria' );
 
 sub _build_prefix

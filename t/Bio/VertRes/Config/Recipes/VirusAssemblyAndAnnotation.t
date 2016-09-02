@@ -115,7 +115,7 @@ is_deeply($input_config_file,{
               'annotation_tool' => 'Prokka',
               'dont_wait' => 0,
               'assembler' => 'spades',
-              'memory' => 3000,
+              'memory' => 5000,
               'tmp_directory' => '/lustre/scratch108/pathogen/pathpipe/tmp',
               'dbdir' => '/lustre/scratch108/pathogen/pathpipe/prokka',
               'pipeline_version' => 1,

@@ -44,7 +44,7 @@ is_deeply(
                       },
               'data' => {
                           'tmp_directory' => '/lustre/scratch108/pathogen/pathpipe/tmp',
-                          'memory'        => 3000,
+                          'memory'        => 5000,
                           'db' => {
                                     'database' => 'my_database',
                                     'password' => 'some_password',
