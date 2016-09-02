@@ -22,7 +22,7 @@ use Moose;
 sub is_valid {
     my ( $self, $prefix ) = @_;
     return 0 unless ( defined($prefix) );
-    return 0 if ( length($prefix) > 12 );
+    return 0 if ( length($prefix) > 15 );
     return 0 if ( $prefix =~ /[\W]/ );
     return 1;
 }

@@ -121,7 +121,7 @@ my %scripts_and_expected_files = (
     ],
     '-a ABC ' => ['command_line.log'],
 );
-mock_execute_script_and_check_output( $script_name, \%scripts_and_expected_files );
+mock_execute_script_and_check_output_ignore_regex( $script_name, \%scripts_and_expected_files,'permission' );
 
 done_testing();
 
