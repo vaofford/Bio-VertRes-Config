@@ -29,7 +29,7 @@ my %scripts_and_expected_files = (
     ],
 );
 
-mock_execute_script_and_check_output( $script_name, \%scripts_and_expected_files );
+mock_execute_script_and_check_output_ignore_regex( $script_name, \%scripts_and_expected_files,'permission' );
 
 
 # Check the format of assembly and annotate config file
