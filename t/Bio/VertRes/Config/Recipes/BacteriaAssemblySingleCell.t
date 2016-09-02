@@ -137,7 +137,7 @@ is_deeply($input_config_file,{
   'umask' => 23,
   'octal_permissions' => 488,
   'unix_group' => 'pathogen',
-  'prefix' => '_annotate_'
+  'prefix' => '_spades_ann_'
 },'Config file as expected');
 
 done_testing();

@@ -138,7 +138,7 @@ is_deeply($input_config_file,{
   'octal_permissions' => 488,
   'unix_group' => 'pathogen',
   'module' => 'VertRes::Pipelines::AnnotateAssembly',
-  'prefix' => '_annotate_'
+  'prefix' => '_spades_ann_'
 },'Config file as expected');
 
 
