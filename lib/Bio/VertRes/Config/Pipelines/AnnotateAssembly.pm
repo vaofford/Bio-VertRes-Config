@@ -22,7 +22,7 @@ with 'Bio::VertRes::Config::Pipelines::Roles::MetaDataFilter';
 
 has 'pipeline_short_name'  => ( is => 'ro', isa => 'Str', default => 'annotate_assembly' );
 has 'module'               => ( is => 'ro', isa => 'Str', default => 'VertRes::Pipelines::AnnotateAssembly' );
-has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default => '_annotate_' );
+has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', lazy => 1, builder => '_build_prefix');
 has 'toplevel_action'      => ( is => 'ro', isa => 'Str', default => '__VRTrack_AnnotateAssembly__' );
 
 has '_max_failures'        => ( is => 'ro', isa => 'Int', default => 3 );
@@ -35,6 +35,19 @@ has '_dbdir'               => ( is => 'ro', isa => 'Str', default => '/lustre/sc
 has '_pipeline_version'    => ( is => 'ro', isa => 'Int', default => 1 );
 has '_memory_in_mb'        => ( is => 'ro', isa => 'Int', default => 3000 );
 has '_kingdom'             => ( is => 'ro', isa => 'Str', default => 'Bacteria' );
+
+sub _build_prefix
+{
+	my ($self) = @_;
+	if($self->_assembler eq 'velvet')
+	{
+		return "_annotate_";
+	}
+	else
+	{
+		return '_'.$self->_assembler.'_ann_';
+	}
+}
 
 override 'to_hash' => sub {
     my ($self) = @_;
