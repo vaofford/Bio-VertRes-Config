@@ -14,6 +14,7 @@ extends 'Bio::VertRes::Config::CommandLine::Common';
 
 has 'database'  => ( is => 'rw', isa => 'Str', default => 'pathogen_virus_track' );
 has 'iva_qc'    => ( is => 'rw', isa => 'Bool', default => 1 ); # Always run iva_qc for viruses
+has 'assembler'  => ( is => 'rw', isa => 'Str', default => 'spades' );
 
 sub run {
     my ($self) = @_;

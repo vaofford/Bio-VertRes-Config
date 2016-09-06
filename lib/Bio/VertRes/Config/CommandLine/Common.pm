@@ -64,7 +64,7 @@ has 'tophat_mapper_library_type' =>
   ( is => 'rw', isa => 'Bio::VertRes::Config::TophatLib' );
 
 # set assembler
-has 'assembler' => ( is => 'rw', isa => 'Maybe[Str]' );
+has 'assembler' => ( is => 'rw', isa => 'Str', default => 'velvet' );
 has 'no_ass'    => ( is => 'rw', isa => 'Bool' );
 
 # iva paramters, iva_qc 
