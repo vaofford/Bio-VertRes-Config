@@ -26,10 +26,10 @@ has '_improve_assembly'    => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_optimiser_exec'      => ( is => 'ro', isa => 'Str', default => '' );
 has 'kraken_db'		   	   => ( is => 'ro', isa => 'Str',  default => '' ); # not relevant at the moment
 has '_primers_file'        => ( is => 'ro', isa => 'Str',  default => '' ); # not relevant
-has '_threads'         => ( is => 'ro', isa => 'Int',  default => 16 );
+has '_threads'         => ( is => 'ro', isa => 'Int',  default => 12 );
 has '_queue'			   => ( is => 'ro', isa => 'Str', default => 'normal');
 has '_genome_size'         => ( is => 'ro', isa => 'Int', default => 3000000 );
-has '_memory'         	   => ( is => 'ro', isa => 'Int', default => 100000 );
+has '_memory'         	   => ( is => 'ro', isa => 'Int', default => 60000 );
 has '_target_coverage'	   => ( is => 'ro', isa => 'Int', default => 30 );
 has '_no_bsub'			   => ( is => 'ro', isa => 'Bool', default => 1 );
 has 'circularise'		   => ( is => 'ro', isa => 'Bool', default => 0 );
