@@ -27,10 +27,10 @@ has 'no_ass'                      => ( is => 'ro', isa => 'Bool', default => 0 )
 has '_pipeline_version'           => ( is => 'ro', isa => 'Str' );
 has '_kingdom'                    => ( is => 'ro', isa => 'Str',  default => "Bacteria" );
 has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ assembled => 0, stored => 1}} );
-has '_max_threads'         => ( is => 'ro', isa => 'Int',  default => 16 );
+has '_max_threads'         => ( is => 'ro', isa => 'Int',  default => 12 );
 has '_queue'			   => ( is => 'ro', isa => 'Str', default => 'normal');
 has '_genome_size'         => ( is => 'ro', isa => 'Int', default => 3000000 );
-has '_memory'         	   => ( is => 'ro', isa => 'Int', default => 100000 ); # for assembly bsub job
+has '_memory'         	   => ( is => 'ro', isa => 'Int', default => 60000 ); # for assembly bsub job
 has '_memory_in_mb'		   => ( is => 'ro', isa => 'Int', default => 4000 ); # for annotation
 has '_target_coverage'	   => ( is => 'ro', isa => 'Int', default => 30 );
 has '_no_bsub'			   => ( is => 'ro', isa => 'Bool', default => 1 );
