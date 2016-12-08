@@ -328,7 +328,7 @@ is_deeply($input_config_file,{
               'seq_pipeline_root' => '/lustre/scratch108/pathogen/pathpipe/my_database/seq-pipelines',
               'normalise' => 0,
               'improve_assembly' => 1,
-							'spades_opts'       => ' ',
+							'spades_opts'       => ' --careful --cov-cutoff auto ',
               'sga_exec' => '/software/pathogen/external/apps/usr/bin/sga',
               'tmp_directory' => '/lustre/scratch108/pathogen/pathpipe/tmp',
               'pipeline_version' => '3.0.1',

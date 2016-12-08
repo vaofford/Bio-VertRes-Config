@@ -192,7 +192,7 @@ is_deeply($input_config_file,{
               'pipeline_version' => '3.0.1',
               'single_cell' => 0,
               'dont_wait' => 0,
-              'spades_opts' => ' ',
+              'spades_opts' => ' --careful --cov-cutoff auto ',
               'post_contig_filtering' => 300,
               'iva_qc' => 0,
               'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py'
