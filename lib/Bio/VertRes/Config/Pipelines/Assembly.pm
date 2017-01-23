@@ -27,7 +27,7 @@ has 'toplevel_action'      => ( is => 'ro', isa => 'Str', default => '__VRTrack_
 has '_max_failures'        => ( is => 'ro', isa => 'Int', default => 3 );
 has '_max_lanes_to_search' => ( is => 'ro', isa => 'Int', default => 10000 );
 has '_limit'               => ( is => 'ro', isa => 'Int', default => 1000 );
-has '_tmp_directory'       => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/pathogen/pathpipe/tmp' );
+has '_tmp_directory'       => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/infgen/pathogen/pathpipe/tmp' );
 has '_genome_size'         => ( is => 'ro', isa => 'Int', default => 10000000 );
 has '_assembler'           => ( is => 'ro', isa => 'Str', default => 'velvet' );
 has '_assembler_exec'      => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/velvet' );
@@ -37,12 +37,12 @@ has '_error_correct'       => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_sga_exec'            => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/sga' );
 has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_post_contig_filtering' => ( is => 'ro', isa => 'Int', default => 300 );
-has '_primers_file'        => ( is => 'ro', isa => 'Str',  default => '/lustre/scratch118/pathogen/pathpipe/usr/share/solexa-adapters.quasr' );
+has '_primers_file'        => ( is => 'ro', isa => 'Str',  default => '/lustre/scratch118/infgen/pathogen/pathpipe/usr/share/solexa-adapters.quasr' );
 has '_remove_primers'      => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_improve_assembly'    => ( is => 'ro', isa => 'Bool', lazy_build => 1 );
 
 has 'iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 0 );
-has 'kraken_db'		   => ( is => 'ro', isa => 'Str',  default => '/lustre/scratch118/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728' );
+has 'kraken_db'		   => ( is => 'ro', isa => 'Str',  default => '/lustre/scratch118/infgen/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728' );
 
 has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ stored => 1, rna_seq_expression => 0 }} );
 

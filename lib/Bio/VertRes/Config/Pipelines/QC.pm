@@ -43,9 +43,9 @@ has '_bwa_exec'             => ( is => 'ro', isa => 'Str', default => '/software
 has '_samtools'             => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/samtools' );
 has '_glf'                  => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/glf' );
 has '_mapviewdepth'         => ( is => 'ro', isa => 'Str', default => '/software/pathogen/external/apps/usr/bin/bindepth' );
-has '_adapters'             => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/pathogen/pathpipe/usr/share/solexa-adapters.fasta' );
-has '_kraken_db'            => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/pathogen/pathpipe/kraken/pi_qc_2015521/' );
-has '_snps'                 => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/pathogen/pathpipe/usr/share/mousehapmap.snps.bin' );
+has '_adapters'             => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/infgen/pathogen/pathpipe/usr/share/solexa-adapters.fasta' );
+has '_kraken_db'            => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/infgen/pathogen/pathpipe/kraken/pi_qc_2015521/' );
+has '_snps'                 => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/infgen/pathogen/pathpipe/usr/share/mousehapmap.snps.bin' );
 has '_skip_genotype'        => ( is => 'ro', isa => 'Int', default => 1 );
 has '_gtype_confidence'     => ( is => 'ro', isa => 'Num', default => 1.2 );
 has '_chr_regex'            => ( is => 'ro', isa => 'Str', default => '.*' );

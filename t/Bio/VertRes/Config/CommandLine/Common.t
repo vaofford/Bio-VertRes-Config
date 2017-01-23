@@ -21,7 +21,7 @@ my $mapping_params = $obj->mapping_parameters;
 is_deeply($mapping_params, {
           'protocol' => 'StrandSpecificProtocol',
           'overwrite_existing_config_file' => 0,
-          'reference_lookup_file' => '/lustre/scratch118/pathogen/pathpipe/refs/refs.index',
+          'reference_lookup_file' => '/lustre/scratch118/infgen/pathogen/pathpipe/refs/refs.index',
           'database' => 'pathogen_prok_track',
           'database_connect_file' => '/software/pathogen/config/database_connection_details',
           'limits' => {
@@ -32,7 +32,7 @@ is_deeply($mapping_params, {
           'mapper_index_params' => '-k 15 -s 4',
           'reference' => 'ABC',
           'additional_mapper_params' => ' -r 1 -y 0.9 -x -l pe',
-          'root_base' => '/lustre/scratch118/pathogen/pathpipe',
+          'root_base' => '/lustre/scratch118/infgen/pathogen/pathpipe',
           'log_base'  => '/nfs/pathnfs05/log',
           'config_base' => '/nfs/pathnfs05/conf',
           'regeneration_log_file' => '/nfs/pathnfs05/log/command_line.log',
@@ -56,7 +56,7 @@ $mapping_params = $obj_tophat->mapping_parameters;
 is_deeply($mapping_params, {
           'protocol' => 'StrandSpecificProtocol',
           'overwrite_existing_config_file' => 0,
-          'reference_lookup_file' => '/lustre/scratch118/pathogen/pathpipe/refs/refs.index',
+          'reference_lookup_file' => '/lustre/scratch118/infgen/pathogen/pathpipe/refs/refs.index',
           'database' => 'pathogen_prok_track',
           'database_connect_file' => '/software/pathogen/config/database_connection_details',
           'limits' => {
@@ -66,7 +66,7 @@ is_deeply($mapping_params, {
                       },
           'reference' => 'ABC',
           'additional_mapper_params' => ' -I 50000 -i 70 -g 20',
-          'root_base' => '/lustre/scratch118/pathogen/pathpipe',
+          'root_base' => '/lustre/scratch118/infgen/pathogen/pathpipe',
           'log_base'  => '/nfs/pathnfs05/log',
           'config_base' => '/nfs/pathnfs05/conf',
           'regeneration_log_file' => '/nfs/pathnfs05/log/command_line.log',
@@ -80,7 +80,7 @@ $mapping_params = $user_root->mapping_parameters;
 is_deeply($mapping_params, {
           'protocol' => 'StrandSpecificProtocol',
           'overwrite_existing_config_file' => 0,
-          'reference_lookup_file' => '/lustre/scratch118/pathogen/pathpipe/refs/refs.index',
+          'reference_lookup_file' => '/lustre/scratch118/infgen/pathogen/pathpipe/refs/refs.index',
           'database' => 'pathogen_prok_track',
           'database_connect_file' => '/software/pathogen/config/database_connection_details',
           'limits' => {
@@ -103,7 +103,7 @@ $mapping_params = $user_dbconnect->mapping_parameters;
 is_deeply($mapping_params, {
           'protocol' => 'StrandSpecificProtocol',
           'overwrite_existing_config_file' => 0,
-          'reference_lookup_file' => '/lustre/scratch118/pathogen/pathpipe/refs/refs.index',
+          'reference_lookup_file' => '/lustre/scratch118/infgen/pathogen/pathpipe/refs/refs.index',
           'database' => 'pathogen_prok_track',
           'database_connect_file' => '/user/database/connect/file',
           'limits' => {
@@ -112,7 +112,7 @@ is_deeply($mapping_params, {
                                      ]
                       },
           'reference' => 'ABC',
-          'root_base' => '/lustre/scratch118/pathogen/pathpipe',
+          'root_base' => '/lustre/scratch118/infgen/pathogen/pathpipe',
           'log_base'  => '/nfs/pathnfs05/log',
           'config_base' => '/nfs/pathnfs05/conf',
           'regeneration_log_file' => '/nfs/pathnfs05/log/command_line.log',
@@ -126,7 +126,7 @@ $mapping_params = $user_dbconnect->mapping_parameters;
 is_deeply($mapping_params, {
           'protocol' => 'StrandSpecificProtocol',
           'overwrite_existing_config_file' => 0,
-          'reference_lookup_file' => '/lustre/scratch118/pathogen/pathpipe/refs/refs.index',
+          'reference_lookup_file' => '/lustre/scratch118/infgen/pathogen/pathpipe/refs/refs.index',
           'database' => 'pathogen_prok_track',
           'database_connect_file' => '',
           'limits' => {
@@ -135,7 +135,7 @@ is_deeply($mapping_params, {
                                      ]
                       },
           'reference' => 'ABC',
-          'root_base' => '/lustre/scratch118/pathogen/pathpipe',
+          'root_base' => '/lustre/scratch118/infgen/pathogen/pathpipe',
           'log_base'  => '/nfs/pathnfs05/log',
           'config_base' => '/nfs/pathnfs05/conf',
           'regeneration_log_file' => '/nfs/pathnfs05/log/command_line.log',

@@ -43,7 +43,7 @@ is_deeply(
                         'host' => 'some_hostname'
                       },
               'data' => {
-                          'tmp_directory' => '/lustre/scratch118/pathogen/pathpipe/tmp',
+                          'tmp_directory' => '/lustre/scratch118/infgen/pathogen/pathpipe/tmp',
                           'memory'        => 5000,
                           'db' => {
                                     'database' => 'my_database',
@@ -52,7 +52,7 @@ is_deeply(
                                     'port' => 1234,
                                     'host' => 'some_hostname'
                                   },
-                          'dbdir' => '/lustre/scratch118/pathogen/pathpipe/prokka',
+                          'dbdir' => '/lustre/scratch118/infgen/pathogen/pathpipe/prokka',
                           'annotation_tool' => 'Prokka',
                           'dont_wait' => 0,
                           'assembler' => 'velvet',
