@@ -24,7 +24,7 @@ has 'config_base' =>
 has 'root_base' => (
     is      => 'rw',
     isa     => 'Str',
-    default => '/lustre/scratch108/pathogen/pathpipe'
+    default => '/lustre/scratch118/pathogen/pathpipe'
 );
 has 'log_base' => ( is => 'rw', isa => 'Str', default => '/nfs/pathnfs05/log' );
 has 'database_connect_file' => (
@@ -35,7 +35,7 @@ has 'database_connect_file' => (
 has 'reference_lookup_file' => (
     is      => 'rw',
     isa     => 'Str',
-    default => '/lustre/scratch108/pathogen/pathpipe/refs/refs.index'
+    default => '/lustre/scratch118/pathogen/pathpipe/refs/refs.index'
 );
 has 'reference'            => ( is => 'rw', isa => 'Maybe[Str]', );
 has 'available_references' => ( is => 'rw', isa => 'Maybe[Str]' );
@@ -69,7 +69,7 @@ has 'no_ass'    => ( is => 'rw', isa => 'Bool' );
 
 # iva paramters, iva_qc 
 has 'iva_qc'    => ( is => 'rw', isa => 'Bool', default => 0 );
-has 'kraken_db' => ( is => 'rw', isa => 'Str', default => '/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728' );
+has 'kraken_db' => ( is => 'rw', isa => 'Str', default => '/lustre/scratch118/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728' );
 has 'iva_insert_size' => (is => 'rw', isa => 'Int', default => 800);
 has 'iva_strand_bias' => (is => 'rw', isa => 'Num', default => 0);
 

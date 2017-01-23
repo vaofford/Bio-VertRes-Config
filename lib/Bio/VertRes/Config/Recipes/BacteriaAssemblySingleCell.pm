@@ -27,7 +27,7 @@ has '_normalise'           => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_kingdom'             => ( is => 'ro', isa => 'Str',  default => "Bacteria" );
 has '_single_cell'         => ( is => 'ro', isa => 'Bool', default => 1 );
 has 'iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 0 );
-has 'kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/lustre/scratch108/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728" );
+has 'kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/lustre/scratch118/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728" );
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
