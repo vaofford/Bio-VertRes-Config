@@ -61,7 +61,7 @@ is_deeply(
                           'ignore_snp_called_status' => 1,
                           'mpileup_cmd' => 'samtools mpileup -d 1000 -DSug ',
                           'bsub_opts' => '-q normal -M3500000 -R \'select[type==X86_64 && mem>3500] rusage[mem=3500,thouio=1,tmp=16000]\'',
-                          'tmp_dir' => '/lustre/scratch118/pathogen/tmp',
+                          'tmp_dir' => '/lustre/scratch118/infgen/pathogen/tmp',
                           'fai_ref' => '/path/to/ABC.fa.fai',
                           'fai_chr_regex' => '[\w\.\#]+',
                           'bsub_opts_mpileup' => '-q normal -R \'select[type==X86_64] rusage[thouio=1]\'',

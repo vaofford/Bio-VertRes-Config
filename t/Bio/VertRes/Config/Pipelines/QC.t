@@ -69,11 +69,11 @@ is_deeply(
             'exit_on_errors'    => 0,
             'bwa_exec'          => '/software/pathogen/external/apps/usr/local/bwa-0.6.1/bwa',
             'samtools'          => '/software/pathogen/external/apps/usr/bin/samtools',
-            'adapters'          => '/lustre/scratch118/pathogen/pathpipe/usr/share/solexa-adapters.fasta',
-            'kraken_db'         => '/lustre/scratch118/pathogen/pathpipe/kraken/pi_qc_2015521/',
+            'adapters'          => '/lustre/scratch118/infgen/pathogen/pathpipe/usr/share/solexa-adapters.fasta',
+            'kraken_db'         => '/lustre/scratch118/infgen/pathogen/pathpipe/kraken/pi_qc_2015521/',
             'fa_ref'            => '/path/to/ABC.fa',
             'gcdepth_R'         => '/software/pathogen/external/apps/usr/local/gcdepth/gcdepth.R',
-            'snps'              => '/lustre/scratch118/pathogen/pathpipe/usr/share/mousehapmap.snps.bin'
+            'snps'              => '/lustre/scratch118/infgen/pathogen/pathpipe/usr/share/mousehapmap.snps.bin'
         },
         'log'    => '/path/to/log/my_database/qc_ABC_study_EFG.log',
         'root'   => '/path/to/root/my_database/seq-pipelines',

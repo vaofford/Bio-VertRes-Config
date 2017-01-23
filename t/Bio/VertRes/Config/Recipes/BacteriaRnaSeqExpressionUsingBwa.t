@@ -86,7 +86,7 @@ is_deeply($input_config_file,{
                                  'import' => 1
                                },
   'log' => '/nfs/pathnfs05/log/my_database/mapping_ABC_study_EFG_ABC_bwa.log',
-  'root' => '/lustre/scratch118/pathogen/pathpipe/my_database/seq-pipelines',
+  'root' => '/lustre/scratch118/infgen/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
   'dont_use_get_lanes' => 1,
   'module' => 'VertRes::Pipelines::Mapping',
@@ -137,7 +137,7 @@ is_deeply($input_config_file,{
                                  'mapped' => 1
                                },
   'log' => '/nfs/pathnfs05/log/my_database/rna_seq_ABC_study_EFG_ABC.log',
-  'root' => '/lustre/scratch118/pathogen/pathpipe/my_database/seq-pipelines',
+  'root' => '/lustre/scratch118/infgen/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
   'umask' => 23,
   'octal_permissions' => 488,

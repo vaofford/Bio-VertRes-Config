@@ -91,7 +91,7 @@ is_deeply($input_config_file,{
                                  'import' => 1
                                },
   'log' => '/nfs/pathnfs05/log/my_database/mapping_ABC_study_EFG_ABC_smalt.log',
-  'root' => '/lustre/scratch118/pathogen/pathpipe/my_database/seq-pipelines',
+  'root' => '/lustre/scratch118/infgen/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
   'dont_use_get_lanes' => 1,
   'module' => 'VertRes::Pipelines::Mapping',
@@ -128,7 +128,7 @@ is_deeply($input_config_file,{
               'bsub_opts' => '-q normal -M3500000 -R \'select[type==X86_64 && mem>3500] rusage[mem=3500,thouio=1,tmp=16000]\'',
               'mpileup_cmd' => 'samtools mpileup -d 1000 -DSug ',
               'ignore_snp_called_status' => 1,
-              'tmp_dir' => '/lustre/scratch118/pathogen/tmp',
+              'tmp_dir' => '/lustre/scratch118/infgen/pathogen/tmp',
               'bsub_opts_mpileup' => '-q normal -R \'select[type==X86_64] rusage[thouio=1]\'',
               'fai_chr_regex' => '[\w\.\#]+',
               'fai_ref' => '/path/to/ABC.fa.fai',
@@ -148,7 +148,7 @@ is_deeply($input_config_file,{
                                  'import' => 1,
                                  'mapped' => 1
                                },
-  'root' => '/lustre/scratch118/pathogen/pathpipe/my_database/seq-pipelines',
+  'root' => '/lustre/scratch118/infgen/pathogen/pathpipe/my_database/seq-pipelines',
   'log' => '/nfs/pathnfs05/log/my_database/snps_ABC_study_EFG_ABC.log',
   'prefix' => '_checked_elsewhere_',
   'umask' => 23,
@@ -218,7 +218,7 @@ is_deeply($input_config_file,{
                                  'import' => 1
                                },
   'log' => '/nfs/pathnfs05/log/my_database/mapping_ABC_study_EFG_ABC_smalt.log',
-  'root' => '/lustre/scratch118/pathogen/pathpipe/my_database/seq-pipelines',
+  'root' => '/lustre/scratch118/infgen/pathogen/pathpipe/my_database/seq-pipelines',
   'prefix' => '_checked_elsewhere_',
   'dont_use_get_lanes' => 1,
   'module' => 'VertRes::Pipelines::Mapping',

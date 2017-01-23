@@ -28,10 +28,10 @@ has 'toplevel_action'      => ( is => 'ro', isa => 'Str', default => '__VRTrack_
 has '_max_failures'        => ( is => 'ro', isa => 'Int', default => 3 );
 has '_max_lanes_to_search' => ( is => 'ro', isa => 'Int', default => 10000 );
 has '_limit'               => ( is => 'ro', isa => 'Int', default => 1000 );
-has '_tmp_directory'       => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/pathogen/pathpipe/tmp' );
+has '_tmp_directory'       => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/infgen/pathogen/pathpipe/tmp' );
 has '_assembler'           => ( is => 'ro', isa => 'Str', default => 'velvet' );
 has '_annotation_tool'     => ( is => 'ro', isa => 'Str', default => 'Prokka' );
-has '_dbdir'               => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/pathogen/pathpipe/prokka' );
+has '_dbdir'               => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/infgen/pathogen/pathpipe/prokka' );
 has '_pipeline_version'    => ( is => 'ro', isa => 'Int', default => 1 );
 has '_memory_in_mb'        => ( is => 'ro', isa => 'Int', default => 5000 );
 has '_kingdom'             => ( is => 'ro', isa => 'Str', default => 'Bacteria' );

@@ -55,7 +55,7 @@ has '_bsub_opts_long' => (
 has '_bsub_opts_mpileup' =>
   ( is => 'ro', isa => 'Str', default => "-q normal -R 'select[type==X86_64] rusage[thouio=1]'" );
 has '_split_size_mpileup'       => ( is => 'ro', isa => 'Int', default => 300000000 );
-has '_tmp_dir'                  => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/pathogen/tmp' );
+has '_tmp_dir'                  => ( is => 'ro', isa => 'Str', default => '/lustre/scratch118/infgen/pathogen/tmp' );
 has '_mpileup_cmd'              => ( is => 'ro', isa => 'Str', default => 'samtools mpileup -d 1000 -DSug ' );
 has '_max_jobs'                 => ( is => 'ro', isa => 'Int', default => 100 );
 has '_fai_chr_regex'            => ( is => 'ro', isa => 'Str', default => '[\w\.\#]+' );
