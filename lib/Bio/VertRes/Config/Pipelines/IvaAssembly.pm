@@ -23,7 +23,7 @@ has '_optimiser_exec'      => ( is => 'ro', isa => 'Str',  default => '/software
 has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default => '_iva_' );
 has '_max_threads'         => ( is => 'ro', isa => 'Int',  default => 8 );
 has '_trimmomatic_jar'     => ( is => 'ro', isa => 'Str',  default => '/software/pathogen/external/apps/usr/local/Trimmomatic-0.32/trimmomatic-0.32.jar' );
-has '_adapters_file'       => ( is => 'ro', isa => 'Str',  default => '/lustre/scratch108/pathogen/pathpipe/usr/share/solexa-adapters.fasta' );
+has '_adapters_file'       => ( is => 'ro', isa => 'Str',  default => '/lustre/scratch118/pathogen/pathpipe/usr/share/solexa-adapters.fasta' );
 
 has '_error_correct'        => ( is => 'rw', isa => 'Bool', default => 0 );
 has '_normalise'            => ( is => 'rw', isa => 'Bool', default => 0 );
