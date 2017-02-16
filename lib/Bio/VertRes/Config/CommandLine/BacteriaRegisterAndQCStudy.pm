@@ -48,40 +48,32 @@ sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
 Usage: bacteria_register_and_qc_study [options]
-Pipeline to register and QC a bacteria study.
+Pipeline to register, QC, assemble and annotate a bacteria study.
 
-# Search for an available reference
-bacteria_register_and_qc_study -a "Stap"
+Required: 
+  -t            STR Type (study/lane/file)
+  -i            STR Study name, study ID, lane, file of lanes
+  -r            STR Reference to QC against. Must match exactly one of the references from the -a option.
+	  
+Options:
+  -s            STR Limit to a single species name (e.g. 'Staphylococcus aureus')	 
+  --assembler   STR Set a different assembler (spades/velvet/iva) [velvet]
+  --spades_opts STR Modify parameters sent to SPAdes [--careful --cov-cutoff auto]
+  --no_aa           Dont assemble or annotate
+  -d            STR Specify a database [pathogen_prok_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
+  -a            STR Search for available reference matching pattern and exit.  
+  -h                Print this message and exit
 
-# Register and QC a study
+Example:
+# Register a study, QC, assemble and annotate.
 bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
 
-# Register and QC a single lane
-bacteria_register_and_qc_study -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
-
-# Register and QC a file of lanes
-bacteria_register_and_qc_study -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
-
-# Register and QC a single species in a study
-bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
-
-# Register and QC a study assembling with SPAdes
-bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -assembler spades
-
-# Register and QC a study in named database specifying location of configs
-bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -c /path/to/my/configs
-
-# Register and QC a study in named database specifying root and log base directories
-bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -root /path/to/root -log /path/to/log
-
-# Register and QC a study in named database specifying a file with database connection details 
-bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -db_file /path/to/connect/file
-
-# Register and QC a study without generating assembly and annotation configs
-bacteria_register_and_qc_study -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --no_aa
-
-# This help message
-bacteria_register_and_qc_study -h
+# Assemble with SPAdes and provide custom options
+bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --assembler spades --spades_opts '--careful'
 
 USAGE
 };

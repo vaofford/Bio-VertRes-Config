@@ -67,6 +67,9 @@ has 'tophat_mapper_library_type' =>
 has 'assembler' => ( is => 'rw', isa => 'Str', default => 'velvet' );
 has 'no_ass'    => ( is => 'rw', isa => 'Bool' );
 
+# SPAdes options
+has 'spades_opts'  => ( is => 'rw', isa => 'Str', default => ' --careful --cov-cutoff auto ' );
+
 # iva paramters, iva_qc 
 has 'iva_qc'    => ( is => 'rw', isa => 'Bool', default => 0 );
 has 'kraken_db' => ( is => 'rw', isa => 'Str', default => '/lustre/scratch118/infgen/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728' );
@@ -104,6 +107,7 @@ sub BUILD {
         $test_mode,						 $iva_qc,
         $kraken_db,	                     $iva_insert_size,
         $iva_strand_bias,				 $no_circularise,
+	$spades_opts,
     );
 
     GetOptionsFromArray(
@@ -131,6 +135,7 @@ sub BUILD {
         'tophat_mapper_max_multihit=i'   => \$tophat_mapper_g,
         'tophat_mapper_library_type=s'   => \$tophat_mapper_library_type,
         'assembler=s'                    => \$assembler,
+	'spades_opts=s'                  => \$spades_opts,
         'root_base=s'                    => \$root_base,
         'log_base=s'                     => \$log_base,
         'db_file:s'                      => \$database_connect_file,
@@ -170,7 +175,9 @@ sub BUILD {
     $self->tophat_mapper_g($tophat_mapper_g) if ( defined($tophat_mapper_g) );
     $self->tophat_mapper_library_type($tophat_mapper_library_type)
       if ( defined($tophat_mapper_library_type) );
-    $self->assembler($assembler) if ( defined($assembler) );
+    $self->assembler($assembler)     if ( defined($assembler) );
+    $self->spades_opts($spades_opts) if ( defined($spades_opts) );
+    
     $self->database_connect_file($database_connect_file)
       if ( defined($database_connect_file) );
     $self->no_ass($no_ass) if ( defined $no_ass );
@@ -291,7 +298,8 @@ sub mapping_parameters {
         overwrite_existing_config_file => $self->overwrite_existing_config_file,
         protocol                       => $self->protocol,
         database_connect_file          => $self->database_connect_file,
-        regeneration_log_file		   => $self->regeneration_log_file,
+        regeneration_log_file	       => $self->regeneration_log_file,
+	spades_opts                    => $self->spades_opts
     );
 
     if ( defined( $self->_construct_smalt_index_params ) ) {
@@ -325,37 +333,37 @@ sub retrieving_rnaseq_results_text {
     print "Once the data is available you can run these commands:\n\n";
 
     print "Create symlinks to all your data\n";
-    print "  rnaseqfind -t "
+    print "  pf rnaseq -t "
       . $self->type . " -i "
       . $self->id
       . " -symlink\n\n";
 
     print "Symlink to the spreadsheets of statistics per gene\n";
-    print "  rnaseqfind -t "
+    print "  pf rnaseq -t "
       . $self->type . " -i "
       . $self->id
       . " -symlink -f spreadsheet\n\n";
 
     print "Symlink to the BAM files (corrected for the protocol)\n";
-    print "  rnaseqfind -t "
+    print "  pf rnaseq -t "
       . $self->type . " -i "
       . $self->id
       . " -symlink -f bam\n\n";
 
     print "Symlink to the annotation for the intergenic regions\n";
-    print "  rnaseqfind -t "
+    print "  pf rnaseq -t "
       . $self->type . " -i "
       . $self->id
       . " -symlink -f intergenic\n\n";
 
     print "Symlink to the coverage plots\n";
-    print "  rnaseqfind -t "
+    print "  pf rnaseq -t "
       . $self->type . " -i "
       . $self->id
       . " -symlink -f coverage\n\n";
 
     print "More details\n";
-    print "  rnaseqfind -h\n";
+    print "  pf rnaseq -h\n";
 }
 
 sub retrieving_mapping_results_text {
@@ -363,13 +371,13 @@ sub retrieving_mapping_results_text {
     print "Once the data is available you can run these commands:\n\n";
 
     print "Symlink to the BAM files\n";
-    print "  mapfind -t " . $self->type . " -i " . $self->id . " -symlink\n\n";
+    print "  pf map -t " . $self->type . " -i " . $self->id . " -symlink\n\n";
 
     print "Find out which mapper and reference was used\n";
-    print "  mapfind -t " . $self->type . " -i " . $self->id . " -v\n\n";
+    print "  pf map -t " . $self->type . " -i " . $self->id . " -v\n\n";
 
     print "More details\n";
-    print "  mapfind -h\n\n";
+    print "  pf map -h\n\n";
 }
 
 sub retrieving_snp_calling_results_text {
@@ -377,17 +385,17 @@ sub retrieving_snp_calling_results_text {
     print "Once the data is available you can run these commands:\n\n";
 
     print "Create a multifasta alignment file of your data\n";
-    print "  snpfind -t " . $self->type . " -i " . $self->id . " -p \n\n";
+    print "  pf snp -t " . $self->type . " -i " . $self->id . " -p \n\n";
 
     print "Create symlinks to the unfiltered variants in VCF format\n";
-    print "  snpfind -t " . $self->type . " -i " . $self->id . " -symlink\n\n";
+    print "  pf snp -t " . $self->type . " -i " . $self->id . " -symlink\n\n";
 
     print "Symlink to the BAM files\n";
-    print "  mapfind -t " . $self->type . " -i " . $self->id . " -symlink\n\n";
+    print "  pf map -t " . $self->type . " -i " . $self->id . " -symlink\n\n";
 
     print "More details\n";
-    print "  snpfind -h\n";
-    print "  mapfind -h\n\n";
+    print "  pf snp -h\n";
+    print "  pf map -h\n\n";
 }
 
 __PACKAGE__->meta->make_immutable;

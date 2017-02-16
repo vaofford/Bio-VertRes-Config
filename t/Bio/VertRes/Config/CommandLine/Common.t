@@ -36,6 +36,7 @@ is_deeply($mapping_params, {
           'log_base'  => '/nfs/pathnfs05/log',
           'config_base' => '/nfs/pathnfs05/conf',
           'regeneration_log_file' => '/nfs/pathnfs05/log/command_line.log',
+	  'spades_opts' => ' --careful --cov-cutoff auto ',
           
         }, 'Mapping parameters include smalt parameters');
 
@@ -70,6 +71,7 @@ is_deeply($mapping_params, {
           'log_base'  => '/nfs/pathnfs05/log',
           'config_base' => '/nfs/pathnfs05/conf',
           'regeneration_log_file' => '/nfs/pathnfs05/log/command_line.log',
+	  'spades_opts' => ' --careful --cov-cutoff auto ',
                     
         }, 'Mapping parameters include tophat parameters');
 
@@ -93,6 +95,7 @@ is_deeply($mapping_params, {
           'log_base'  => '/path/to/log',
           'config_base' => '/path/to/conf',
           'regeneration_log_file' => '/path/to/log/command_line.log',
+	  'spades_opts' => ' --careful --cov-cutoff auto ',
           
         }, 'Mapping parameters include user-defined root, log and config base');
 
@@ -116,6 +119,7 @@ is_deeply($mapping_params, {
           'log_base'  => '/nfs/pathnfs05/log',
           'config_base' => '/nfs/pathnfs05/conf',
           'regeneration_log_file' => '/nfs/pathnfs05/log/command_line.log',
+	  'spades_opts' => ' --careful --cov-cutoff auto ',
           
         }, 'Mapping parameters include user-defined database connect file');
 
@@ -139,6 +143,7 @@ is_deeply($mapping_params, {
           'log_base'  => '/nfs/pathnfs05/log',
           'config_base' => '/nfs/pathnfs05/conf',
           'regeneration_log_file' => '/nfs/pathnfs05/log/command_line.log',
+	  'spades_opts' => ' --careful --cov-cutoff auto ',
           
         }, 'Mapping parameters include user-defined database connect file set to empty string');
 
