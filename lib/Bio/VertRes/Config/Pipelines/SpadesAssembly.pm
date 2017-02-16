@@ -19,8 +19,8 @@ extends 'Bio::VertRes::Config::Pipelines::Assembly';
 
 has '_assembler'           => ( is => 'ro', isa => 'Str',  default => 'spades' );
 has 'prefix'               => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default => '_spades_' );
-has '_assembler_exec'      => ( is => 'ro', isa => 'Str',  default => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py' );
-has '_optimiser_exec'      => ( is => 'ro', isa => 'Str',  default => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py' );
+has '_assembler_exec'      => ( is => 'ro', isa => 'Str',  default => '/software/pathogen/external/apps/usr/bin/spades-3.10.0.py' );
+has '_optimiser_exec'      => ( is => 'ro', isa => 'Str',  default => '/software/pathogen/external/apps/usr/bin/spades-3.10.0.py' );
 has '_max_threads'         => ( is => 'ro', isa => 'Int',  default => 2 );
 has '_single_cell'         => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_spades_opts'         => ( is => 'ro', isa => 'Maybe[Str]',  default => undef );

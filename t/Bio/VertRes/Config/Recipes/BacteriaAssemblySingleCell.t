@@ -51,7 +51,7 @@ is_deeply($input_config_file,{
                         'port' => 1234,
                         'host' => 'some_hostname'
                       },
-              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py',
+              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.10.0.py',
               'error_correct' => 0,
               'seq_pipeline_root' => '/lustre/scratch118/infgen/pathogen/pathpipe/my_database/seq-pipelines',
               'assembler' => 'spades',
@@ -65,7 +65,7 @@ is_deeply($input_config_file,{
               'single_cell' => 1,
               'dont_wait' => 0,
               'post_contig_filtering' => 300,
-              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py',
+              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.10.0.py',
 			  'iva_qc'		    => 0,
 			  'kraken_db'		    => '/lustre/scratch118/infgen/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728',
             },

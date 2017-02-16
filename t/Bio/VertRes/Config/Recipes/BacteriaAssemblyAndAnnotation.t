@@ -179,7 +179,7 @@ is_deeply($input_config_file,{
                         'host' => 'some_hostname'
                       },
               'improve_assembly' => 1,
-              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py',
+              'assembler_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.10.0.py',
               'error_correct' => 0,
               'seq_pipeline_root' => '/lustre/scratch118/infgen/pathogen/pathpipe/my_database/seq-pipelines',
               'assembler' => 'spades',
@@ -195,7 +195,7 @@ is_deeply($input_config_file,{
               'spades_opts' => ' --careful --cov-cutoff auto ',
               'post_contig_filtering' => 300,
               'iva_qc' => 0,
-              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py'
+              'optimiser_exec' => '/software/pathogen/external/apps/usr/bin/spades-3.10.0.py'
             },
   'max_lanes_to_search' => 10000,
   'limits' => {
