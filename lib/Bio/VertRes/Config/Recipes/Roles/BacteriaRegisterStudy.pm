@@ -129,7 +129,7 @@ sub add_bacteria_spades_assembly_config
           _normalise                     => $self->_normalise,
           iva_qc			 => $self->iva_qc,
           kraken_db			 => $self->kraken_db,
-	  _spades_opts                   => $self->_spades_opts,
+	  spades_opts                   => $self->spades_opts,
       )
   );
   return ;

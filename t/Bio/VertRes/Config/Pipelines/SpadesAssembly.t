@@ -56,7 +56,7 @@ is_deeply(
                 'port'     => 1234,
                 'host'     => 'some_hostname'
             },
-            'assembler_exec'    => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py',
+            'assembler_exec'    => '/software/pathogen/external/apps/usr/bin/spades-3.10.0.py',
             'dont_wait'         => 0,
             'assembler'         => 'spades',
             'seq_pipeline_root' => '/path/to/root/my_database/seq-pipelines',
@@ -67,7 +67,7 @@ is_deeply(
             'error_correct'     => 1,
             'improve_assembly'  => 0,
             'sga_exec'          => '/software/pathogen/external/apps/usr/bin/sga',
-            'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/spades-3.9.0.py',
+            'optimiser_exec'    => '/software/pathogen/external/apps/usr/bin/spades-3.10.0.py',
             'primers_file'      => '/lustre/scratch118/infgen/pathogen/pathpipe/usr/share/solexa-adapters.quasr',
             'remove_primers'    => 1,
             'normalise'         => 0,

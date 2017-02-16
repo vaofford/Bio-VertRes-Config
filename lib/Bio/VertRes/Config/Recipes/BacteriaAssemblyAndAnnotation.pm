@@ -27,7 +27,7 @@ has '_kingdom'             => ( is => 'ro', isa => 'Str',  default => "Bacteria"
 has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ assembled => 0, stored => 1, rna_seq_expression => 0 }} );
 has 'iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 0 );
 has 'kraken_db'		   => ( is => 'ro', isa => 'Str',  default => "/lustre/scratch118/infgen/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728" );
-has '_spades_opts'         => ( is => 'ro', isa => 'Str',  default => ' --careful --cov-cutoff auto ' );
+has 'spades_opts'         => ( is => 'ro', isa => 'Str',  default => ' --careful --cov-cutoff auto ' );
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;

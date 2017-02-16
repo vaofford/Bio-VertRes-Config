@@ -45,38 +45,30 @@ sub register_and_qc_usage_text {
 Usage: bacteria_assembly_and_annotation [options]
 Pipeline to run assembly and annotation. Study must be registered and QC'd separately first
 
-
+Required: 
+  -t            STR Type (study/lane/file)
+  -i            STR Study name, study ID, lane, file of lanes
+	  
+Options:
+  -s            STR Limit to a single species name (e.g. 'Staphylococcus aureus')	 
+  --assembler   STR Set a different assembler (spades/velvet/iva) [velvet]
+  --spades_opts STR Modify parameters sent to SPAdes [--careful --cov-cutoff auto]
+  -d            STR Specify a database [pathogen_prok_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
+  -a            STR Search for available reference matching pattern and exit.  
+  -h                Print this message and exit
+  
 # Assemble and annotate a study
-bacteria_assembly_and_annotation -t study -i 1234 
+bacteria_assembly_and_annotation -t study -i 1234
 
-# Assemble and annotate a single lane
-bacteria_assembly_and_annotation -t lane -i 1234_5#6 
-
-# Assemble and annotate a file of lanes
-bacteria_assembly_and_annotation -t file -i file_of_lanes 
-
-# Assemble and annotate a single species in a study
-bacteria_assembly_and_annotation -t study -i 1234  -s "Staphylococcus aureus"
-
-# Assemble and annotate a study assembling with SPAdes
-bacteria_assembly_and_annotation -t study -i 1234 -assembler spades
-
-# Assemble and annotate a study in named database specifying location of configs
-bacteria_assembly_and_annotation -t study -i 1234  -d my_database -c /path/to/my/configs
-
-# Assemble and annotate a study in named database specifying root and log base directories
-bacteria_assembly_and_annotation -t study -i 1234  -d my_database -root /path/to/root -log /path/to/log
-
-# Assemble and annotate a study in named database specifying a file with database connection details 
-bacteria_assembly_and_annotation -t study -i 1234  -d my_database -db_file /path/to/connect/file
-
-# This help message
-bacteria_assembly_and_annotation -h
+# Assemble with SPAdes and provide custom options
+bacteria_assembly_and_annotation -t study -i 1234 --assembler spades --spades_opts '--careful -k 41,51,61'
 
 USAGE
 };
-
-
 
 __PACKAGE__->meta->make_immutable;
 no Moose;
