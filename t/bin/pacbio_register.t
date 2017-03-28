@@ -23,9 +23,7 @@ my %scripts_and_expected_files = (
         'pathogen_pacbio_track/pathogen_pacbio_track.ilm.studies',       
         'pathogen_pacbio_track/pathogen_pacbio_track_annotate_assembly_pipeline.conf',
         'pathogen_pacbio_track/pathogen_pacbio_track_assembly_pipeline.conf',
-        'pathogen_pacbio_track/pathogen_pacbio_track_import_cram_pipeline.conf',
-        'pathogen_pacbio_track/pathogen_pacbio_track_stored_pipeline.conf',
-        'pathogen_pacbio_track/stored/stored_global.conf',        
+        'pathogen_pacbio_track/pathogen_pacbio_track_import_cram_pipeline.conf',  
     ],
 );
 

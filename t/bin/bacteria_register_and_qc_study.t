@@ -28,8 +28,8 @@ my %scripts_and_expected_files = (
         'some_other_db_name/some_other_db_name_import_cram_pipeline.conf',
         'some_other_db_name/some_other_db_name_permissions_pipeline.conf',
         'some_other_db_name/some_other_db_name_qc_pipeline.conf',
-        'some_other_db_name/some_other_db_name_stored_pipeline.conf',
-        'some_other_db_name/stored/stored_global.conf'
+        
+        
     ],
 
     '-t file -i t/data/lanes_file -r ABC' => [
@@ -43,9 +43,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_permissions_pipeline.conf',
         'prokaryotes/prokaryotes_qc_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/qc/qc_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name.conf',
-        'prokaryotes/stored/stored_global.conf'
+        
     ],
 
     '-t lane -i 1234_5#6 -r ABC' => [
@@ -54,8 +54,8 @@ my %scripts_and_expected_files = (
         'prokaryotes/permissions/permissions_1234_5_6.conf',  'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_assembly_pipeline.conf',     'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_permissions_pipeline.conf',  'prokaryotes/prokaryotes_qc_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',       'prokaryotes/qc/qc_1234_5_6.conf',
-        'prokaryotes/stored/stored_global.conf'
+               'prokaryotes/qc/qc_1234_5_6.conf',
+        
     ],
 
     '-t library -i libname -r ABC' => [
@@ -64,8 +64,8 @@ my %scripts_and_expected_files = (
         'prokaryotes/permissions/permissions_libname.conf',  'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_assembly_pipeline.conf',    'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_permissions_pipeline.conf', 'prokaryotes/prokaryotes_qc_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',      'prokaryotes/qc/qc_libname.conf',
-        'prokaryotes/stored/stored_global.conf'
+              'prokaryotes/qc/qc_libname.conf',
+        
     ],
 
     '-t sample -i sample -r ABC' => [
@@ -74,8 +74,8 @@ my %scripts_and_expected_files = (
         'prokaryotes/permissions/permissions_sample.conf',   'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_assembly_pipeline.conf',    'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_permissions_pipeline.conf', 'prokaryotes/prokaryotes_qc_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',      'prokaryotes/qc/qc_sample.conf',
-        'prokaryotes/stored/stored_global.conf'
+              'prokaryotes/qc/qc_sample.conf',
+        
     ],
 
     '-t study -i ZZZ -r ABC' => [
@@ -84,8 +84,8 @@ my %scripts_and_expected_files = (
         'prokaryotes/permissions/permissions_ZZZ.conf',            'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf', 'prokaryotes/prokaryotes_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',       'prokaryotes/prokaryotes_permissions_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',                'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_ZZZ.conf',                              'prokaryotes/stored/stored_global.conf'
+        'prokaryotes/prokaryotes_qc_pipeline.conf',                
+        'prokaryotes/qc/qc_ZZZ.conf',                              
     ],
 
     '-t study -i ZZZ -r ABC -assembler spades' => [
@@ -94,8 +94,8 @@ my %scripts_and_expected_files = (
         'prokaryotes/permissions/permissions_ZZZ.conf',            'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf', 'prokaryotes/prokaryotes_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',       'prokaryotes/prokaryotes_permissions_pipeline.conf',
-        'prokaryotes/prokaryotes_qc_pipeline.conf',                'prokaryotes/prokaryotes_stored_pipeline.conf',
-        'prokaryotes/qc/qc_ZZZ.conf',                              'prokaryotes/stored/stored_global.conf'
+        'prokaryotes/prokaryotes_qc_pipeline.conf',                
+        'prokaryotes/qc/qc_ZZZ.conf',                              
     ],
 
     '-t study -i ZZZ -r ABC -s Staphylococcus_aureus' => [
@@ -110,9 +110,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_permissions_pipeline.conf',
         'prokaryotes/prokaryotes_qc_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/qc/qc_ZZZ_Staphylococcus_aureus.conf',
-        'prokaryotes/stored/stored_global.conf'
+        
     ],
 
 );
