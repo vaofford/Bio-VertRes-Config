@@ -34,7 +34,7 @@ has '_target_coverage'	   => ( is => 'ro', isa => 'Int', default => 30 );
 has '_no_bsub'			   => ( is => 'ro', isa => 'Bool', default => 1 );
 has 'circularise'		   => ( is => 'ro', isa => 'Bool', default => 0 );
 
-has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ stored => 1, assembled => 0 }} );
+has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ import => 1, assembled => 0 }} );
 
 has '_pipeline_version'    => ( is => 'rw', isa => 'Str',  lazy_build => 1 );
 has '_flag'                => ( is => 'ro', isa => 'Str',  lazy_build => 1 );

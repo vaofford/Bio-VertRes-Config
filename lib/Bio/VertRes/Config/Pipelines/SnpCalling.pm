@@ -79,7 +79,7 @@ override 'to_hash' => sub {
     my $output_hash = super();
 
     $output_hash->{max_lanes} = $self->_max_lanes;
-    $output_hash->{vrtrack_processed_flags} = { import => 1, qc => 1, stored => 1, mapped => 1};
+    $output_hash->{vrtrack_processed_flags} = { import => 1, qc => 1, mapped => 1};
     $output_hash->{vrtrack_processed_flags}{improved} = 1 if($self->run_after_bam_improvement);
 
     if ( $self->_pseudo_genome ) {

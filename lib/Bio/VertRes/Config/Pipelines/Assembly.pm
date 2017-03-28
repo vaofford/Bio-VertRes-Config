@@ -44,7 +44,7 @@ has '_improve_assembly'    => ( is => 'ro', isa => 'Bool', lazy_build => 1 );
 has 'iva_qc'			   => ( is => 'ro', isa => 'Bool', default => 0 );
 has 'kraken_db'		   => ( is => 'ro', isa => 'Str',  default => '/lustre/scratch118/infgen/pathogen/pathpipe/kraken/assemblyqc_fluhiv_20150728' );
 
-has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ stored => 1, rna_seq_expression => 0 }} );
+has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ qc => 1, rna_seq_expression => 0 }} );
 
 has '_subversions' => ( is => 'rw', isa => 'HashRef', lazy_build => 1 );
 
