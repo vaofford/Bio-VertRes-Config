@@ -72,7 +72,6 @@ is_deeply(
               'max_lanes' => 300,
               'vrtrack_processed_flags' => {
                                              'qc' => 1,
-                                             'stored' => 1,
                                              'mapped' => 1,
                                              'import' => 1
                                            },
