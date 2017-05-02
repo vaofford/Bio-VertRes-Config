@@ -52,7 +52,7 @@ override 'to_hash' => sub {
     my $output_hash = super();
     $output_hash->{limits}                  = $self->_escaped_limits;
     
-    $output_hash->{vrtrack_processed_flags} = { import => 1, qc => 1, stored => 1, mapped => 1 };
+    $output_hash->{vrtrack_processed_flags} = { import => 1, qc => 1, mapped => 1 };
     $output_hash->{data}{reference}         = $self->_reference_fasta;
     $output_hash->{data}{assembly_name}     = $self->reference;
     $output_hash->{data}{slx_mapper}        = $self->slx_mapper;

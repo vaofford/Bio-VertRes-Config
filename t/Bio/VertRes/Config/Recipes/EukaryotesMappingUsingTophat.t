@@ -35,12 +35,10 @@ ok( ( $obj->create ), 'Create all the config files and toplevel files' ); #3
 
 # Are all the necessary top level files there?
 ok( -e $destination_directory . '/my_database/my_database.ilm.studies' , 'study names file exists');         #4
-ok( -e $destination_directory . '/my_database/my_database_stored_pipeline.conf', 'stored toplevel file');    #5
 ok( -e $destination_directory . '/my_database/my_database_import_cram_pipeline.conf', 'import toplevel file');    #5
 ok( -e $destination_directory . '/my_database/my_database_mapping_pipeline.conf', 'mapping toplevel file');  #7
 
 # Individual config files
-ok((-e "$destination_directory/my_database/stored/stored_global.conf"), 'stored config file exists');        #9
 ok((-e "$destination_directory/my_database/import_cram/import_cram_global.conf"), 'import config file exists');        #10
 ok((-e "$destination_directory/my_database/mapping/mapping_ABC_study_EFG_ABC_tophat.conf"), 'mapping config file exists' ); #12
 
@@ -85,7 +83,6 @@ is_deeply($input_config_file,{
               },
   'vrtrack_processed_flags' => {
                                  'qc' => 1,
-                                 'stored' => 1,
                                  'import' => 1
                                },
   'log' => '/nfs/pathnfs05/log/my_database/mapping_ABC_study_EFG_ABC_tophat.log',

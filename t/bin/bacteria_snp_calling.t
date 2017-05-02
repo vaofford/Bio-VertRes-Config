@@ -23,9 +23,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
         'prokaryotes/prokaryotes_snps_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/snps/snps_ZZZ_ABC.conf',
-        'prokaryotes/stored/stored_global.conf',
+        
     ],
     '-t lane -i 1234_5#6 -r ABC' => [
         'command_line.log',
@@ -34,9 +34,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
         'prokaryotes/prokaryotes_snps_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/snps/snps_1234_5_6_ABC.conf',
-        'prokaryotes/stored/stored_global.conf',
+        
     ],
     '-t library -i libname -r ABC' => [
         'command_line.log',
@@ -45,9 +45,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
         'prokaryotes/prokaryotes_snps_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/snps/snps_libname_ABC.conf',
-        'prokaryotes/stored/stored_global.conf',
+        
     ],
     '-t sample -i sample -r ABC' => [
         'command_line.log',
@@ -56,9 +56,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
         'prokaryotes/prokaryotes_snps_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/snps/snps_sample_ABC.conf',
-        'prokaryotes/stored/stored_global.conf',
+        
     ],
     '-t file -i t/data/lanes_file -r ABC' => [
         'command_line.log',
@@ -67,9 +67,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
         'prokaryotes/prokaryotes_snps_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/snps/snps_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name_ABC.conf',
-        'prokaryotes/stored/stored_global.conf',
+        
     ],
     '-t study -i ZZZ -r ABC -s Staphylococcus_aureus' => [
         'command_line.log',
@@ -79,9 +79,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
         'prokaryotes/prokaryotes_snps_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/snps/snps_ZZZ_Staphylococcus_aureus_ABC.conf',
-        'prokaryotes/stored/stored_global.conf',
+        
     ],
     '-t study -i ZZZ -r ABC -m bwa' => [
         'command_line.log',
@@ -91,9 +91,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
         'prokaryotes/prokaryotes_snps_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/snps/snps_ZZZ_ABC.conf',
-        'prokaryotes/stored/stored_global.conf',
+        
     ],
     '-t study -i ZZZ -r ABC -m stampy' => [
         'command_line.log',
@@ -103,9 +103,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
         'prokaryotes/prokaryotes_snps_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/snps/snps_ZZZ_ABC.conf',
-        'prokaryotes/stored/stored_global.conf',
+        
     ],
     '-t study -i ZZZ -r ABC -m ssaha2' => [
         'command_line.log',
@@ -115,9 +115,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
         'prokaryotes/prokaryotes_snps_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/snps/snps_ZZZ_ABC.conf',
-        'prokaryotes/stored/stored_global.conf',
+        
     ],
     '-t study -i ZZZ -r ABC -m bowtie2' => [
         'command_line.log',
@@ -127,9 +127,9 @@ my %scripts_and_expected_files = (
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_mapping_pipeline.conf',
         'prokaryotes/prokaryotes_snps_pipeline.conf',
-        'prokaryotes/prokaryotes_stored_pipeline.conf',
+        
         'prokaryotes/snps/snps_ZZZ_ABC.conf',
-        'prokaryotes/stored/stored_global.conf',
+        
     ],
 
 );

@@ -77,7 +77,7 @@ is_deeply($input_config_file,{
               },
   'vrtrack_processed_flags' => {
                                  'rna_seq_expression' => 0,
-                                 'stored' => 1
+                                 'qc' => 1
                                },
   'root' => '/lustre/scratch118/infgen/pathogen/pathpipe/my_database/seq-pipelines',
   'log' => '/nfs/pathnfs05/log/my_database/assembly_ABC_study_EFG_velvet.log',

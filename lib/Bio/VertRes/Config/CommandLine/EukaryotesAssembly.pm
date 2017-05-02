@@ -4,7 +4,7 @@ package Bio::VertRes::Config::CommandLine::EukaryotesAssembly;
 
 =head1 SYNOPSIS
 
-Create assembly files, but QC and store must have been run first, avoids the need for a reference
+Create assembly files, but QC must have been run first, avoids the need for a reference
 
 =cut
 

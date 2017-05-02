@@ -60,7 +60,7 @@ override 'to_hash' => sub {
     my ($self) = @_;
     my $output_hash = super();
 
-    $output_hash->{vrtrack_processed_flags} = { import => 1, stored => 1, mapped => 1 };
+    $output_hash->{vrtrack_processed_flags} = { import => 1, mapped => 1 };
     $output_hash->{limits} = $self->_escaped_limits;
 
     $output_hash->{data}{sequencing_file_suffix}      = $self->_sequencing_file_suffix;

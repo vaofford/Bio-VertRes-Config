@@ -4,7 +4,7 @@ package Bio::VertRes::Config::CommandLine::VirusAssemblyAndAnnotation;
 
 =head1 SYNOPSIS
 
-Create assembly and annotation files, but QC and store must have been run first, avoids the need for a reference
+Create assembly and annotation files, but QC must have been run first, avoids the need for a reference
 
 =cut
 

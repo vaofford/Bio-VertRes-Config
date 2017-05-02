@@ -26,7 +26,7 @@ has 'assembler_alias_for_annotation'    => ( is => 'ro', isa => 'Str',  default 
 has 'no_ass'                      => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_pipeline_version'           => ( is => 'ro', isa => 'Str' );
 has '_kingdom'                    => ( is => 'ro', isa => 'Str',  default => "Bacteria" );
-has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ assembled => 0, stored => 1}} );
+has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ assembled => 0, import => 1}} );
 has '_max_threads'         => ( is => 'ro', isa => 'Int',  default => 12 );
 has '_queue'			   => ( is => 'ro', isa => 'Str', default => 'normal');
 has '_genome_size'         => ( is => 'ro', isa => 'Int', default => 3000000 );

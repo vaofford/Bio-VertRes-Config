@@ -47,7 +47,6 @@ is_deeply(
                             },
               'vrtrack_processed_flags' => {
                                              'qc' => 1,
-                                             'stored' => 1,
                                              'mapped' => 1,
                                              'import' => 1
                                            },
