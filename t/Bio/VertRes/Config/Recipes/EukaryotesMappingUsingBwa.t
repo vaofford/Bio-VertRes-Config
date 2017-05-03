@@ -69,7 +69,7 @@ is_deeply($input_config_file,{
               'do_cleanup' => 1,
               'ignore_mapped_status' => 1,
               'slx_mapper' => 'bwa',
-              'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/bwa-0.7.12/bwa'
+              'slx_mapper_exe' => '/software/pathogen/external/apps/usr/local/bwa-0.7.15/bwa'
             },
   'limits' => {
                 'project' => [
