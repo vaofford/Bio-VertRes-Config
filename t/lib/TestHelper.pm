@@ -142,7 +142,10 @@ sub mock_execute_script_create_file_and_check_output {
            my $expected_output_file_name = $scripts_and_expected_files->{$script_parameters}->[1];
            ok(-e $actual_output_file_name, "Actual output file exists $actual_output_file_name");
 	       strip_prefix_attribute($actual_output_file_name);
-	       compare_ok($actual_output_file_name,$expected_output_file_name,"Actual and expected output match for '$script_parameters'");
+	   my $actual_content = eval ''.read_text($actual_output_file_name);
+	   my $expected_content = eval ''.read_text($expected_output_file_name);
+	   is_deeply($actual_content,$expected_content);
+	       #compare_ok($actual_output_file_name,$expected_output_file_name,"Actual and expected output match for '$script_parameters'");
            unlink($actual_output_file_name);
 
        }
