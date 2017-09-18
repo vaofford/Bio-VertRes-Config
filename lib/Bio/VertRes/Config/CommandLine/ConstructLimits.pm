@@ -45,7 +45,7 @@ sub limits_hash
   
   if($self->input_type eq 'study' && $self->input_id =~ /^[\d]+$/)
   {
-    my $connection_str = join(':',('DBI','mysql','host='.$self->_database_connection_details->{mlwarehouse_host},'port='.$self->_database_connection_details->{mlwarehouse_port}';database='.$self->_database_connection_details->{mlwarehouse_database} ));
+    my $connection_str = join(':',('DBI','mysql','host='.$self->_database_connection_details->{mlwarehouse_host},'port='.$self->_database_connection_details->{mlwarehouse_port}.';database='.$self->_database_connection_details->{mlwarehouse_database} ));
     # Todo: move ssid lookup to somewhere more sensible
     my $dbh = DBI->connect($connection_str, $self->_database_connection_details->{mlwarehouse_user},$self->_database_connection_details->{mlwarehouse_password}, {'RaiseError' => 1, 'PrintError' => 0});
     my $sql = "select name from study where id_study_lims = '".$self->input_id."' ";
