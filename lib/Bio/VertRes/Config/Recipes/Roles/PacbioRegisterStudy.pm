@@ -65,21 +65,25 @@ sub add_hgap_assembly_config
 sub add_bacteria_annotate_config
 {
   my ($self, $pipeline_configs_array) = @_;
-  push(
-      @{$pipeline_configs_array},
-      Bio::VertRes::Config::Pipelines::AnnotateAssembly->new(
-          database                       => $self->database,
-          database_connect_file          => $self->database_connect_file,
-          root_base                      => $self->root_base,
-          log_base                       => $self->log_base,
-          config_base                    => $self->config_base,
-          overwrite_existing_config_file => $self->overwrite_existing_config_file,
-          limits                         => $self->limits,
-          _kingdom                       => $self->_kingdom,
-          _assembler                     => $self->assembler_alias_for_annotation,
-          _memory_in_mb					 => $self->_memory_in_mb,
-      )
-  );
+  
+  for my $assembler_alias (@{$self->assembler_alias_for_annotation})
+  {
+    push(
+        @{$pipeline_configs_array},
+        Bio::VertRes::Config::Pipelines::AnnotateAssembly->new(
+            database                       => $self->database,
+            database_connect_file          => $self->database_connect_file,
+            root_base                      => $self->root_base,
+            log_base                       => $self->log_base,
+            config_base                    => $self->config_base,
+            overwrite_existing_config_file => $self->overwrite_existing_config_file,
+            limits                         => $self->limits,
+            _kingdom                       => $self->_kingdom,
+            _assembler                     => $assembler_alias,
+            _memory_in_mb				   => $self->_memory_in_mb,
+        )
+    );
+  }
   return ;
 }
 
