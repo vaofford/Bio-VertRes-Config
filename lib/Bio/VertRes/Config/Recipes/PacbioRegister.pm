@@ -22,7 +22,7 @@ with 'Bio::VertRes::Config::Recipes::Roles::PacbioRegisterStudy';
 with 'Bio::VertRes::Config::Recipes::Roles::CreateGlobal';
 
 has 'assembler'                   => ( is => 'ro', isa => 'Str',  default => 'hgap' );
-has 'assembler_alias_for_annotation'    => ( is => 'ro', isa => 'ArrayRef',  default => sub{ ['pacbio','hgap_4_0']} );
+has 'assembler_alias_for_annotation'    => ( is => 'ro', isa => 'ArrayRef',  default => sub{ ['pacbio','hgap']} );
 has 'no_ass'                      => ( is => 'ro', isa => 'Bool', default => 0 );
 has '_pipeline_version'           => ( is => 'ro', isa => 'Str' );
 has '_kingdom'                    => ( is => 'ro', isa => 'Str',  default => "Bacteria" );
