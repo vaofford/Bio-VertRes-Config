@@ -1,10 +1,10 @@
 package Bio::VertRes::Config::CommandLine::BacteriaRegisterAndQCStudy;
 
-# ABSTRACT: Create config scripts to map helminths
+# ABSTRACT: Create config scripts to register and QC bacteria
 
 =head1 SYNOPSIS
 
-Create config scripts to map helminths
+Create config scripts to register and QC bacteria
 
 =cut
 
@@ -47,7 +47,7 @@ sub usage_text
 sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
-Usage: bacteria_register_and_qc_study [options]
+Usage: bacteria_register_and_qc_study -t <ID type> -i <ID> -r <reference> [options]
 Pipeline to register, QC, assemble and annotate a bacteria study.
 
 Required: 
@@ -68,12 +68,23 @@ Options:
   -a            STR Search for available reference matching pattern and exit.  
   -h                Print this message and exit
 
-Example:
-# Register a study, QC, assemble and annotate.
-bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-# Assemble with SPAdes and provide custom options
-bacteria_register_and_qc_study -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --assembler spades --spades_opts '--careful'
+If you use the results of these pipelines, please acknowledge the pathogen informatics team and include the appropriate citations:
+
+"Robust high throughput prokaryote de novo assembly and improvement pipeline for Illumina data"
+Page AJ, De Silva, N., Hunt M, Quail MA, Parkhill J, Harris SR, Otto TD, Keane JA. (2016). Microbial Genomics 2(8) doi: 10.1099/mgen.0.000083 
+
+For more information on how to site the pipelines, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Bacterial_Assembly_and_Annotation
+
+For example usage, please see:
+[wiki page]
+
+For more information about the QC, assembly and annotation pipelines, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines#QC_Pipeline
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Bacterial_Assembly_Pipeline
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Automated_Annotation_Pipeline
 
 USAGE
 };

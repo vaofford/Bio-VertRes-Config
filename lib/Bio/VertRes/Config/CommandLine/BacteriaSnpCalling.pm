@@ -59,38 +59,35 @@ sub usage_text
 sub snp_calling_usage_text {
     my ($self) = @_;
     return <<USAGE;
-Usage: bacteria_snp_calling [options]
+Usage: bacteria_snp_calling -t <ID type> -i <ID> -r <reference> [options]
 Pipeline to map and SNP call bacteria, producing a pseudo genome at the end.
 
-# Search for an available reference
-bacteria_snp_calling -a "Stap"
+Required:
+  -t        STR Type (study/lane/file)
+  -i        STR Study name, study ID, lane, file of lanes
+  -r        STR Reference to map against. Must match exactly one of the references from the -a option.
 
-# Map and SNP call a study
-bacteria_snp_calling -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+Options:
+  -s            STR Limit to a single species name (e.g. 'Staphylococcus aureus')
+  -m            STR Set a different mapper (bwa/stampy/smalt/ssaha2/bowtie2) [smalt]
+  -d            STR STR Specify a database [pathogen_prok_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
+  -a            STR Search for available reference matching pattern and exit.
+  -h            Print this message and exit
 
-# Map and SNP call a single lane
-bacteria_snp_calling -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+NOTE - If the data you are regestering is external you need to add the -d pathogen_prok_external option to the command.
 
-# Map and SNP call a file of lanes
-bacteria_snp_calling -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-# Map and SNP call a single species in a study
-bacteria_snp_calling -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Bacteria_Mapping_and_Variant_Detection
 
-# Use a different mapper. Available are bwa/stampy/smalt/ssaha2/bowtie2. The default is smalt and ssaha2 is only for 454 data.
-bacteria_snp_calling -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -m bwa
-
-# Map and SNP call a study in named database specifying location of configs
-bacteria_snp_calling -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -c /path/to/my/configs
-
-# Map and SNP call a study in named database specifying root and log base directories
-bacteria_snp_calling -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -root /path/to/root -log /path/to/log
-
-# Map and SNP call a study in named database specifying a file with database connection details
-bacteria_snp_calling -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -db_file /path/to/connect/file
-
-# This help message
-bacteria_snp_calling -h
+For example usage and more information about the mapping and  SNP calling pipelines, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Mapping_Pipeline
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_SNP_Calling_Pipeline
 
 USAGE
 }

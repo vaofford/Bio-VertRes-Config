@@ -4,7 +4,7 @@ package Bio::VertRes::Config::CommandLine::BacteriaMapping;
 
 =head1 SYNOPSIS
 
-Create config scripts to map and snp call bacteria.
+Create config scripts to map bacteria.
 
 =method run
 
@@ -91,21 +91,21 @@ Smalt options:
   --smalt_index_s       STR Set index s for smalt [4]
   --smalt_mapper_r      STR Set mapping r for smalt [0]
   --smalt_mapper_y      STR Set mapping y for smalt [0]
+  --smalt_mapper_x          Set mapping x for smalt
   --smalt_mapper_l      STR Set orientation of mate pairs for smalt (pe/mp/pp)
 
 TopHat options:
   --tophat_mapper_library_type  STR Set the library type for TopHat (fr-unstranded/fr-firststrand/fr-secondstrand) [fr-unstranded]
 
-For example usage, please see:
-http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Command_Line_Scripts#mapfind
-
-For more information about the mapping pipeline, please see:
-http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Mapping_Pipeline
+NOTE - If the data you are regestering is external you need to add the -d pathogen_prok_external option to the command.
 
 NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to site this pipeline, please see:
-http://scratchy.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Bacteria_Mapping_and_Variant_Detection
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Bacteria_Mapping_and_Variant_Detection
+
+For example usage and more information about the mapping pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Mapping_Pipeline
 
 USAGE
 }

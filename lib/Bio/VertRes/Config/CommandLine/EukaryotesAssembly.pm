@@ -42,35 +42,33 @@ sub usage_text
 sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
-Usage: eukaryote_assembly [options]
+Usage: eukaryote_assembly -t <ID type> -i <ID>  [options]
 Pipeline to run assembly and annotation. Study must be registered and QC'd separately first
 
-# Assemble a study
-eukaryote_assembly -t study -i 1234 
+Required: 
+  -t            STR Type (study/lane/file)
+  -i            STR Study name, study ID, lane, file of lanes
+      
+Options:
+  -s            STR Limit to a single species name (e.g. 'Staphylococcus aureus')     
+  -assembler    STR Set a different assembler (spades/velvet) [velvet]
+  -d            STR Specify a database [pathogen_euk_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
+  -a            STR Search for available reference matching pattern and exit.  
+  -h            Print this message and exit
+  
+NOTE - If the data you are regestering is external you need to add the -d pathogen_euk_external option to the command.
 
-# Assemble a single lane
-eukaryote_assembly -t lane -i 1234_5#6 
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-# Assemble a file of lanes
-eukaryote_assembly -t file -i file_of_lanes 
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citation. For more information on how to cite this pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods
 
-# Assemble a single species in a study
-eukaryote_assembly -t study -i 1234  -s "Staphylococcus aureus"
-
-# Assemble a study assembling with SPAdes
-eukaryote_assembly -t study -i 1234 -assembler spades
-
-# Assemble a study in named database specifying location of configs
-eukaryote_assembly -t study -i 1234  -d my_database -c /path/to/my/configs
-
-# Assemble a study in named database specifying root and log base directories
-eukaryote_assembly -t study -i 1234  -d my_database -root /path/to/root -log /path/to/log
-
-# Assemble a study in named database specifying a file with database connection details
-eukaryote_assembly -t study -i 1234  -d my_database -db_file /path/to/connect/file
-
-# This help message
-eukaryote_assembly -h
+For example usage and more information about the assembly and annotation pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Eukaryote_Assembly_Pipeline
 
 USAGE
 };
