@@ -67,50 +67,45 @@ sub usage_text
 sub mapping_usage_text {
     my ($self) = @_;
     return <<USAGE;
-Usage: bacteria_mapping [options]
+Usage: bacteria_mapping -t <ID type> -i <ID> -r <reference> [options]
 Pipeline for bacteria mapping
 
-# Search for an available reference
-bacteria_mapping -a "Staphylococcus"
+Required: 
+  -t        STR Type (study/lane/file)
+  -i        STR Study name, study ID, lane, file of lanes
+  -r        STR Reference to map against. Must match exactly one of the references from the -a option.
 
-# Map a study
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+Options:
+  -s            STR Limit to a single species name (e.g. 'Staphylococcus aureus')
+  -m            STR Set a different mapper (bwa/stampy/smalt/ssaha2/bowtie2/tophat) [smalt]
+  -d            STR STR Specify a database [pathogen_prok_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
+  -a            STR Search for available reference matching pattern and exit.  
+  -h            Print this message and exit
 
-# Map a single lane
-bacteria_mapping -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+Smalt options:
+  --smalt_index_k       STR Set index k for smalt [13]
+  --smalt_index_s       STR Set index s for smalt [4]
+  --smalt_mapper_r      STR Set mapping r for smalt [0]
+  --smalt_mapper_y      STR Set mapping y for smalt [0]
+  --smalt_mapper_l      STR Set orientation of mate pairs for smalt (pe/mp/pp)
 
-# Map a file of lanes
-bacteria_mapping -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+TopHat options:
+  --tophat_mapper_library_type  STR Set the library type for TopHat (fr-unstranded/fr-firststrand/fr-secondstrand) [fr-unstranded]
 
-# Map a single species in a study
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
+For example usage, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Command_Line_Scripts#mapfind
 
-# Use a different mapper. Available are bwa/stampy/smalt/ssaha2/bowtie2/tophat. The default is smalt and ssaha2 is only for 454 data.
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -m bwa
+For more information about the mapping pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Mapping_Pipeline
 
-# Vary the parameters for smalt
-# Index defaults to '-k 13 -s 4'
-# Mapping defaults to '-r 0 -x -y 0.8'
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --smalt_index_k 13 --smalt_index_s 4 --smalt_mapper_r 0 --smalt_mapper_y 0.8 --smalt_mapper_x
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-# Set orientation of mate pairs for smalt ('pe', 'mp' or 'pp')
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --smalt_mapper_l pp
-
-#Default parameters for Tophat
-#The --library_type parameter defaults to fr-unstranded. Other options are: fr-firststrand or fr-secondstrand. 
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --tophat_mapper_library_type fr-firststrand
-
-# Map a study in named database specifying location of configs
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -c /path/to/my/configs
-
-# Map a study in named database specifying root and log base directories
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -root /path/to/root -log /path/to/log
-
-# Map a study in named database specifying a file with database connection details
-bacteria_mapping -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -db_file /path/to/connect/file
-
-# This help message
-bacteria_mapping -h
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to site this pipeline, please see:
+http://scratchy.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Bacteria_Mapping_and_Variant_Detection
 
 USAGE
 }
