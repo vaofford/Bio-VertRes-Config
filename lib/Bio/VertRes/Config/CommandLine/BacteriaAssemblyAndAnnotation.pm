@@ -67,7 +67,7 @@ http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Command_Li
 For more information about the annotation pipeline, please see:
 http://scratchy.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Automated_Annotation_Pipeline
 
-NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help@sanger.ac.uk.
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
 If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline:
 
