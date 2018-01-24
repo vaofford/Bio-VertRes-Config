@@ -33,33 +33,21 @@ sub usage_text
 sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
-Usage: bacteria_permissions [options]
-Pipeline to run assembly and annotation. Study must be registered and QC'd separately first
+Usage: bacteria_permissions -t <ID type> -i <ID> [options]
+Pipeline to set file permissions.
 
-
-# Set permissions for a study
-bacteria_permissions -t study -i 1234 
-
-# Set permissions for a single lane
-bacteria_permissions -t lane -i 1234_5#6 
-
-# Set permissions for a file of lanes
-bacteria_permissions -t file -i file_of_lanes 
-
-# Set permissions for a single species in a study
-bacteria_permissions -t study -i 1234  -s "Staphylococcus aureus"
-
-# Set permissions for a study in named database specifying location of configs
-bacteria_permissions -t study -i 1234  -d my_database -c /path/to/my/configs
-
-# Set permissions for a study in named database specifying root and log base directories
-bacteria_permissions -t study -i 1234  -d my_database -root /path/to/root -log /path/to/log
-
-# Set permissions for a study in named database specifying a file with database connection details 
-bacteria_permissions -t study -i 1234  -d my_database -db_file /path/to/connect/file
-
-# This help message
-bacteria_permissions -h
+Required: 
+  -t            STR Type (study/lane/file)
+  -i            STR Study name, study ID, lane, file of lanes
+      
+Options:
+  -s            STR Limit to a single species name (e.g. 'Staphylococcus aureus')
+  -d            STR Specify a database [pathogen_prok_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details
+  -h            Print this message and exit
 
 USAGE
 };
