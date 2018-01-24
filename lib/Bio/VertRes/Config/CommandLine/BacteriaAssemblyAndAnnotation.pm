@@ -60,22 +60,25 @@ Options:
   --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
   -a            STR Search for available reference matching pattern and exit.  
   -h                Print this message and exit
-  
-For example usage, please see:
-http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Command_Line_Scripts#annotationfind
 
-For more information about the annotation pipeline, please see:
-http://scratchy.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Automated_Annotation_Pipeline
+NOTE - If the data you are regestering is external you need to add the -d pathogen_prok_external option to the command.
 
 NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline:
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citation:
 
 "Robust high throughput prokaryote de novo assembly and improvement pipeline for Illumina data"
 Page AJ, De Silva, N., Hunt M, Quail MA, Parkhill J, Harris SR, Otto TD, Keane JA. (2016). Microbial Genomics 2(8) doi: 10.1099/mgen.0.000083
 
-For more information on how to site this pipeline, please see:
-http://scratchy.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Bacterial_Assembly_and_Annotation
+For more information on how to cite this pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Bacterial_Assembly_and_Annotation
+
+For example usage, please see:
+[wiki page]
+
+For more information about the assembly and annotation pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Bacterial_Assembly_Pipeline
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Automated_Annotation_Pipeline
 
 USAGE
 };

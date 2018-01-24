@@ -66,45 +66,38 @@ sub rna_seq_usage_text {
     my ($self) = @_;
     
     return <<USAGE;
-Usage: bacteria_rna_seq_expression [options]
-Run the RNA seq expression pipeline
+Usage: bacteria_rna_seq_expression -t <ID type> -i <ID> -r <reference> [options]
+Pipeline to run mapping and RNA seq expression
 
-# Search for an available reference
-bacteria_rna_seq_expression -a "Stap"
+Required:
+  -t        STR Type (study/lane/file)
+  -i        STR Study name, study ID, lane, file of lanes
+  -r        STR Reference to map against. Must match exactly one of the references from the -a option.
 
-# Run over a study
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+Options:
+  -s            STR Limit to a single species name (e.g. 'Staphylococcus aureus')
+  -m            STR Set a different mapper (bwa/stampy/smalt/ssaha2/bowtie2/tophat) [bwa]
+  -p            STR Set the protocol (StandardProtocol/StrandSpecificProtocol) [StandardProtocol]
+  -d            STR STR Specify a database [pathogen_prok_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
+  -a            STR Search for available reference matching pattern and exit.
+  -h            Print this message and exit
 
-# Run over a single lane
-bacteria_rna_seq_expression -t lane -i 1234_5#6 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+TopHat options:
+  --tophat_mapper_library_type  STR Set the library type for TopHat (fr-unstranded/fr-firststrand/fr-secondstrand) [fr-firststrand]
 
-# Run over a file of lanes
-bacteria_rna_seq_expression -t file -i file_of_lanes -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1"
+NOTE - If the data you are regestering is external you need to add the -d pathogen_prok_external option to the command.
 
-#  The default is the Standard FRT Protocol. Use the Strand Specific Protocol.
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -p "StrandSpecificProtocol"
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-# Run over a single species in a study
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -s "Staphylococcus aureus"
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:
+http://scratchy.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Prokaryote_RNASeq_Expression_Analysis
 
-# Use a different mapper. Available are bwa/stampy/smalt/ssaha2/bowtie2/tophat. The default is bwa and ssaha2 is only for 454 data.
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -m smalt
-
-#Default parameters for Tophat
-#The --library_type parameter defaults to fr-firststrand for rnaseq data. Other options are: fr-unstranded or fr-secondstrand. 
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" --tophat_mapper_library_type fr-unstranded
-
-# Run over a study in a named database specifying location of configs
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -c /path/to/my/configs
-
-# Run over a study in named database specifying root and log base directories
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -root /path/to/root -log /path/to/log
-
-# Run over a study in named database specifying a file with database connection details 
-bacteria_rna_seq_expression -t study -i 1234 -r "Staphylococcus_aureus_subsp_aureus_EMRSA15_v1" -d my_database -db_file /path/to/connect/file
-
-# This help message
-bacteria_rna_seq_expression -h
+For example usage and more information about the mapping pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_RNA-Seq_Expression_Pipeline
 
 USAGE
 }
