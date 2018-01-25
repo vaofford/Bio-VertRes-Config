@@ -68,7 +68,7 @@ If you use the results of this pipeline, please acknowledge the pathogen informa
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods
 
 For example usage and more information about the assembly and annotation pipeline, please see:
-http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Eukaryote_Assembly_Pipeline
+http://mediawiki.internal.sanger.ac.uk/index.php/Assembly_Pipeline_-_Pathogen_Informatics
 
 USAGE
 };
