@@ -69,7 +69,8 @@ http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_
 
 For example usage and more information about the QC, assembly and annotation pipelines, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines#QC_Pipeline
-http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Eukaryote_Assembly_Pipeline
+http://mediawiki.internal.sanger.ac.uk/index.php/Assembly_Pipeline_-_Pathogen_Informatics
+
 
 USAGE
 };
