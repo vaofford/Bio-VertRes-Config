@@ -76,7 +76,7 @@ Options:
   --log         STR Base directory for the log files [/nfs/pathnfs05/log]
   --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
   -a            STR Search for available reference matching pattern and exit.
-  -h            Print this message and exit
+  -h                Print this message and exit
 
 NOTE - If the data you are regestering is external you need to add the -d pathogen_prok_external option to the command.
 
