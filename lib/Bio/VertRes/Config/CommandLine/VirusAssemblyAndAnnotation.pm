@@ -46,36 +46,33 @@ sub usage_text
 sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
-Usage: virus_assembly_and_annotation [options]
+Usage: virus_assembly_and_annotation -t <ID type> -i <ID> [options]
 Pipeline to run assembly and annotation. Study must be registered and QC'd separately first
 
+Required:
+  -t            STR Type (study/lane/file)
+  -i            STR Study name, study ID, lane, file of lanes
 
-# Register and QC a study
-virus_assembly_and_annotation -t study -i 1234 
+Options:
+  -s            STR Limit to a single species name (e.g. 'Influenzavirus A')
+  --assembler   STR Set a different assembler (spades/velvet/iva) [spades]
+  -d            STR Specify a database [pathogen_virus_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
+  -a            STR Search for available reference matching pattern and exit.
+  -h                Print this message and exit
 
-# Register and QC a single lane
-virus_assembly_and_annotation -t lane -i 1234_5#6 
+NOTE - If the data you are regestering is external you need to add the -d pathogen_virus_external option to the command.
 
-# Register and QC a file of lanes
-virus_assembly_and_annotation -t file -i file_of_lanes 
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-# Register and QC a single species in a study
-virus_assembly_and_annotation -t study -i 1234  -s "Staphylococcus aureus"
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citation. For more information on how to cite this pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Viral_Assembly_and_Annotation
 
-# Register and QC a study assembling with SPAdes
-virus_assembly_and_annotation -t study -i 1234 -assembler spades
-
-# Register and QC a study in named database specifying location of configs
-virus_assembly_and_annotation -t study -i 1234  -d my_database -c /path/to/my/configs
-
-# Assemble and annotate a study in named database specifying root and log base directories
-virus_assembly_and_annotation -t study -i 1234  -d my_database -root /path/to/root -log /path/to/log
-
-# Assemble and annotate a study in named database specifying a file with database connection details 
-virus_assembly_and_annotation -t study -i 1234  -d my_database -db_file /path/to/connect/file
-
-# This help message
-virus_assembly_and_annotation -h
+For more information about the assembly pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Assembly_Pipeline_-_Pathogen_Informatics
 
 USAGE
 };

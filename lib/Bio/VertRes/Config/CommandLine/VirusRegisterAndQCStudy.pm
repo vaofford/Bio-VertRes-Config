@@ -1,10 +1,10 @@
 package Bio::VertRes::Config::CommandLine::VirusRegisterAndQCStudy;
 
-# ABSTRACT: Create config scripts to map helminths
+# ABSTRACT: Create config scripts to register and QC virus
 
 =head1 SYNOPSIS
 
-Create config scripts to map helminths
+Create config scripts to register and QC virus
 
 =cut
 
@@ -44,38 +44,35 @@ sub usage_text
 sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
-Usage: virus_register_and_qc_study [options]
+Usage: virus_register_and_qc_study -t <ID type> -i <ID> -r <reference> [options]
 Pipeline to register and QC a virus study.
 
-# Search for an available reference
-virus_register_and_qc_study -a "Norovirus"
+Required:
+  -t            STR Type (study/lane/file)
+  -i            STR Study name, study ID, lane, file of lanes
+  -r            STR Reference to map against. Must match exactly one of the references from the -a option.
 
-# Register and QC a study
-virus_register_and_qc_study -t study -i 1234 -r "Norovirus_Hu_Pune_PC52_2007_India_v2"
+Options:
+  -s            STR Limit to a single species name (e.g. 'Influenzavirus A')
+  --assembler   STR Set a different assembler (spades/velvet/iva) [spades]
+  -d            STR Specify a database [pathogen_virus_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
+  -a            STR Search for available reference matching pattern and exit.
+  -h                Print this message and exit
 
-# Register and QC a single lane
-virus_register_and_qc_study -t lane -i 1234_5#6 -r "Norovirus_Hu_Pune_PC52_2007_India_v2"
+NOTE - If the data you are regestering is external you need to add the -d pathogen_virus_external option to the command.
 
-# Register and QC a file of lanes
-virus_register_and_qc_study -t file -i file_of_lanes -r "Norovirus_Hu_Pune_PC52_2007_India_v2"
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-# Register and QC a single species in a study
-virus_register_and_qc_study -t study -i 1234 -r "Norovirus_Hu_Pune_PC52_2007_India_v2" -s "Norovirus"
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citation. For more information on how to cite this pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Viral_Assembly_and_Annotation
 
-# Register and QC a study assembling with velvet
-virus_register_and_qc_study -t study -i 1234 -r "Norovirus_Hu_Pune_PC52_2007_India_v2" -assembler velvet
-
-# Register and QC a study in named database specifying location of configs
-virus_register_and_qc_study -t study -i 1234 -r "Norovirus_Hu_Pune_PC52_2007_India_v2" -d my_database -c /path/to/my/configs
-
-# Register and QC a study in named database specifying root and log base directories
-virus_register_and_qc_study -t study -i 1234 -r "Norovirus_Hu_Pune_PC52_2007_India_v2" -d my_database -root /path/to/root -log /path/to/log
-
-# Register and QC a study in named database specifying a file with database connection details 
-virus_register_and_qc_study -t study -i 1234 -r "Norovirus_Hu_Pune_PC52_2007_India_v2" -d my_database -db_file /path/to/connect/file
-
-# This help message
-virus_register_and_qc_study -h
+For more information about the QC and assembly pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines#QC_Pipeline
+http://mediawiki.internal.sanger.ac.uk/index.php/Assembly_Pipeline_-_Pathogen_Informatics
 
 USAGE
 };
