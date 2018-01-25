@@ -97,7 +97,7 @@ NOTE - If you are uncertain that your request was successful, please do NOT run 
 If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods
 
-For example usage and more information about the mapping pipeline, please see:
+For example usage and more information about the RNA-Seq expression  pipeline, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_RNA-Seq_Expression_Pipeline
 
 USAGE

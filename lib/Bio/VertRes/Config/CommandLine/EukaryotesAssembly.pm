@@ -50,15 +50,15 @@ Required:
   -i            STR Study name, study ID, lane, file of lanes
       
 Options:
-  -s            STR Limit to a single species name (e.g. 'Staphylococcus aureus')     
-  -assembler    STR Set a different assembler (spades/velvet) [velvet]
+  -s            STR Limit to a single species name (e.g. 'Leishmania donovani')     
+  --assembler   STR Set a different assembler (spades/velvet) [velvet]
   -d            STR Specify a database [pathogen_euk_track]
   -c            STR Base directory to config files [/nfs/pathnfs05/conf]
   --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
   --log         STR Base directory for the log files [/nfs/pathnfs05/log]
   --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
   -a            STR Search for available reference matching pattern and exit.  
-  -h            Print this message and exit
+  -h                Print this message and exit
   
 NOTE - If the data you are regestering is external you need to add the -d pathogen_euk_external option to the command.
 
@@ -67,7 +67,7 @@ NOTE - If you are uncertain that your request was successful, please do NOT run 
 If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citation. For more information on how to cite this pipeline, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods
 
-For example usage and more information about the assembly and annotation pipeline, please see:
+For example usage and more information about the assembly pipeline, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Assembly_Pipeline_-_Pathogen_Informatics
 
 USAGE
