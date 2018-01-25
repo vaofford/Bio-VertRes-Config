@@ -84,7 +84,7 @@ Options:
   --log         STR Base directory for the log files [/nfs/pathnfs05/log]
   --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
   -a            STR Search for available reference matching pattern and exit.
-  -h            Print this message and exit
+  -h                Print this message and exit
 
 TopHat options:
   --tophat_mapper_library_type  STR Set the library type for TopHat (fr-unstranded/fr-firststrand/fr-secondstrand) [fr-firststrand]
@@ -94,7 +94,7 @@ NOTE - If the data you are regestering is external you need to add the -d pathog
 NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
 If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:
-http://scratchy.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Prokaryote_RNASeq_Expression_Analysis
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Prokaryote_RNASeq_Expression_Analysis
 
 For example usage and more information about the mapping pipeline, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_RNA-Seq_Expression_Pipeline

@@ -78,12 +78,9 @@ Page AJ, De Silva, N., Hunt M, Quail MA, Parkhill J, Harris SR, Otto TD, Keane J
 For more information on how to site the pipelines, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Bacterial_Assembly_and_Annotation
 
-For example usage, please see:
-[wiki page]
-
-For more information about the QC, assembly and annotation pipelines, please see:
+For example usage and more information about the QC, assembly and annotation pipelines, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines#QC_Pipeline
-http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Bacterial_Assembly_Pipeline
+http://mediawiki.internal.sanger.ac.uk/index.php/Assembly_Pipeline_-_Pathogen_Informatics
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Automated_Annotation_Pipeline
 
 USAGE

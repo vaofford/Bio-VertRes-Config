@@ -84,7 +84,7 @@ Options:
   --log         STR Base directory for the log files [/nfs/pathnfs05/log]
   --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
   -a            STR Search for available reference matching pattern and exit.  
-  -h            Print this message and exit
+  -h                Print this message and exit
 
 Smalt options:
   --smalt_index_k       STR Set index k for smalt [13]

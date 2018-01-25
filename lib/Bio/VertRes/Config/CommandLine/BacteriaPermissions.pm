@@ -47,7 +47,7 @@ Options:
   --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
   --log         STR Base directory for the log files [/nfs/pathnfs05/log]
   --db_file     STR Filename containing database connection details
-  -h            Print this message and exit
+  -h                Print this message and exit
 
 USAGE
 };
