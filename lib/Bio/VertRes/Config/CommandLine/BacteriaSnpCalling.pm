@@ -85,7 +85,7 @@ NOTE - If you are uncertain that your request was successful, please do NOT run 
 If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Bacteria_Mapping_and_Variant_Detection
 
-For example usage and more information about the mapping and  SNP calling pipelines, please see:
+For example usage and more information about the mapping and SNP calling pipelines, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Mapping_Pipeline
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_SNP_Calling_Pipeline
 
