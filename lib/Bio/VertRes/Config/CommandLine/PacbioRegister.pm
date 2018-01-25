@@ -45,17 +45,24 @@ sub usage_text
 sub register_usage_text {
     my ($self) = @_;
     return <<USAGE;
-Usage: pacbio_register_study [options]
+Usage: pacbio_register -t <ID type> -i <ID> [options]
 Pipeline to register a pacbio study.
 
-# Register a study (assemble and annotate)
-pacbio_register_study -t study -i 1234 
+Required:
+  -t        STR Type (study/lane/file)
+  -i        STR Study name, study ID, lane, file of lanes
 
-# Dont circularise
-pacbio_register_study -t study -i 1234 --no_circularise
+Options:
+  --no_circularise  Do not circularise
+  -h                Print this message and exit
 
-# This help message
-pacbio_register_study -h
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
+
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#PacBio_Assembly_and_Annotation
+
+For more information about the assembly and annotation pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Automated_PacBio_Assembly_Pipeline
 
 USAGE
 };
