@@ -27,7 +27,10 @@ sub run {
 
 sub retrieving_results_text {
     my ($self) = @_;
-    "";
+    print "Your request was SUCCESSFUL\n\n";
+    print "NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.\n\n";
+    print "If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:\n";
+    print "http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods\n";
 }
 
 sub usage_text
