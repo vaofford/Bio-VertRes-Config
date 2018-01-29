@@ -32,7 +32,7 @@ sub run {
 
 sub retrieving_results_text {
     my ($self) = @_;
-    "";
+    $self->retrieving_register_and_qc_results_text;
 }
 
 sub usage_text
@@ -54,7 +54,6 @@ Required:
 
 Options:
   -s            STR Limit to a single species name (e.g. 'Influenzavirus A')
-  --assembler   STR Set a different assembler (spades/velvet/iva) [spades]
   -d            STR Specify a database [pathogen_virus_track]
   -c            STR Base directory to config files [/nfs/pathnfs05/conf]
   --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
@@ -68,11 +67,10 @@ NOTE - If the data you are regestering is external you need to add the -d pathog
 NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
 If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citation. For more information on how to cite this pipeline, please see:
-http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Viral_Assembly_and_Annotation
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods
 
 For more information about the QC and assembly pipeline, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines#QC_Pipeline
-http://mediawiki.internal.sanger.ac.uk/index.php/Assembly_Pipeline_-_Pathogen_Informatics
 
 USAGE
 };

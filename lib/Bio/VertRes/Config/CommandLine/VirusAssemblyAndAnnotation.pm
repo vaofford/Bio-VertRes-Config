@@ -34,7 +34,7 @@ sub run {
 
 sub retrieving_results_text {
     my ($self) = @_;
-    "";
+    $self->retrieving_assembly_and_annotation_results_text;
 }
 
 sub usage_text

@@ -30,7 +30,7 @@ sub run {
 
 sub retrieving_results_text {
     my ($self) = @_;
-    "";
+    $self->retrieving_register_and_qc_results_text;
 }
 
 sub usage_text
@@ -67,10 +67,8 @@ NOTE - If you are uncertain that your request was successful, please do NOT run 
 If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citation. For more information on how to cite this pipeline, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods
 
-For example usage and more information about the QC, assembly and annotation pipelines, please see:
+For example usage and more information about the QC pipeline, please see:
 http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines#QC_Pipeline
-http://mediawiki.internal.sanger.ac.uk/index.php/Assembly_Pipeline_-_Pathogen_Informatics
-
 
 USAGE
 };
