@@ -17,6 +17,7 @@ my %scripts_and_expected_files = (
     '-a ABC '                  => ['command_line.log'],
     '-t study -i ZZZ' => [
         'command_line.log',
+		'pathogen_pacbio_track/annotate_assembly/annotate_assembly_ZZZ_canu.conf',
 		'pathogen_pacbio_track/annotate_assembly/annotate_assembly_ZZZ_hgap.conf',
         'pathogen_pacbio_track/annotate_assembly/annotate_assembly_ZZZ_pacbio.conf',
         'pathogen_pacbio_track/assembly/assembly_ZZZ_hgap.conf',
@@ -48,6 +49,10 @@ mock_execute_script_and_check_output_ignore_regex( $script_name, \%scripts_and_e
     '-t study -i ZZZ' => [
         'pathogen_pacbio_track/annotate_assembly/annotate_assembly_ZZZ_hgap.conf',
         't/data/expected/annotate_assembly_ZZZ_hgap.conf'
+    ],
+    '-t study -i ZZZ' => [
+        'pathogen_pacbio_track/annotate_assembly/annotate_assembly_ZZZ_canu.conf',
+        't/data/expected/annotate_assembly_ZZZ_canu.conf'
     ],
 	
 );
