@@ -35,7 +35,29 @@ sub run {
 
 sub retrieving_results_text {
     my ($self) = @_;
-    "";
+    print "Your request was SUCCESSFUL\n\n";
+    print "Once the data is available you can run these commands:\n\n";
+
+    print "Create symlinks to the fastq files, final assemblies and annotations\n";
+    print "  pf data -t " . $self->type ." -i " . $self->id . " --filetype fastq --symlink\n\n";
+    print "  pf assembly -t " . $self->type . " -i " . $self->id . " --symlink\n\n";
+    print "  pf annotation -t " . $self->type . " -i " . $self->id . " --symlink\n\n";
+
+    print "Return the Kraken report(s) from the QC pipeline";
+    print "  pf qc -t " . $self->type ." -i " . $self->id . "\n\n";
+
+    print "Generate a report of the assembly statistics in CSV format\n";
+    print "  pf assembly -t " . $self->type . " -i " . $self->id . " --stats\n\n";
+
+    print "More details\n";
+    print "  pf data -h\n";
+    print "  pf qc -h\n";
+    print "  pf assembly -h\n";
+    print "  pf annotation -h\n\n";
+
+    print "NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.\n\n";
+    print "If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:\n";
+    print "http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods\n";
 }
 
 sub usage_text

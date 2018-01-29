@@ -30,7 +30,7 @@ sub run {
 
 sub retrieving_results_text {
     my ($self) = @_;
-    "";
+    $self->retrieving_register_and_qc_results_text;
 }
 
 sub usage_text
