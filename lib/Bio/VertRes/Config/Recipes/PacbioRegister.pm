@@ -29,7 +29,7 @@ has '_kingdom'                    => ( is => 'ro', isa => 'Str',  default => "Ba
 has '_vrtrack_processed_flags'    => ( is => 'ro', isa => 'HashRef', default => sub {{ assembled => 0, import => 1}} );
 has '_max_threads'         => ( is => 'ro', isa => 'Int',  default => 12 );
 has '_queue'			   => ( is => 'ro', isa => 'Str', default => 'normal');
-has '_genome_size'         => ( is => 'ro', isa => 'Int', default => 3000000 );
+has '_genome_size'         => ( is => 'ro', isa => 'Int', default => 7000000 );
 has '_memory'         	   => ( is => 'ro', isa => 'Int', default => 60000 ); # for assembly bsub job
 has '_memory_in_mb'		   => ( is => 'ro', isa => 'Int', default => 4000 ); # for annotation
 has '_target_coverage'	   => ( is => 'ro', isa => 'Int', default => 30 );
