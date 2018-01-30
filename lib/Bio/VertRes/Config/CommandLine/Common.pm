@@ -365,7 +365,7 @@ sub retrieving_rnaseq_results_text {
       . " -symlink -f coverage\n\n";
 
     print "More details\n";
-    print "  pf rnaseq -h\n";
+    print "  pf rnaseq -h\n\n";
 
     print "NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.\n\n";
     print "If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:\n";
@@ -443,12 +443,12 @@ sub retrieving_register_and_qc_results_text {
     print "Create symlinks to the fastq files\n";
     print "  pf data -t " . $self->type ." -i " . $self->id . " --filetype fastq --symlink\n\n";
 
-    print "Return the Kraken report(s) from the QC pipeline";
+    print "Return the Kraken report(s) from the QC pipeline\n";
     print "  pf qc -t " . $self->type ." -i " . $self->id . "\n\n";
 
     print "More details\n";
     print "  pf data -h\n";
-    print "  pf qc -h\n";
+    print "  pf qc -h\n\n";
 
     print "NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.\n\n";
     print "If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:\n";
