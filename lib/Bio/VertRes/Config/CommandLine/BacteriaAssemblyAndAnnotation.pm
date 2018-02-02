@@ -30,7 +30,7 @@ sub run {
 
 sub retrieving_results_text {
     my ($self) = @_;
-    "";
+    $self->retrieving_assembly_and_annotation_results_text;
 }
 
 sub usage_text
@@ -42,7 +42,7 @@ sub usage_text
 sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
-Usage: bacteria_assembly_and_annotation [options]
+Usage: bacteria_assembly_and_annotation -t <ID type> -i <ID> [options]
 Pipeline to run assembly and annotation. Study must be registered and QC'd separately first
 
 Required: 
@@ -60,12 +60,22 @@ Options:
   --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
   -a            STR Search for available reference matching pattern and exit.  
   -h                Print this message and exit
-  
-# Assemble and annotate a study
-bacteria_assembly_and_annotation -t study -i 1234
 
-# Assemble with SPAdes and provide custom options
-bacteria_assembly_and_annotation -t study -i 1234 --assembler spades --spades_opts '--careful -k 41,51,61'
+NOTE - If the data you are regestering is external you need to add the -d pathogen_prok_external option to the command.
+
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
+
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citation:
+
+"Robust high throughput prokaryote de novo assembly and improvement pipeline for Illumina data"
+Page AJ, De Silva, N., Hunt M, Quail MA, Parkhill J, Harris SR, Otto TD, Keane JA. (2016). Microbial Genomics 2(8) doi: 10.1099/mgen.0.000083
+
+For more information on how to cite this pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Bacterial_Assembly_and_Annotation
+
+For more information about the assembly and annotation pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Assembly_Pipeline_-_Pathogen_Informatics
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Automated_Annotation_Pipeline
 
 USAGE
 };

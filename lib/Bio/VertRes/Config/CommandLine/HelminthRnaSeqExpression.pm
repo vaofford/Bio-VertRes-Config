@@ -67,54 +67,48 @@ sub rna_seq_usage_text {
     my ($self) = @_;
     
     return <<USAGE;
-Usage: helminth_rna_seq_expression [options]
+Usage: helminth_rna_seq_expression -t <ID type> -i <ID> -r <reference> [options]
 Run the RNA seq expression pipeline
 
-# Search for an available reference
-helminth_rna_seq_expression -a "Schisto"
+Required:
+  -t        STR Type (study/lane/file)
+  -i        STR Study name, study ID, lane, file of lanes
+  -r        STR Reference to map against. Must match exactly one of the references from the -a option.
 
-# Run over a study
-helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5"
+Options:
+  -s            STR Limit to a single species name (e.g. 'Schistosoma mansoni')
+  -m            STR Set a different mapper (bwa/stampy/smalt/ssaha2/bowtie2/tophat) [tophat]
+  -p            STR Set the protocol (StandardProtocol/StrandSpecificProtocol) [StandardProtocol]  
+  -d            STR STR Specify a database [pathogen_helminth_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
+  -a            STR Search for available reference matching pattern and exit.
+  -h                Print this message and exit
 
-# Run over a single lane
-helminth_rna_seq_expression -t lane -i 1234_5#6 -r "Schistosoma_mansoni_v5"
+Smalt options:
+  --smalt_index_k       STR Set index k for smalt [13]
+  --smalt_index_s       STR Set index s for smalt [2]
+  --smalt_mapper_r      STR Set mapping r for smalt [0]
+  --smalt_mapper_y      STR Set mapping y for smalt [0.8]
+  --smalt_mapper_x          Set mapping x for smalt
 
-# Run over a file of lanes
-helminth_rna_seq_expression -t file -i file_of_lanes -r "Schistosoma_mansoni_v5"
+TopHat options:
+  --tophat_mapper_library_type  STR Set the library type for TopHat (fr-unstranded/fr-firststrand/fr-secondstrand) [fr-firststrand]
+  --tophat_mapper_max_intron    STR Set the maximum intron length for TopHat [10000]
+  --tophat_mapper_min_intron    STR Set the minimum intron length for TopHat [70]
+  --tophat_mapper_max_multihit  STR Set the maximum multihit for TopHat [1]
 
-# Use the Strand Specific Protocol, also known as the Croucher protocol. The default is FRT.
-helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" -p "StrandSpecificProtocol"
+NOTE - If the data you are regestering is external you need to add the -d pathogen_helminth_external option to the command.
 
-# Run over a single species in a study
-helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" -s "Schistosoma mansoni"
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-# Use a different mapper. Available are bwa/stampy/smalt/ssaha2/bowtie2/tophat. The default is tophat and ssaha2 is only for 454 data.
-eukaryote_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" -m bwa
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citations for the pipeline. For more information on how to cite this pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods#Eukaryote_RNASeq_Expression_Analysis
 
-# Vary the parameters for tophat
-# Mapping defaults to '-I 10000 -i 70 -g 1'
-helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" --tophat_mapper_max_intron 10000 --tophat_mapper_min_intron 70 --tophat_mapper_max_multihit 1
-
-# Vary the parameters for smalt
-# Index defaults to '-k 13 -s 2'
-# Mapping defaults to '-r 0 -x -y 0.8'
-helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" -m smalt --smalt_index_k 13 --smalt_index_s 2 --smalt_mapper_r 0 --smalt_mapper_y 0.8 --smalt_mapper_x
-
-#Default parameters for Tophat
-#The --library_type parameter defaults to fr-firststrand for rnaseq data. Other options are: fr-unstranded or fr-secondstrand. 
-helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" --tophat_mapper_library_type fr-unstranded
-
-# Run over a study in a named database specifying location of configs
-helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" -d my_database -c /path/to/my/configs
-
-# Run over a study in named database specifying root and log base directories
-helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" -d my_database -root /path/to/root -log /path/to/log
-
-# Run over a study in named database specifying a file with database connection details 
-helminth_rna_seq_expression -t study -i 1234 -r "Schistosoma_mansoni_v5" -d my_database -db_file /path/to/connect/file
-
-# This help message
-helminth_rna_seq_expression -h
+For example usage and more information about the RNA-Seq expression pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_RNA-Seq_Expression_Pipeline
 
 USAGE
 }

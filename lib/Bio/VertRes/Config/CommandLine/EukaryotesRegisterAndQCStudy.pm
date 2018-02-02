@@ -1,10 +1,10 @@
 package Bio::VertRes::Config::CommandLine::EukaryotesRegisterAndQCStudy;
 
-# ABSTRACT: Create config scripts to map helminths
+# ABSTRACT: Create config scripts to register and QC eukaryotes
 
 =head1 SYNOPSIS
 
-Create config scripts to map helminths
+Create config scripts to register and QC eukaryotes
 
 =cut
 
@@ -30,7 +30,7 @@ sub run {
 
 sub retrieving_results_text {
     my ($self) = @_;
-    "";
+    $self->retrieving_register_and_qc_results_text;
 }
 
 sub usage_text
@@ -42,35 +42,33 @@ sub usage_text
 sub register_and_qc_usage_text {
     my ($self) = @_;
     return <<USAGE;
-Usage: eukaryote_register_and_qc_study [options]
+Usage: eukaryote_register_and_qc_study -t <ID type> -i <ID> -r <reference> [options]
 Pipeline to register and QC a eukaryote study.
 
-# Search for an available reference
-eukaryote_register_and_qc_study -a "Plasmodium"
+Required:
+  -t        STR Type (study/lane/file)
+  -i        STR Study name, study ID, lane, file of lanes
+  -r        STR Reference to map against. Must match exactly one of the references from the -a option.
 
-# Register and QC a study
-eukaryote_register_and_qc_study -t study -i 1234 -r "Plasmodium_falciparum_3D7_02April2012"
+Options:
+  -s            STR Limit to a single species name (e.g. 'Plasmodium falciparum')
+  -d            STR Specify a database [pathogen_euk_track]
+  -c            STR Base directory to config files [/nfs/pathnfs05/conf]
+  --root        STR Base directory for the pipelines [/lustre/scratch118/infgen/pathogen/pathpipe]
+  --log         STR Base directory for the log files [/nfs/pathnfs05/log]
+  --db_file     STR Filename containing database connection details [/software/pathogen/config/database_connection_details]
+  -a            STR Search for available reference matching pattern and exit.
+  -h            Print this message and exit
 
-# Register and QC a single lane
-eukaryote_register_and_qc_study -t lane -i 1234_5#6 -r "Plasmodium_falciparum_3D7_02April2012"
+NOTE - If the data you are regestering is external you need to add the -d pathogen_euk_external option to the command.
 
-# Register and QC a file of lanes
-eukaryote_register_and_qc_study -t file -i file_of_lanes -r "Plasmodium_falciparum_3D7_02April2012"
+NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
 
-# Register and QC a single species in a study
-eukaryote_register_and_qc_study -t study -i 1234 -r "Plasmodium_falciparum_3D7_02April2012" -s "Plasmodium falciparum"
+If you use the results of this pipeline, please acknowledge the pathogen informatics team and include the appropriate citation. For more information on how to cite this pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines_-_Methods
 
-# Register and QC a study in named database specifying location of configs
-eukaryote_register_and_qc_study -t study -i 1234 -r "Plasmodium_falciparum_3D7_02April2012" -d my_database -c /path/to/my/configs
-
-# Register and QC a study in named database specifying root and log base directories
-eukaryote_register_and_qc_study -t study -i 1234 -r "Plasmodium_falciparum_3D7_02April2012" -d my_database -root /path/to/root -log /path/to/log
-
-# Register and QC a study in named database specifying a file with database connection details 
-eukaryote_register_and_qc_study -t study -i 1234 -r "Plasmodium_falciparum_3D7_02April2012" -d my_database -db_file /path/to/connect/file
-
-# This help message
-register_and_qc_study -h
+For example usage and more information about the QC pipeline, please see:
+http://mediawiki.internal.sanger.ac.uk/index.php/Pathogen_Informatics_Pipelines#QC_Pipeline
 
 USAGE
 };
