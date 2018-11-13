@@ -196,7 +196,7 @@ sub BUILD {
     # circularise
     $self->circularise(0) if ( defined($no_circularise) );
 
-    # circularise
+    # annotate
     $self->annotate(0) if ( defined($no_annotation) );
 
     $regeneration_log_file ||= join( '/', ( $self->log_base(), 'command_line.log' ) );
