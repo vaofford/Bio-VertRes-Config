@@ -37,7 +37,7 @@ sub retrieving_results_text {
     print "Your request was SUCCESSFUL\n\n";
     print "Once the data is available you can run these commands:\n\n";
 
-    print "Create symlinks to the raw PacBio read data, final assemblies\n";
+    print "Create symlinks to the raw PacBio read data and final assemblies\n";
     print "  pf data -t " . $self->type ." -i " . $self->id . " --filetype pacbio --symlink\n\n";
     print "  pf assembly -t " . $self->type . " -i " . $self->id . " --symlink\n\n";
 
