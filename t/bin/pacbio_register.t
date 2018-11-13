@@ -27,6 +27,14 @@ my %scripts_and_expected_files = (
         'pathogen_pacbio_track/pathogen_pacbio_track_assembly_pipeline.conf',
         'pathogen_pacbio_track/pathogen_pacbio_track_import_cram_pipeline.conf',  
     ],
+    '-t study -i ZZZ --no_annotation' => [
+        'command_line.log',
+        'pathogen_pacbio_track/assembly/assembly_ZZZ_hgap.conf',
+        'pathogen_pacbio_track/import_cram/import_cram_global.conf',
+        'pathogen_pacbio_track/pathogen_pacbio_track.ilm.studies',       
+        'pathogen_pacbio_track/pathogen_pacbio_track_assembly_pipeline.conf',
+        'pathogen_pacbio_track/pathogen_pacbio_track_import_cram_pipeline.conf',  
+    ],
 );
 
 mock_execute_script_and_check_output_ignore_regex( $script_name, \%scripts_and_expected_files,'permission' );

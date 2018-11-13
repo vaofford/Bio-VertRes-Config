@@ -35,7 +35,7 @@ has '_memory_in_mb'		   => ( is => 'ro', isa => 'Int', default => 4000 ); # for 
 has '_target_coverage'	   => ( is => 'ro', isa => 'Int', default => 30 );
 has '_no_bsub'			   => ( is => 'ro', isa => 'Bool', default => 1 );
 has 'circularise'		   => ( is => 'ro', isa => 'Bool', default => 1 );
-
+has 'annotate'             => ( is => 'ro', isa => 'Bool', default => 1 );
 
 override '_pipeline_configs' => sub {
     my ($self) = @_;
@@ -46,7 +46,10 @@ override '_pipeline_configs' => sub {
         $self->add_hgap_assembly_config(\@pipeline_configs);
     }
 
-    $self->add_bacteria_annotate_config(\@pipeline_configs);
+    if( $self->annotate eq 1 ) 
+    {
+        $self->add_bacteria_annotate_config(\@pipeline_configs);
+    }
 
     return \@pipeline_configs;
 };
