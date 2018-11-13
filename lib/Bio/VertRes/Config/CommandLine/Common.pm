@@ -79,6 +79,9 @@ has 'iva_strand_bias' => (is => 'rw', isa => 'Num', default => 0);
 # circularisation
 has 'circularise'  => ( is => 'rw', isa => 'Bool', default => 1 );
 
+# annotation
+has 'annotate' => ( is => 'rw', isa => 'Bool', default => 1 );
+
 # test mode
 has 'test_mode' => ( is => 'rw', isa => 'Bool', default => 0);
 
@@ -107,7 +110,7 @@ sub BUILD {
         $test_mode,						 $iva_qc,
         $kraken_db,	                     $iva_insert_size,
         $iva_strand_bias,				 $no_circularise,
-	$spades_opts,
+	    $spades_opts,                    $no_annotation
     );
 
     GetOptionsFromArray(
@@ -135,7 +138,7 @@ sub BUILD {
         'tophat_mapper_max_multihit=i'   => \$tophat_mapper_g,
         'tophat_mapper_library_type=s'   => \$tophat_mapper_library_type,
         'assembler=s'                    => \$assembler,
-	'spades_opts=s'                  => \$spades_opts,
+	    'spades_opts=s'                  => \$spades_opts,
         'root_base=s'                    => \$root_base,
         'log_base=s'                     => \$log_base,
         'db_file:s'                      => \$database_connect_file,
@@ -145,7 +148,8 @@ sub BUILD {
         'kraken_db=s'                    => \$kraken_db,
         'iva_insert_size=i'              => \$iva_insert_size,
         'iva_strand_bias=f'              => \$iva_strand_bias,
-        'no_circularise'		       			 => \$no_circularise,
+        'no_circularise'		       	 => \$no_circularise,
+        'no_annotation'                  => \$no_annotation,
         'h|help'                         => \$help
     );
 
@@ -191,6 +195,9 @@ sub BUILD {
     
     # circularise
     $self->circularise(0) if ( defined($no_circularise) );
+
+    # annotate
+    $self->annotate(0) if ( defined($no_annotation) );
 
     $regeneration_log_file ||= join( '/', ( $self->log_base(), 'command_line.log' ) );
     $self->regeneration_log_file($regeneration_log_file)

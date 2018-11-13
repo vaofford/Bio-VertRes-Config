@@ -26,7 +26,8 @@ sub run {
     
     my %mapping_parameters = %{$self->mapping_parameters};
     $mapping_parameters{'circularise'} = $self->circularise if defined ($self->circularise);
-   Bio::VertRes::Config::Recipes::PacbioRegister->new( \%mapping_parameters )->create();
+    $mapping_parameters{'annotate'} = $self->annotate if defined ($self->annotate);
+    Bio::VertRes::Config::Recipes::PacbioRegister->new( \%mapping_parameters )->create();
 
     $self->retrieving_results_text;
 };
@@ -36,9 +37,11 @@ sub retrieving_results_text {
     print "Your request was SUCCESSFUL\n\n";
     print "Once the data is available you can run these commands:\n\n";
 
-    print "Create symlinks to the raw PacBio read data, final assemblies and annotations\n";
+    print "Create symlinks to the raw PacBio read data and final assemblies\n";
     print "  pf data -t " . $self->type ." -i " . $self->id . " --filetype pacbio --symlink\n\n";
     print "  pf assembly -t " . $self->type . " -i " . $self->id . " --symlink\n\n";
+
+    print "Create symlinks to final assembly annotations\n";
     print "  pf annotation -t " . $self->type . " -i " . $self->id . " --symlink\n\n";
 
     print "Generate a report of the assembly statistics in CSV format\n";
@@ -72,6 +75,7 @@ Required:
 
 Options:
   --no_circularise  Do not circularise
+  --no_annotation   Do not annotate assembly
   -h                Print this message and exit
 
 NOTE - If you are uncertain that your request was successful, please do NOT run the command again. Instead, please direct any queries to path-help\@sanger.ac.uk.
