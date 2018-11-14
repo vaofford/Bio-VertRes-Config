@@ -122,7 +122,7 @@ is_deeply(
 # check config file name
 is(
     $obj->config,
-    '/path/to/config_base/my_database/permissions/permissions_study_1_study_2_sample_1_sample_2_species_1.conf',
+    '/path/to/config_base/my_database/permissions/permissions_study_1_study_2.conf',
     'config file name in expected format'
 );
 

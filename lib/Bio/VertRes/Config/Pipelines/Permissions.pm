@@ -41,6 +41,26 @@ override 'to_hash' => sub {
     return $output_hash;
 };
 
+override '_limits_values_part_of_filename' => sub {
+    my ($self) = @_;
+    my $output_filename = "";
+    my @limit_values;
+
+    if ( defined $self->limits->{'project'} ) {
+      my $list_of_limit_values = $self->limits->{'project'};
+      for my $limit_value ( @{$list_of_limit_values} ) {
+        $limit_value =~ s/^\s+|\s+$//g;
+        push( @limit_values, $limit_value );
+      }
+    }
+
+    if ( @limit_values > 0 ) {
+        $output_filename = join( '_', @limit_values );
+    }
+
+    return $output_filename;
+};
+
 sub _construct_filename
 {
   my ($self, $suffix) = @_;

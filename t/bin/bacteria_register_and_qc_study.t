@@ -27,9 +27,7 @@ my %scripts_and_expected_files = (
         'some_other_db_name/some_other_db_name_assembly_pipeline.conf',
         'some_other_db_name/some_other_db_name_import_cram_pipeline.conf',
         'some_other_db_name/some_other_db_name_permissions_pipeline.conf',
-        'some_other_db_name/some_other_db_name_qc_pipeline.conf',
-        
-        
+        'some_other_db_name/some_other_db_name_qc_pipeline.conf',  
     ],
 
     '-t file -i t/data/lanes_file -r ABC' => [
@@ -37,44 +35,42 @@ my %scripts_and_expected_files = (
         'prokaryotes/annotate_assembly/annotate_assembly_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name_velvet.conf',
         'prokaryotes/assembly/assembly_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name_velvet.conf',
         'prokaryotes/import_cram/import_cram_global.conf',
-        'prokaryotes/permissions/permissions_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name.conf',
         'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_permissions_pipeline.conf',
         'prokaryotes/prokaryotes_qc_pipeline.conf',
-        
         'prokaryotes/qc/qc_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name.conf',
-        
     ],
 
     '-t lane -i 1234_5#6 -r ABC' => [
         'command_line.log',                                   'prokaryotes/annotate_assembly/annotate_assembly_1234_5_6_velvet.conf',
         'prokaryotes/assembly/assembly_1234_5_6_velvet.conf', 'prokaryotes/import_cram/import_cram_global.conf',
-        'prokaryotes/permissions/permissions_1234_5_6.conf',  'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
+        'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_assembly_pipeline.conf',     'prokaryotes/prokaryotes_import_cram_pipeline.conf',
-        'prokaryotes/prokaryotes_permissions_pipeline.conf',  'prokaryotes/prokaryotes_qc_pipeline.conf',
+        'prokaryotes/prokaryotes_permissions_pipeline.conf',  
+        'prokaryotes/prokaryotes_qc_pipeline.conf',
                'prokaryotes/qc/qc_1234_5_6.conf',
-        
     ],
 
     '-t library -i libname -r ABC' => [
         'command_line.log',                                  'prokaryotes/annotate_assembly/annotate_assembly_libname_velvet.conf',
         'prokaryotes/assembly/assembly_libname_velvet.conf', 'prokaryotes/import_cram/import_cram_global.conf',
-        'prokaryotes/permissions/permissions_libname.conf',  'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
+        'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_assembly_pipeline.conf',    'prokaryotes/prokaryotes_import_cram_pipeline.conf',
-        'prokaryotes/prokaryotes_permissions_pipeline.conf', 'prokaryotes/prokaryotes_qc_pipeline.conf',
-              'prokaryotes/qc/qc_libname.conf',
-        
+        'prokaryotes/prokaryotes_permissions_pipeline.conf', 
+        'prokaryotes/prokaryotes_qc_pipeline.conf',
+        'prokaryotes/qc/qc_libname.conf', 
     ],
 
     '-t sample -i sample -r ABC' => [
         'command_line.log',                                  'prokaryotes/annotate_assembly/annotate_assembly_sample_velvet.conf',
-        'prokaryotes/assembly/assembly_sample_velvet.conf',  'prokaryotes/import_cram/import_cram_global.conf',
-        'prokaryotes/permissions/permissions_sample.conf',   'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
+        'prokaryotes/assembly/assembly_sample_velvet.conf',  'prokaryotes/import_cram/import_cram_global.conf', 
+        'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_assembly_pipeline.conf',    'prokaryotes/prokaryotes_import_cram_pipeline.conf',
-        'prokaryotes/prokaryotes_permissions_pipeline.conf', 'prokaryotes/prokaryotes_qc_pipeline.conf',
-              'prokaryotes/qc/qc_sample.conf',
+        'prokaryotes/prokaryotes_permissions_pipeline.conf', 
+        'prokaryotes/prokaryotes_qc_pipeline.conf',
+        'prokaryotes/qc/qc_sample.conf',
         
     ],
 
@@ -103,14 +99,13 @@ my %scripts_and_expected_files = (
         'prokaryotes/annotate_assembly/annotate_assembly_ZZZ_Staphylococcus_aureus_velvet.conf',
         'prokaryotes/assembly/assembly_ZZZ_Staphylococcus_aureus_velvet.conf',
         'prokaryotes/import_cram/import_cram_global.conf',
-        'prokaryotes/permissions/permissions_ZZZ_Staphylococcus_aureus.conf',
+        'prokaryotes/permissions/permissions_ZZZ.conf',
         'prokaryotes/prokaryotes.ilm.studies',
         'prokaryotes/prokaryotes_annotate_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_assembly_pipeline.conf',
         'prokaryotes/prokaryotes_import_cram_pipeline.conf',
         'prokaryotes/prokaryotes_permissions_pipeline.conf',
         'prokaryotes/prokaryotes_qc_pipeline.conf',
-        
         'prokaryotes/qc/qc_ZZZ_Staphylococcus_aureus.conf',
         
     ],

@@ -39,7 +39,6 @@ ok( -e $destination_directory . '/my_database/qc/qc_ABC_study_EFG.conf', 'QC top
 $text = read_text( $destination_directory . '/my_database/qc/qc_ABC_study_EFG.conf' );
 my $input_config_file = eval($text);
 
-print Dumper $input_config_file;
 is_deeply($input_config_file,{
   'max_failures' => 3,
   'db' => {

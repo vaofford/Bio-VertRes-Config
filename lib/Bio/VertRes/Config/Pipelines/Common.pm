@@ -148,6 +148,7 @@ sub create_config_file {
     my ($self) = @_;
     
     my $mode = 0777;
+
     if ( !( -e $self->config ) ) {
         my ( $config_filename, $directories, $suffix ) = fileparse( $self->config );
         make_path( $directories, {mode => $mode} );
@@ -155,6 +156,9 @@ sub create_config_file {
 
     # If the file exists and you dont want to overwrite existing files, skip it
     return if ( ( -e $self->config ) && $self->overwrite_existing_config_file == 0 );
+
+    # If the file exists and you dont want to overwrite existing files, skip it
+    return if ( $self->config =~ /_.conf$/ );
 
     # dont print out an extra wrapper variable
     $Data::Dumper::Terse = 1;

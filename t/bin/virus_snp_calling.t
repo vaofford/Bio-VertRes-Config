@@ -27,24 +27,22 @@ my %scripts_and_expected_files = (
         'command_line.log',                                'viruses/import_cram/import_cram_global.conf',
         'viruses/mapping/mapping_1234_5_6_ABC_smalt.conf', 'viruses/viruses_import_cram_pipeline.conf',
         'viruses/viruses_mapping_pipeline.conf',           'viruses/viruses_snps_pipeline.conf',
-                   'viruses/snps/snps_1234_5_6_ABC.conf',
-        'viruses/permissions/permissions_1234_5_6.conf',   'viruses/viruses_permissions_pipeline.conf',
-        
+        'viruses/snps/snps_1234_5_6_ABC.conf',
+        'viruses/viruses_permissions_pipeline.conf',  
     ],
     '-t library -i libname -r ABC' => [
         'command_line.log',                               'viruses/import_cram/import_cram_global.conf',
         'viruses/mapping/mapping_libname_ABC_smalt.conf', 'viruses/viruses_import_cram_pipeline.conf',
         'viruses/viruses_mapping_pipeline.conf',          'viruses/viruses_snps_pipeline.conf',
-                  'viruses/snps/snps_libname_ABC.conf',
-        'viruses/viruses_permissions_pipeline.conf',      'viruses/permissions/permissions_libname.conf',
-        
+        'viruses/snps/snps_libname_ABC.conf',
+        'viruses/viruses_permissions_pipeline.conf',    
     ],
     '-t sample -i sample -r ABC' => [
         'command_line.log',                              'viruses/import_cram/import_cram_global.conf',
         'viruses/mapping/mapping_sample_ABC_smalt.conf', 'viruses/viruses_import_cram_pipeline.conf',
         'viruses/viruses_mapping_pipeline.conf',         'viruses/viruses_snps_pipeline.conf',
-                 'viruses/snps/snps_sample_ABC.conf',
-        'viruses/viruses_permissions_pipeline.conf',     'viruses/permissions/permissions_sample.conf',
+        'viruses/snps/snps_sample_ABC.conf',
+        'viruses/viruses_permissions_pipeline.conf',     
         
     ],
     '-t file -i t/data/lanes_file -r ABC' => [
@@ -55,18 +53,16 @@ my %scripts_and_expected_files = (
         'viruses/viruses_mapping_pipeline.conf',
         'viruses/viruses_permissions_pipeline.conf',
         'viruses/viruses_snps_pipeline.conf',
-        
         'viruses/snps/snps_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name_ABC.conf',
-        
-        'viruses/permissions/permissions_1111_2222_3333_lane_name_another_lane_name_a_very_big_lane_name.conf',
     ],
     '-t study -i ZZZ -r ABC -s Staphylococcus_aureus' => [
         'command_line.log',                                                 'viruses/import_cram/import_cram_global.conf',
         'viruses/mapping/mapping_ZZZ_Staphylococcus_aureus_ABC_smalt.conf', 'viruses/viruses.ilm.studies',
         'viruses/viruses_import_cram_pipeline.conf',                        'viruses/viruses_mapping_pipeline.conf',
-        'viruses/permissions/permissions_ZZZ_Staphylococcus_aureus.conf',   'viruses/viruses_snps_pipeline.conf',
-                                    'viruses/snps/snps_ZZZ_Staphylococcus_aureus_ABC.conf',
-                                        'viruses/viruses_permissions_pipeline.conf',
+        'viruses/permissions/permissions_ZZZ.conf',   
+        'viruses/viruses_snps_pipeline.conf',
+        'viruses/snps/snps_ZZZ_Staphylococcus_aureus_ABC.conf',
+        'viruses/viruses_permissions_pipeline.conf',
     ],
     '-t study -i ZZZ -r ABC -m bwa' => [
         'command_line.log',                          'viruses/import_cram/import_cram_global.conf',
