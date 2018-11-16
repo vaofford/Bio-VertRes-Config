@@ -38,13 +38,13 @@ sub build_database_connection_details {
 sub build_database_handle {
   my ($self) = @_;
 
-  my %connection_details = %{ $self->_build_database_connection_details };
+  my %connection_details = %{ $self->build_database_connection_details };
   my $host = $connection_details{ $self->host };
   my $port = $connection_details{ $self->port };
   my $user = $connection_details{ $self->user };
   my $password = $connection_details{ $self->password };
 
-  my $connection_str = join(':',('DBI', 'mysql', 'host='.$host, 'port='.$port.';database='.$self->_database ));
+  my $connection_str = join(':',('DBI', 'mysql', 'host='.$host, 'port='.$port.';database='.$self->database ));
   my $dbh = DBI->connect($connection_str, $user, $password, {'RaiseError' => 1, 'PrintError' => 1});
   return $dbh
 }
@@ -52,20 +52,19 @@ sub build_database_handle {
 sub get_study_name_from_ssid {
   my ($self, $ssid) = @_;
   my $sql = "select name from study where id_study_lims = '".$ssid."' ";
-  my @study_names = $self->_dbh->selectrow_array($sql );
+  my $dbh = $self->build_database_handle;
+  my @study_names = $dbh->selectrow_array($sql );
   return @study_names;
 }
 
 sub get_data_access_group {
   my ($self, $study_name) = @_;
   my $sql = "select data_access_group from study where name = '".$study_name."' ";
-  my @study_names = $self->_dbh->selectrow_array($sql );
+  my $dbh = $self->build_database_handle;
+  my @study_names = $dbh->selectrow_array($sql );
   return @study_names;
 }
 
 __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
-
-
-    

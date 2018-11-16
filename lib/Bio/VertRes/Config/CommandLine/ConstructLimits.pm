@@ -32,26 +32,26 @@ sub limits_hash
                                                              port => 'mlwarehouse_port',
                                                              user => 'mlwarehouse_user',
                                                              password => 'mlwarehouse_password',
+                                                             database => 'mlwarehouse',
                                                              database_connect_file => $self->database_connect_file
                                                             );
-    my $dbh = $db_obj->build_database_handle;
-    my @study_names = Bio::VertRes::Config::DatabaseManager->get_study_name_from_ssid();    
-		Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'No studies have been found for this Sequencescape ID '.$self->input_id) if( @study_names < 1 );
+    my @study_names = $db_obj->get_study_name_from_ssid( $self->input_id );    
+    Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'No studies have been found for this Sequencescape ID '.$self->input_id) if( @study_names < 1 );
     $limits{project} = \@study_names;
   }
   elsif($self->input_type eq 'study')
   {
-		Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
+    Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
     $limits{project} = [$self->input_id];
   }
   elsif($self->input_type eq 'library' || $self->input_type eq 'sample')
   {
-		Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
+    Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
     $limits{$self->input_type} = [$self->input_id];
   } 
   elsif($self->input_type eq 'lane')
   {
-		Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
+    Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
     if($self->input_id =~ /^\d+_\d$/)
     {
       $limits{$self->input_type} = [$self->input_id.'(#.+)?'];
@@ -89,16 +89,16 @@ sub _extract_lanes_from_file
   {
     next if($lane =~ /^#/);
     next if($lane =~ /^\s*$/);
-		if($lane =~ /\s/)
-		{
-			print "Invalid lane name: ".$lane ."\n";
-			next;
-		}
+    if($lane =~ /\s/)
+    {
+      print "Invalid lane name: ".$lane ."\n";
+      next;
+    }
     $lane = $lane.'(#.+)?' if $lane =~ /^\d+_\d$/;
     push(@filtered_lanes, $lane);
   }
-	Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'No valid lanes have been found in the file '.$self->input_id) if(@filtered_lanes < 1 );
-	
+  Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'No valid lanes have been found in the file '.$self->input_id) if(@filtered_lanes < 1 );
+  
   return \@filtered_lanes;
 }
 
