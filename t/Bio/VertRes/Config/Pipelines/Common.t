@@ -14,6 +14,7 @@ BEGIN {
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
+$ENV{VERTRES_DB_CONFIG} = 't/data/database_connection_details';
 
 ok(
     (
@@ -24,7 +25,6 @@ ok(
             toplevel_action     => '__VRTrack_Action__',
             root_base           => '/path/to/root',
             log_base            => '/path/to/log',
-            database_connect_file => 't/data/database_connection_details',
             config_base         => $destination_directory
         )
     ),
@@ -112,7 +112,6 @@ ok(
             toplevel_action     => '__VRTrack_Action__',
             root_base           => '/path/to/root',
             log_base            => '/path/to/log',
-            database_connect_file => 't/data/database_connection_details',
             config_base         => $destination_directory
         )
     ),
@@ -157,7 +156,6 @@ ok(
             pipeline_short_name => 'new_pipeline',
             module              => 'Bio::Example',
             toplevel_action     => '__VRTrack_Action__',
-            database_connect_file => '',
             root_base           => '/path/to/root',
             log_base            => '/path/to/log',
             config_base         => $destination_directory
@@ -166,35 +164,26 @@ ok(
     'initialise common config without a specified database connection details file'
 );
 
-is_deeply(
-    $obj_database_connection_file->to_hash,
-    {
-        'db' => {
-            'database' => 'pathogen_prok_track',
-            'password' => undef,
-            'user'     => 'root',
-            'port'     => 3306,
-            'host'     => 'localhost'
-        },
-        'data' => {
-            'db' => {
-                'database' => 'pathogen_prok_track',
-                'password' => undef,
-                'user'     => 'root',
-                'port'     => 3306,
-                'host'     => 'localhost'
-            },
-            'dont_wait' => 0
-        },
-        'log'    => '/path/to/log/prokaryotes/new_pipeline_logfile.log',
-        'root'   => '/path/to/root/prokaryotes/seq-pipelines',
-        'prefix' => '_',
-	    'umask' => 23,
-	    'octal_permissions' => 488,
-	    'unix_group' => 'pathogen',
-        'module' => 'Bio::Example'
-    },
-    'output hash with default database connection details.'
+ok(
+    (
+        $obj_database_connection_file = Bio::VertRes::Config::Pipelines::Common->new(
+            database            => 'pathogen_prok_track',
+            pipeline_short_name => 'new_pipeline',
+            module              => 'Bio::Example',
+            toplevel_action     => '__VRTrack_Action__',
+            root_base           => '/path/to/root',
+            log_base            => '/path/to/log',
+            config_base         => $destination_directory,
+            database_connect_file => 't/data/does_not_exist'
+        )
+    ),
+    'initialise common config when database connection details file doesnt exist'
+);
+
+throws_ok(
+    sub { $obj_database_connection_file->to_hash },
+    qr/Couldnt find database connect file t\/data\/does_not_exist/,
+    'cannot get output hash from database connection file that doesnt exist.'
 );
 
 done_testing();

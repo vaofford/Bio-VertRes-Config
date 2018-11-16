@@ -18,6 +18,8 @@ use Bio::VertRes::Config::Types;
 use Data::Dumper;
 use File::Basename;
 use File::Path qw(make_path);
+
+use Bio::VertRes::Config::DatabaseManager;
 with 'Bio::VertRes::Config::Pipelines::Roles::RootDatabaseLookup';
 
 has 'prefix'              => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default  => '_' );
@@ -49,7 +51,7 @@ has 'port'     => ( is => 'ro', isa => 'Int',        lazy     => 1, builder => '
 has 'user'     => ( is => 'ro', isa => 'Str',        lazy     => 1, builder => '_build_user' );
 has 'password' => ( is => 'ro', isa => 'Maybe[Str]', lazy     => 1, builder => '_build_password' );
 
-has 'database_connect_file' => ( is => 'ro', isa => 'Str', required => 1 );
+has 'database_connect_file' => ( is => 'ro', isa => 'Maybe[Str]' );
 has '_database_connection_details' =>
   ( is => 'ro', isa => 'Maybe[HashRef]', lazy => 1, builder => '_build__database_connection_details' );
 
@@ -71,7 +73,7 @@ sub _build_log {
 }
 
 sub _build_host {
-    my ($self) = @_;
+    my ($self, $connection_details) = @_;
     if ( defined( $self->_database_connection_details ) ) {
         return $self->_database_connection_details->{host};
     }
@@ -79,7 +81,7 @@ sub _build_host {
 }
 
 sub _build_port {
-    my ($self) = @_;
+    my ($self, $connection_details) = @_;
     if ( defined( $self->_database_connection_details ) ) {
         return $self->_database_connection_details->{port};
     }
@@ -87,7 +89,7 @@ sub _build_port {
 }
 
 sub _build_user {
-    my ($self) = @_;
+    my ($self, $connection_details) = @_;
     if ( defined( $self->_database_connection_details ) ) {
         return $self->_database_connection_details->{user};
     }
@@ -95,7 +97,7 @@ sub _build_user {
 }
 
 sub _build_password {
-    my ($self) = @_;
+    my ($self, $connection_details) = @_;
     if ( defined( $self->_database_connection_details ) ) {
         return $self->_database_connection_details->{password};
     }
@@ -105,10 +107,10 @@ sub _build_password {
 sub _build__database_connection_details {
     my ($self) = @_;
     my $connection_details;
-    if ( -f $self->database_connect_file ) {
-        my $text = read_text( $self->database_connect_file );
-        $connection_details = eval($text);
-    }
+    my $db_obj = Bio::VertRes::Config::DatabaseManager->new( database_connect_file => $self->database_connect_file,
+                                                             database => $self->database
+                                                             );
+    $connection_details = $db_obj->build_database_connection_details;
     return $connection_details;
 }
 

@@ -11,7 +11,6 @@ our @actual_files_found;
 # default db file to be used for testing
 our $test_database_connection_file = "t/data/database_connection_details"; 
 
-
 # Execute script and check required files are created 
 sub execute_script_and_check_output {
     my ( $script_name, $scripts_and_expected_files ) = @_;

@@ -19,6 +19,7 @@ use Bio::VertRes::Config::DatabaseManager;
 has 'input_type'   => ( is => 'ro', isa => 'Str',   required => 1 );
 has 'input_id'     => ( is => 'ro', isa => 'Str',   required => 1 );
 has 'species'      => ( is => 'ro', isa => 'Maybe[Str]' );
+has 'database_connect_file' => ( is => 'ro', isa => 'Maybe[Str]', default => $ENV{VERTRES_DB_CONFIG} );
 
 sub limits_hash
 {
@@ -27,6 +28,13 @@ sub limits_hash
 
   if($self->input_type eq 'study' && $self->input_id =~ /^[\d]+$/)
   {
+    my $db_obj = Bio::VertRes::Config::DatabaseManager->new( host => 'mlwarehouse_host',
+                                                             port => 'mlwarehouse_port',
+                                                             user => 'mlwarehouse_user',
+                                                             password => 'mlwarehouse_password',
+                                                             database_connect_file => $self->database_connect_file
+                                                            );
+    my $dbh = $db_obj->build_database_handle;
     my @study_names = Bio::VertRes::Config::DatabaseManager->get_study_name_from_ssid();    
 		Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'No studies have been found for this Sequencescape ID '.$self->input_id) if( @study_names < 1 );
     $limits{project} = \@study_names;

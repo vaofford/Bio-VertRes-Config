@@ -12,12 +12,12 @@ BEGIN {
 }
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
+$ENV{VERTRES_DB_CONFIG} = 't/data/database_connection_details';
 
 ok(
     (
         my $obj = Bio::VertRes::Config::Pipelines::AnnotateAssembly->new(
             database    => 'my_database',
-            database_connect_file => 't/data/database_connection_details',
             limits      => {project => ['Abc def (ghi123)']},
             root_base   => '/path/to/root',
             log_base    => '/path/to/log',
@@ -89,7 +89,6 @@ ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::AnnotateAssembly->new(
             database              => 'my_database',
-            database_connect_file => 't/data/database_connection_details',
             limits                => {
                 project     => [ 'study 1',  'study 2' ],
                 sample      => [ 'sample 1', 'sample 2' ],
