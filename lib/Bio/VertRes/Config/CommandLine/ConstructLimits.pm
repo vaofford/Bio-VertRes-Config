@@ -14,59 +14,44 @@ A class to represent multiple top level files. It splits out mixed config files 
 use Moose;
 use Bio::VertRes::Config::Exceptions;
 use File::Slurper qw[write_text read_text];
-use DBI;
-
+use Bio::VertRes::Config::DatabaseManager;
 
 has 'input_type'   => ( is => 'ro', isa => 'Str',   required => 1 );
 has 'input_id'     => ( is => 'ro', isa => 'Str',   required => 1 );
 has 'species'      => ( is => 'ro', isa => 'Maybe[Str]' );
-has 'database_connect_file' => (
-    is      => 'rw',
-    isa     => 'Str',
-    default => '/software/pathogen/config/database_connection_details');
-has '_database_connection_details' =>
-      ( is => 'ro', isa => 'Maybe[HashRef]', lazy => 1, builder => '_build__database_connection_details' );
-
-sub _build__database_connection_details {
-    my ($self) = @_;
-    my $connection_details;
-    if ( -f $self->database_connect_file ) {
-        my $text = read_text( $self->database_connect_file );
-        $connection_details = eval($text);
-    }
-    return $connection_details;
-}
+has 'database_connect_file' => ( is => 'ro', isa => 'Maybe[Str]', default => $ENV{VERTRES_DB_CONFIG} );
 
 sub limits_hash
 {
   my ($self) = @_;
   my %limits;
 
-  
   if($self->input_type eq 'study' && $self->input_id =~ /^[\d]+$/)
   {
-    my $connection_str = join(':',('DBI','mysql','host='.$self->_database_connection_details->{mlwarehouse_host},'port='.$self->_database_connection_details->{mlwarehouse_port}.';database='.$self->_database_connection_details->{mlwarehouse_database} ));
-    # Todo: move ssid lookup to somewhere more sensible
-    my $dbh = DBI->connect($connection_str, $self->_database_connection_details->{mlwarehouse_user},$self->_database_connection_details->{mlwarehouse_password}, {'RaiseError' => 1, 'PrintError' => 0});
-    my $sql = "select name from study where id_study_lims = '".$self->input_id."' ";
-    my @study_names = $dbh->selectrow_array($sql );
-    
-		Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'No studies have been found for this Sequencescape ID '.$self->input_id) if( @study_names < 1 );
+    my $db_obj = Bio::VertRes::Config::DatabaseManager->new( host => 'mlwarehouse_host',
+                                                             port => 'mlwarehouse_port',
+                                                             user => 'mlwarehouse_user',
+                                                             password => 'mlwarehouse_password',
+                                                             database => 'mlwarehouse',
+                                                             database_connect_file => $self->database_connect_file
+                                                            );
+    my @study_names = $db_obj->get_study_name_from_ssid( $self->input_id );    
+    Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'No studies have been found for this Sequencescape ID '.$self->input_id) if( @study_names < 1 );
     $limits{project} = \@study_names;
   }
   elsif($self->input_type eq 'study')
   {
-		Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
+    Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
     $limits{project} = [$self->input_id];
   }
   elsif($self->input_type eq 'library' || $self->input_type eq 'sample')
   {
-		Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
+    Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
     $limits{$self->input_type} = [$self->input_id];
   } 
   elsif($self->input_type eq 'lane')
   {
-		Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
+    Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'Invalid identifier '.$self->input_id) if(!defined($self->input_id) ||$self->input_id eq '' );
     if($self->input_id =~ /^\d+_\d$/)
     {
       $limits{$self->input_type} = [$self->input_id.'(#.+)?'];
@@ -104,16 +89,16 @@ sub _extract_lanes_from_file
   {
     next if($lane =~ /^#/);
     next if($lane =~ /^\s*$/);
-		if($lane =~ /\s/)
-		{
-			print "Invalid lane name: ".$lane ."\n";
-			next;
-		}
+    if($lane =~ /\s/)
+    {
+      print "Invalid lane name: ".$lane ."\n";
+      next;
+    }
     $lane = $lane.'(#.+)?' if $lane =~ /^\d+_\d$/;
     push(@filtered_lanes, $lane);
   }
-	Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'No valid lanes have been found in the file '.$self->input_id) if(@filtered_lanes < 1 );
-	
+  Bio::VertRes::Config::Exceptions::InvalidType->throw(error => 'No valid lanes have been found in the file '.$self->input_id) if(@filtered_lanes < 1 );
+  
   return \@filtered_lanes;
 }
 

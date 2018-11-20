@@ -13,6 +13,7 @@ BEGIN {
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
+$ENV{VERTRES_DB_CONFIG} = 't/data/database_connection_details';
 
 
 my $obj;
@@ -20,7 +21,6 @@ ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::QC->new(
             database              => 'my_database',
-            database_connect_file => 't/data/database_connection_details',
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },
@@ -99,7 +99,6 @@ ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::QC->new(
             database              => 'my_database',
-            database_connect_file => 't/data/database_connection_details',
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => {

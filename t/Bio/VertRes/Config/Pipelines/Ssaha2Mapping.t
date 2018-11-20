@@ -10,12 +10,13 @@ BEGIN {
     use_ok('Bio::VertRes::Config::Pipelines::Ssaha2Mapping');
 }
 
+
+$ENV{VERTRES_DB_CONFIG} = 't/data/database_connection_details';
 my $obj;
 ok(
     (
         $obj = Bio::VertRes::Config::Pipelines::Ssaha2Mapping->new(
             database              => 'my_database',
-            database_connect_file => 't/data/database_connection_details',
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
             limits                => { project => ['ABC study( EFG )'] },

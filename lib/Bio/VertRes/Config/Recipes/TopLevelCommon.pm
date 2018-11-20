@@ -14,7 +14,7 @@ use Moose;
 use Bio::VertRes::Config::MultipleTopLevelFiles;
 
 has 'database'                       => ( is => 'rw', isa => 'Str',  required => 1 );
-has 'database_connect_file'          => ( is => 'ro', isa => 'Str',  default => '/software/pathogen/config/database_connection_details' );
+has 'database_connect_file'          => ( is => 'ro', isa => 'Maybe[Str]' );
 has 'config_base'                    => ( is => 'ro', isa => 'Str',  default  => '/nfs/pathnfs05/conf' );
 has 'root_base'                      => ( is => 'ro', isa => 'Str',  default  => '/lustre/scratch118/infgen/pathogen/pathpipe' );
 has 'log_base'                       => ( is => 'ro', isa => 'Str',  default  => '/nfs/pathnfs05/log' );

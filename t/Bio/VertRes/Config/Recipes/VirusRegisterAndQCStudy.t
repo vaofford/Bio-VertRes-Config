@@ -13,14 +13,13 @@ BEGIN {
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
-
+$ENV{VERTRES_DB_CONFIG} = 't/data/database_connection_details';
 
 ok(
     (
             my $obj = Bio::VertRes::Config::Recipes::VirusRegisterAndQCStudy->new(
             database    => 'my_database',
             config_base => $destination_directory,
-            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
@@ -39,7 +38,6 @@ ok( -e $destination_directory . '/my_database/qc/qc_ABC_study_EFG.conf', 'QC top
 $text = read_text( $destination_directory . '/my_database/qc/qc_ABC_study_EFG.conf' );
 my $input_config_file = eval($text);
 
-print Dumper $input_config_file;
 is_deeply($input_config_file,{
   'max_failures' => 3,
   'db' => {
@@ -99,7 +97,6 @@ ok(
         $obj = Bio::VertRes::Config::Recipes::VirusRegisterAndQCStudy->new(
             database    => 'my_database',
             config_base => $destination_directory,
-            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'], species => ['Cat', 'Dog'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
@@ -174,7 +171,6 @@ ok(
         $obj = Bio::VertRes::Config::Recipes::VirusRegisterAndQCStudy->new(
             database    => 'my_database',
             config_base => $destination_directory,
-            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',
@@ -195,7 +191,6 @@ ok(
         $obj = Bio::VertRes::Config::Recipes::VirusRegisterAndQCStudy->new(
             database    => 'my_other_database',
             config_base => $destination_directory,
-            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['DDD'] },
             reference_lookup_file => 't/data/refs.index',
             reference             => 'ABC',

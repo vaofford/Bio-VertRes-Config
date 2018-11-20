@@ -13,6 +13,7 @@ BEGIN {
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
+$ENV{VERTRES_DB_CONFIG} = 't/data/database_connection_details';
 
 # Create a few config objects for testing
 

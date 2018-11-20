@@ -13,6 +13,7 @@ use Getopt::Long qw(GetOptionsFromArray);
 use Bio::VertRes::Config::CommandLine::LogParameters;
 use Bio::VertRes::Config::CommandLine::ConstructLimits;
 use Bio::VertRes::Config::Exceptions;
+use Bio::VertRes::Config::DatabaseManager;
 
 has 'args'        => ( is => 'ro', isa => 'ArrayRef', required => 1 );
 has 'script_name' => ( is => 'ro', isa => 'Str',      required => 1 );
@@ -29,8 +30,7 @@ has 'root_base' => (
 has 'log_base' => ( is => 'rw', isa => 'Str', default => '/nfs/pathnfs05/log' );
 has 'database_connect_file' => (
     is      => 'rw',
-    isa     => 'Str',
-    default => '/software/pathogen/config/database_connection_details'
+    isa     => 'Maybe[Str]',
 );
 has 'reference_lookup_file' => (
     is      => 'rw',
@@ -182,8 +182,6 @@ sub BUILD {
     $self->assembler($assembler)     if ( defined($assembler) );
     $self->spades_opts($spades_opts) if ( defined($spades_opts) );
     
-    $self->database_connect_file($database_connect_file)
-      if ( defined($database_connect_file) );
     $self->no_ass($no_ass) if ( defined $no_ass );
     $self->test_mode($test_mode) if ( defined $test_mode ); 
    
@@ -209,6 +207,17 @@ sub BUILD {
     # Only create log files if not in test mode
     if(!$self->test_mode()){
     	$log_params->create();
+    }
+
+    if ( defined $test_mode && ! defined($database_connect_file) ) {
+        $self->database_connect_file('t/data/database_connection_details');
+    } else {
+        if ( defined($database_connect_file) ) {
+            $self->database_connect_file($database_connect_file);
+        } else {
+            my $db_obj = Bio::VertRes::Config::DatabaseManager->new( database => $self->database );
+            $self->database_connect_file( $db_obj->database_connect_file($database_connect_file) );
+        }
     }
 }
 
@@ -291,7 +300,7 @@ sub mapping_parameters {
     my $limits = Bio::VertRes::Config::CommandLine::ConstructLimits->new(
         input_type => $self->type,
         input_id   => $self->id,
-        database_connect_file          => $self->database_connect_file,
+        database_connect_file => $self->database_connect_file,
         species    => $self->species
     )->limits_hash;
 
@@ -307,7 +316,7 @@ sub mapping_parameters {
         protocol                       => $self->protocol,
         database_connect_file          => $self->database_connect_file,
         regeneration_log_file	       => $self->regeneration_log_file,
-	spades_opts                    => $self->spades_opts
+	    spades_opts                    => $self->spades_opts
     );
 
     if ( defined( $self->_construct_smalt_index_params ) ) {

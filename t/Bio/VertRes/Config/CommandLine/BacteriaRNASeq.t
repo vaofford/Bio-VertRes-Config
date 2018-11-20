@@ -13,17 +13,18 @@ BEGIN {
     use_ok('Bio::VertRes::Config::CommandLine::BacteriaRnaSeqExpression');
 }
 
+$ENV{VERTRES_DB_CONFIG} = 't/data/database_connection_details';
+
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
-
 
 ok(my $obj = Bio::VertRes::Config::CommandLine::BacteriaRnaSeqExpression->new(
   args => [], 
   script_name => '',
-  database_connect_file => 't/data/database_connection_details',
 	config_base => $destination_directory,
 	log_base => $destination_directory,
 ), 'initialise dummy object');
 is( $obj->protocol, 'StandardProtocol', 'check protocol');
+
 
 done_testing();

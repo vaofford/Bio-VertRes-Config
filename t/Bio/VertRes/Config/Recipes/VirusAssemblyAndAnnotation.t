@@ -14,13 +14,13 @@ BEGIN {
 
 my $destination_directory_obj = File::Temp->newdir( CLEANUP => 1 );
 my $destination_directory = $destination_directory_obj->dirname();
+$ENV{VERTRES_DB_CONFIG} = 't/data/database_connection_details';
 
 ok(
     (
             my $obj = Bio::VertRes::Config::Recipes::VirusAssemblyAndAnnotation->new(
             database    => 'my_database',
             config_base => $destination_directory,
-            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'] }
         )
     ),
@@ -147,7 +147,6 @@ ok(
             my $obj_iva = Bio::VertRes::Config::Recipes::VirusAssemblyAndAnnotation->new(
             database    => 'my_database',
             config_base => $destination_directory,
-            database_connect_file => 't/data/database_connection_details',
             limits      => { project => ['ABC study( EFG )'] },
             assembler   => 'iva',
             iva_qc      => 0,
