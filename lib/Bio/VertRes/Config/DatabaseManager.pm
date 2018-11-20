@@ -57,12 +57,12 @@ sub get_study_name_from_ssid {
   return @study_names;
 }
 
-sub get_data_access_group {
+sub get_data_access_groups {
   my ($self, $study_name) = @_;
   my $sql = "select data_access_group from study where name = '".$study_name."' ";
   my $dbh = $self->build_database_handle;
-  my @study_names = $dbh->selectrow_array($sql );
-  return @study_names;
+  my @data_access_groups = $dbh->selectrow_array($sql );
+  return @data_access_groups;
 }
 
 __PACKAGE__->meta->make_immutable;
