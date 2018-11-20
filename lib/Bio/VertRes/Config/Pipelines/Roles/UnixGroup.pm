@@ -4,8 +4,10 @@ package Bio::VertRes::Config::Pipelines::Roles::UnixGroup;
 
 use Moose::Role;
 use List::MoreUtils qw(uniq);
+use Array::Utils qw(:all);
 use Bio::VertRes::Config::DatabaseManager;
 use Data::Dumper;
+
 
 has 'admin_user'   => ( is => 'ro', isa => 'Str',             required => 1, default => 'pathpipe' );
 has 'admin_groups' => ( is => 'rw', isa => 'ArrayRef',        lazy => 1, builder => '_build__admin_groups' );
@@ -54,6 +56,12 @@ sub _build__data_access_groups {
 sub _build__unix_group {
     my ($self) = @_;
     my $unix_group = 'pathogen';
+
+    my @data_access_groups = @{ $self->data_access_groups };
+    my @admin_groups = @{ $self->admin_groups };
+    my @intersect = intersect( @data_access_groups, @admin_groups );
+    
+    $unix_group = $intersect[0] if scalar @intersect > 0;
     #print Dumper $self;
     return $unix_group;
 }
