@@ -21,11 +21,11 @@ use File::Path qw(make_path);
 
 use Bio::VertRes::Config::DatabaseManager;
 with 'Bio::VertRes::Config::Pipelines::Roles::RootDatabaseLookup';
+with 'Bio::VertRes::Config::Pipelines::Roles::UnixGroup';
 
 has 'prefix'              => ( is => 'ro', isa => 'Bio::VertRes::Config::Prefix', default  => '_' );
 has 'umask'               => ( is => 'ro', isa => 'Num',                          default  => 0027 );
 has 'octal_permissions'   => ( is => 'ro', isa => 'Num',                          default  => 0750 );
-has 'unix_group'          => ( is => 'ro', isa => 'Str',                          default  => 'pathogen' );
 has 'pipeline_short_name' => ( is => 'ro', isa => 'Str',                          required => 1 );
 has 'module'              => ( is => 'ro', isa => 'Str',                          required => 1 );
 has 'toplevel_action'     => ( is => 'ro', isa => 'Str',                          required => 1 );
@@ -150,7 +150,7 @@ sub create_config_file {
     my ($self) = @_;
     
     my $mode = 0777;
-
+    
     if ( !( -e $self->config ) ) {
         my ( $config_filename, $directories, $suffix ) = fileparse( $self->config );
         make_path( $directories, {mode => $mode} );

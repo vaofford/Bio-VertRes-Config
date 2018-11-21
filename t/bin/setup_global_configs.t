@@ -19,13 +19,11 @@ my %scripts_and_expected_files = (
         'eukaryotes/eukaryotes_import_cram_pipeline.conf',
         'eukaryotes/import_cram/import_cram_global.conf',
         'eukaryotes/eukaryotes_permissions_pipeline.conf',
-	    #'eukaryotes/permissions/permissions_.conf',
     ],
     '-d some_other_db_name' => [
         'command_line.log',
         'some_other_db_name/import_cram/import_cram_global.conf',
         'some_other_db_name/some_other_db_name_import_cram_pipeline.conf',
-        #'some_other_db_name/permissions/permissions_.conf',
 	    'some_other_db_name/some_other_db_name_permissions_pipeline.conf',
     ],
 
