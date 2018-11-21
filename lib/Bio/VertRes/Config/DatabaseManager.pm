@@ -46,7 +46,7 @@ sub build_database_handle {
 
   my $connection_str = join(':',('DBI', 'mysql', 'host='.$host, 'port='.$port.';database='.$self->database ));
   my $dbh = DBI->connect($connection_str, $user, $password, {'RaiseError' => 1, 'PrintError' => 1});
-  return $dbh
+  return $dbh;
 }
 
 sub get_study_name_from_ssid {
@@ -59,9 +59,15 @@ sub get_study_name_from_ssid {
 
 sub get_data_access_groups {
   my ($self, $study_name) = @_;
+  my @data_access_groups;
   my $sql = "select data_access_group from study where name = '".$study_name."' ";
-  my $dbh = $self->build_database_handle;
-  my @data_access_groups = $dbh->selectrow_array($sql );
+  eval { my $dbh = $self->build_database_handle; };
+  if ( !$@ ) {
+    my $dbh = $self->build_database_handle;
+    my $dag_string = $dbh->selectrow_array( $sql );
+    @data_access_groups = split(' ', $dag_string) if defined $dag_string && $dag_string ne '';
+  }
+
   return @data_access_groups;
 }
 
