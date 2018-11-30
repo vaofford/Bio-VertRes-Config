@@ -14,7 +14,8 @@ Generate config files for the pathogen pipelines
   * [Feedback/Issues](#feedbackissues)
 
 ## Introduction
-Bio-VertRes-Config contains scripts for generating config files for the pathogen pipelines. The examples of scripts included are:
+Bio-VertRes-Config contains scripts for generating config files for the pathogen pipelines. It includes the following scripts:   
+
 * **bacteria_register_and_qc_study** - Register a bacteria study for import and QC with the pathogens informatics pipelines
 * **bacteria_mapping** - Request the bacteria mapping pipeline to be run for a given dataset that is stored in the bacteria tracking database
 * **bacteria_snp_calling** - Request the bacteria mapping and SNP calling pipeline to be run for a given dataset that is stored in the bacteria tracking database
