@@ -16,7 +16,7 @@ Generate config files for the pathogen pipelines
 ## Introduction
 Bio-VertRes-Config contains scripts for generating config files for the pathogen pipelines. It includes the following scripts:   
 
-* **bacteria_register_and_qc_study** - Register a bacteria study for import and QC with the pathogens informatics pipelines
+* **bacteria_register_and_qc_study** - Register a bacteria study for import and QC with the Pathogen Informatics pipelines
 * **bacteria_mapping** - Request the bacteria mapping pipeline to be run for a given dataset that is stored in the bacteria tracking database
 * **bacteria_snp_calling** - Request the bacteria mapping and SNP calling pipeline to be run for a given dataset that is stored in the bacteria tracking database
 * **bacteria_assembly_and_annotation** - Request the bacteria assembly and annotation pipeline to be run for a given dataset that is stored in the bacteria tracking database
@@ -24,24 +24,24 @@ Bio-VertRes-Config contains scripts for generating config files for the pathogen
 * **bacteria_assembly_single_cell** - Request the single cell assembly and annotation pipeline to be run for a given dataset
 * **bacteria_permissions** - Create config scripts for pipeline permissions data
 
-* **eukaryote_register_and_qc_study** - Register a eukaryote study for import and QC with the pathogens informatics pipelines
+* **eukaryote_register_and_qc_study** - Register a eukaryote study for import and QC with the Pathogen Informatics pipelines
 * **eukaryote_mapping** - Request the eukaryote mapping pipeline to be run for a given dataset that is stored in the eukaryote tracking database
 * **eukaryote_snp_calling** - Request the eukaryote mapping and SNP calling pipeline to be run for a given dataset that is stored in the eukaryote tracking database
 * **eukaryote_assembly** - Request the eukaryote assembly and annotation pipeline to be run for a given dataset that is stored in the eukaryote tracking database
 * **eukaryote_rna_seq_expression** - Request the RNA-seq expression analysis pipeline to be run for a given dataset that is stored in the eukaryote tracking database
 
-* **helminth_register_and_qc_study** - Register a helminth study for import and QC with the pathogens informatics pipelines
+* **helminth_register_and_qc_study** - Register a helminth study for import and QC with the Pathogen Informatics pipelines
 * **helminth_mapping** - Request the helminth mapping pipeline to be run for a given dataset that is stored in the helminth tracking database
 * **helminth_snp_calling** - Request the helminth mapping and SNP calling pipeline to be run for a given dataset that is stored in the helminth tracking database
 * **helminth_rna_seq_expression** - Request the RNA-seq expression analysis pipeline to be run for a given dataset that is stored in the helminth tracking database
 
-* **virus_register_and_qc_study** - Register a virus study for import and QC with the pathogens informatics pipelines
+* **virus_register_and_qc_study** - Register a virus study for import and QC with the Pathogen Informatics pipelines
 * **virus_mapping** - Request the virus mapping pipeline to be run for a given dataset that is stored in the virus tracking database
 * **virus_snp_calling** - Request the virus mapping and SNP calling pipeline to be run for a given dataset that is stored in the virus tracking database
 * **virus_assembly_and_annotation** - Request the virus assembly and annotation pipeline to be run for a given dataset that is stored in the virus tracking database
 * **virus_rna_seq_expression** - Request the RNA-seq expression analysis pipeline to be run for a given dataset that is stored in the virus tracking database
 
-* **pacbio_register** - Register a pacbio study for import with the pathogens informatics pipelines
+* **pacbio_register** - Register a pacbio study for import with the Pathogen Informatics pipelines
 
 * **setup_global_configs** - Create config scripts and overall strucutre for the global configs
 
@@ -69,7 +69,7 @@ If the tests pass, install Bio-VertRes-Config:
 `dzil install`   
 
 ### Running the tests
-The test can be run with dzil from the top level directory:  
+The tests can be run with `dzil` from the top level directory:  
   
 `dzil test`  
 
