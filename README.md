@@ -24,11 +24,11 @@ Bio-VertRes-Config contains scripts for generating config files for the pathogen
 * **bacteria_assembly_single_cell** - Request the single cell assembly and annotation pipeline to be run for a given dataset
 * **bacteria_permissions** - Create config scripts for pipeline permissions data
 
-* **eukaryote_register_and_qc_study* - Register a eukaryote study for import and QC with the pathogens informatics pipelines
-* **eukaryote_mapping* - Request the eukaryote mapping pipeline to be run for a given dataset that is stored in the eukaryote tracking database
-* **eukaryote_snp_calling* - Request the eukaryote mapping and SNP calling pipeline to be run for a given dataset that is stored in the eukaryote tracking database
-* **eukaryote_assembly* - Request the eukaryote assembly and annotation pipeline to be run for a given dataset that is stored in the eukaryote tracking database
-* **eukaryote_rna_seq_expression* - Request the RNA-seq expression analysis pipeline to be run for a given dataset that is stored in the eukaryote tracking database
+* **eukaryote_register_and_qc_study** - Register a eukaryote study for import and QC with the pathogens informatics pipelines
+* **eukaryote_mapping** - Request the eukaryote mapping pipeline to be run for a given dataset that is stored in the eukaryote tracking database
+* **eukaryote_snp_calling** - Request the eukaryote mapping and SNP calling pipeline to be run for a given dataset that is stored in the eukaryote tracking database
+* **eukaryote_assembly** - Request the eukaryote assembly and annotation pipeline to be run for a given dataset that is stored in the eukaryote tracking database
+* **eukaryote_rna_seq_expression** - Request the RNA-seq expression analysis pipeline to be run for a given dataset that is stored in the eukaryote tracking database
 
 * **helminth_register_and_qc_study** - Register a helminth study for import and QC with the pathogens informatics pipelines
 * **helminth_mapping** - Request the helminth mapping pipeline to be run for a given dataset that is stored in the helminth tracking database
