@@ -53,7 +53,7 @@ sub _build__pipeline_version {
     my $self = shift;
     my %subversions = %{ $self->_subversions };
 
-    my $version = '7' . $subversions{$self->_flag};
+    my $version = '8' . $subversions{$self->_flag};
     $self->_pipeline_version($version);
 }
 
